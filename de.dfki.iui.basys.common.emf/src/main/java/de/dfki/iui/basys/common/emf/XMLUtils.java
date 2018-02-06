@@ -39,7 +39,7 @@ import org.xml.sax.InputSource;
  * @author kirill
  * 
  */
-public class XMLUtil {
+public class XMLUtils {
 	/**
 	 * 
 	 * @param xmlDoc
@@ -149,7 +149,7 @@ public class XMLUtil {
 	 * @throws Exception
 	 */
 	public static void stripWhiteSpaces(Node doc, OutputStream out) throws Exception {
-		runXslt(XMLUtil.class.getResourceAsStream("strip.xsl"), doc, out);
+		runXslt(XMLUtils.class.getResourceAsStream("strip.xsl"), doc, out);
 	}
 
 	/**

@@ -199,7 +199,7 @@ public class EmfPersistence {
 				dfs(instance, d.getDocumentElement(), alreadyHandled, namespaces);
 				setGlobalNameSpaces(d, namespaces);
 				// XMLUtil.stripWhiteSpaces(d, os);
-				XMLUtil.printDocument(d, os, true);
+				XMLUtils.printDocument(d, os, true);
 				// logger.info(stringWriter.toString());
 			} catch (Exception e) {
 				logger.error("An error occured while serializing an object:\n" + e.getLocalizedMessage());
@@ -252,7 +252,7 @@ public class EmfPersistence {
 						List<EObject> refList = (List<EObject>) object.eGet(ref);
 						for (int id = 0; id < refList.size(); ++id) {
 							EObject content = refList.get(id);
-							Element childNode = (Element) XMLUtil.getChildNodeWithNameAndId(node, modelMetaData.getName(ref), modelMetaData.getNamespace(ref), id);
+							Element childNode = (Element) XMLUtils.getChildNodeWithNameAndId(node, modelMetaData.getName(ref), modelMetaData.getNamespace(ref), id);
 							if (childNode != null) {
 								dfs(content, childNode, alreadyHandled, namespaces);
 							}
@@ -260,7 +260,7 @@ public class EmfPersistence {
 					} else {
 						EObject content = ((EObject) object.eGet(ref));
 						if (content != null && node != null) {
-							Element childNode = (Element) XMLUtil.getChildNodeWithNameAndId(node, modelMetaData.getName(ref), modelMetaData.getNamespace(ref), 0);
+							Element childNode = (Element) XMLUtils.getChildNodeWithNameAndId(node, modelMetaData.getName(ref), modelMetaData.getNamespace(ref), 0);
 							if (childNode != null) {
 								dfs(content, childNode, alreadyHandled, namespaces);
 							}
@@ -301,8 +301,8 @@ public class EmfPersistence {
 		// System.err.println(result);
 		Document doc = null;
 		try {
-			doc = XMLUtil.parseFromString(result);
-			XMLUtil.collectNamespace(doc, namespaces);
+			doc = XMLUtils.parseFromString(result);
+			XMLUtils.collectNamespace(doc, namespaces);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			assert(false);
@@ -358,31 +358,31 @@ public class EmfPersistence {
 	 * @throws Exception
 	 */
 	private static Element updateMember(Element node, EReference memberReference, int id, EObject memberObject, Document memberDocument) throws Exception {
-		Node currentMemberNode = XMLUtil.getChildNodeWithNameAndId(node, modelMetaData.getName(memberReference), modelMetaData.getNamespace(memberReference), id);
+		Node currentMemberNode = XMLUtils.getChildNodeWithNameAndId(node, modelMetaData.getName(memberReference), modelMetaData.getNamespace(memberReference), id);
 		if (currentMemberNode != null) {
 			logger.debug("Member " + memberReference.getName() + " is going to be replaced");
 			logger.debug("Current member contents");
-			XMLUtil.logDocument(currentMemberNode, logger);
+			XMLUtils.logDocument(currentMemberNode, logger);
 			logger.debug("Resolved member contents ");
-			XMLUtil.logDocument(memberDocument, logger);
+			XMLUtils.logDocument(memberDocument, logger);
 			logger.debug("Removing child nodes of " + memberReference.getName());
 			for (Node child; (child = currentMemberNode.getFirstChild()) != null; currentMemberNode.removeChild(child)) {
 				;
 			}
-			XMLUtil.logDocument(currentMemberNode, logger);
+			XMLUtils.logDocument(currentMemberNode, logger);
 			logger.debug("Inserting resolved contents to the member");
 			for (int i = 0; i < memberDocument.getFirstChild().getChildNodes().getLength(); ++i) {
 				Node importedNode = node.getOwnerDocument().importNode(memberDocument.getFirstChild().getChildNodes().item(i), true);
 				currentMemberNode.appendChild(importedNode);
 			}
 			logger.debug("Member after insertion");
-			XMLUtil.logDocument(currentMemberNode, logger);
+			XMLUtils.logDocument(currentMemberNode, logger);
 			logger.debug("Removing href attribute");
 			if (currentMemberNode.getAttributes().getNamedItem(HREF_ATTR) != null) {
 				currentMemberNode.getAttributes().removeNamedItem(HREF_ATTR);
 			}
 			logger.debug("Member after deleting href");
-			XMLUtil.logDocument(currentMemberNode, logger);
+			XMLUtils.logDocument(currentMemberNode, logger);
 
 			logger.debug("Setting xsi:type");
 			Attr attr = currentMemberNode.getOwnerDocument().createAttributeNS(modelMetaData.XSI_URI, "type");
@@ -390,11 +390,11 @@ public class EmfPersistence {
 			attr.setPrefix("xsi");
 			((Element) currentMemberNode).setAttributeNode(attr);
 			logger.debug("Member after setting type");
-			XMLUtil.logDocument(currentMemberNode, logger);
+			XMLUtils.logDocument(currentMemberNode, logger);
 			logger.debug("Copying resolved member attributes to the member");
-			XMLUtil.copyEObjectAttributes(memberObject, memberDocument.getDocumentElement(), (Element) currentMemberNode);
+			XMLUtils.copyEObjectAttributes(memberObject, memberDocument.getDocumentElement(), (Element) currentMemberNode);
 			logger.debug("Member after copying attributes");
-			XMLUtil.logDocument(currentMemberNode, logger);
+			XMLUtils.logDocument(currentMemberNode, logger);
 		}
 		return node;
 	}

@@ -1,45 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-  <parent>
-    <relativePath>../../build/poms/compiled/</relativePath>
-    <groupId>de.dfki.iui.basys.build</groupId>
-    <artifactId>compiled-bundle-settings</artifactId>
-    <version>1.0-SNAPSHOT</version>
-  </parent>
+	<parent>
+		<relativePath>../../build/poms/compiled/</relativePath>
+		<groupId>de.dfki.iui.basys.build</groupId>
+		<artifactId>compiled-bundle-settings</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
 
-  <properties>
-    <bundle.symbolicName>de.dfki.iui.basys.common.emf</bundle.symbolicName>
-    <bundle.namespace>de.dfki.iui.basys.common.emf</bundle.namespace>
-  </properties>
+	<properties>
+		<bundle.symbolicName>de.dfki.iui.basys.common.emf</bundle.symbolicName>
+		<bundle.namespace>de.dfki.iui.basys.common.emf</bundle.namespace>
+	</properties>
 
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>de.dfki.iui.basys.common</groupId>
-  <artifactId>de.dfki.iui.basys.common.emf</artifactId>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>de.dfki.iui.basys.common</groupId>
+	<artifactId>de.dfki.iui.basys.common.emf</artifactId>
 
-  <name>${bundle.symbolicName}</name>
+	<name>${bundle.symbolicName}</name>
 
-  <packaging>bundle</packaging>
+	<packaging>bundle</packaging>
 
-  <dependencies>
-    <!-- comment to remove all imported (non-local) bundles from your compilation classpath -->
-    <dependency>
-      <type>pom</type>
-      <groupId>${project.parent.groupId}</groupId>
-      <artifactId>provision</artifactId>
-      <optional>true</optional>
-    </dependency>
+	<dependencies>
+		<!-- comment to remove all imported (non-local) bundles from your compilation 
+			classpath -->
+		<dependency>
+			<type>pom</type>
+			<groupId>${project.parent.groupId}</groupId>
+			<artifactId>provision</artifactId>
+			<optional>true</optional>
+		</dependency>
 
-    <dependency>
-      <groupId>org.osgi</groupId>
-      <artifactId>osgi_R4_core</artifactId>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>org.osgi</groupId>
-      <artifactId>osgi_R4_compendium</artifactId>
-      <optional>true</optional>
-    </dependency>
-  </dependencies>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>osgi_R4_core</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>osgi_R4_compendium</artifactId>
+			<optional>true</optional>
+		</dependency>
+	</dependencies>
 
 </project>

@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1511363565245
+Bnd-LastModified: 1516982442832
 Build-Jdk: 1.8.0_131
 Built-By: dapo01
 Bundle-Activator: de.dfki.iui.basys.common.emf.internal.ExampleActivator
@@ -12,21 +12,23 @@ Bundle-SymbolicName: de.dfki.iui.basys.common.emf
 Bundle-Vendor: DFKI GmbH
 Bundle-Version: 1.0.0.SNAPSHOT
 Created-By: Apache Maven Bundle Plugin
-Export-Package: de.dfki.iui.basys.common.emf;uses:="javax.xml.transform,
- org.eclipse.emf.common.util,org.eclipse.emf.ecore,org.eclipse.emf.ecore
- .resource,org.eclipse.emf.ecore.util,org.slf4j,org.w3c.dom,org.xml.sax"
- ;version="1.0.0.SNAPSHOT"
+Export-Package: de.dfki.iui.basys.common.emf;version="1.0.0.SNAPSHOT";us
+ es:="javax.xml.transform,org.eclipse.emf.common.util,org.eclipse.emf.ec
+ ore,org.eclipse.emf.ecore.resource,org.eclipse.emf.ecore.util,org.slf4j
+ ,org.w3c.dom,org.xml.sax"
 Import-Package: com.fasterxml.jackson.databind;version="[2.9,3)";resolut
- ion:=optional,de.dfki.iui.basys.common.emf,javax.xml.parsers,javax.xml.
- transform,javax.xml.transform.dom,javax.xml.transform.stream,org.apache
- .commons.io.input;version="[1.4,2)";resolution:=optional,org.apache.com
- mons.io.output;version="[1.4,2)";resolution:=optional,org.eclipse.emf.c
- ommon.util;resolution:=optional,org.eclipse.emf.ecore;resolution:=optio
- nal,org.eclipse.emf.ecore.resource;resolution:=optional,org.eclipse.emf
- .ecore.util;resolution:=optional,org.emfjson.jackson.databind;version="
- [1.0,2)";resolution:=optional,org.emfjson.jackson.module;version="[1.0,
- 2)";resolution:=optional,org.emfjson.jackson.resource;version="[1.0,2)"
- ;resolution:=optional,org.osgi.framework;resolution:=optional,org.slf4j
- ;version="[1.7,2)";resolution:=optional,org.w3c.dom,org.xml.sax
+ ion:=optional,de.dfki.iui.basys.common.emf;version="[1.0,2)",javax.xml.
+ parsers,javax.xml.transform,javax.xml.transform.dom,javax.xml.transform
+ .stream,org.apache.commons.io.input;version="[1.4,2)";resolution:=optio
+ nal,org.apache.commons.io.output;version="[1.4,2)";resolution:=optional
+ ,org.eclipse.emf.common.util;resolution:=optional,org.eclipse.emf.ecore
+ ;resolution:=optional,org.eclipse.emf.ecore.resource;resolution:=option
+ al,org.eclipse.emf.ecore.resource.impl;resolution:=optional,org.eclipse
+ .emf.ecore.util;resolution:=optional,org.eclipse.emf.ecore.xmi.impl;res
+ olution:=optional,org.emfjson.jackson.databind;version="[1.0,2)";resolu
+ tion:=optional,org.emfjson.jackson.module;version="[1.0,2)";resolution:
+ =optional,org.emfjson.jackson.resource;version="[1.0,2)";resolution:=op
+ tional,org.osgi.framework;resolution:=optional,org.slf4j;version="[1.7,
+ 2)";resolution:=optional,org.w3c.dom,org.xml.sax
 Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
 Tool: Bnd-3.3.0.201609221906
