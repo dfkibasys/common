@@ -11,6 +11,7 @@ import java.nio.charset.Charset;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import org.apache.commons.io.input.ReaderInputStream;
 import org.apache.commons.io.output.WriterOutputStream;
@@ -27,7 +28,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.emfjson.EMFJs;
 import org.emfjson.jackson.databind.EMFContext;
 import org.emfjson.jackson.module.EMFModule;
-
 
 public class JsonUtils {
 
@@ -83,7 +83,10 @@ public class JsonUtils {
 		options.put(EMFJs.OPTION_INDENT_OUTPUT, true);
 		options.put(EMFJs.OPTION_SERIALIZE_TYPE, false);
 
-		resource.getContents().add(entity);
+		if (entity.eResource() != null)
+			resource.getContents().add(EmfUtils.clone(entity));
+		else
+			resource.getContents().add(entity);
 		resource.save(os, options);
 	}
 
@@ -97,7 +100,16 @@ public class JsonUtils {
 		options.put(EMFJs.OPTION_SERIALIZE_TYPE, false);
 		options.put(EMFJs.OPTION_SERIALIZE_REF_TYPE, true);
 
-		resource.getContents().addAll(entities);
+		entities.forEach(new Consumer<EObject>() {
+			@Override
+			public void accept(EObject e) {
+				if (e.eResource() != null)
+					resource.getContents().add(EmfUtils.clone(e));
+				else
+					resource.getContents().add(e);
+			}
+		});
+
 		resource.save(os, options);
 	}
 

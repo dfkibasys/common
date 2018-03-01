@@ -13,6 +13,10 @@
 	<properties>
 		<bundle.symbolicName>de.dfki.iui.basys.common.emf</bundle.symbolicName>
 		<bundle.namespace>de.dfki.iui.basys.common.emf</bundle.namespace>
+		<commons-io-version>2.6</commons-io-version>
+		<jackson-version>2.9.2</jackson-version>
+		<emfjson-version>0.13.0</emfjson-version>
+		<emfjson-jackson-version>1.0.1</emfjson-jackson-version>
 	</properties>
 
 	<modelVersion>4.0.0</modelVersion>
@@ -24,6 +28,47 @@
 	<packaging>bundle</packaging>
 
 	<dependencies>
+				
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons-io-version}</version>
+		</dependency>
+	
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson-version}</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson-version}</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.emfjson</groupId>
+			<artifactId>emfjson-core</artifactId>
+			<version>${emfjson-version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.emfjson/emfjson-jackson -->
+		<dependency>
+			<groupId>org.emfjson</groupId>
+			<artifactId>emfjson-jackson</artifactId>
+			<version>${emfjson-jackson-version}</version>
+		</dependency>
+	
 		<!-- comment to remove all imported (non-local) bundles from your compilation 
 			classpath -->
 		<dependency>
