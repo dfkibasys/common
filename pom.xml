@@ -18,6 +18,7 @@
 
   <modules>
     <module>de.dfki.iui.basys.common.emf</module>
+    <module>de.dfki.iui.basys.common.scxml</module>
   </modules>
 
 </project>

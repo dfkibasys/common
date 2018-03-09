@@ -1,0 +1,129 @@
+<scxml initial="abortable" version="1.0" xmlns="http://www.w3.org/2005/07/scxml"><!--   node-size-and-position x=0 y=0 w=2190 h=1640  --><!-- node-size-and-position x=0 y=0 w=588,8 h=1201 -->
+ <state id="ABORTING"><!--   node-size-and-position x=1189,53 y=1440 w=100 h=75  -->
+  <onentry>
+   <script>unit.onAborting()</script>
+  </onentry>
+<!-- node-size-and-position x=1459,57 y=1420 w=100 h=75 -->
+  <transition target="ABORTED"></transition>
+ </state>
+ <state id="ABORTED"><!--   node-size-and-position x=1009,53 y=1440 w=90 h=75  -->
+  <onentry>
+   <script>unit.onAborted()</script>
+  </onentry>
+<!-- node-size-and-position x=1229,57 y=1420 w=90 h=75 -->
+  <transition event="lifecycle.events.clear" target="CLEARING"><!--   edge-path [CLEARING]  x=351,53 y=1456,5 pointx=0 pointy=0 offsetx=286 offsety=0  --></transition>
+ </state>
+ <state id="abortable" initial="STOPPED"><!--   node-size-and-position x=20 y=40 w=1570 h=1330  -->
+  <transition event="lifecycle.events.abort" target="ABORTING"></transition>
+  <state id="CLEARING"><!--   node-size-and-position x=365,25 y=43 w=100 h=75  -->
+   <onentry>
+    <script>unit.onClearing()</script>
+   </onentry>
+<!-- node-size-and-position x=1210,32 y=1200 w=100 h=75 -->
+   <transition target="STOPPED"></transition>
+  </state>
+  <state id="STOPPING"><!--   node-size-and-position x=367,25 y=1231 w=100 h=75  -->
+   <onentry>
+    <script>unit.onStopping()</script>
+   </onentry>
+<!-- node-size-and-position x=930,32 y=1110 w=110 h=75   node-size-and-position x=366,93 y=1106 w=110 h=75 -->
+   <transition target="STOPPED"><!--   edge-path [STOPPED]  x=560,25 y=737  --></transition>
+  </state>
+  <state id="STOPPED"><!--   node-size-and-position x=370,25 y=168 w=90 h=75  -->
+   <onentry>
+    <script>unit.onStopped()</script>
+   </onentry>
+<!-- node-size-and-position x=690,32 y=1200 w=90 h=75   node-size-and-position x=376,93 y=43 w=90 h=75 -->
+   <transition event="lifecycle.events.reset" target="stoppable"></transition>
+  </state>
+  <state id="stoppable" initial="RESETTING"><!--   node-size-and-position x=20 y=293 w=510,5 h=888  --><!-- node-size-and-position x=20 y=168 w=515,86 h=888 -->
+   <transition event="lifecycle.events.stop" target="STOPPING"></transition>
+   <state id="RESETTING"><!--   node-size-and-position x=231,5 y=43 w=100 h=75  -->
+    <onentry>
+     <script>unit.onResetting()</script>
+    </onentry>
+<!-- node-size-and-position x=189,36 y=43 w=110 h=75 -->
+    <transition target="IDLE"></transition>
+   </state>
+   <state id="IDLE"><!--   node-size-and-position x=210 y=168 w=75 h=75  -->
+    <onentry>
+     <script>unit.onIdle()</script>
+    </onentry>
+<!-- node-size-and-position x=239,36 y=168 w=80 h=75 -->
+    <transition event="lifecycle.events.start" target="STARTING"></transition>
+   </state>
+   <state id="STARTING"><!--   node-size-and-position x=197,5 y=293 w=100 h=75  -->
+    <onentry>
+     <script>unit.onStarting()</script>
+    </onentry>
+<!-- node-size-and-position x=220,36 y=293 w=110 h=75 -->
+    <transition target="EXECUTE"></transition>
+   </state>
+   <state id="EXECUTE"><!--   node-size-and-position x=202,5 y=418 w=90 h=75  -->
+    <onentry>
+     <script>unit.onExecute()</script>
+    </onentry>
+<!-- node-size-and-position x=226,36 y=418 w=90 h=75 -->
+    <transition event="lifecycle.events.hold" target="HOLDING"></transition>
+    <transition event="lifecycle.events.suspend" target="SUSPENDING"></transition>
+    <transition target="COMPLETING"><!--   edge-path [COMPLETING]  x=409,5 y=580,5  --></transition>
+   </state>
+   <state id="COMPLETING"><!--   node-size-and-position x=342,5 y=668 w=110 h=75  -->
+    <onentry>
+     <script>unit.onCompleting()</script>
+    </onentry>
+<!-- node-size-and-position x=209,36 y=668 w=110 h=75 -->
+    <transition target="COMPLETE"></transition>
+   </state>
+   <state id="COMPLETE"><!--   node-size-and-position x=390,5 y=793 w=100 h=75  -->
+    <onentry>
+     <script>unit.onComplete()</script>
+    </onentry>
+<!-- node-size-and-position x=171,36 y=793 w=100 h=75 -->
+    <transition event="lifecycle.events.reset" target="RESETTING"><!--   edge-path [RESETTING]  x=483,5 y=705,5 x=439,5 y=580,5 x=383,5 y=455,5 x=349,5 y=330,5 x=315,5 y=205,5  --></transition>
+   </state>
+   <state id="HOLDING"><!--   node-size-and-position x=288,5 y=543 w=90 h=75  -->
+    <onentry>
+     <script>unit.onHolding()</script>
+    </onentry>
+<!-- node-size-and-position x=149,36 y=543 w=90 h=75 -->
+    <transition target="HELD"></transition>
+   </state>
+   <state id="HELD"><!--   node-size-and-position x=237 y=668 w=75 h=75  -->
+    <onentry>
+     <script>unit.onHeld()</script>
+    </onentry>
+<!-- node-size-and-position x=530,5 y=340 w=75 h=75   node-size-and-position x=73,86 y=668 w=75 h=75 -->
+    <transition event="lifecycle.events.unhold" target="UNHOLDING"></transition>
+   </state>
+   <state id="UNHOLDING"><!--   node-size-and-position x=190,5 y=793 w=100 h=75  -->
+    <onentry>
+     <script>unit.onUnholding()</script>
+    </onentry>
+<!-- node-size-and-position x=27,36 y=793 w=100 h=75 -->
+    <transition target="EXECUTE"><!--   edge-path [EXECUTE]  x=207,5 y=705,5 x=256,5 y=580,5  --></transition>
+   </state>
+   <state id="SUSPENDING"><!--   node-size-and-position x=116,5 y=543 w=110 h=75  -->
+    <onentry>
+     <script>unit.onSuspending()</script>
+    </onentry>
+<!-- node-size-and-position x=331,36 y=543 w=110 h=75 -->
+    <transition target="SUSPENDED"></transition>
+   </state>
+   <state id="SUSPENDED"><!--   node-size-and-position x=74,5 y=668 w=100 h=75  -->
+    <onentry>
+     <script>unit.onSuspended()</script>
+    </onentry>
+<!-- node-size-and-position x=382,36 y=668 w=100 h=75 -->
+    <transition event="lifecycle.events.unsuspend" target="UNSUSPENDING"></transition>
+   </state>
+   <state id="UNSUSPENDING"><!--   node-size-and-position x=23,5 y=793 w=120 h=75  -->
+    <onentry>
+     <script>unit.onUnsuspending()</script>
+    </onentry>
+<!-- node-size-and-position x=331,36 y=793 w=120 h=75 -->
+    <transition target="EXECUTE"><!--   edge-path [EXECUTE]  x=42,5 y=705,5 x=85,5 y=580,5  --></transition>
+   </state>
+  </state>
+ </state>
+</scxml>

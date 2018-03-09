@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-Description: Generated using Pax-Construct
+Bundle-DocURL: http://www.dfki.de
+Bundle-License: https://www.eclipse.org/legal/epl-v10.html
+Bundle-ManifestVersion: 2
+Bundle-Name: de.dfki.iui.basys.common.scxml
+Bundle-SymbolicName: de.dfki.iui.basys.common.scxml
+Bundle-Vendor: DFKI GmbH
+Bundle-Version: 1.0.0.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Include-Resource: readme.txt=src/main/resources/readme.txt
+Private-Package: !*
+Tool: Bnd-3.3.0.201609221906
+Bundle-ActivationPolicy: lazy

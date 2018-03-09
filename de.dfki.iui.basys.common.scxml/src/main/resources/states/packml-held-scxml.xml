@@ -1,0 +1,13 @@
+<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0"
+	datamodel="jexl" initial="my-held">
+
+	<!-- held inner state -->
+	<state id="my-held">
+		<onentry>
+			<script>
+				unit.held()
+			</script>
+		</onentry>
+	</state>
+
+</scxml>

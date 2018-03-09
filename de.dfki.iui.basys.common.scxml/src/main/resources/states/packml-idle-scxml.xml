@@ -1,0 +1,13 @@
+<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0"
+	datamodel="jexl" initial="my-idle">
+
+	<!-- idle inner state -->
+	<state id="my-idle">
+		<onentry>
+			<script>
+				unit.idle()
+			</script>
+		</onentry>
+	</state>
+
+</scxml>

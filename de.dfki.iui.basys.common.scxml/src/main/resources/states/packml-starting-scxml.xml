@@ -1,0 +1,11 @@
+<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0"
+	datamodel="jexl" initial="my-starting">
+
+	<!-- starting inner state -->
+	<state id="my-starting">
+		<onentry>
+			<send event="'lifecycle.events.sc.execute'" delay="1000"></send>
+		</onentry>
+	</state>
+
+</scxml>

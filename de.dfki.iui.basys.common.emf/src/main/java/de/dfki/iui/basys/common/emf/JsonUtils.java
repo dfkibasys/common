@@ -74,6 +74,51 @@ public class JsonUtils {
 		return fromStream(is, root);
 	}
 
+
+	public static <T> T fromStream(InputStream input, Class<T> clz) throws IOException {
+
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.registerModule(new EMFModule());
+
+		// Map<String, Object> options = new HashMap<String, Object>();
+		// options.put(EMFJs.OPTION_ROOT_ELEMENT, root);
+
+		ResourceSet resourceSet = new ResourceSetImpl();
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("json",
+				new JsonResourceFactory(mapper));
+
+		T resource = mapper.reader().withAttribute(EMFContext.Attributes.RESOURCE_SET, resourceSet)
+				.withAttribute(EMFContext.Attributes.RESOURCE_URI, URI.createURI("in.json"))
+				.forType(clz).readValue(input);
+
+		// Resource resource =
+		// resourceSet.createResource(URI.createURI("in.json"));
+
+		// StringWriter writer = new StringWriter();
+		// IOUtils.copy(input, writer, Charsets.UTF_8);
+		// String content = writer.toString();
+
+		// InputStreamReader isr = new
+		// InputStreamReader(IOUtils.toInputStream(content,Charsets.UTF_8));
+
+		// try {
+		// //resource.load(input, options);
+		// resource.load(IOUtils.toInputStream(content,Charsets.UTF_8));
+		// } catch (IOException e) {
+		//
+		// throw e;
+		// }
+		return resource;
+	}
+
+	
+	public static <T> T fromJsonString(String input, Class<T> clz) throws IOException {
+		StringReader stringReader = new StringReader(input);
+		ReaderInputStream is = new ReaderInputStream(stringReader, Charset.forName("UTF-8"));
+		T result = fromStream(is, clz);
+		return result;
+	}
+	
 	public static void toStream(OutputStream os, EObject entity) throws IOException {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("json", new JsonResourceFactory());

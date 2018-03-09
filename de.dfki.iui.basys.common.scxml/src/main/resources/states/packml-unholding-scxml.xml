@@ -1,0 +1,13 @@
+<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0"
+	datamodel="jexl" initial="my-unholding">
+
+	<!-- unholding inner state -->
+	<state id="my-unholding">
+		<onentry>
+			<script>
+				unit.unholding()
+			</script>
+		</onentry>
+	</state>
+
+</scxml>
