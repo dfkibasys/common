@@ -75,6 +75,12 @@ public interface Unit extends ActiveStatesHandler {
 
 	UnitConfiguration getConfig();
 	void setConfig(UnitConfiguration config);
-	
+
+	void onStopped();
+	void onIdle();
+	void onComplete();
+	void onHold();
+	void onSuspend();
+	void onAborted();
 
 }

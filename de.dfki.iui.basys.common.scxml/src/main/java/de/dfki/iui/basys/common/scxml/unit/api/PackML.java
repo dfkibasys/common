@@ -37,7 +37,7 @@ public class PackML {
 	
 	protected void initialize() {
 		if (!initialized && handler != null) {
-			URL scxmlResource = this.getClass().getResource("/resources/packml.scxml");
+			URL scxmlResource = this.getClass().getResource("/packml.scxml");
 			// initialize states and state machine
 			try {
 				scxml = SCXMLReader.read(scxmlResource);
