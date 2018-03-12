@@ -15,13 +15,18 @@ import org.apache.commons.scxml2.io.SCXMLReader;
 import org.apache.commons.scxml2.model.EnterableState;
 import org.apache.commons.scxml2.model.ModelException;
 import org.apache.commons.scxml2.model.SCXML;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import de.dfki.iui.basys.common.scxml.TestUnit;
 import de.dfki.iui.basys.common.scxml.unit.api.Unit.Mode;
 import de.dfki.iui.basys.common.scxml.unit.api.Unit.State;
 
 public class PackML {
 
-	Mode mode;
+	protected final Logger LOGGER = LoggerFactory.getLogger(PackML.class.getName());
+		
+	private Mode mode = Mode.PRODUCTION;
 
 	ActiveStatesHandler handler = null;
 
@@ -34,7 +39,7 @@ public class PackML {
 	public PackML(ActiveStatesHandler handler) {
 		this.handler = handler;
 	}
-	
+
 	protected void initialize() {
 		if (!initialized && handler != null) {
 			URL scxmlResource = this.getClass().getResource("/packml.scxml");
@@ -51,6 +56,7 @@ public class PackML {
 				// add script variables to scope
 				exec.addListener(scxml, new SimpleSCXMLListener());
 				exec.getRootContext().set("unit", handler);
+				exec.getRootContext().set("Mode", Unit.Mode.class);
 
 				exec.go();
 
@@ -78,8 +84,16 @@ public class PackML {
 		return mode;
 	}
 
-	public void changeMode(Mode mode) {
-		// this.mode = mode;
+	public void setMode(Mode mode){
+		State state = getState();
+		if (mode == Mode.MANUAL && state == State.ABORTED) {
+			this.mode = mode;
+		} else if (state == State.STOPPED) {
+			this.mode = mode;
+		} else {
+			// illegal state
+			LOGGER.warn("Cannot change mode in state " + state);
+		}
 	}
 
 	protected void raiseLifecycleEvent(String event) {

@@ -48,8 +48,8 @@ public abstract class UnitImpl implements Unit {
 	}
 
 	@Override
-	public void changeMode(Mode mode) {
-		packml.changeMode(mode);
+	public void setMode(Mode mode) {
+		packml.setMode(mode);
 	}
 
 	@Override

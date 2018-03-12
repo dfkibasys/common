@@ -59,9 +59,8 @@ public interface Unit extends ActiveStatesHandler {
 	 *
 	 * @return the unit mode
 	 */
-	Mode getMode();
-	
-	void changeMode(Mode mode);
+	Mode getMode();	
+	void setMode(Mode mode);
 	
 	void reset();
 	void start();
