@@ -3,52 +3,57 @@ package de.dfki.iui.basys.common.scxml;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.dfki.iui.basys.common.scxml.unit.api.UnitImpl;
+import de.dfki.iui.basys.common.scxml.unit.ActiveStatesHandler;
+import de.dfki.iui.basys.common.scxml.unit.PackMLUnit;
+import de.dfki.iui.basys.common.scxml.unit.State;
 import junit.framework.TestCase;
 
-public class TestUnit extends UnitImpl {
+public class TestHandler implements ActiveStatesHandler {
 
+	protected final Logger LOGGER = LoggerFactory.getLogger(TestHandler.class.getName());
+		
 	enum Path {NORMAL, SUSPEND, HOLD}
 	
 	public Path path = Path.NORMAL;
 	
-	public TestUnit(String id) {
-		super(id);
+	PackMLUnit unit;
+	
+	public TestHandler(PackMLUnit unit) {
+		this.unit = unit;
 	}
 
-	protected final Logger LOGGER = LoggerFactory.getLogger(TestUnit.class.getName());
-	
-	
-	@Override
-	public void updateConfig() {
-		LOGGER.info("updateConfig");
-		
+	public void initialize() {
+		unit.initialize();
+	}
+
+	public void dispose() {
+		unit.dispose();
 	}
 	
 	@Override
 	public void onResetting() {
 		LOGGER.info("onResetting");
-		TestCase.assertEquals(getState(), State.RESETTING);
+		TestCase.assertEquals(unit.getState(), State.RESETTING);
 	}
 
 	@Override
 	public void onStarting() {
 		LOGGER.info("onStarting");
-		TestCase.assertEquals(getState(), State.STARTING);
+		TestCase.assertEquals(unit.getState(), State.STARTING);
 
 	}
 
 	@Override
 	public void onExecute() {
 		LOGGER.info("onExecute");
-		TestCase.assertEquals(getState(), State.EXECUTE);
+		TestCase.assertEquals(unit.getState(), State.EXECUTE);
 		
 		switch (path) {
 		case HOLD:
-			hold();
+			unit.hold();
 			break;
 		case SUSPEND:
-			suspend();
+			unit.suspend();
 			break;
 		case NORMAL:
 		default:
@@ -66,21 +71,21 @@ public class TestUnit extends UnitImpl {
 	@Override
 	public void onCompleting() {
 		LOGGER.info("onCompleting");
-		TestCase.assertEquals(getState(), State.COMPLETING);
+		TestCase.assertEquals(unit.getState(), State.COMPLETING);
 
 	}
 
 	@Override
 	public void onHolding() {
 		LOGGER.info("onHolding");
-		TestCase.assertEquals(getState(), State.HOLDING);
+		TestCase.assertEquals(unit.getState(), State.HOLDING);
 
 	}
 
 	@Override
 	public void onUnholding() {
 		LOGGER.info("onUnholding");
-		TestCase.assertEquals(getState(), State.UNHOLDING);
+		TestCase.assertEquals(unit.getState(), State.UNHOLDING);
 		path = Path.NORMAL;
 
 	}
@@ -88,13 +93,13 @@ public class TestUnit extends UnitImpl {
 	@Override
 	public void onSuspending() {
 		LOGGER.info("onSuspending");
-		TestCase.assertEquals(getState(), State.SUSPENDING);
+		TestCase.assertEquals(unit.getState(), State.SUSPENDING);
 
 	}
 
 	@Override
 	public void onUnsuspending() {
-		TestCase.assertEquals(getState(), State.UNSUSPENDING);
+		TestCase.assertEquals(unit.getState(), State.UNSUSPENDING);
 		LOGGER.info("onUnsuspending");
 		path = Path.NORMAL;
 
@@ -102,21 +107,21 @@ public class TestUnit extends UnitImpl {
 
 	@Override
 	public void onAborting() {
-		TestCase.assertEquals(getState(), State.ABORTING);
+		TestCase.assertEquals(unit.getState(), State.ABORTING);
 		LOGGER.info("onAborting");
 
 	}
 
 	@Override
 	public void onClearing() {
-		TestCase.assertEquals(getState(), State.CLEARING);
+		TestCase.assertEquals(unit.getState(), State.CLEARING);
 		LOGGER.info("onClearing");
 
 	}
 
 	@Override
 	public void onStopping() {
-		TestCase.assertEquals(getState(), State.STOPPING);
+		TestCase.assertEquals(unit.getState(), State.STOPPING);
 		LOGGER.info("onStopping");
 
 	}

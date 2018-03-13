@@ -3,20 +3,23 @@ package de.dfki.iui.basys.common.scxml;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import junit.framework.TestCase;
-import de.dfki.iui.basys.common.scxml.TestUnit.Path;
-import de.dfki.iui.basys.common.scxml.unit.api.Unit.State;
+import de.dfki.iui.basys.common.scxml.TestHandler.Path;
+import de.dfki.iui.basys.common.scxml.unit.PackMLUnit;
+import de.dfki.iui.basys.common.scxml.unit.State;
 
 public class PackMLTests extends TestCase {
 
 	protected final Logger LOGGER = LoggerFactory.getLogger(PackMLTests.class.getName());
 	
-	TestUnit unit;
+	TestHandler handler;
+	PackMLUnit unit;
 	
 	protected void setUp() throws Exception {		
 		super.setUp();
 		LOGGER.info("setUp");
-		
-		unit = new TestUnit("test_unit");
+		unit = new PackMLUnit("test_unit");
+		handler = new TestHandler(unit);
+		unit.setActiveStatesHandler(handler);
 		unit.initialize();
 		
 	}
@@ -39,7 +42,7 @@ public class PackMLTests extends TestCase {
 	}
 	
 	public void testHold() {
-		unit.path = Path.HOLD;
+		handler.path = Path.HOLD;
 		assertEquals(State.STOPPED, unit.getState());
 		unit.reset();
 		assertEquals(State.IDLE, unit.getState());
@@ -52,7 +55,7 @@ public class PackMLTests extends TestCase {
 	}
 	
 	public void testSuspend() {
-		unit.path = Path.SUSPEND;
+		handler.path = Path.SUSPEND;
 		assertEquals(State.STOPPED, unit.getState());
 		unit.reset();
 		assertEquals(State.IDLE, unit.getState());

@@ -1,4 +1,4 @@
-package de.dfki.iui.basys.common.scxml.unit.api;
+package de.dfki.iui.basys.common.scxml.unit;
 
 import java.io.IOException;
 import java.net.URL;
@@ -18,9 +18,7 @@ import org.apache.commons.scxml2.model.SCXML;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.dfki.iui.basys.common.scxml.TestUnit;
-import de.dfki.iui.basys.common.scxml.unit.api.Unit.Mode;
-import de.dfki.iui.basys.common.scxml.unit.api.Unit.State;
+import de.dfki.iui.basys.common.scxml.TestHandler;
 
 public class PackML {
 
@@ -28,20 +26,20 @@ public class PackML {
 		
 	private Mode mode = Mode.PRODUCTION;
 
-	ActiveStatesHandler handler = null;
+	private PackMLUnit unit = null;
 
-	boolean initialized = false;
+	private boolean initialized = false;
 
-	protected SCXML scxml = null;
-	protected SCXMLExecutor exec = null;
+	private SCXML scxml = null;
+	private SCXMLExecutor exec = null;
 	///////////////////////////////
 
-	public PackML(ActiveStatesHandler handler) {
-		this.handler = handler;
+	public PackML(PackMLUnit unit) {
+		this.unit = unit;
 	}
 
-	protected void initialize() {
-		if (!initialized && handler != null) {
+	public void initialize() {
+		if (!initialized) {
 			URL scxmlResource = this.getClass().getResource("/packml.scxml");
 			// initialize states and state machine
 			try {
@@ -55,8 +53,8 @@ public class PackML {
 
 				// add script variables to scope
 				exec.addListener(scxml, new SimpleSCXMLListener());
-				exec.getRootContext().set("unit", handler);
-				exec.getRootContext().set("Mode", Unit.Mode.class);
+				exec.getRootContext().set("unit", unit);
+				exec.getRootContext().set("Mode", Mode.class);
 
 				exec.go();
 
@@ -68,7 +66,7 @@ public class PackML {
 		}
 	}
 
-	protected void dispose() {
+	public void dispose() {
 		if (initialized) {
 			initialized = false;
 		}
@@ -96,7 +94,7 @@ public class PackML {
 		}
 	}
 
-	protected void raiseLifecycleEvent(String event) {
+	public void raiseLifecycleEvent(String event) {
 		try {
 			exec.triggerEvent(new EventBuilder("lifecycle.events." + event, TriggerEvent.SIGNAL_EVENT).build());
 		} catch (ModelException e) {

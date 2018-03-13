@@ -1,4 +1,4 @@
-package de.dfki.iui.basys.common.scxml.unit.api;
+package de.dfki.iui.basys.common.scxml.unit;
 
 public interface ActiveStatesHandler {
 

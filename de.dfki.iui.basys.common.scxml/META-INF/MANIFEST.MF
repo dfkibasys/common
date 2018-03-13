@@ -8,14 +8,16 @@ Bundle-SymbolicName: de.dfki.iui.basys.common.scxml
 Bundle-Vendor: DFKI GmbH
 Bundle-Version: 1.0.0.SNAPSHOT
 Created-By: Apache Maven Bundle Plugin
-Export-Package: de.dfki.iui.basys.common.scxml.unit.api;version="1.0.0.S
- NAPSHOT";uses:="org.apache.commons.scxml2,org.apache.commons.scxml2.mod
- el,org.slf4j"
-Import-Package: de.dfki.iui.basys.common.scxml,javax.xml.stream,org.apac
- he.commons.scxml2;version="[2.0,3)",org.apache.commons.scxml2.env;versi
- on="[2.0,3)",org.apache.commons.scxml2.env.jexl;version="[2.0,3)",org.a
- pache.commons.scxml2.io;version="[2.0,3)",org.apache.commons.scxml2.mod
- el;version="[2.0,3)",org.slf4j;version="[1.7,2)";resolution:=optional
+Export-Package: de.dfki.iui.basys.common.scxml.unit;version="1.0.0.SNAPS
+ HOT",de.dfki.iui.basys.common.scxml.unit.impl;version="1.0.0.SNAPSHOT";
+ uses:="de.dfki.iui.basys.common.scxml.unit,org.apache.commons.scxml2,or
+ g.apache.commons.scxml2.model,org.slf4j"
+Import-Package: de.dfki.iui.basys.common.scxml,de.dfki.iui.basys.common.
+ scxml.unit;version="[1.0,2)",javax.xml.stream,org.apache.commons.scxml2
+ ;version="[2.0,3)",org.apache.commons.scxml2.env;version="[2.0,3)",org.
+ apache.commons.scxml2.env.jexl;version="[2.0,3)",org.apache.commons.scx
+ ml2.io;version="[2.0,3)",org.apache.commons.scxml2.model;version="[2.0,
+ 3)",org.slf4j;version="[1.7,2)";resolution:=optional
 Include-Resource: packml-first-layer-scxml.xml=src/main/resources/packml
  -first-layer-scxml.xml,packml-second-layer-scxml.xml=src/main/resources
  /packml-second-layer-scxml.xml,packml.scxml=src/main/resources/packml.s
