@@ -73,67 +73,67 @@ public class PackMLUnit implements StatusInterface, CommandInterface, ActiveStat
 	 */
 
 	@Override
-	public void setMode(Mode mode) {
+	public synchronized void setMode(Mode mode) {
 		packml.setMode(mode);
 	}
 
 	@Override
-	public void setConfig(UnitConfiguration config) {
+	public synchronized void setConfig(UnitConfiguration config) {
 		if (getState() == State.IDLE) {
 			this.config = config;
 		}		
 	}
 
 	@Override
-	public void reset() {
+	public synchronized void reset() {
 		LOGGER.info("reset");
 		packml.raiseLifecycleEvent("reset");
 	}
 
 	@Override
-	public void start() {
+	public synchronized void start() {
 		LOGGER.info("start");
 		packml.raiseLifecycleEvent("start");
 	}
 
 	@Override
-	public void stop() {
+	public synchronized void stop() {
 		LOGGER.info("stop");
 		packml.raiseLifecycleEvent("stop");
 	}
 
 	@Override
-	public void hold() {
+	public synchronized void hold() {
 		LOGGER.info("hold");
 		packml.raiseLifecycleEvent("hold");
 	}
 
 	@Override
-	public void unhold() {
+	public synchronized void unhold() {
 		LOGGER.info("unhold");
 		packml.raiseLifecycleEvent("unhold");
 	}
 
 	@Override
-	public void suspend() {
+	public synchronized void suspend() {
 		LOGGER.info("suspend");
 		packml.raiseLifecycleEvent("suspend");
 	}
 
 	@Override
-	public void unsuspend() {
+	public synchronized void unsuspend() {
 		LOGGER.info("unsuspend");
 		packml.raiseLifecycleEvent("unsuspend");
 	}
 
 	@Override
-	public void abort() {
+	public synchronized void abort() {
 		LOGGER.info("abort");
 		packml.raiseLifecycleEvent("abort");
 	}
 
 	@Override
-	public void clear() {
+	public synchronized void clear() {
 		LOGGER.info("clear");
 		packml.raiseLifecycleEvent("clear");
 	}

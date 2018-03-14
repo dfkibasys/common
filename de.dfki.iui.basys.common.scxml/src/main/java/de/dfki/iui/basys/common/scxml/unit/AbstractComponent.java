@@ -15,12 +15,12 @@ public abstract class AbstractComponent implements ActiveStatesHandler, WaitStat
 		unit.setWaitStatesHandler(this);
 	}
 	
-	public void initialize() {
+	public void activate() {
 		unit.initialize();
 		//register service
 	}
 
-	public void dispose() {
+	public void deactivate() {
 		//unregister service
 		unit.dispose();
 	}
