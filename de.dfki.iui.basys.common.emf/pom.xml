@@ -13,6 +13,7 @@
 	<properties>
 		<bundle.symbolicName>de.dfki.iui.basys.common.emf</bundle.symbolicName>
 		<bundle.namespace>de.dfki.iui.basys.common.emf</bundle.namespace>
+		<emf-version>2.12.0</emf-version>
 		<commons-io-version>2.6</commons-io-version>
 		<jackson-version>2.9.2</jackson-version>
 		<emfjson-version>0.13.0</emfjson-version>
@@ -28,27 +29,46 @@
 	<packaging>bundle</packaging>
 
 	<dependencies>
-				
+
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.common</artifactId>
+			<version>${emf-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.ecore</artifactId>
+			<version>${emf-version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.eclipse.emf/org.eclipse.emf.ecore.xmi -->
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.ecore.xmi</artifactId>
+			<version>${emf-version}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>${commons-io-version}</version>
 		</dependency>
-	
+
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
 			<version>${jackson-version}</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
 			<version>${jackson-version}</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -68,7 +88,7 @@
 			<artifactId>emfjson-jackson</artifactId>
 			<version>${emfjson-jackson-version}</version>
 		</dependency>
-	
+
 		<!-- comment to remove all imported (non-local) bundles from your compilation 
 			classpath -->
 		<dependency>
