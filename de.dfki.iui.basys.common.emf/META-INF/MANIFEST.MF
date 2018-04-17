@@ -11,20 +11,17 @@ Created-By: Apache Maven Bundle Plugin
 Export-Package: de.dfki.iui.basys.common.emf;version="1.0.0.SNAPSHOT";us
  es:="javax.xml.transform,org.eclipse.emf.common.util,org.eclipse.emf.ec
  ore,org.eclipse.emf.ecore.resource,org.eclipse.emf.ecore.util,org.slf4j
- ,org.w3c.dom,org.xml.sax",de.dfki.iui.basys.common.emf.computation;vers
- ion="1.0.0.SNAPSHOT";uses:="org.eclipse.emf.ecore"
-Import-Package: com.fasterxml.jackson.databind;version="[2.9,3)",de.dfki
- .iui.basys.common.emf;version="[1.0,2)",javax.xml.parsers,javax.xml.tra
- nsform,javax.xml.transform.dom,javax.xml.transform.stream,org.apache.co
- mmons.io.input;version="[1.4,2)",org.apache.commons.io.output;version="
- [1.4,2)",org.eclipse.emf.common.util,org.eclipse.emf.ecore,org.eclipse.
- emf.ecore.resource,org.eclipse.emf.ecore.resource.impl,org.eclipse.emf.
- ecore.util,org.eclipse.emf.ecore.xmi.impl;resolution:=optional,org.emfj
- son.jackson.databind;version="[1.0,2)",org.emfjson.jackson.module;versi
- on="[1.0,2)",org.emfjson.jackson.resource;version="[1.0,2)",org.slf4j;v
- ersion="[1.7,2)";resolution:=optional,org.w3c.dom,org.xml.sax
+ ,org.w3c.dom,org.xml.sax"
+Import-Package: com.fasterxml.jackson.databind;version="[2.9,3)",javax.x
+ ml.parsers,javax.xml.transform,javax.xml.transform.dom,javax.xml.transf
+ orm.stream,org.apache.commons.io.input;version="[1.4,2)",org.apache.com
+ mons.io.output;version="[1.4,2)",org.eclipse.emf.common.util,org.eclips
+ e.emf.ecore,org.eclipse.emf.ecore.resource,org.eclipse.emf.ecore.resour
+ ce.impl,org.eclipse.emf.ecore.util,org.eclipse.emf.ecore.xmi,org.eclips
+ e.emf.ecore.xmi.impl,org.emfjson;version="[0.13,1)",org.emfjson.jackson
+ .databind;version="[1.0,2)",org.emfjson.jackson.module;version="[1.0,2)
+ ",org.emfjson.jackson.resource;version="[1.0,2)",org.slf4j;version="[1.
+ 7,2)";resolution:=optional,org.w3c.dom,org.xml.sax
 Include-Resource: readme.txt=src/main/resources/readme.txt
-Private-Package: de.dfki.iui.basys.common.emf.computation,de.dfki.iui.ba
- sys.common.emf
-Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
-Tool: Bnd-3.3.0.201609221906
+Private-Package: readme.txt
+Tool: Bnd-2.1.0.20130426-122213
