@@ -17,11 +17,10 @@ Import-Package: com.fasterxml.jackson.databind;version="[2.9,3)",javax.x
  orm.stream,org.apache.commons.io.input;version="[1.4,2)",org.apache.com
  mons.io.output;version="[1.4,2)",org.eclipse.emf.common.util,org.eclips
  e.emf.ecore,org.eclipse.emf.ecore.resource,org.eclipse.emf.ecore.resour
- ce.impl,org.eclipse.emf.ecore.util,org.eclipse.emf.ecore.xmi,org.eclips
- e.emf.ecore.xmi.impl,org.emfjson;version="[0.13,1)",org.emfjson.jackson
- .databind;version="[1.0,2)",org.emfjson.jackson.module;version="[1.0,2)
- ",org.emfjson.jackson.resource;version="[1.0,2)",org.slf4j;version="[1.
- 7,2)";resolution:=optional,org.w3c.dom,org.xml.sax
+ ce.impl,org.eclipse.emf.ecore.util,org.eclipse.emf.ecore.xmi.impl,org.e
+ mfjson.jackson.databind;version="[1.0,2)",org.emfjson.jackson.module;ve
+ rsion="[1.0,2)",org.emfjson.jackson.resource;version="[1.0,2)",org.slf4
+ j;version="[1.7,2)";resolution:=optional,org.w3c.dom,org.xml.sax
 Include-Resource: readme.txt=src/main/resources/readme.txt
 Private-Package: readme.txt
 Tool: Bnd-2.1.0.20130426-122213

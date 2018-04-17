@@ -21,15 +21,28 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.emfjson.EMFJs;
+import org.emfjson.jackson.databind.EMFContext;
+import org.emfjson.jackson.module.EMFModule;
 import org.emfjson.jackson.resource.JsonResourceFactory;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import org.emfjson.EMFJs;
-import org.emfjson.jackson.databind.EMFContext;
-import org.emfjson.jackson.module.EMFModule;
-
 public class JsonUtils {
+
+	public static Resource fromStream(InputStream input) throws IOException {
+
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.registerModule(new EMFModule());
+
+		ResourceSet resourceSet = new ResourceSetImpl();
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("json", new JsonResourceFactory(mapper));
+
+		Resource resource = mapper.reader().withAttribute(EMFContext.Attributes.RESOURCE_SET, resourceSet).withAttribute(EMFContext.Attributes.RESOURCE_URI, URI.createURI("in.json"))
+				.forType(Resource.class).readValue(input);
+
+		return resource;
+	}
 
 	public static Resource fromStream(InputStream input, EClass root) throws IOException {
 
@@ -40,11 +53,9 @@ public class JsonUtils {
 		// options.put(EMFJs.OPTION_ROOT_ELEMENT, root);
 
 		ResourceSet resourceSet = new ResourceSetImpl();
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("json",
-				new JsonResourceFactory(mapper));
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("json", new JsonResourceFactory(mapper));
 
-		Resource resource = mapper.reader().withAttribute(EMFContext.Attributes.RESOURCE_SET, resourceSet)
-				.withAttribute(EMFContext.Attributes.RESOURCE_URI, URI.createURI("in.json"))
+		Resource resource = mapper.reader().withAttribute(EMFContext.Attributes.RESOURCE_SET, resourceSet).withAttribute(EMFContext.Attributes.RESOURCE_URI, URI.createURI("in.json"))
 				.withAttribute(EMFContext.Attributes.ROOT_ELEMENT, root).forType(Resource.class).readValue(input);
 
 		// Resource resource =
@@ -74,7 +85,6 @@ public class JsonUtils {
 		return fromStream(is, root);
 	}
 
-
 	public static <T> T fromStream(InputStream input, Class<T> clz) throws IOException {
 
 		ObjectMapper mapper = new ObjectMapper();
@@ -84,12 +94,10 @@ public class JsonUtils {
 		// options.put(EMFJs.OPTION_ROOT_ELEMENT, root);
 
 		ResourceSet resourceSet = new ResourceSetImpl();
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("json",
-				new JsonResourceFactory(mapper));
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("json", new JsonResourceFactory(mapper));
 
-		T resource = mapper.reader().withAttribute(EMFContext.Attributes.RESOURCE_SET, resourceSet)
-				.withAttribute(EMFContext.Attributes.RESOURCE_URI, URI.createURI("in.json"))
-				.forType(clz).readValue(input);
+		T resource = mapper.reader().withAttribute(EMFContext.Attributes.RESOURCE_SET, resourceSet).withAttribute(EMFContext.Attributes.RESOURCE_URI, URI.createURI("in.json")).forType(clz)
+				.readValue(input);
 
 		// Resource resource =
 		// resourceSet.createResource(URI.createURI("in.json"));
@@ -111,14 +119,13 @@ public class JsonUtils {
 		return resource;
 	}
 
-	
 	public static <T> T fromJsonString(String input, Class<T> clz) throws IOException {
 		StringReader stringReader = new StringReader(input);
 		ReaderInputStream is = new ReaderInputStream(stringReader, Charset.forName("UTF-8"));
 		T result = fromStream(is, clz);
 		return result;
 	}
-	
+
 	public static void toStream(OutputStream os, EObject entity) throws IOException {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("json", new JsonResourceFactory());
