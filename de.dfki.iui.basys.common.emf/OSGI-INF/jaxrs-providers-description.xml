@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<components xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0">
+	
+	<scr:component name="de.dfki.iui.basys.common.emf.jaxrs.CORSResponseFilter">
+		<implementation class="de.dfki.iui.basys.common.emf.jaxrs.CORSResponseFilter"/>
+		<service servicefactory="false">
+			<provide interface="javax.ws.rs.container.ContainerResponseFilter"/>
+		</service>
+	</scr:component>
+	 
+	<scr:component name="de.dfki.iui.basys.common.emf.jaxrs.EObjectMessageBodyWriter">
+		<implementation class="de.dfki.iui.basys.common.emf.jaxrs.EObjectMessageBodyWriter"/>
+		<service servicefactory="false">
+			<provide interface="de.dfki.iui.basys.common.emf.jaxrs.EObjectMessageBodyWriter"/>
+		</service>
+	</scr:component>
+		
+	<scr:component name="de.dfki.iui.basys.common.emf.jaxrs.EObjectListMessageBodyWriter">
+		<implementation class="de.dfki.iui.basys.common.emf.jaxrs.EObjectListMessageBodyWriter"/>
+		<service servicefactory="false">
+			<provide interface="de.dfki.iui.basys.common.emf.jaxrs.EObjectListMessageBodyWriter"/>
+		</service>
+	</scr:component>
+	
+	<scr:component name="de.dfki.iui.basys.common.emf.jaxrs.EObjectMessageBodyReader">
+		<implementation class="de.dfki.iui.basys.common.emf.jaxrs.EObjectMessageBodyReader"/>
+		<service servicefactory="false">
+			<provide interface="de.dfki.iui.basys.common.emf.jaxrs.EObjectMessageBodyReader"/>
+		</service>
+	</scr:component>
+		
+	<scr:component name="de.dfki.iui.basys.common.emf.jaxrs.EObjectListMessageBodyReader">
+		<implementation class="de.dfki.iui.basys.common.emf.jaxrs.EObjectListMessageBodyReader"/>
+		<service servicefactory="false">
+			<provide interface="de.dfki.iui.basys.common.emf.jaxrs.EObjectListMessageBodyReader"/>
+		</service>
+	</scr:component>
+	
+</components>

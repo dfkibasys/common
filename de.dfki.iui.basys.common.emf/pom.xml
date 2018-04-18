@@ -18,6 +18,7 @@
 		<jackson-version>2.9.5</jackson-version>
 		<emfjson-version>0.13.0</emfjson-version>
 		<emfjson-jackson-version>1.0.1</emfjson-jackson-version>
+		<jaxrs-version>5.3.1</jaxrs-version>
 	</properties>
 
 	<modelVersion>4.0.0</modelVersion>
@@ -94,6 +95,13 @@
 			<groupId>org.emfjson</groupId>
 			<artifactId>emfjson-jackson</artifactId>
 			<version>${emfjson-jackson-version}</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.eclipsesource.jaxrs/publisher/5.3.1 -->
+		<dependency>
+			<groupId>com.eclipsesource.jaxrs</groupId>
+			<artifactId>publisher</artifactId>
+			<version>${jaxrs-version}</version>
 		</dependency>
 
 		<!-- comment to remove all imported (non-local) bundles from your compilation 
