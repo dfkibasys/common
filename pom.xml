@@ -18,6 +18,8 @@
 
   <modules>
     <module>de.dfki.iui.basys.common.emf</module>
+    <module>de.dfki.iui.basys.common.emf.json</module>
+    <module>de.dfki.iui.basys.common.emf.jaxrs</module>
   </modules>
 
 </project>

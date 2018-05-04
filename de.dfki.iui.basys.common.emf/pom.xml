@@ -15,10 +15,6 @@
 		<bundle.namespace>de.dfki.iui.basys.common.emf</bundle.namespace>
 		<emf-version>2.12.0</emf-version>
 		<commons-io-version>2.6</commons-io-version>
-		<jackson-version>2.9.5</jackson-version>
-		<emfjson-version>0.13.0</emfjson-version>
-		<emfjson-jackson-version>1.0.1</emfjson-jackson-version>
-		<jaxrs-version>5.3.1</jaxrs-version>
 	</properties>
 
 	<modelVersion>4.0.0</modelVersion>
@@ -31,12 +27,14 @@
 
 	<dependencies>
 
+		<!-- https://mvnrepository.com/artifact/org.eclipse.emf/org.eclipse.emf.common -->
 		<dependency>
 			<groupId>org.eclipse.emf</groupId>
 			<artifactId>org.eclipse.emf.common</artifactId>
 			<version>${emf-version}</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.eclipse.emf/org.eclipse.emf.ecore -->
 		<dependency>
 			<groupId>org.eclipse.emf</groupId>
 			<artifactId>org.eclipse.emf.ecore</artifactId>
@@ -56,53 +54,6 @@
 			<version>${commons-io-version}</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-core</artifactId>
-			<version>${jackson-version}</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-annotations</artifactId>
-			<version>${jackson-version}</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>${jackson-version}</version>
-		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-properties -->
-		<dependency>
-			<groupId>com.fasterxml.jackson.dataformat</groupId>
-			<artifactId>jackson-dataformat-properties</artifactId>
-			<version>${jackson-version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.emfjson</groupId>
-			<artifactId>emfjson-core</artifactId>
-			<version>${emfjson-version}</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.emfjson/emfjson-jackson -->
-		<dependency>
-			<groupId>org.emfjson</groupId>
-			<artifactId>emfjson-jackson</artifactId>
-			<version>${emfjson-jackson-version}</version>
-		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/com.eclipsesource.jaxrs/publisher/5.3.1 -->
-		<dependency>
-			<groupId>com.eclipsesource.jaxrs</groupId>
-			<artifactId>publisher</artifactId>
-			<version>${jaxrs-version}</version>
-		</dependency>
 
 		<!-- comment to remove all imported (non-local) bundles from your compilation 
 			classpath -->
@@ -124,5 +75,7 @@
 			<optional>true</optional>
 		</dependency>
 	</dependencies>
+
+
 
 </project>

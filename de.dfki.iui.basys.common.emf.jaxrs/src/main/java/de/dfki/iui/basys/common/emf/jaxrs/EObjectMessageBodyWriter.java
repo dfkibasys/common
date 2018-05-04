@@ -14,7 +14,7 @@ import javax.ws.rs.ext.Provider;
 
 import org.eclipse.emf.ecore.EObject;
 
-import de.dfki.iui.basys.common.emf.JsonUtils;
+import de.dfki.iui.basys.common.emf.json.JsonUtils;
 
 @Provider
 @Produces(MediaType.APPLICATION_JSON)

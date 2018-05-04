@@ -16,7 +16,7 @@ import javax.ws.rs.ext.Provider;
 
 import org.eclipse.emf.ecore.EObject;
 
-import de.dfki.iui.basys.common.emf.JsonUtils;
+import de.dfki.iui.basys.common.emf.json.JsonUtils;
 
 @Provider
 @Produces(MediaType.APPLICATION_JSON)
@@ -26,7 +26,7 @@ public class EObjectListMessageBodyWriter implements MessageBodyWriter<List<EObj
 	public boolean isWriteable(Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
 		if (genericType instanceof ParameterizedType) {
 			Type t = ((ParameterizedType) genericType).getActualTypeArguments()[0];
-			return EObject.class.isAssignableFrom(t.getClass());
+			return EObject.class.isAssignableFrom((Class<?>)t);
 		}
 		return true;
 	}

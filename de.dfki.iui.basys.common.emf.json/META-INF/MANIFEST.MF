@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Bundle-Description: Generated using Pax-Construct
+Bundle-DocURL: http://www.dfki.de
+Bundle-License: https://www.eclipse.org/legal/epl-v10.html
+Bundle-ManifestVersion: 2
+Bundle-Name: de.dfki.iui.basys.common.emf.json
+Bundle-SymbolicName: de.dfki.iui.basys.common.emf.json
+Bundle-Vendor: DFKI GmbH
+Bundle-Version: 1.0.0.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Export-Package: de.dfki.iui.basys.common.emf.json;version="1.0.0.SNAPSHO
+ T";uses:="com.fasterxml.jackson.core,com.fasterxml.jackson.databind,org
+ .eclipse.emf.ecore,org.eclipse.emf.ecore.resource"
+Import-Package: com.fasterxml.jackson.core;version="[2.9,3)",com.fasterx
+ ml.jackson.databind;version="[2.9,3)",org.eclipse.emf.common.util,org.e
+ clipse.emf.ecore,org.eclipse.emf.ecore.resource,org.eclipse.emf.ecore.r
+ esource.impl,org.emfjson.jackson.databind;version="[1.0,2)",org.emfjson
+ .jackson.module;version="[1.0,2)",org.emfjson.jackson.resource;version=
+ "[1.0,2)"
+Include-Resource: readme.txt=src/main/resources/readme.txt
+Private-Package: readme.txt
+Service-Component: OSGI-INF/*.xml
+Tool: Bnd-2.1.0.20130426-122213
