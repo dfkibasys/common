@@ -15,7 +15,7 @@
 		<bundle.namespace>de.dfki.iui.basys.common.emf.json</bundle.namespace>
 		<emf-version>2.12.0</emf-version>
 		<commons-io-version>2.6</commons-io-version>
-		<jackson-version>2.9.5</jackson-version>
+		<jackson-version>2.9.1</jackson-version>
 		<emfjson-jackson-version>1.0.1</emfjson-jackson-version>
 	</properties>
 
@@ -58,11 +58,11 @@
 		</dependency> -->
 
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-properties -->
-<!-- 		<dependency>
+		<dependency>
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
 			<artifactId>jackson-dataformat-properties</artifactId>
 			<version>${jackson-version}</version>
-		</dependency> -->
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.emfjson/emfjson-jackson -->
 		<dependency>
