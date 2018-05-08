@@ -17,9 +17,8 @@ Import-Package: javax.xml.parsers,javax.xml.transform,javax.xml.transfor
  1.4,2)",org.apache.commons.io.output;version="[1.4,2)",org.eclipse.emf.
  common.util,org.eclipse.emf.ecore,org.eclipse.emf.ecore.resource,org.ec
  lipse.emf.ecore.resource.impl,org.eclipse.emf.ecore.util,org.eclipse.em
- f.ecore.xmi,org.eclipse.emf.ecore.xmi.impl,org.slf4j;version="[1.7,2)";
- resolution:=optional,org.w3c.dom,org.xml.sax
+ f.ecore.xmi.impl,org.slf4j;version="[1.7,2)";resolution:=optional,org.w
+ 3c.dom,org.xml.sax
 Include-Resource: readme.txt=src/main/resources/readme.txt
 Private-Package: readme.txt
-Service-Component: OSGI-INF/*.xml
 Tool: Bnd-2.1.0.20130426-122213

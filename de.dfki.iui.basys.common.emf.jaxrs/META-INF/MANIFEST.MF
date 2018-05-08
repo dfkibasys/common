@@ -11,11 +11,10 @@ Created-By: Apache Maven Bundle Plugin
 Export-Package: de.dfki.iui.basys.common.emf.jaxrs;version="1.0.0.SNAPSH
  OT";uses:="javax.ws.rs,javax.ws.rs.container,javax.ws.rs.core,javax.ws.
  rs.ext,org.eclipse.emf.ecore"
-Import-Package: de.dfki.iui.basys.common.emf.json;version="[1.0,2)",java
- x.ws.rs;version="[2.1,3)",javax.ws.rs.container;version="[2.1,3)",javax
- .ws.rs.core;version="[2.1,3)",javax.ws.rs.ext;version="[2.1,3)",org.ecl
- ipse.emf.common.util,org.eclipse.emf.ecore,org.eclipse.emf.ecore.resour
- ce
+Import-Package: de.dfki.iui.basys.common.emf.json,javax.ws.rs;version="[
+ 2.0,3)",javax.ws.rs.container;version="[2.0,3)",javax.ws.rs.core;versio
+ n="[2.0,3)",javax.ws.rs.ext;version="[2.0,3)",org.eclipse.emf.common.ut
+ il,org.eclipse.emf.ecore,org.eclipse.emf.ecore.resource
 Include-Resource: readme.txt=src/main/resources/readme.txt
 Private-Package: readme.txt
 Service-Component: OSGI-INF/*.xml

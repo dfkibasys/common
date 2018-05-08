@@ -15,7 +15,7 @@
 		<bundle.namespace>de.dfki.iui.basys.common.emf.json</bundle.namespace>
 		<emf-version>2.12.0</emf-version>
 		<commons-io-version>2.6</commons-io-version>
-		<jackson-version>2.9.1</jackson-version>
+		<jackson-version>2.9.5</jackson-version>
 		<emfjson-jackson-version>1.0.1</emfjson-jackson-version>
 	</properties>
 
@@ -37,25 +37,25 @@
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
-		<!-- <dependency>
+		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
 			<version>${jackson-version}</version>
-		</dependency> -->
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
-		<!-- <dependency>
+		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
 			<version>${jackson-version}</version>
-		</dependency> -->
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-		<!-- <dependency>
+		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>${jackson-version}</version>
-		</dependency> -->
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-properties -->
 		<dependency>
@@ -69,7 +69,7 @@
 			<groupId>org.emfjson</groupId>
 			<artifactId>emfjson-jackson</artifactId>
 			<version>${emfjson-jackson-version}</version>
-<!-- 						<exclusions>
+<!--  		<exclusions>
 				<exclusion>
 					<groupId>com.fasterxml.jackson.core</groupId>
 					<artifactId>jackson-databind</artifactId>
