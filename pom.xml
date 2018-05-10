@@ -1,30 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-  <parent>
-    <relativePath>../build</relativePath>
-    <groupId>de.dfki.iui</groupId>
-    <artifactId>basys</artifactId>
-    <version>1.0-SNAPSHOT</version>
-  </parent>
+	<parent>
+		<relativePath>../build</relativePath>
+		<groupId>de.dfki.iui</groupId>
+		<artifactId>basys</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
 
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>de.dfki.iui.basys</groupId>
-  <artifactId>common</artifactId>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>de.dfki.iui.basys</groupId>
+	<artifactId>common</artifactId>
 
-  <name>BaSys 4.0 Common Module</name>
+	<name>BaSys 4.0 Common Module</name>
 
-  <packaging>pom</packaging>
+	<packaging>pom</packaging>
 
-  <modules>
-    <module>de.dfki.iui.basys.common.emf</module>
-    <module>de.dfki.iui.basys.common.emf.json</module>
-    <module>de.dfki.iui.basys.common.emf.jaxrs</module>
-  </modules>
+	<modules>
+		<module>de.dfki.iui.basys.common.emf</module>
+		<module>de.dfki.iui.basys.common.emf.json</module>
+		<module>de.dfki.iui.basys.common.emf.jaxrs</module>
+	</modules>
 
-  <scm>
-  	<url>https://lns-90165.sb.dfki.de/gitlab/basys/common.git</url>
-  	<connection>scm:git:ssh://git@lns-90165.sb.dfki.de:10022/basys/common.git</connection>
-  	<developerConnection>scm:git:ssh://git@lns-90165.sb.dfki.de:10022/basys/common.git</developerConnection>
-  </scm>
+	<scm>
+		<url>https://lns-90165.sb.dfki.de/gitlab/basys/common</url>
+		<connection>scm:git:ssh://git@lns-90165.sb.dfki.de:10022/basys/common.git</connection>
+		<developerConnection>scm:git:ssh://git@lns-90165.sb.dfki.de:10022/basys/common.git</developerConnection>
+	</scm>
+
 </project>
