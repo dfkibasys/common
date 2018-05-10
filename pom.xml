@@ -22,4 +22,9 @@
     <module>de.dfki.iui.basys.common.emf.jaxrs</module>
   </modules>
 
+  <scm>
+  	<url>https://lns-90165.sb.dfki.de/gitlab/basys/common.git</url>
+  	<connection>scm:git:ssh://git@lns-90165.sb.dfki.de:10022/basys/common.git</connection>
+  	<developerConnection>scm:git:ssh://git@lns-90165.sb.dfki.de:10022/basys/common.git</developerConnection>
+  </scm>
 </project>
