@@ -39,33 +39,12 @@
 			<type>bundle</type>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/com.eclipsesource.jaxrs/publisher/5.3.1 -->
-		<!-- <dependency>
-			<groupId>com.eclipsesource.jaxrs</groupId>
-			<artifactId>publisher</artifactId>
-			<version>${jaxrs-connector-version}</version>
-			<exclusions> -->
-				<!-- exclude jersey-all due to conflicts with com.fasterxml.jackson -->
-				<!-- <exclusion>
-					<groupId>com.eclipsesource.jaxrs</groupId>
-					<artifactId>jersey-all</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		
-		<dependency>
-			<groupId>com.eclipsesource.jaxrs</groupId>
-			<artifactId>jersey-min</artifactId>
-			<version>${jersey-version}</version>
-		</dependency>
- -->
 		<!-- https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api -->
 		<dependency>
 		    <groupId>javax.ws.rs</groupId>
 		    <artifactId>javax.ws.rs-api</artifactId>
 		    <version>${jaxrs-version}</version>
 		</dependency>
-
 
 		<!-- comment to remove all imported (non-local) bundles from your compilation 
 			classpath -->
@@ -76,16 +55,6 @@
 			<optional>true</optional>
 		</dependency>
 
-		<dependency>
-			<groupId>org.osgi</groupId>
-			<artifactId>osgi_R4_core</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.osgi</groupId>
-			<artifactId>osgi_R4_compendium</artifactId>
-			<optional>true</optional>
-		</dependency>
 	</dependencies>
 
 
