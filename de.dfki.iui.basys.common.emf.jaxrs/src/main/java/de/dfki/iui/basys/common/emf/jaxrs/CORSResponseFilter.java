@@ -8,7 +8,10 @@ import javax.ws.rs.container.ContainerResponseFilter;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.Provider;
 
+import org.osgi.service.component.annotations.Component;
+
 @Provider
+@Component
 public class CORSResponseFilter implements ContainerResponseFilter {
 
 	public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {

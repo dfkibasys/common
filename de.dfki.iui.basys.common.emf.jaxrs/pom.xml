@@ -38,6 +38,14 @@
 			<version>${project.version}</version>
 			<type>bundle</type>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.osgi/org.osgi.service.component.annotations -->
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.service.component.annotations</artifactId>
+			<version>1.4.0</version>
+			<scope>provided</scope>
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api -->
 		<dependency>

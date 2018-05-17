@@ -18,5 +18,10 @@ Import-Package: de.dfki.iui.basys.common.emf.json;version="[1.0,2)",java
  ce
 Include-Resource: readme.txt=src/main/resources/readme.txt
 Private-Package: readme.txt
-Service-Component: OSGI-INF/*.xml
+Service-Component: OSGI-INF/de.dfki.iui.basys.common.emf.jaxrs.CORSRespo
+ nseFilter.xml,OSGI-INF/de.dfki.iui.basys.common.emf.jaxrs.EObjectMessag
+ eBodyReader.xml,OSGI-INF/de.dfki.iui.basys.common.emf.jaxrs.EObjectList
+ MessageBodyWriter.xml,OSGI-INF/de.dfki.iui.basys.common.emf.jaxrs.EObje
+ ctListMessageBodyReader.xml,OSGI-INF/de.dfki.iui.basys.common.emf.jaxrs
+ .EObjectMessageBodyWriter.xml
 Tool: Bnd-2.1.0.20130426-122213

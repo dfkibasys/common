@@ -15,11 +15,13 @@ import javax.ws.rs.ext.MessageBodyWriter;
 import javax.ws.rs.ext.Provider;
 
 import org.eclipse.emf.ecore.EObject;
+import org.osgi.service.component.annotations.Component;
 
 import de.dfki.iui.basys.common.emf.json.JsonUtils;
 
 @Provider
 @Produces(MediaType.APPLICATION_JSON)
+@Component
 public class EObjectListMessageBodyWriter implements MessageBodyWriter<List<EObject>> {
 
 	@Override

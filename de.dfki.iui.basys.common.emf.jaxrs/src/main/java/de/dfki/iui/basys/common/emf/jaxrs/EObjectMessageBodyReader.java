@@ -12,11 +12,13 @@ import javax.ws.rs.ext.MessageBodyReader;
 import javax.ws.rs.ext.Provider;
 
 import org.eclipse.emf.ecore.EObject;
+import org.osgi.service.component.annotations.Component;
 
 import de.dfki.iui.basys.common.emf.json.JsonUtils;
 
 @Provider
 @Consumes(MediaType.APPLICATION_JSON)
+@Component
 public class EObjectMessageBodyReader implements MessageBodyReader<EObject> {
 
 	@Override
