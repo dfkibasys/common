@@ -13,7 +13,10 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.emfjson.jackson.annotations.EcoreReferenceInfo;
+import org.emfjson.jackson.annotations.EcoreTypeInfo;
 import org.emfjson.jackson.databind.EMFContext;
+import org.emfjson.jackson.handlers.BaseURIHandler;
 import org.emfjson.jackson.module.EMFModule;
 import org.emfjson.jackson.resource.JsonResourceFactory;
 
@@ -32,7 +35,7 @@ public class JsonUtils {
 	static {
 		module = new EMFModule();		
 		
-		//module.setReferenceSerializer(new MyEcoreReferenceSerializer(new EcoreReferenceInfo(new BaseURIHandler()), new EcoreTypeInfo()));
+		module.setReferenceSerializer(new MyEcoreReferenceSerializer(new EcoreReferenceInfo(new BaseURIHandler()), new EcoreTypeInfo()));
 		
 		mapper = new ObjectMapper(null);
 		// same as emf

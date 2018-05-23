@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
@@ -33,23 +34,27 @@ public class MyEcoreReferenceSerializer extends JsonSerializer<EObject> {
 	public void serialize(EObject value, JsonGenerator jg, SerializerProvider serializers) throws IOException {
 		final EObject parent = EMFContext.getParent(serializers);
 		String href = getHRef(serializers, parent, value);
-		//href = href.replace('#', '/');
-		URIConverter converter = parent.eResource().getResourceSet().getURIConverter();
-		
-		URI newUri = converter.normalize(URI.createURI(href));
-		if (newUri.hasFragment()) {
-			String fragment = newUri.fragment();
-			newUri = newUri.trimFragment();
-			newUri = newUri.appendSegment(fragment);
-		}
 
 		jg.writeStartObject();
 		jg.writeStringField(typeInfo.getProperty(), typeInfo.getValueWriter().writeValue(value.eClass(), serializers));
 		if (href == null) {
 			jg.writeNullField(info.getProperty());
 		} else {
-			jg.writeStringField(info.getProperty(), newUri.toString());
-			//jg.writeStringField(info.getProperty(), href);
+			//custom logic starts here
+			if (value.eClass().getEPackage() == EcorePackage.eINSTANCE) {
+				//original logic
+				jg.writeStringField(info.getProperty(), href);
+			} else {
+				URIConverter converter = parent.eResource().getResourceSet().getURIConverter();
+				URI newUri = converter.normalize(URI.createURI(href));
+				if (newUri.hasFragment()) {
+					String fragment = newUri.fragment();
+					newUri = newUri.trimFragment();
+					newUri = newUri.appendSegment(fragment);
+				}
+				jg.writeStringField(info.getProperty(), newUri.toString());
+			}
+			//custom logic ends here
 		}
 		jg.writeEndObject();
 	}
@@ -60,8 +65,7 @@ public class MyEcoreReferenceSerializer extends JsonSerializer<EObject> {
 		if (target.eIsProxy() && target instanceof InternalEObject) {
 			URI uri = ((InternalEObject) target).eProxyURI();
 
-			return sourceResource != null
-					&& sourceResource.getURI() != null
+			return sourceResource != null && sourceResource.getURI() != null
 					&& !sourceResource.getURI().equals(uri.trimFragment());
 		}
 
@@ -73,9 +77,9 @@ public class MyEcoreReferenceSerializer extends JsonSerializer<EObject> {
 
 			URI targetURI = EMFContext.getURI(ctxt, value);
 			URI sourceURI = EMFContext.getURI(ctxt, parent);
-			URI deresolved = handler != null ? handler.deresolve(sourceURI, targetURI): targetURI;
+			URI deresolved = handler != null ? handler.deresolve(sourceURI, targetURI) : targetURI;
 
-			return deresolved == null ? null: deresolved.toString();
+			return deresolved == null ? null : deresolved.toString();
 
 		} else {
 
@@ -87,4 +91,8 @@ public class MyEcoreReferenceSerializer extends JsonSerializer<EObject> {
 			return null;
 		}
 	}
+
+
+
+
 }
