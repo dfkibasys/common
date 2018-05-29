@@ -14,9 +14,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emfjson.jackson.annotations.EcoreReferenceInfo;
 import org.emfjson.jackson.annotations.EcoreTypeInfo;
 import org.emfjson.jackson.databind.EMFContext;
+import org.emfjson.jackson.databind.property.EObjectPropertyMap;
 import org.emfjson.jackson.handlers.BaseURIHandler;
 import org.emfjson.jackson.module.EMFModule;
 import org.emfjson.jackson.resource.JsonResourceFactory;
@@ -35,11 +37,14 @@ public class JsonUtils {
 
 	static {
 		module = new EMFModule();		
+		module.setTypeInfo(new EcoreTypeInfo());
+		module.setReferenceInfo(new EcoreReferenceInfo(new BaseURIHandler()));
 		
 		
-		//module.setReferenceInfo(new EcoreReferenceInfo(new IdentityURIHandler()));
-		module.setReferenceSerializer  (new MyEcoreReferenceSerializer  (new EcoreReferenceInfo(new BaseURIHandler()), new EcoreTypeInfo()));
+		
+		module.setReferenceSerializer  (MyEcoreReferenceSerializer.from(module));
 		//module.setReferenceDeserializer(new MyEcoreReferenceDeserializer(new EcoreReferenceInfo(new BaseURIHandler()), new EcoreTypeInfo()));
+		
 		
 		mapper = new ObjectMapper(null);
 		// same as emf
@@ -50,8 +55,6 @@ public class JsonUtils {
 		mapper.setDateFormat(dateFormat);
 		mapper.setTimeZone(TimeZone.getDefault());
 		mapper.registerModule(module);	
-		
-		
 		
 		resourceSet = new BasysResourceSetImpl();
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("json", new JsonResourceFactory(mapper));
@@ -87,11 +90,12 @@ public class JsonUtils {
 
 	public static String toString(EObject entity) throws JsonProcessingException {
 		if (entity.eResource() == null) {
-			ResourceSet resourceSet = new ResourceSetImpl();
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("json", new JsonResourceFactory());
+			ResourceSet resourceSet = new BasysResourceSetImpl();
+			resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("json", new JsonResourceFactory(mapper));
 			Resource resource = resourceSet.createResource(URI.createURI("out.json"));
 			resource.getContents().add(entity);
 		}
+		EcoreUtil.resolveAll(entity);
 		String result = mapper.writeValueAsString(entity);
 		return result;
 	}

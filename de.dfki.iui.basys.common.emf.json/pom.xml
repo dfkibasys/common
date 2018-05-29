@@ -36,6 +36,13 @@
 			<type>bundle</type>
 		</dependency>
 		
+		<dependency>
+			<groupId>de.dfki.iui.basys.model</groupId>
+			<artifactId>de.dfki.iui.basys.model.runtime</artifactId>
+			<version>${project.version}</version>
+			<type>bundle</type>
+		</dependency>
+		
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>

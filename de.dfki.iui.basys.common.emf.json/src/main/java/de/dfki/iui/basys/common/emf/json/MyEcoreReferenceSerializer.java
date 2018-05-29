@@ -11,7 +11,11 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.emfjson.jackson.annotations.EcoreReferenceInfo;
 import org.emfjson.jackson.annotations.EcoreTypeInfo;
 import org.emfjson.jackson.databind.EMFContext;
+import org.emfjson.jackson.databind.property.EObjectProperty;
+import org.emfjson.jackson.databind.property.EObjectPropertyMap;
+import org.emfjson.jackson.databind.ser.EObjectSerializer;
 import org.emfjson.jackson.handlers.URIHandler;
+import org.emfjson.jackson.module.EMFModule;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.DatabindContext;
@@ -24,41 +28,60 @@ public class MyEcoreReferenceSerializer extends JsonSerializer<EObject> {
 	private final EcoreTypeInfo typeInfo;
 	private final URIHandler handler;
 
-	public MyEcoreReferenceSerializer(EcoreReferenceInfo info, EcoreTypeInfo typeInfo) {
+	private final EObjectPropertyMap.Builder builder;
+	
+	public MyEcoreReferenceSerializer(EcoreReferenceInfo info, EcoreTypeInfo typeInfo, EObjectPropertyMap.Builder builder) {
 		this.info = info;
 		this.typeInfo = typeInfo;
 		this.handler = info.getHandler();
+		this.builder = builder; 
 	}
+	
+	public static MyEcoreReferenceSerializer from(EMFModule module) {
+		return new MyEcoreReferenceSerializer(module.getReferenceInfo(), module.getTypeInfo(), EObjectPropertyMap.Builder.from(module, module.getFeatures()));
+}
 
 	@Override
 	public void serialize(EObject value, JsonGenerator jg, SerializerProvider serializers) throws IOException {
 		final EObject parent = EMFContext.getParent(serializers);
-		String href = getHRef(serializers, parent, value);
-
-		jg.writeStartObject();
-		jg.writeStringField(typeInfo.getProperty(), typeInfo.getValueWriter().writeValue(value.eClass(), serializers));
-		if (href == null) {
-			jg.writeNullField(info.getProperty());
-		} else {
-			//custom logic starts here
-			if (value.eClass().getEPackage() == EcorePackage.eINSTANCE) {
-				//original logic
-				jg.writeStringField(info.getProperty(), href);
-			} else {
-				URIConverter converter = parent.eResource().getResourceSet().getURIConverter();
-				URI newUri = converter.normalize(URI.createURI(href));
-				if (newUri.hasFragment()) {
-					String fragment = newUri.fragment();
-					newUri = newUri.trimFragment();
-					newUri = newUri.appendSegment(fragment);
-				}
-				jg.writeStringField(info.getProperty(), newUri.toString());
-			}
-			//custom logic ends here
-		}
-		jg.writeEndObject();
+		
+		serializeContent(value, jg, serializers);
+		
+//		String href = getHRef(serializers, parent, value);
+//		jg.writeStartObject();
+//		jg.writeStringField(typeInfo.getProperty(), typeInfo.getValueWriter().writeValue(value.eClass(), serializers));
+//		if (href == null) {
+//			jg.writeNullField(info.getProperty());
+//		} else {
+//			//custom logic starts here
+//			if (value.eClass().getEPackage() == EcorePackage.eINSTANCE) {
+//				//original logic
+//				jg.writeStringField(info.getProperty(), href);
+//			} else {
+//				URIConverter converter = parent.eResource().getResourceSet().getURIConverter();
+//				URI newUri = converter.normalize(URI.createURI(href));
+//				if (newUri.hasFragment()) {
+//					String fragment = newUri.fragment();
+//					newUri = newUri.trimFragment();
+//					newUri = newUri.appendSegment(fragment);
+//				}
+//				jg.writeStringField(info.getProperty(), newUri.toString());
+//			}
+//			//custom logic ends here
+//		}
+//		jg.writeEndObject();
 	}
 
+	public void serializeContent(EObject object, JsonGenerator jg, SerializerProvider provider) throws IOException {
+		EObjectPropertyMap properties = builder.construct(provider, object.eClass());
+	
+		jg.writeStartObject();
+		for (EObjectProperty property : properties.getProperties()) {
+			property.serialize(object, jg, provider);
+		}
+		jg.writeEndObject();
+}
+	
 	private boolean isExternal(DatabindContext ctxt, EObject source, EObject target) {
 		Resource sourceResource = EMFContext.getResource(ctxt, source);
 
