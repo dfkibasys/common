@@ -13,6 +13,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emfjson.jackson.annotations.EcoreReferenceInfo;
 import org.emfjson.jackson.annotations.EcoreTypeInfo;
 import org.emfjson.jackson.databind.EMFContext;
@@ -85,6 +86,12 @@ public class JsonUtils {
 	}
 
 	public static String toString(EObject entity) throws JsonProcessingException {
+		if (entity.eResource() == null) {
+			ResourceSet resourceSet = new ResourceSetImpl();
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("json", new JsonResourceFactory());
+			Resource resource = resourceSet.createResource(URI.createURI("out.json"));
+			resource.getContents().add(entity);
+		}
 		String result = mapper.writeValueAsString(entity);
 		return result;
 	}
