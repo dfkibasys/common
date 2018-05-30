@@ -77,7 +77,9 @@ public class MyEcoreReferenceSerializer extends JsonSerializer<EObject> {
 	
 		jg.writeStartObject();
 		for (EObjectProperty property : properties.getProperties()) {
-			property.serialize(object, jg, provider);
+			//TODO: better handling of bi-directional references
+			if (!property.getFieldName().equals("role"))
+				property.serialize(object, jg, provider);
 		}
 		jg.writeEndObject();
 }
