@@ -154,7 +154,7 @@ public class JsonUtils {
 		return (T) resource.getContents().get(0);
 	}
 	
-	public static <T> T fromString(String input, Class<T> clz) throws IOException { 
+	public synchronized static <T> T fromString(String input, Class<T> clz) throws IOException { 
 		return fromString(input, clz, resourceSet);
 	}
 	
