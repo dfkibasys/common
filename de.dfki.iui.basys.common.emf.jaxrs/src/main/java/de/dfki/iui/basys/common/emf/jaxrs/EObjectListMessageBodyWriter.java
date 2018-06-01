@@ -9,6 +9,8 @@ import java.util.List;
 
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.MessageBodyWriter;
@@ -23,6 +25,9 @@ import de.dfki.iui.basys.common.emf.json.JsonUtils;
 @Produces(MediaType.APPLICATION_JSON)
 @Component
 public class EObjectListMessageBodyWriter implements MessageBodyWriter<List<EObject>> {
+
+	@Context
+	HttpHeaders httpRequestHeaders;
 
 	@Override
 	public boolean isWriteable(Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
@@ -41,9 +46,13 @@ public class EObjectListMessageBodyWriter implements MessageBodyWriter<List<EObj
 	@Override
 	public void writeTo(List<EObject> entities, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, Object> httpHeaders, OutputStream entityStream)
 			throws IOException, WebApplicationException {
-
-		JsonUtils.toStream(entityStream, entities);
-
+		MultivaluedMap<String,String> headers = httpRequestHeaders.getRequestHeaders();
+		List<String> resolve = httpRequestHeaders.getRequestHeader("X-BaSys-Resolve");
+		if (resolve != null && resolve.get(0).equals("true")) {
+			JsonUtils.toStream(entityStream, entities, true);
+		} else {
+			JsonUtils.toStream(entityStream, entities, false);
+		}	
 	}
 
 }
