@@ -55,7 +55,7 @@ public class JsonUtils {
 		customModule.setTypeInfo(new EcoreTypeInfo());
 		customModule.setReferenceInfo(new EcoreReferenceInfo(new BaseURIHandler()));		
 		customModule.setReferenceSerializer(MyEcoreReferenceSerializer.from(customModule, true));
-		customModule.setReferenceDeserializer(new MyEcoreReferenceDeserializer(customModule.getReferenceInfo(), customModule.getTypeInfo()));
+//		customModule.setReferenceDeserializer(new MyEcoreReferenceDeserializer(customModule.getReferenceInfo(), customModule.getTypeInfo()));
 		
 		customMapper = new ObjectMapper(null);
 		customMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
