@@ -58,19 +58,19 @@ public class MyEcoreReferenceSerializer extends JsonSerializer<EObject> {
 				jg.writeNullField(info.getProperty());
 			} else {
 				// custom logic starts here
-				if (value.eClass().getEPackage() == EcorePackage.eINSTANCE) {
+				//if (value.eClass().getEPackage() == EcorePackage.eINSTANCE) {
 					// original logic
 					jg.writeStringField(info.getProperty(), href);
-				} else {
-					URIConverter converter = parent.eResource().getResourceSet().getURIConverter();
-					URI newUri = converter.normalize(URI.createURI(href));
-					if (newUri.hasFragment()) {
-						String fragment = newUri.fragment();
-						newUri = newUri.trimFragment();
-						newUri = newUri.appendSegment(fragment);
-					}
-					jg.writeStringField(info.getProperty(), newUri.toString());
-				}
+//				} else {
+//					URIConverter converter = parent.eResource().getResourceSet().getURIConverter();
+//					URI newUri = converter.normalize(URI.createURI(href));
+//					if (newUri.hasFragment()) {
+//						String fragment = newUri.fragment();
+//						newUri = newUri.trimFragment();
+//						newUri = newUri.appendSegment(fragment);
+//					}
+//					jg.writeStringField(info.getProperty(), newUri.toString());
+//				}
 				// custom logic ends here
 			}
 			jg.writeEndObject();

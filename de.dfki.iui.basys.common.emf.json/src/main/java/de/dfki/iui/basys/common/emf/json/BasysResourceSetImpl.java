@@ -1,6 +1,13 @@
 package de.dfki.iui.basys.common.emf.json;
 
+import java.io.IOException;
 import java.util.Arrays;
+
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -31,6 +38,8 @@ import de.dfki.iui.basys.model.domain.topology.util.TopologyResourceFactoryImpl;
 import de.dfki.iui.basys.model.runtime.component.ComponentPackage;
 
 public class BasysResourceSetImpl extends ResourceSetImpl {
+	
+	Client client = ClientBuilder.newClient();
 	
 	public BasysResourceSetImpl() {
 		
@@ -72,13 +81,13 @@ public class BasysResourceSetImpl extends ResourceSetImpl {
 	
 		
 		//TODO: get real network endpoint or even urispec for each individual service from component registry
-		String BASE_URL = "http://localhost:8080/services/";
-		String fileName = "model";
-				
-		String [] fileExtensions = new String [] {"material", "order", "processdefinition", "processinstance", "productdefinition", "productinstance", "resourceinstance", "resourcetype", "topology" };
-		for (String fileExtension : Arrays.asList(fileExtensions)) {
-			getURIConverter().getURIMap().put(URI.createURI(fileName + "." + fileExtension), URI.createURI(BASE_URL + "entity"));			
-		}
+//		String BASE_URL = "http://localhost:8080/services/";
+//		String fileName = "model";
+//				
+//		String [] fileExtensions = new String [] {"material", "order", "processdefinition", "processinstance", "productdefinition", "productinstance", "resourceinstance", "resourcetype", "topology" };
+//		for (String fileExtension : Arrays.asList(fileExtensions)) {
+//			getURIConverter().getURIMap().put(URI.createURI(fileName + "." + fileExtension), URI.createURI(BASE_URL + "entity"));			
+//		}
 				
 		
 	}
@@ -89,6 +98,17 @@ public class BasysResourceSetImpl extends ResourceSetImpl {
 		EObject obj = super.getEObject(uri, loadOnDemand);
 		if (obj == null) {
 			//call URL
+			String url = uri.toString();
+			Response response = client.target(url).request(MediaType.APPLICATION_JSON).get();
+			if (response.getStatus() == 200) {
+				String content = response.readEntity(String.class);
+				try {
+					obj = JsonUtils.fromString(content, EObject.class);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 		return obj;
 	}

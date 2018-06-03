@@ -26,6 +26,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import de.dfki.iui.basys.common.emf.EmfUtils;
 
 public class JsonUtils {
 
@@ -42,7 +43,7 @@ public class JsonUtils {
 		
 		defaultModule = new EMFModule();	
 		defaultModule.setTypeInfo(new EcoreTypeInfo());
-		defaultModule.setReferenceInfo(new EcoreReferenceInfo(new BaseURIHandler()));	
+		defaultModule.setReferenceInfo(new EcoreReferenceInfo(new MyURIHandler("http://localhost:8080/services/entity")));	
 		defaultModule.setReferenceSerializer(MyEcoreReferenceSerializer.from(defaultModule, false));
 		
 		defaultMapper = new ObjectMapper(null);		
@@ -53,7 +54,7 @@ public class JsonUtils {
 		
 		customModule = new EMFModule();		
 		customModule.setTypeInfo(new EcoreTypeInfo());
-		customModule.setReferenceInfo(new EcoreReferenceInfo(new BaseURIHandler()));		
+		customModule.setReferenceInfo(new EcoreReferenceInfo(new MyURIHandler("http://localhost:8080/services/entity")));		
 		customModule.setReferenceSerializer(MyEcoreReferenceSerializer.from(customModule, true));
 //		customModule.setReferenceDeserializer(new MyEcoreReferenceDeserializer(customModule.getReferenceInfo(), customModule.getTypeInfo()));
 		
@@ -75,10 +76,37 @@ public class JsonUtils {
 	}
 	
 	public static void toStream(OutputStream os, EObject entity, boolean resolveReferences) throws JsonGenerationException, JsonMappingException, IOException {
+		Resource originalResource = entity.eResource();
+		
+		ResourceSet resourceSet = new BasysResourceSetImpl();
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("json", new JsonResourceFactory(customMapper));
+		Resource resource = resourceSet.createResource(URI.createURI("out.json"));
+				
 		if (resolveReferences) {
 			EcoreUtil.resolveAll(entity);
 		}
-		selectMapper(resolveReferences).writeValue(os, entity);
+		resource.getContents().add(entity);
+		
+		selectMapper(resolveReferences).writeValue(os, resource);
+					
+		if (originalResource != null) {
+			originalResource.getContents().add(entity);
+		}
+		
+		
+//		String result = selectMapper(resolveReferences).writeValueAsString(entity);
+//		String content = toString(entity, resolveReferences);
+//		
+//		ResourceSet resourceSet = new BasysResourceSetImpl();
+//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("json", new JsonResourceFactory());
+//		Resource resource = resourceSet.createResource(URI.createURI("out.json"));
+//		//if (entity.eResource() != null)
+//			resource.getContents().add(EmfUtils.clone(entity));
+//		//else
+//		//	resource.getContents().add(entity);
+//			
+//		
+//		selectMapper(resolveReferences).writeValue(os, resource);
 	}
 	
 	public static void toStream(OutputStream os, EObject entity) throws JsonGenerationException, JsonMappingException, IOException {
@@ -106,12 +134,17 @@ public class JsonUtils {
 		// });
 		//
 		// resource.save(os, options);
-		if (resolveReferences) {
-			for (EObject entity : entities) {
-				EcoreUtil.resolveAll(entity);
-			}
+		
+		
+//		if (resolveReferences) {
+//			for (EObject entity : entities) {
+//				EcoreUtil.resolveAll(entity);
+//			}
+//		}
+//		selectMapper(resolveReferences).writeValue(os, entities);
+		for (EObject entity : entities) {
+			toStream(os, entity, resolveReferences);
 		}
-		selectMapper(resolveReferences).writeValue(os, entities);
 	}
 
 	public static void toStream(OutputStream os, Collection<? extends EObject> entities) throws IOException {
@@ -183,7 +216,7 @@ public class JsonUtils {
 	}
 	
 	public static <T> T fromString(String input, Class<T> clz, ResourceSet rs) throws IOException {
-		rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("json", new JsonResourceFactory(customMapper));
+		//rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("json", new JsonResourceFactory(customMapper));
 
 		Resource resource = fromString(input, rs);
 
