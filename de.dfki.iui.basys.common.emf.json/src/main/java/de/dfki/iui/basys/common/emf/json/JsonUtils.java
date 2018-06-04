@@ -86,7 +86,7 @@ public class JsonUtils {
 		
 		ResourceSet resourceSet = new BasysResourceSetImpl();
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("json", new JsonResourceFactory(customMapper));
-		Resource resource = resourceSet.createResource(URI.createURI("out.json"));
+		Resource resource = resourceSet.createResource(URI.createURI(System.currentTimeMillis() + ".json"));
 				
 		if (resolveReferences) {
 			EcoreUtil.resolveAll(entity);
@@ -114,7 +114,7 @@ public class JsonUtils {
 //		
 //		ResourceSet resourceSet = new BasysResourceSetImpl();
 //		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("json", new JsonResourceFactory());
-//		Resource resource = resourceSet.createResource(URI.createURI("out.json"));
+//		Resource resource = resourceSet.createResource(URI.createURI(System.currentTimeMillis() + ".json"));
 //		//if (entity.eResource() != null)
 //			resource.getContents().add(EmfUtils.clone(entity));
 //		//else
@@ -132,7 +132,7 @@ public class JsonUtils {
 		// ResourceSet resourceSet = new ResourceSetImpl();
 		// Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("json", new JsonResourceFactory());
 		//
-		// Resource resource = resourceSet.createResource(URI.createURI("out.json"));
+		// Resource resource = resourceSet.createResource(URI.createURI(System.currentTimeMillis() + ".json"));
 		// Map<String, Object> options = new HashMap<String, Object>();
 		// // options.put(EMFJs.OPTION_INDENT_OUTPUT, true);
 		// // options.put(EMFJs.OPTION_SERIALIZE_TYPE, false);
@@ -170,7 +170,7 @@ public class JsonUtils {
 		if (entity.eResource() == null) {
 			ResourceSet resourceSet = new BasysResourceSetImpl();
 			resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("json", new JsonResourceFactory(customMapper));
-			Resource resource = resourceSet.createResource(URI.createURI("out.json"));
+			Resource resource = resourceSet.createResource(URI.createURI(System.currentTimeMillis() + ".json"));
 			resource.getContents().add(entity);
 		}
 		if (resolveReferences) {
@@ -190,7 +190,7 @@ public class JsonUtils {
 		Resource resource = customMapper
 				.reader()
 				.withAttribute(EMFContext.Attributes.RESOURCE_SET, rs)
-				.withAttribute(EMFContext.Attributes.RESOURCE_URI, URI.createURI("in.json"))
+				.withAttribute(EMFContext.Attributes.RESOURCE_URI, URI.createURI(System.currentTimeMillis() + ".json"))
 				.forType(Resource.class)
 				.readValue(input);
 
@@ -219,7 +219,7 @@ public class JsonUtils {
 		Resource resource = customMapper
 				.reader()
 				.withAttribute(EMFContext.Attributes.RESOURCE_SET, rs)
-				.withAttribute(EMFContext.Attributes.RESOURCE_URI, URI.createURI("in.json"))
+				.withAttribute(EMFContext.Attributes.RESOURCE_URI, URI.createURI(System.currentTimeMillis() + ".json"))
 				.forType(Resource.class)
 				.readValue(input);
 
@@ -249,7 +249,7 @@ public class JsonUtils {
 		Resource resource = customMapper
 				.reader()
 				.withAttribute(EMFContext.Attributes.RESOURCE_SET, rs)
-				.withAttribute(EMFContext.Attributes.RESOURCE_URI, URI.createURI("in.json"))
+				.withAttribute(EMFContext.Attributes.RESOURCE_URI, URI.createURI(System.currentTimeMillis() + ".json"))
 				.forType(Resource.class)
 				.readValue(file);
 
