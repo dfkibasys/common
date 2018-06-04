@@ -9,15 +9,17 @@ import java.util.Collection;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emfjson.jackson.annotations.EcoreReferenceInfo;
 import org.emfjson.jackson.annotations.EcoreTypeInfo;
 import org.emfjson.jackson.databind.EMFContext;
-import org.emfjson.jackson.handlers.BaseURIHandler;
 import org.emfjson.jackson.module.EMFModule;
 import org.emfjson.jackson.resource.JsonResourceFactory;
 
@@ -26,7 +28,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import de.dfki.iui.basys.common.emf.EmfUtils;
 
 public class JsonUtils {
 
@@ -78,6 +79,11 @@ public class JsonUtils {
 	public static void toStream(OutputStream os, EObject entity, boolean resolveReferences) throws JsonGenerationException, JsonMappingException, IOException {
 		Resource originalResource = entity.eResource();
 		
+		
+		EObject container = entity.eContainer();
+		EReference ref = entity.eContainmentFeature();
+		EStructuralFeature str = entity.eContainingFeature();
+		
 		ResourceSet resourceSet = new BasysResourceSetImpl();
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("json", new JsonResourceFactory(customMapper));
 		Resource resource = resourceSet.createResource(URI.createURI("out.json"));
@@ -90,7 +96,16 @@ public class JsonUtils {
 		selectMapper(resolveReferences).writeValue(os, resource);
 					
 		if (originalResource != null) {
-			originalResource.getContents().add(entity);
+			if (container != null) {
+				if (str.isMany()) {
+					EList<Object> list = (EList<Object>) container.eGet(str);
+					list.add(entity);
+				} else {
+					container.eSet(str, entity);
+				}
+			} else {
+				originalResource.getContents().add(entity);
+			}
 		}
 		
 		
