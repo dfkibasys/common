@@ -107,12 +107,20 @@ public class BasysResourceSetImpl extends ResourceSetImpl {
 	}
 	
 	@Override
-	public EObject getEObject(URI uri, boolean loadOnDemand) {
+	public EObject getEObject(URI uri, boolean loadOnDemand) {		
+		EObject obj = loadFromUrl(uri);
+		if (obj == null) {		
+			obj = super.getEObject(uri, loadOnDemand);		
+		}			 
 		
-		EObject obj = super.getEObject(uri, loadOnDemand);
-		if (obj == null) {
-			//call URL
-			String url = uri.toString();
+		return obj;
+	}
+	
+	public EObject loadFromUrl(URI uri) {
+		EObject obj = null;
+		
+		String url = uri.toString();		
+		if (url.contains("services/entity/")) {			
 			Response response = client.target(url).request(MediaType.APPLICATION_JSON).get();
 			if (response.getStatus() == 200) {
 				String content = response.readEntity(String.class);
