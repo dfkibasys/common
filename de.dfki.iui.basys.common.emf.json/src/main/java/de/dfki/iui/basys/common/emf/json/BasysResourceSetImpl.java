@@ -1,7 +1,6 @@
 package de.dfki.iui.basys.common.emf.json;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -10,9 +9,13 @@ import javax.ws.rs.core.Response;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
+import de.dfki.iui.basys.model.base.BasePackage;
+import de.dfki.iui.basys.model.base.util.BaseResourceFactoryImpl;
 import de.dfki.iui.basys.model.domain.capability.CapabilityPackage;
 import de.dfki.iui.basys.model.domain.capability.util.CapabilityResourceFactoryImpl;
 import de.dfki.iui.basys.model.domain.linebalancing.LinebalancingPackage;
@@ -35,6 +38,8 @@ import de.dfki.iui.basys.model.domain.resourcetype.ResourcetypePackage;
 import de.dfki.iui.basys.model.domain.resourcetype.util.ResourcetypeResourceFactoryImpl;
 import de.dfki.iui.basys.model.domain.topology.TopologyPackage;
 import de.dfki.iui.basys.model.domain.topology.util.TopologyResourceFactoryImpl;
+import de.dfki.iui.basys.model.pattern.PatternPackage;
+import de.dfki.iui.basys.model.pattern.util.PatternResourceFactoryImpl;
 import de.dfki.iui.basys.model.runtime.component.ComponentPackage;
 
 public class BasysResourceSetImpl extends ResourceSetImpl {
@@ -43,8 +48,17 @@ public class BasysResourceSetImpl extends ResourceSetImpl {
 	
 	public BasysResourceSetImpl() {
 		
+		getPackageRegistry().put(EcorePackage.eNS_URI,EcorePackage.eINSTANCE);
+		getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());			
+		
 		getPackageRegistry().put(CapabilityPackage.eNS_URI,CapabilityPackage.eINSTANCE);
 		getResourceFactoryRegistry().getExtensionToFactoryMap().put("capability", new CapabilityResourceFactoryImpl());	
+			
+		getPackageRegistry().put(BasePackage.eNS_URI,BasePackage.eINSTANCE);
+		getResourceFactoryRegistry().getExtensionToFactoryMap().put("base", new BaseResourceFactoryImpl());	
+			
+		getPackageRegistry().put(PatternPackage.eNS_URI,PatternPackage.eINSTANCE);
+		getResourceFactoryRegistry().getExtensionToFactoryMap().put("pattern", new PatternResourceFactoryImpl());	
 			
 		getPackageRegistry().put(MaterialPackage.eNS_URI,MaterialPackage.eINSTANCE);
 		getResourceFactoryRegistry().getExtensionToFactoryMap().put("material", new MaterialResourceFactoryImpl());	
