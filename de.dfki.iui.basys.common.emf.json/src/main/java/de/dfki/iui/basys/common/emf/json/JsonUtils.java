@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Locale;
 import java.util.TimeZone;
+import java.util.function.Consumer;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -16,6 +17,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emfjson.jackson.annotations.EcoreReferenceInfo;
 import org.emfjson.jackson.annotations.EcoreTypeInfo;
@@ -28,6 +30,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import de.dfki.iui.basys.common.emf.EmfUtils;
 
 public class JsonUtils {
 
@@ -129,37 +132,37 @@ public class JsonUtils {
 	}
 	
 	public static void toStream(OutputStream os, Collection<? extends EObject> entities, boolean resolveReferences) throws IOException {
-		// ResourceSet resourceSet = new ResourceSetImpl();
-		// Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("json", new JsonResourceFactory());
+		 ResourceSet resourceSet = new ResourceSetImpl();
+		 Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("json", new JsonResourceFactory());
 		//
-		// Resource resource = resourceSet.createResource(URI.createURI("out.json"));
+		Resource resource = resourceSet.createResource(URI.createURI("out.json"));
 		// Map<String, Object> options = new HashMap<String, Object>();
 		// // options.put(EMFJs.OPTION_INDENT_OUTPUT, true);
 		// // options.put(EMFJs.OPTION_SERIALIZE_TYPE, false);
 		// // options.put(EMFJs.OPTION_SERIALIZE_REF_TYPE, true);
 		//
-		// entities.forEach(new Consumer<EObject>() {
-		// @Override
-		// public void accept(EObject e) {
-		// if (e.eResource() != null)
-		// resource.getContents().add(EmfUtils.clone(e));
-		// else
-		// resource.getContents().add(e);
-		// }
-		// });
+		 entities.forEach(new Consumer<EObject>() {
+		 @Override
+		 public void accept(EObject e) {
+			 if (e.eResource() != null)
+				 resource.getContents().add(EmfUtils.clone(e));
+			 else
+				 resource.getContents().add(e);
+			 }
+		 });
 		//
 		// resource.save(os, options);
 		
 		
-//		if (resolveReferences) {
-//			for (EObject entity : entities) {
-//				EcoreUtil.resolveAll(entity);
-//			}
-//		}
-//		selectMapper(resolveReferences).writeValue(os, entities);
-		for (EObject entity : entities) {
-			toStream(os, entity, resolveReferences);
+		if (resolveReferences) {
+			for (EObject entity : entities) {
+				EcoreUtil.resolveAll(entity);
+			}
 		}
+		selectMapper(resolveReferences).writeValue(os, entities);
+//		for (EObject entity : entities) {
+//			toStream(os, entity, resolveReferences);
+//		}
 	}
 
 	public static void toStream(OutputStream os, Collection<? extends EObject> entities) throws IOException {
