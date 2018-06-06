@@ -39,7 +39,12 @@ public class JsonUtils {
 	public static EMFModule customModule;
 	public static ObjectMapper defaultMapper;
 	public static ObjectMapper customMapper;
-	public static ResourceSet resourceSet;
+	public static ResourceSetFactory factory  = new ResourceSetFactory() {		
+		@Override
+		public ResourceSet createResourceSet() {
+			return new ResourceSetImpl();
+		}
+	};
 
 	static {
 		// same as emf
@@ -69,8 +74,8 @@ public class JsonUtils {
 		customMapper.setTimeZone(TimeZone.getDefault());
 		customMapper.registerModule(customModule);	
 		
-		resourceSet = new BasysResourceSetImpl();
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("json", new JsonResourceFactory(customMapper));
+		//resourceSet = new BasysResourceSetImpl();
+		//resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("json", new JsonResourceFactory(customMapper));
 	}
 
 	private static ObjectMapper selectMapper(boolean custom) {
@@ -88,7 +93,7 @@ public class JsonUtils {
 		EReference ref = entity.eContainmentFeature();
 		EStructuralFeature str = entity.eContainingFeature();
 		
-		ResourceSet resourceSet = new BasysResourceSetImpl();
+		ResourceSet resourceSet = factory.createResourceSet();
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("json", new JsonResourceFactory(customMapper));
 		Resource resource = resourceSet.createResource(URI.createURI(System.currentTimeMillis() + ".json"));
 				
@@ -133,7 +138,7 @@ public class JsonUtils {
 	}
 	
 	public static void toStream(OutputStream os, Collection<? extends EObject> entities, boolean resolveReferences) throws IOException {
-		ResourceSet resourceSet = new ResourceSetImpl();
+		ResourceSet resourceSet = factory.createResourceSet();
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("json", new JsonResourceFactory());
 		Resource resource = resourceSet.createResource(URI.createURI(System.currentTimeMillis() + ".json"));
 		// Map<String, Object> options = new HashMap<String, Object>();
@@ -171,7 +176,7 @@ public class JsonUtils {
 	
 	public static String toString(EObject entity, boolean resolveReferences) throws JsonProcessingException {
 		if (entity.eResource() == null) {
-			ResourceSet resourceSet = new BasysResourceSetImpl();
+			ResourceSet resourceSet = factory.createResourceSet();
 			resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("json", new JsonResourceFactory(customMapper));
 			Resource resource = resourceSet.createResource(URI.createURI(System.currentTimeMillis() + ".json"));
 			resource.getContents().add(entity);
@@ -201,7 +206,7 @@ public class JsonUtils {
 	}
 	
 	public static Resource fromStream(InputStream input) throws IOException {
-		return fromStream(input, resourceSet);
+		return fromStream(input, factory.createResourceSet());
 	}
 	
 	public static <T> T fromStream(InputStream input, Class<T> clz, ResourceSet rs) throws IOException {
@@ -213,7 +218,7 @@ public class JsonUtils {
 	}
 	
 	public static <T> T fromStream(InputStream input, Class<T> clz) throws IOException { 
-		return fromStream(input, clz, resourceSet);
+		return fromStream(input, clz, factory.createResourceSet());
 	}
 	
 	public static Resource fromString(String input, ResourceSet rs) throws IOException {
@@ -230,7 +235,7 @@ public class JsonUtils {
 	}
 	
 	public static Resource fromString(String input) throws IOException {
-		return fromString(input, resourceSet);
+		return fromString(input, factory.createResourceSet());
 	}
 	
 	public static <T> T fromString(String input, Class<T> clz, ResourceSet rs) throws IOException {
@@ -242,7 +247,7 @@ public class JsonUtils {
 	}
 	
 	public synchronized static <T> T fromString(String input, Class<T> clz) throws IOException { 
-		return fromString(input, clz, resourceSet);
+		return fromString(input, clz, factory.createResourceSet());
 	}
 	
 
@@ -260,7 +265,7 @@ public class JsonUtils {
 	}
 	
 	public static Resource fromFile(File file) throws IOException {
-		return fromFile(file, resourceSet);
+		return fromFile(file, factory.createResourceSet());
 	}
 	
 	public static <T> T fromFile(File file, Class<T> clz, ResourceSet rs) throws IOException {
@@ -272,7 +277,7 @@ public class JsonUtils {
 	}
 	
 	public static <T> T fromFile(File file, Class<T> clz) throws IOException { 
-		return fromFile(file, clz, resourceSet);
+		return fromFile(file, clz, factory.createResourceSet());
 	}
 
 }
