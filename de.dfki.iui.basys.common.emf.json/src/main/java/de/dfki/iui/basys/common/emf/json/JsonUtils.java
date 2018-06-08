@@ -10,11 +10,8 @@ import java.util.Locale;
 import java.util.TimeZone;
 import java.util.function.Consumer;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -86,36 +83,56 @@ public class JsonUtils {
 	}
 	
 	public static void toStream(OutputStream os, EObject entity, boolean resolveReferences) throws JsonGenerationException, JsonMappingException, IOException {
-		Resource originalResource = entity.eResource();
 		
+		EObject toSerialize = EcoreUtil.copy(entity);
 		
-		EObject container = entity.eContainer();
-		EReference ref = entity.eContainmentFeature();
-		EStructuralFeature str = entity.eContainingFeature();
+		//this should always be the case, just for debugging
+		if (toSerialize.eResource() == null) {
+			ResourceSet resourceSet = factory.createResourceSet();
+			resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("json", new JsonResourceFactory(customMapper));
+			Resource resource = resourceSet.createResource(URI.createURI(System.currentTimeMillis() + ".json"));
+			resource.getContents().add(toSerialize);
+		}
 		
-		ResourceSet resourceSet = factory.createResourceSet();
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("json", new JsonResourceFactory(customMapper));
-		Resource resource = resourceSet.createResource(URI.createURI(System.currentTimeMillis() + ".json"));
-				
 		if (resolveReferences) {
-			EcoreUtil.resolveAll(entity);
+			EcoreUtil.resolveAll(toSerialize);
 		}
-		resource.getContents().add(entity);
 		
-		selectMapper(resolveReferences).writeValue(os, resource);
-					
-		if (originalResource != null) {
-			if (container != null) {
-				if (str.isMany()) {
-					EList<Object> list = (EList<Object>) container.eGet(str);
-					list.add(entity);
-				} else {
-					container.eSet(str, entity);
-				}
-			} else {
-				originalResource.getContents().add(entity);
-			}
-		}
+		selectMapper(resolveReferences).writeValue(os, toSerialize.eResource());
+		
+//		Resource originalResource = entity.eResource();
+//		
+//		
+//		EObject container = entity.eContainer();
+//		EReference ref = entity.eContainmentFeature();
+//		EStructuralFeature str = entity.eContainingFeature();
+//		
+//		ResourceSet resourceSet = factory.createResourceSet();
+//		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("json", new JsonResourceFactory(customMapper));
+//		Resource resource = resourceSet.createResource(URI.createURI(System.currentTimeMillis() + ".json"));
+//				
+//		if (resolveReferences) {
+//			EcoreUtil.resolveAll(entity);
+//		}
+//		resource.getContents().add(entity);
+//		
+//		selectMapper(resolveReferences).writeValue(os, resource);
+//					
+//		if (originalResource != null) {
+//			if (container != null) {
+//				if (str.isMany()) {
+//					EList<Object> list = (EList<Object>) container.eGet(str);
+//					list.add(entity);
+//				} else {
+//					container.eSet(str, entity);
+//				}
+//			} else {
+//				originalResource.getContents().add(entity);
+//			}
+//		}
+		
+		
+		
 		
 		
 //		String result = selectMapper(resolveReferences).writeValueAsString(entity);
@@ -139,35 +156,22 @@ public class JsonUtils {
 	
 	public static void toStream(OutputStream os, Collection<? extends EObject> entities, boolean resolveReferences) throws IOException {
 		ResourceSet resourceSet = factory.createResourceSet();
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("json", new JsonResourceFactory());
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("json", new JsonResourceFactory(customMapper));
 		Resource resource = resourceSet.createResource(URI.createURI(System.currentTimeMillis() + ".json"));
-		// Map<String, Object> options = new HashMap<String, Object>();
-		// // options.put(EMFJs.OPTION_INDENT_OUTPUT, true);
-		// // options.put(EMFJs.OPTION_SERIALIZE_TYPE, false);
-		// // options.put(EMFJs.OPTION_SERIALIZE_REF_TYPE, true);
-		//
-		 entities.forEach(new Consumer<EObject>() {
-		 @Override
-		 public void accept(EObject e) {
-			 if (e.eResource() != null)
-				 resource.getContents().add(EmfUtils.clone(e));
-			 else
-				 resource.getContents().add(e);
-			 }
-		 });
-		//
-		// resource.save(os, options);
 		
-		
-		if (resolveReferences) {
-			for (EObject entity : entities) {
-				EcoreUtil.resolveAll(entity);
+		entities.forEach(new Consumer<EObject>() {
+			@Override
+			public void accept(EObject entity) {
+				EObject toSerialize = EmfUtils.clone(entity);
+				if (resolveReferences) {
+					EcoreUtil.resolveAll(toSerialize);
+				}
+				resource.getContents().add(toSerialize);				
 			}
-		}
+		});
+		
 		selectMapper(resolveReferences).writeValue(os, entities);
-//		for (EObject entity : entities) {
-//			toStream(os, entity, resolveReferences);
-//		}
+
 	}
 
 	public static void toStream(OutputStream os, Collection<? extends EObject> entities) throws IOException {
@@ -175,16 +179,20 @@ public class JsonUtils {
 	}
 	
 	public static String toString(EObject entity, boolean resolveReferences) throws JsonProcessingException {
-		if (entity.eResource() == null) {
+		EObject toSerialize = EmfUtils.clone(entity);
+		
+		//this should always be the case, just for debugging
+		if (toSerialize.eResource() == null) {
 			ResourceSet resourceSet = factory.createResourceSet();
 			resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("json", new JsonResourceFactory(customMapper));
 			Resource resource = resourceSet.createResource(URI.createURI(System.currentTimeMillis() + ".json"));
-			resource.getContents().add(entity);
+			resource.getContents().add(toSerialize);
 		}
+		
 		if (resolveReferences) {
-			EcoreUtil.resolveAll(entity);
+			EcoreUtil.resolveAll(toSerialize);
 		}
-		String result = selectMapper(resolveReferences).writeValueAsString(entity);
+		String result = selectMapper(resolveReferences).writeValueAsString(toSerialize.eResource());
 		return result;
 	}
 	

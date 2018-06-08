@@ -7,7 +7,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.URIConverter;
 import org.emfjson.jackson.annotations.EcoreReferenceInfo;
 import org.emfjson.jackson.annotations.EcoreTypeInfo;
 import org.emfjson.jackson.databind.EMFContext;
@@ -45,12 +44,12 @@ public class MyEcoreReferenceSerializer extends JsonSerializer<EObject> {
 
 	@Override
 	public void serialize(EObject value, JsonGenerator jg, SerializerProvider serializers) throws IOException {
-		final EObject parent = EMFContext.getParent(serializers);
+		
 
 		if (resolve) {
 			serializeContent(value, jg, serializers);
 		} else {
-
+			final EObject parent = EMFContext.getParent(serializers);
 			String href = getHRef(serializers, parent, value);
 			jg.writeStartObject();
 			jg.writeStringField(typeInfo.getProperty(), typeInfo.getValueWriter().writeValue(value.eClass(), serializers));
@@ -77,16 +76,24 @@ public class MyEcoreReferenceSerializer extends JsonSerializer<EObject> {
 		}
 	}
 
-	public void serializeContent(EObject object, JsonGenerator jg, SerializerProvider provider) throws IOException {
-		EObjectPropertyMap properties = builder.construct(provider, object.eClass());
-
-		jg.writeStartObject();
-		for (EObjectProperty property : properties.getProperties()) {
-			// TODO: better handling of bi-directional references
-			if (!property.getFieldName().equals("role"))
-				property.serialize(object, jg, provider);
+	public void serializeContent(EObject value, JsonGenerator jg, SerializerProvider serializers) throws IOException {
+		if (value.eClass().getEPackage() == EcorePackage.eINSTANCE) {
+			final EObject parent = EMFContext.getParent(serializers);
+			String href = getHRef(serializers, parent, value);
+			jg.writeStartObject();
+			jg.writeStringField(typeInfo.getProperty(), typeInfo.getValueWriter().writeValue(value.eClass(), serializers));
+			jg.writeStringField(info.getProperty(), href);
+			jg.writeEndObject();
+		} else {		
+			EObjectPropertyMap properties = builder.construct(serializers, value.eClass());
+			jg.writeStartObject();
+			for (EObjectProperty property : properties.getProperties()) {
+				// TODO: better handling of bi-directional references
+				if (!property.getFieldName().equals("role"))
+					property.serialize(value, jg, serializers);
+			}
+			jg.writeEndObject();
 		}
-		jg.writeEndObject();
 	}
 
 	private boolean isExternal(DatabindContext ctxt, EObject source, EObject target) {
