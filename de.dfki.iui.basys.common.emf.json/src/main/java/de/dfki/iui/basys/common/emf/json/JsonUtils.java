@@ -84,7 +84,14 @@ public class JsonUtils {
 	
 	public static void toStream(OutputStream os, EObject entity, boolean resolveReferences) throws JsonGenerationException, JsonMappingException, IOException {
 		
-		EObject toSerialize = EcoreUtil.copy(entity);
+		EObject toSerialize;
+		if (resolveReferences) {
+			//normal cloning
+			toSerialize = EcoreUtil.copy(entity);
+		} else {
+			//includes bi-directional references -> role in resourceinstance
+			toSerialize = EmfUtils.clone(entity);
+		}
 		
 		//this should always be the case, just for debugging
 		if (toSerialize.eResource() == null) {
