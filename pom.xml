@@ -25,9 +25,9 @@
 	</modules>
 
 	<scm>
-		<url>https://lns-90165.sb.dfki.de/gitlab/basys/common</url>
-		<connection>scm:git:ssh://git@lns-90165.sb.dfki.de:10022/basys/common.git</connection>
-		<developerConnection>scm:git:ssh://git@lns-90165.sb.dfki.de:10022/basys/common.git</developerConnection>
+		<url>https://lns-90165.sb.dfki.de/gitlab/i40/basys/common</url>
+		<connection>scm:git:ssh://git@lns-90165.sb.dfki.de:10022/i40/basys/common.git</connection>
+		<developerConnection>scm:git:ssh://git@lns-90165.sb.dfki.de:10022/i40/basys/common.git</developerConnection>
 	</scm>
 
 </project>
