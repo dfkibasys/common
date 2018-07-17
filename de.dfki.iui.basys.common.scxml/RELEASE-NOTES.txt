@@ -1,0 +1,65 @@
+<!--
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+$Id$
+
+                         Commons SCXML Package
+                          Version 2.0-SNAPSHOT
+                            Release Notes
+
+INTRODUCTION:
+
+Commons SCXML 2.0 is a major release. It contains non backwards compatible
+changes from the 0.x releases. Note: version 1.0 never came to be and was skipped.
+See about section at the end for general information on Commons SCXML.
+
+IMPORTANT NOTES:
+
+ o The minimum JDK version required is now 1.6.
+
+ o All deprecated methods and classes from any of the 0.x releases are removed.
+
+NEW FEATURES:
+
+ o
+
+BUG FIXES:
+
+ o
+
+IMPROVEMENTS:
+
+ o
+
+OTHER CHANGES:
+
+ o
+
+ABOUT COMMONS SCXML:
+
+The Commons SCXML (State Chart XML) project provides a generic
+state-machine based execution environment. It borrows most semantics
+from its namesake Working Draft at the W3C. Anything that can be
+represented as a UML state chart -- business process flows, view
+navigation bits, interaction or dialog management, and many more -- can
+leverage the Commons SCXML library. The library abstracts out the
+environment interfaces, and can be used in numerous server-side and
+client-side runtimes.
+
+Please visit the website for project information and documentation:
+
+http://commons.apache.org/scxml/
+

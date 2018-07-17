@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<!--
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+<!-- A fictitious state machine used by test cases.
+     Meant to illustrate the usage of SCXML <datamodel> element -->
+<scxml xmlns="http://www.w3.org/2005/07/scxml"
+       version="1.0"
+       datamodel="jexl"
+       initial="main">
+
+    <!-- Root or document datamodel -->
+    <datamodel>
+        <data id="docdata">{ "root" : { "foo" : { "bar" : "alpha" } } }</data>
+    </datamodel>
+
+    <state id="main">
+
+        <initial>
+            <transition target="ten"/>
+        </initial>
+
+        <!-- datamodel scoped to state "main" -->
+        <datamodel>
+            <!-- Degenerate usage, similar to the <var> element -->
+            <data id="mainvar" expr="0" />
+            <!-- Usage where the value is an JSON model -->
+            <data id="maindata">{ "root" : { "a" : { "b" : { "c" : "beta", "d" : 123, "e" : 456.789 } } } }</data>
+        </datamodel>
+
+        <state id="ten">
+            <onentry>
+                <assign location="mainvar" expr="10" />
+            </onentry>
+            <transition event="done.state.ten"
+             cond="mainvar eq 10 and maindata.root.a.b.c eq 'beta'"
+             target="twenty" />
+            <onexit>
+                <assign location="maindata.root.a.b.c" expr="'gamma'" />
+            </onexit>
+        </state>
+
+        <state id="twenty">
+            <onentry>
+                <assign location="mainvar" expr="20" />
+            </onentry>
+            <transition event="done.state.twenty"
+             cond="maindata.root.a.b.c eq 'gamma' and mainvar eq 20"
+             target="thirty" />
+            <onexit>
+                <assign location="docdata.root.foo"
+                        expr="maindata.root" />
+            </onexit>
+        </state>
+
+        <state id="thirty">
+            <!-- Arithmetic operations.
+                 Note that data "docdata"
+                 did not have data at 'root.foo.a.b.d' to begin with,
+                 the data model was manipulated by the <assign> above -->
+            <transition event="done.state.thirty"
+             cond="docdata.root.foo.a.b.d + docdata.root.foo.a.b.e eq 579.789"
+             target="forty" />
+        </state>
+
+        <final id="forty"/>
+
+    </state>
+
+</scxml>
+

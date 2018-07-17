@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<!--
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+<!-- Various send usages that fire the events on the existing execution
+     engine. -->
+<scxml xmlns="http://www.w3.org/2005/07/scxml"
+       version="1.0"
+       datamodel="jexl"
+       initial="ten">
+
+    <!-- We are expected to just fall all the way through down to
+         the state "seventy", then hop over and end up in "ninety" -->
+    <state id="ten">
+        <onentry>
+            <send eventexpr="'done.state.' + 'ten'" target="#_internal"/>
+        </onentry>
+        <transition event="done.state.ten" target="twenty" />
+    </state>
+
+    <state id="twenty">
+        <onentry>
+            <send event="done.state.twenty" type="scxml"  target="#_internal"/>
+        </onentry>
+        <transition event="done.state.twenty" target="thirty" />
+    </state>
+
+    <state id="thirty">
+        <onentry>
+            <send event="done.state.thirty" type=" sCxML  "  target="#_internal"/>
+        </onentry>
+        <transition event="done.state.thirty" target="forty" />
+    </state>
+
+    <state id="forty">
+        <onentry>
+            <send event="done.state.forty" type=" " target="#_internal" />
+        </onentry>
+        <transition event="done.state.forty" target="fifty" />
+    </state>
+
+    <state id="fifty">
+        <onentry>
+            <send event="done.state.fifty" target="#_internal" />
+        </onentry>
+        <transition event="done.state.fifty" target="sixty" />
+    </state>
+
+    <state id="sixty">
+        <onentry>
+            <send event="done.state.sixty" type="scxml" target="#_internal" />
+        </onentry>
+        <transition event="done.state.sixty" target="seventy" />
+    </state>
+
+    <state id="seventy">
+        <onentry>
+            <send event="done.state.seventy" type="scxml" target="foo" />
+        </onentry>
+
+        <!-- This transition should not be followed since
+             target "foo" is unavailable (any target other
+             than an empty target is unavailable, empty target
+             is current execution i.e. this state machine) -->
+        <transition event="done.state.seventy" target="eighty" />
+
+        <!-- Since "foo" it not available, the event
+             "error.execution" should be raised -->
+        <transition event="error.execution" target="ninety" />
+
+    </state>
+
+    <final id="eighty"/>
+
+    <final id="ninety"/>
+
+</scxml>
+

@@ -1,0 +1,193 @@
+<?xml version="1.0"?>
+<!--
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+<faqs title="Commons SCXML FAQ">
+
+ <part id="general">
+
+  <title>General</title>
+
+  <faq id="what-is">
+   <question>
+    What is SCXML?
+   </question>
+   <answer>
+    State Chart XML (SCXML) is a general-purpose event-based state
+    machine language that can be used in many ways. It is currently
+    a W3C Working Draft, available
+    <a href="http://www.w3.org/TR/scxml/">here</a>.
+   </answer>
+  </faq>
+
+  <faq id="commons-scxml">
+   <question>
+    What is Commons SCXML?
+   </question>
+   <answer>
+    Commons SCXML is aimed at creating and maintaining an
+    open-source Java SCXML engine capable of executing
+    a state machine defined using a SCXML document, while abstracting
+    out the environment interfaces.
+   </answer>
+  </faq>
+
+  <faq id="simple-example">
+   <question>
+    Do you have a simple example where Commons SCXML is used?
+   </question>
+   <answer>
+    Sure, take a look at the <a href="usecases/scxml-stopwatch.html">
+    stopwatch usecase</a>.
+   </answer>
+  </faq>
+
+  <faq id="dependencies">
+   <question>
+    What are the core requirements of SCXML?
+   </question>
+   <answer>
+    The "core" requirements for Commons SCXML are Commons Logging.
+    You will need to choose an expression language for your SCXML documents
+    (details in next section of this
+    FAQ). See the <a href="dependencies.html">dependencies page</a>
+    for details about the dependency versions.
+   </answer>
+  </faq>
+
+ </part>
+
+ <part id="expression-languages">
+
+  <title>Expression languages</title>
+
+  <faq id="which-ones">
+   <question>
+    Which expression languages does the Commons SCXML implementation support?
+   </question>
+   <answer>
+    Commons SCXML currently supports
+    <a href="http://commons.apache.org/jexl/">Commons JEXL</a>, Javascript, XPath and
+    <a href="http://groovy.codehaus.org/">Groovy</a>. For details,
+    see the <a href="guide/testing-standalone.html">trying out</a> and
+    <a href="guide/contexts-evaluators.html">contexts and evaluators</a>
+    pages of the user guide.
+   </answer>
+  </faq>
+
+  <faq id="more-than-one">
+   <question>
+    Can I use more than one expression language in the same SCXML document?
+   </question>
+   <answer>
+    No, the expressions throughout the document must be homogeneous. This
+    also applies to any external documents that may be referred by this
+    document, for example via "src" attributes.
+   </answer>
+  </faq>
+
+ </part>
+
+ <part id="executor">
+
+  <title>The SCXMLExecutor</title>
+
+  <faq id="activate">
+   <question>
+    Once I set up an SCXMLExecutor (call the constructor, set the
+    state machine) is there anything I have to do to "activate" it?
+   </question>
+   <answer>
+    Yes, you must call the marker method, SCXMLExecutor#go().
+    This serves as an indication that you have finished configuring the
+    SCXMLExecutor instance and are now ready to begin executing the state
+    machine described by your SCXML document. For example, you may
+    attach zero, one or many SCXMLListeners to interesting "nodes" within
+    the SCXML document, such as the document root i.e. the SCXML object,
+    and/or particular State and Transition objects as well. See the
+    <a href="guide/core-engine.html">SCXMLExecutor section of the
+    user guide</a> for more.
+   </answer>
+  </faq>
+
+  <faq id="one-state-machine">
+   <question>
+    Can I have multiple instances of SCXMLExecutor all working off of
+    a single instance of the SCXML class?
+   </question>
+   <answer>
+    Yes. The Commons SCXML object model does not store any information
+    related to a particular execution of the state machine. It is
+    therefore possible to use a single SCXML instance as the state
+    machine for multiple SCXMLExecutor instances. This also means that
+    a SCXML document needs to be parsed only once, irrespective of the
+    number of "instances" of the state machine that may execute.
+   </answer>
+  </faq>
+
+  <faq id="many-threads">
+   <question>
+    Can multiple threads safely interact with an instance of SCXMLExecutor?
+   </question>
+   <answer>
+   <p>
+    To a certain extent. The execution of an SCXML state machine through an SCXMLExecutor instance may only be done,
+    as per the specification, sequentially.
+   </p>
+   <p>
+    Multiple threads may 'send' or 'register' new events on a state machine through its #addEvent methods, which
+    then will be processed sequentially by the SCXMLExecutor.
+   </p>
+   <p>
+    If such events are registered while the state machine is executing, these will processed automatically
+    before the state machine 'returns' in a stable state.
+   </p>
+   <p>
+    If such events are registered or added while the state machine is in a stable state, the SCXMLExecutor its
+    #triggerEvents method will have to be invoked for the state machine to proceed with processing these events.
+   </p>
+   <p>
+    The SCXMLExecutor methods themselves are not thread save, and thus it is the responsibility of the 'manager' of the
+    SCXMLExecutor, typically the thread creating and initializing the state machine to also execute the state machine
+    and check upon its state.
+   </p>
+   <p>
+    Other threads collaborating with the state machine however should refrain to only use the #addEvent methods, or
+    otherwise be (externally) coordinated such that only one thread at a time is triggering the execution of the state
+    machine.
+   </p>
+   </answer>
+  </faq>
+
+  <faq id="serializability">
+   <question>
+    Are SCXMLExecutor instances serializable?
+   </question>
+   <answer>
+   <p>
+    No, but the SCInstance of an SCXMLExecutor, which contains all the 'state' of the state machine including the SCXML
+    document itself, is serializable after detaching through its #detachInstance method as long as all associated
+    user-defined content is too.
+   </p>
+   <p>
+    A detached SCInstance can be re-attached to the SCXMLExecutor using its #attachInstance method.
+   </p>
+   </answer>
+  </faq>
+
+ </part>
+
+</faqs>

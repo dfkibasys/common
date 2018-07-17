@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<!--
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+<scxml xmlns="http://www.w3.org/2005/07/scxml"
+       version="1.0"
+       datamodel="jexl"
+       initial="para">
+
+    <datamodel>
+        <data id="root">{ "root" : { "count" : 0 } }</data>
+    </datamodel>
+
+    <parallel id="para">
+
+        <onentry>
+            <assign location="root.root.count" expr="root.root.count + 1"/>
+        </onentry>
+
+        <state id="para1">
+
+            <initial>
+                <transition target="para11"/>
+            </initial>
+            <onentry>
+                <assign location="root.root.count" expr="root.root.count + 1"/>
+            </onentry>
+
+            <state id="para11">
+                <onentry>
+                      <assign location="root.root.count" expr="root.root.count + 1"/>
+                </onentry>
+                <transition event="foo" target="para12"/>
+                <onexit>
+                      <assign location="root.root.count" expr="root.root.count + 1"/>
+                </onexit>
+            </state>
+
+            <final id="para12">
+                <onentry>
+                    <assign location="root.root.count" expr="root.root.count + 1"/>
+                </onentry>
+                <onexit>
+                    <assign location="root.root.count" expr="root.root.count + 1"/>
+                </onexit>
+            </final>
+
+            <onexit>
+                <assign location="root.root.count" expr="root.root.count + 1"/>
+            </onexit>
+
+        </state>
+
+        <state id="para2">
+
+            <initial>
+                <transition target="para21"/>
+            </initial>
+            <onentry>
+                <assign location="root.root.count" expr="root.root.count + 1"/>
+            </onentry>
+
+            <state id="para21">
+                <onentry>
+                    <assign location="root.root.count" expr="root.root.count + 1"/>
+                </onentry>
+                <transition event="bar" target="para22"/>
+                <onexit>
+                    <assign location="root.root.count" expr="root.root.count + 1"/>
+                </onexit>
+            </state>
+
+            <final id="para22">
+                <onentry>
+                    <assign location="root.root.count" expr="root.root.count + 1"/>
+                </onentry>
+                <onexit>
+                    <assign location="root.root.count" expr="root.root.count + 1"/>
+                </onexit>
+            </final>
+
+            <onexit>
+                <assign location="root.root.count" expr="root.root.count + 1"/>
+            </onexit>
+
+        </state>
+
+        <transition event="done.state.para" target="end"/>
+
+        <onexit>
+            <assign location="root.root.count" expr="root.root.count + 1"/>
+        </onexit>
+
+    </parallel>
+
+    <final id="end"/>
+
+</scxml>
+
