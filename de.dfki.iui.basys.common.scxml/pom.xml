@@ -13,6 +13,21 @@
 	<properties>
 		<bundle.symbolicName>de.dfki.iui.basys.common.scxml</bundle.symbolicName>
 		<bundle.namespace>de.dfki.iui.basys.common.scxml</bundle.namespace>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<commons.componentid>scxml2</commons.componentid>
+		<commons.module.name>org.apache.commons.scxml2</commons.module.name>
+		<commons.release.version>2.0-alpha-1</commons.release.version>
+		<commons.release.desc>(Java 8.0+)</commons.release.desc>
+		<commons.rc.version>RC1</commons.rc.version>
+		<commons.jira.id>SCXML</commons.jira.id>
+		<commons.jira.pid>12310492</commons.jira.pid>
+		<commons.scmPubUrl>https://svn.apache.org/repos/infra/websites/production/commons/content/proper/commons-scxml</commons.scmPubUrl>
+		<commons.scmPubCheckoutDirectory>site-content</commons.scmPubCheckoutDirectory>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<!-- Allow override of the logging level -->
+		<simplelog.defaultlog>fatal</simplelog.defaultlog>
 	</properties>
 
 	<modelVersion>4.0.0</modelVersion>
@@ -81,6 +96,8 @@
 
 	</dependencies>
 
+
+	
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<resources>
