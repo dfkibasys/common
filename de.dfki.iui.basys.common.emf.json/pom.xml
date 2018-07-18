@@ -21,7 +21,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.dfki.iui.basys.common</groupId>
 	<artifactId>de.dfki.iui.basys.common.emf.json</artifactId>
-	<version>0.1.1-SNAPSHOT</version>
+	<version>0.1.0-SNAPSHOT</version>
 
 	<name>${bundle.symbolicName}</name>
 
@@ -99,4 +99,7 @@
 		</dependency>
 
 	</dependencies>
+
+
+
 </project>

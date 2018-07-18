@@ -11,7 +11,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.dfki.iui.basys</groupId>
 	<artifactId>common</artifactId>
-	<version>0.1.1-SNAPSHOT</version>
+	<version>0.1.0-SNAPSHOT</version>
 
 	<name>BaSys 4.0 Common Module</name>
 
@@ -28,7 +28,6 @@
 		<url>https://lns-90165.sb.dfki.de/gitlab/i40/basys/common</url>
 		<connection>scm:git:ssh://git@lns-90165.sb.dfki.de:10022/i40/basys/common.git</connection>
 		<developerConnection>scm:git:ssh://git@lns-90165.sb.dfki.de:10022/i40/basys/common.git</developerConnection>
-	  <tag>HEAD</tag>
-  </scm>
+	</scm>
 
 </project>
