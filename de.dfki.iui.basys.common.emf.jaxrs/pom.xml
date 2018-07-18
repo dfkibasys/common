@@ -59,6 +59,7 @@
 			<type>pom</type>
 			<groupId>${project.parent.groupId}</groupId>
 			<artifactId>provision</artifactId>
+			<version>${project.parent.version}</version>
 			<optional>true</optional>
 		</dependency>
 
