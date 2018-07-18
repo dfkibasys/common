@@ -90,6 +90,7 @@
 			<type>pom</type>
 			<groupId>${project.parent.groupId}</groupId>
 			<artifactId>provision</artifactId>
+			<version>${project.parent.groupId}</version>
 			<optional>true</optional>
 		</dependency>
 
