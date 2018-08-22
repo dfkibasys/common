@@ -2,15 +2,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<parent>
-		<relativePath>../build</relativePath>
+		<!-- <relativePath>../build</relativePath> -->
+		<relativePath></relativePath>
 		<groupId>de.dfki.iui</groupId>
 		<artifactId>basys</artifactId>
-		<version>0.1.1-SNAPSHOT</version>
+		<version>0.1.0</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.dfki.iui.basys</groupId>
 	<artifactId>common</artifactId>
+	<version>0.1.1-SNAPSHOT</version>
 
 	<name>BaSys 4.0 Common Module</name>
 
@@ -29,4 +31,22 @@
 		<developerConnection>scm:git:ssh://git@lns-90165.sb.dfki.de:10022/i40/basys/common.git</developerConnection>
 	</scm>
 
+	<repositories>
+		<repository>
+			<id>DFKI BaSys Nexus</id>
+			<url>http://lns-90165.sb.dfki.de:8081/repository/maven-public/</url>
+		</repository>
+	</repositories>
+
+	<distributionManagement>
+		<repository>
+			<id>nexus-releases</id>
+			<url>http://lns-90165.sb.dfki.de:8081/repository/maven-releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>nexus-snapshots</id>
+			<url>http://lns-90165.sb.dfki.de:8081/repository/maven-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+	
 </project>

@@ -2,10 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<parent>
-		<relativePath>../../build/poms/compiled/</relativePath>
+		<!-- <relativePath>../../build/poms/compiled/</relativePath> -->
+		<relativePath></relativePath>
 		<groupId>de.dfki.iui.basys.build</groupId>
 		<artifactId>compiled-bundle-settings</artifactId>
-		<version>0.1.1-SNAPSHOT</version>
+		<version>0.1.0</version>
 	</parent>
 
 	<properties>
@@ -31,6 +32,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.dfki.iui.basys.common</groupId>
 	<artifactId>de.dfki.iui.basys.common.scxml</artifactId>
+	<version>0.1.1-SNAPSHOT</version>
 
 	<name>${bundle.symbolicName}</name>
 
