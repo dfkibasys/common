@@ -34,18 +34,18 @@
 	<repositories>
 		<repository>
 			<id>DFKI BaSys Nexus</id>
-			<url>http://lns-90165.sb.dfki.de:8081/repository/maven-public/</url>
+			<url>https://lns-90165.sb.dfki.de:8443/repository/maven-public/</url>
 		</repository>
 	</repositories>
 
 	<distributionManagement>
 		<repository>
 			<id>nexus-releases</id>
-			<url>http://lns-90165.sb.dfki.de:8081/repository/maven-releases/</url>
+			<url>https://lns-90165.sb.dfki.de:8443/repository/maven-releases/</url>
 		</repository>
 		<snapshotRepository>
 			<id>nexus-snapshots</id>
-			<url>http://lns-90165.sb.dfki.de:8081/repository/maven-snapshots/</url>
+			<url>https://lns-90165.sb.dfki.de:8443/repository/maven-snapshots/</url>
 		</snapshotRepository>
 	</distributionManagement>
 	
