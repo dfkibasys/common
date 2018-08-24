@@ -12,7 +12,7 @@ cache:
 build:
   stage: build
   script:
-    - mvn $MAVEN_CLI_OPTS compile
+    - mvn -V $MAVEN_CLI_OPTS compile
 
 test:
   stage: test
