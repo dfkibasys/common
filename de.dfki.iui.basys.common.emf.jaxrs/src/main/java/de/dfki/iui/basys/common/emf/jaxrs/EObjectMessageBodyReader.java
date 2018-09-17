@@ -20,7 +20,7 @@ import de.dfki.iui.basys.common.emf.json.JsonUtils;
 
 @Provider
 @Consumes(MediaType.APPLICATION_JSON)
-@Component
+@Component(immediate=true)
 public class EObjectMessageBodyReader implements MessageBodyReader<EObject> {
 
 	@Context

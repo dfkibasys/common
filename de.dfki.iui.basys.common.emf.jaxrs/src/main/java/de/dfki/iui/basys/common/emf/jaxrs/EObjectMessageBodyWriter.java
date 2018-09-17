@@ -22,7 +22,7 @@ import de.dfki.iui.basys.common.emf.json.JsonUtils;
 
 @Provider
 @Produces(MediaType.APPLICATION_JSON)
-@Component
+@Component(immediate=true)
 public class EObjectMessageBodyWriter implements MessageBodyWriter<EObject> {
 
 	@Context

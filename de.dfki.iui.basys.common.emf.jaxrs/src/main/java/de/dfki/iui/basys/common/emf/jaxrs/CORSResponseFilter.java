@@ -11,7 +11,7 @@ import javax.ws.rs.ext.Provider;
 import org.osgi.service.component.annotations.Component;
 
 @Provider
-@Component
+@Component(immediate=true)
 public class CORSResponseFilter implements ContainerResponseFilter {
 
 	@Override
