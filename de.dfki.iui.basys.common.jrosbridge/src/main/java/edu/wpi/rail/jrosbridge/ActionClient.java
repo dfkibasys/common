@@ -25,84 +25,98 @@ public class ActionClient {
 	private Topic goalTopic;
 	private Topic cancelTopic;
 	
+	private boolean initialized = false;
+	
 	protected Map<String, ActionCallback> goals = new HashMap<String, ActionCallback>();
 
 	public ActionClient(Ros ros, String serverName, String actionName) {
 		this.ros = ros;
 		this.serverName = serverName;
-		this.actionName = actionName;
-
-		feedbackListener = new Topic(ros, this.serverName + "/feedback", this.actionName + "Feedback" );
-		statusListener = new Topic(ros, this.serverName + "/status", GoalStatusArray.TYPE );
-		resultListener = new Topic(ros, this.serverName + "/result", this.actionName + "Result" );
-
-		goalTopic = new Topic(ros, this.serverName + "/goal", this.actionName + "Goal" );
-		cancelTopic = new Topic(ros, this.serverName + "/cancel", GoalID.TYPE);
-			
+		this.actionName = actionName;			
 	}
 
-	public void initialize() {
-		goalTopic.advertise();
-		cancelTopic.advertise();
-		
-		feedbackListener.subscribe(new TopicCallback() {
-			
-			@Override
-			public void handleMessage(Message message) {
-				String goalId = message.toJsonObject().getJsonObject("status").getJsonObject("goal_id").getString("id");
-				if (goals.containsKey(goalId)) {
-					ActionCallback cb = goals.get(goalId);
-					cb.handleStatus(GoalStatus.fromJsonObject(message.toJsonObject().getJsonObject("status")));
-					cb.handleFeedback(message.toJsonObject().getJsonObject("feedback"));
-				}
-			}
-		});
-
-		resultListener.subscribe(new TopicCallback() {
-			
-			@Override
-			public void handleMessage(Message message) {
-				String goalId = message.toJsonObject().getJsonObject("status").getJsonObject("goal_id").getString("id");
-				if (goals.containsKey(goalId)) {
-					ActionCallback cb = goals.get(goalId);
-					cb.handleStatus(GoalStatus.fromJsonObject(message.toJsonObject().getJsonObject("status")));
-					cb.handleResult(message.toJsonObject().getJsonObject("result"));
-				}
-			}
-		});
-		
-		statusListener.subscribe(new TopicCallback() {
-			
-			@Override
-			public void handleMessage(Message message) {
-				JsonArray statusList = message.toJsonObject().getJsonArray("status_list");
-				statusList.forEach(status -> {
-					String goalId = ((JsonObject)status).getJsonObject("goal_id").getString("id");
+	public boolean isInitialized() {
+		return initialized;
+	}
+	
+	public void initialize() {		
+		if (!initialized) {
+			feedbackListener = new Topic(ros, this.serverName + "/feedback", this.actionName + "Feedback" );
+			feedbackListener.subscribe(new TopicCallback() {
+				
+				@Override
+				public void handleMessage(Message message) {
+					String goalId = message.toJsonObject().getJsonObject("status").getJsonObject("goal_id").getString("id");
 					if (goals.containsKey(goalId)) {
 						ActionCallback cb = goals.get(goalId);
-						cb.handleStatus(GoalStatus.fromJsonObject((JsonObject)status));
+						cb.handleStatus(GoalStatus.fromJsonObject(message.toJsonObject().getJsonObject("status")));
+						cb.handleFeedback(message.toJsonObject().getJsonObject("feedback"));
 					}
-				});				
-			}
-		});
-		
+				}
+			});
+	
+			resultListener = new Topic(ros, this.serverName + "/result", this.actionName + "Result" );
+			resultListener.subscribe(new TopicCallback() {
+				
+				@Override
+				public void handleMessage(Message message) {
+					String goalId = message.toJsonObject().getJsonObject("status").getJsonObject("goal_id").getString("id");
+					if (goals.containsKey(goalId)) {
+						ActionCallback cb = goals.get(goalId);
+						cb.handleStatus(GoalStatus.fromJsonObject(message.toJsonObject().getJsonObject("status")));
+						cb.handleResult(message.toJsonObject().getJsonObject("result"));
+					}
+				}
+			});
+	
+			statusListener = new Topic(ros, this.serverName + "/status", GoalStatusArray.TYPE );
+			statusListener.subscribe(new TopicCallback() {
+				
+				@Override
+				public void handleMessage(Message message) {
+					JsonArray statusList = message.toJsonObject().getJsonArray("status_list");
+					statusList.forEach(status -> {
+						String goalId = ((JsonObject)status).getJsonObject("goal_id").getString("id");
+						if (goals.containsKey(goalId)) {
+							ActionCallback cb = goals.get(goalId);
+							cb.handleStatus(GoalStatus.fromJsonObject((JsonObject)status));
+						}
+					});				
+				}
+			});
+	
+			goalTopic = new Topic(ros, this.serverName + "/goal", this.actionName + "Goal" );
+			goalTopic.advertise();
+			
+			cancelTopic = new Topic(ros, this.serverName + "/cancel", GoalID.TYPE);		
+			cancelTopic.advertise();		
+			
+			initialized = true;
+		}
 	}	
 	
 	public void dispose() {
 		goalTopic.unadvertise();
 		cancelTopic.unadvertise();
+	}	
+	
+	public Goal createGoal(ActionCallback cb) {
+		Goal goal = new Goal(this);
+		//TODO: remove goal when finished or canceled?
+		goals.put(goal.getId(), cb);
+		return goal;		
 	}
 	
-	public void cancel() {
+	public void cancelAll() {
 		GoalID msg = new GoalID();
 		cancelTopic.publish(msg);
 	} 
 	
-	public Topic getGoalTopic() {
+	Topic getGoalTopic() {
 		return goalTopic;
 	}
 	
-	public Topic getCancelTopic() {
+	Topic getCancelTopic() {
 		return cancelTopic;
 	}
 	
