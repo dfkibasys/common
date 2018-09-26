@@ -103,8 +103,13 @@ public class ActionClient {
 	public Goal createGoal(ActionCallback cb) {
 		Goal goal = new Goal(this);
 		//TODO: remove goal when finished or canceled?
-		goals.put(goal.getId(), cb);
+		//goals.put(goal.getId(), cb);
+		goal.setActionCallback(cb);
 		return goal;		
+	}
+	
+	public Goal createGoal() {
+		return createGoal(null);
 	}
 	
 	public void cancelAll() {

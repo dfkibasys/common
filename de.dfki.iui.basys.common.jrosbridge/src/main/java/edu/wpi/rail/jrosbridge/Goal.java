@@ -1,26 +1,33 @@
 package edu.wpi.rail.jrosbridge;
 
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.json.JsonObject;
 
+import edu.wpi.rail.jrosbridge.callback.ActionCallback;
 import edu.wpi.rail.jrosbridge.messages.actionlib.GoalID;
 import edu.wpi.rail.jrosbridge.messages.actionlib.GoalMessage;
 import edu.wpi.rail.jrosbridge.messages.actionlib.GoalStatus;
 import edu.wpi.rail.jrosbridge.primitives.Time;
 
-public class Goal {
+public class Goal implements ActionCallback {
 
 	private String id;
 	private ActionClient client;
 	private GoalID goalId;
+	private ActionCallback cb;
+	
+	private GoalStatusEnum status;
+	private List<JsonObject> feedback = new LinkedList<JsonObject>();
+	private JsonObject result;
 	
 	Goal(ActionClient client) {
 		this.client = client;
 		
 		this.id = "goal_" + Math.random() + "_" + new Date().getTime();
-		this.goalId = new GoalID(Time.now(), id);
-		
+		this.goalId = new GoalID(Time.now(), id);		
 	}
 	
 	public String getId() {
@@ -30,14 +37,57 @@ public class Goal {
 	public void submit(JsonObject goal) {
 		client.initialize();
 		
+		client.goals.put(getId(), this);
+		
 		GoalMessage goalMessage = new GoalMessage(goalId, goal);
 		client.getGoalTopic().publish(goalMessage);
 	}
-	
+
 	public void cancel() {
 		client.initialize();
 		
 		client.getCancelTopic().publish(goalId);
+	}
+	
+	public void setActionCallback(ActionCallback cb) {
+		this.cb = cb;
+	}
+	
+	public GoalStatusEnum getStatus() {
+		return status;
+	}
+	
+	public List<JsonObject> getFeedback() {
+		return feedback;
+	}
+	
+	public JsonObject getResult() {
+		return result;
+	}
+	
+	
+	@Override
+	public void handleStatus(GoalStatus status) {
+		this.status = GoalStatusEnum.values()[status.getStatus()];	
+		if (cb != null) {
+			cb.handleStatus(status);
+		}
+	}
+	
+	@Override
+	public void handleResult(JsonObject result) {
+		this.result = result;
+		if (cb != null) {
+			cb.handleResult(result);			
+		}
+	}
+	
+	@Override
+	public void handleFeedback(JsonObject feedback) {
+		this.feedback.add(feedback);
+		if (cb != null) {
+			cb.handleFeedback(feedback);
+		}
 	}
 	
 	public enum GoalStatusEnum {
