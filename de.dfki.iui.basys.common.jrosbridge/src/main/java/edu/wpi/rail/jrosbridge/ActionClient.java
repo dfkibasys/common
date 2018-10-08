@@ -98,6 +98,9 @@ public class ActionClient {
 	public void dispose() {
 		goalTopic.unadvertise();
 		cancelTopic.unadvertise();
+		statusListener.unsubscribe();
+		feedbackListener.unsubscribe();
+		resultListener.unsubscribe();
 	}	
 	
 	public Goal createGoal(ActionCallback cb) {
