@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -458,8 +459,18 @@ public class SCXMLExecutor implements SCXMLIOProcessor {
         Thread t = new Thread(() -> {
             try {
                 while (exctx.isRunning()) {
-                    triggerEvents();
-                }
+
+					try {
+						TriggerEvent evt = externalEventQueue.poll(100, TimeUnit.MILLISECONDS);
+						if (evt != null) {
+							eventStep(evt);
+						}
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+				}
             } catch (ModelException ignored) {
             }
         });
