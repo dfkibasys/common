@@ -19,9 +19,9 @@ package org.apache.commons.scxml2;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Queue;
 import java.util.Set;
-import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -71,7 +71,8 @@ public class SCXMLExecutor implements SCXMLIOProcessor {
     /**
      * The external event queue
      */
-    private final Queue<TriggerEvent> externalEventQueue = new ConcurrentLinkedQueue<>();
+    //private final Queue<TriggerEvent> externalEventQueue = new ConcurrentLinkedQueue<>();
+    private final BlockingQueue<TriggerEvent> externalEventQueue = new LinkedBlockingQueue<>();
 
     /**
      * Convenience constructor.
@@ -473,7 +474,8 @@ public class SCXMLExecutor implements SCXMLIOProcessor {
      * </p>
      * @param evt an external event
      */
-    public void addEvent(final TriggerEvent evt) {
+    @Override
+	public void addEvent(final TriggerEvent evt) {
         if (evt != null) {
             externalEventQueue.add(evt);
         }
