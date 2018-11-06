@@ -2,22 +2,22 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<parent>
-		<relativePath>../../build/poms/compiled/</relativePath>
-		<groupId>de.dfki.iui.basys.build</groupId>
+		<relativePath>../poms/compiled/</relativePath>
+		<groupId>de.dfki.cos.basys.common</groupId>
 		<artifactId>compiled-bundle-settings</artifactId>
 		<version>0.1.1-SNAPSHOT</version>
 	</parent>
 
 	<properties>
-		<bundle.symbolicName>de.dfki.iui.basys.common.emf</bundle.symbolicName>
+		<bundle.symbolicName>de.dfki.cos.basys.common.emf</bundle.symbolicName>
 		<bundle.namespace>de.dfki.iui.basys.common.emf</bundle.namespace>
 		<emf-version>2.12.0</emf-version>
 		<commons-io-version>2.6</commons-io-version>
 	</properties>
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>de.dfki.iui.basys.common</groupId>
-	<artifactId>de.dfki.iui.basys.common.emf</artifactId>
+	<groupId>de.dfki.cos.basys.common</groupId>
+	<artifactId>de.dfki.cos.basys.common.emf</artifactId>
 
 	<name>${bundle.symbolicName}</name>
 
