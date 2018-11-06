@@ -39,11 +39,11 @@
 	<modules>
 		<module>poms</module>
 		<module>provision</module>		
-		<module>de.dfki.iui.basys.common.emf</module>
-		<module>de.dfki.iui.basys.common.emf.json</module>
-		<module>de.dfki.iui.basys.common.emf.jaxrs</module>
-		<module>de.dfki.iui.basys.common.scxml</module>
-		<module>de.dfki.iui.basys.common.jrosbridge</module>	
+		<module>de.dfki.cos.basys.common.emf</module>
+		<module>de.dfki.cos.basys.common.emf.json</module>
+		<module>de.dfki.cos.basys.common.emf.jaxrs</module>
+		<module>de.dfki.cos.basys.common.scxml</module>
+		<module>de.dfki.cos.basys.common.jrosbridge</module>	
 	</modules>
 
 	<scm>
