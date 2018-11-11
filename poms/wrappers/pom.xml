@@ -2,57 +2,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <parent>
-    <groupId>de.dfki.cos.basys.common</groupId>
-    <artifactId>shared-plugin-settings</artifactId>
-    <version>0.1.1-SNAPSHOT</version>
+    <groupId>de.dfki.cos.basys.pom</groupId>
+    <artifactId>wrapper-bundle-settings</artifactId>
+    <version>0.1.1</version>
+		<relativePath></relativePath>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
+  <groupId>de.dfki.cos.basys.common</groupId>
   <artifactId>wrapper-bundle-settings</artifactId>
+	<version>0.1.1-SNAPSHOT</version>
 
   <name>BaSys 4.0 Common - Wrapper Instructions</name>
 
-  <!--
-   | don't apply project details to wrapped jars
-  -->
-
-  <organization />
-
-  <description>Simple OSGi wrapper around third-party jar(s)</description>
-
-  <licenses>
-    <license />
-  </licenses>
-
   <packaging>pom</packaging>
-
-  <build>
-    <plugins>
-      <plugin>
-        <!--
-         | the following instructions are optimized for wrapping third-party libraries as OSGi bundles
-        -->
-        <groupId>org.apache.felix</groupId>
-        <artifactId>maven-bundle-plugin</artifactId>
-		<extensions>true</extensions>		
-        <configuration>
-          <instructions>
-            <Bundle-SymbolicName>${bundle.symbolicName}</Bundle-SymbolicName>
-            <Bundle-Version>${wrapped.version}</Bundle-Version>
-            <!--
-             | export wrapped contents: don't use Export-Package:* as this bundles everything on the classpath
-            -->
-            <_exportcontents>*</_exportcontents>
-            <Private-Package>!*</Private-Package>
-            <!--
-             | each module can override these defaults in their osgi.bnd file
-            -->
-            <_include>-osgi.bnd</_include>
-          </instructions>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
 
   <modules>
 

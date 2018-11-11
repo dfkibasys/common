@@ -2,91 +2,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <parent>
-    <groupId>de.dfki.cos.basys.common</groupId>
-    <artifactId>shared-plugin-settings</artifactId>
-    <version>0.1.1-SNAPSHOT</version>
+    <groupId>de.dfki.cos.basys.pom</groupId>
+    <artifactId>compiled-bundle-settings</artifactId>
+    <version>0.1.1</version>
+		<relativePath></relativePath>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
+  <groupId>de.dfki.cos.basys.common</groupId>
   <artifactId>compiled-bundle-settings</artifactId>
+  <version>0.1.1-SNAPSHOT</version>
 
   <name>BaSys 4.0 Common - Bundle Instructions</name>
 
   <packaging>pom</packaging>
-
-  	<properties>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<tycho-version>1.0.0</tycho-version>
-		<emf-version>2.12.0</emf-version>
-		<commons-io-version>2.6</commons-io-version>
-		<jackson-version>2.9.5</jackson-version>
-		<emfjson-jackson-version>1.0.1</emfjson-jackson-version>		
-		<jaxrs-version>2.0.1</jaxrs-version>		
-		<jaxrs-connector-version>5.3.1</jaxrs-connector-version>		
-		<jersey-version>2.22.2</jersey-version>	
-		<curator.version>4.0.1</curator.version>
-		<curator-x.version>4.0.0</curator-x.version>
-		<!-- <jexl.version>3.1</jexl.version> -->
-		<milo.version>0.2.3</milo.version>
-	</properties>
-  
-  <build>
-    <resources>
-      <resource>
-        <directory>src/main/resources</directory>
-      </resource>
-      <!--
-       | example additional resource entries, useful when building Eclipse RCP applications
-      -->
-      <resource>
-        <directory>.</directory>
-        <includes>
-          <include>plugin.xml</include>
-          <include>plugin.properties</include>
-          <include>icons/**</include>
-          <include>model/**</include>
-        </includes>
-      </resource>
-    </resources>
-    <plugins>
-	  <plugin>
-        <!--
-         | the following instructions build a simple set of public/private classes into an OSGi bundle
-        -->
-        <groupId>org.apache.felix</groupId>
-        <artifactId>maven-bundle-plugin</artifactId>	
-		<extensions>true</extensions>		
-        <configuration>
-          <manifestLocation>META-INF</manifestLocation>
-		  <archive>
-			<addMavenDescriptor>false</addMavenDescriptor>
-		  </archive> 
-          <instructions>
-            <Bundle-SymbolicName>${bundle.symbolicName}</Bundle-SymbolicName>
-            <Bundle-Version>${project.version}</Bundle-Version>
-            <!--
-             | assume public classes are in the top package, and private classes are under ".internal"
-            -->
-            <!--
-			<Export-Package>!${bundle.namespace}.internal.*,!*.impl,${bundle.namespace}.*;version="${project.version}"</Export-Package>
-            <Private-Package>${bundle.namespace}.internal.*,*.impl</Private-Package>
-			-->
-            <!--
-             | each module can override these defaults in their osgi.bnd file
-            -->
-			<!--
-            <Import-Package>!*.impl,*</Import-Package>
-			-->
-			<Export-Package>!${bundle.namespace}.internal.*,${bundle.namespace}.*;version="${project.version}"</Export-Package>
-            <_include>-osgi.bnd</_include>
-			<_dsannotations>*</_dsannotations>
-			<_removeheaders>Bnd-LastModified, Built-By, Build-Jdk</_removeheaders>
-          </instructions>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
 
 </project>

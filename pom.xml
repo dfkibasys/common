@@ -1,19 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-	<organization>
-		<name>DFKI GmbH</name>
-		<url>http://www.dfki.de</url>
-	</organization>
-
-	<licenses>
-		<license>
-			<name>Eclipse Public License - v 1.0</name>
-			<url>https://www.eclipse.org/legal/epl-v10.html</url>
-			<comments />
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
+	<parent>
+		<groupId>de.dfki.cos.basys</groupId>
+		<artifactId>pom</artifactId>
+		<version>0.1.1</version>
+		<relativePath></relativePath>
+	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.dfki.cos.basys</groupId>
@@ -25,14 +18,6 @@
 	<!-- | describe your project here -->
 
 	<description>Generated using Pax-Construct</description>
-
-	<properties>
-		<!-- | some example OSGi runtime properties -->
-		<org.osgi.service.http.port>8080</org.osgi.service.http.port>
-		<org.osgi.service.http.port.secure>8443</org.osgi.service.http.port.secure>
-
-		<tycho-version>1.0.0</tycho-version>
-	</properties>
 
 	<packaging>pom</packaging>
 
@@ -51,169 +36,5 @@
 		<connection>scm:git:ssh://git@lns-90165.sb.dfki.de:10022/i40/basys/common.git</connection>
 		<developerConnection>scm:git:ssh://git@lns-90165.sb.dfki.de:10022/i40/basys/common.git</developerConnection>
 	</scm>
-
-	<repositories>
-		<repository>
-			<id>DFKI BaSys Nexus</id>
-			<url>https://lns-90165.sb.dfki.de:8443/repository/maven-public/</url>
-		</repository>
-	</repositories>
-
-	<distributionManagement>
-		<repository>
-			<id>nexus-releases</id>
-			<url>https://lns-90165.sb.dfki.de:8443/repository/maven-releases/</url>
-		</repository>
-		<snapshotRepository>
-			<id>nexus-snapshots</id>
-			<url>https://lns-90165.sb.dfki.de:8443/repository/maven-snapshots/</url>
-		</snapshotRepository>
-	</distributionManagement>
-
-	<build>
-		<plugins>
-			<!-- https://wiki.eclipse.org/Tycho/Target_Platform#.22POM_dependencies_consider.22 -->
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-maven-plugin</artifactId>
-				<version>${tycho-version}</version>
-				<extensions>true</extensions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>target-platform-configuration</artifactId>
-				<version>${tycho-version}</version>
-				<configuration>
-					<pomDependencies>consider</pomDependencies>
-				</configuration>
-			</plugin>
-
-<!-- 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<version>3.1.0</version>
-				<executions>
-					<execution>
-						<id>copy-dependencies</id>
-						<phase>package</phase>
-						<goals>
-							<goal>copy-dependencies</goal>
-						</goals>
-						<configuration>
-							<overWriteReleases>false</overWriteReleases>
-							<overWriteSnapshots>false</overWriteSnapshots>
-							<overWriteIfNewer>true</overWriteIfNewer>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin> -->
-		    
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-deploy-plugin</artifactId>
-				<version>2.8.2</version>
-<!-- 				<configuration>
-					<skip>true</skip>
-				</configuration> -->
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-release-plugin</artifactId>
-				<version>2.5.3</version>
-				<configuration>
-					<tagNameFormat>v@{project.version}</tagNameFormat>
-					<autoVersionSubmodules>true</autoVersionSubmodules>
-					<releaseProfiles>releases</releaseProfiles>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-enforcer-plugin</artifactId>
-				<version>1.4.1</version>
-				<configuration>
-					<rules>
-						<dependencyConvergence />
-					</rules>
-				</configuration>
-			</plugin>
-
-			<!-- https://github.com/ferstl/depgraph-maven-plugin -->
-		    <plugin>
-		      <groupId>com.github.ferstl</groupId>
-		      <artifactId>depgraph-maven-plugin</artifactId>
-		      <version>3.1.0</version>
-		    </plugin>
-		    
-		    <plugin>
-			    <groupId>org.codehaus.mojo</groupId>
-			    <artifactId>license-maven-plugin</artifactId>
-			    <version>1.16</version>
-		    </plugin>
-
-		</plugins>
-
-		<pluginManagement>
-			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
-					only. It has no influence on the Maven build itself. -->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>org.apache.maven.plugins</groupId>
-										<artifactId>maven-dependency-plugin</artifactId>
-										<versionRange>[3.1.0,)</versionRange>
-										<goals>
-											<goal>copy-dependencies</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<execute />
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
-
-	<profiles>
-		<profile>
-			<id>releases</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.sonatype.plugins</groupId>
-						<artifactId>nexus-staging-maven-plugin</artifactId>
-						<version>1.6.8</version>
-						<executions>
-							<execution>
-								<id>default-deploy</id>
-								<phase>deploy</phase>
-								<goals>
-									<goal>deploy</goal>
-								</goals>
-							</execution>
-						</executions>
-						<configuration>
-							<serverId>nexus-releases</serverId>
-							<nexusUrl>http://lns-90165.sb.dfki.de:8081/</nexusUrl>
-							<skipStaging>true</skipStaging>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
 
 </project>
