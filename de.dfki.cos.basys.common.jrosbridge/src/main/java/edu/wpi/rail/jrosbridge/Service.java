@@ -16,9 +16,16 @@ import edu.wpi.rail.jrosbridge.services.ServiceResponse;
  */
 public class Service {
 
+	/** The ros. */
 	private final Ros ros;
+	
+	/** The name. */
 	private final String name;
+	
+	/** The type. */
 	private final String type;
+	
+	/** The is advertised. */
 	private boolean isAdvertised;
 
 	/**
@@ -122,6 +129,8 @@ public class Service {
 
 	/**
 	 * Registers as service advertiser.
+	 *
+	 * @param cb the cb
 	 */
 	public void advertiseService(CallServiceCallback cb) {
 		// register the callback
@@ -194,7 +203,10 @@ public class Service {
 	 */
 	private class BlockingCallback implements ServiceCallback {
 
+		/** The response. */
 		private ServiceResponse response;
+		
+		/** The service. */
 		private Service service;
 
 		/**

@@ -37,7 +37,7 @@ import edu.wpi.rail.jrosbridge.services.ServiceResponse;
  * The Ros object is the main connection point to the rosbridge server. This
  * object manages all communication to-and-from ROS. Typically, this object is
  * not used on its own. Instead, helper classes, such as
- * {@link edu.wpi.rail.jrosbridge.JRosbridge.Topic Topic}, are used.
+ * {@link edu.wpi.rail.jrosbridge.Topic Topic}, are used.
  * 
  * @author Russell Toris - russell.toris@gmail.com
  * @version April 1, 2014
@@ -55,25 +55,36 @@ public class Ros {
 	 */
 	public static final int DEFAULT_PORT = 9090;
 
+	/** The hostname. */
 	private final String hostname;
+	
+	/** The port. */
 	private final int port;
+	
+	/** The protocol. */
 	private final JRosbridge.WebSocketType protocol;
 
+	/** The session. */
 	// active session (stored upon connection)
 	private Session session;
 
+	/** The id counter. */
 	// used throughout the library to create unique IDs for requests.
 	private long idCounter;
 
+	/** The topic callbacks. */
 	// keeps track of callback functions for a given topic
 	private final HashMap<String, ArrayList<TopicCallback>> topicCallbacks;
 
+	/** The service callbacks. */
 	// keeps track of callback functions for a given service request
 	private final HashMap<String, ServiceCallback> serviceCallbacks;
 
+	/** The call service callbacks. */
 	// keeps track of callback functions for a given advertised service
 	private final HashMap<String, CallServiceCallback> callServiceCallbacks;
 
+	/** The handlers. */
 	// keeps track of handlers for this connection
 	private final ArrayList<RosHandler> handlers;
 
@@ -163,8 +174,8 @@ public class Ros {
 
 	/**
 	 * Get the full URL this client is connecting to.
-	 * 
-	 * @return
+	 *
+	 * @return the url
 	 */
 	public String getURL() {
 		return this.protocol.toString() + "://" + this.hostname + ":"
@@ -279,11 +290,9 @@ public class Ros {
 
 	/**
 	 * This function is called if an error occurs.
-	 * 
-	 * @param session
-	 *            The session for the error.
-	 * @param session
-	 *            The session for the error.
+	 *
+	 * @param session            The session for the error.
+	 * @param t the t
 	 */
 	@OnError
 	public void onError(Session session, Throwable t) {

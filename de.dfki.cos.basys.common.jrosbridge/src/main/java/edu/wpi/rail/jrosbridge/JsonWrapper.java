@@ -20,7 +20,10 @@ public abstract class JsonWrapper {
 	 */
 	public static final String EMPTY_JSON = "{}";
 
+	/** The json object. */
 	private final JsonObject jsonObject;
+	
+	/** The json string. */
 	private final String jsonString;
 
 	/**
@@ -34,7 +37,7 @@ public abstract class JsonWrapper {
 	 * Create a JSON object based on the given String representation of a JSON
 	 * object.
 	 * 
-	 * @param json
+	 * @param jsonString
 	 *            The JSON String to parse.
 	 */
 	public JsonWrapper(String jsonString) {
@@ -75,6 +78,8 @@ public abstract class JsonWrapper {
 
 	/**
 	 * Create a clone of this JSON object.
+	 *
+	 * @return the json wrapper
 	 */
 	public abstract JsonWrapper clone();
 

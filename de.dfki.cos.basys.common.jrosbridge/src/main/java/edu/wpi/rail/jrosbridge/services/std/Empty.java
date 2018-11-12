@@ -35,6 +35,8 @@ public class Empty {
 
 		/**
 		 * Create a clone of this Empty ServiceRequest.
+		 *
+		 * @return the request
 		 */
 		@Override
 		public Request clone() {
@@ -58,9 +60,8 @@ public class Empty {
 		/**
 		 * Create a new Empty ServiceRequest based on the given ServiceRequest.
 		 * Any missing values will be set to their defaults.
-		 * 
-		 * @param m
-		 *            The ServiceRequest to parse.
+		 *
+		 * @param req the req
 		 * @return A Empty ServiceRequest based on the given Message.
 		 */
 		public static Request fromServiceRequest(ServiceRequest req) {
@@ -109,6 +110,8 @@ public class Empty {
 
 		/**
 		 * Create a clone of this Empty ServiceResponse.
+		 *
+		 * @return the response
 		 */
 		@Override
 		public Response clone() {
@@ -132,9 +135,8 @@ public class Empty {
 		/**
 		 * Create a new Empty ServiceResponse based on the given
 		 * ServiceResponse. Any missing values will be set to their defaults.
-		 * 
-		 * @param m
-		 *            The ServiceResponse to parse.
+		 *
+		 * @param resp the resp
 		 * @return A Empty ServiceResponse based on the given Message.
 		 */
 		public static Response fromServiceResponse(ServiceResponse resp) {

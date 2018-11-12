@@ -51,9 +51,8 @@ public class Time extends TimeBase<Time> {
 
 	/**
 	 * Create a new Time with the given time in nanoseconds.
-	 * 
-	 * @param sec
-	 *            The time in nanoseconds.
+	 *
+	 * @param nano the nano
 	 */
 	public Time(long nano) {
 		super(nano, Time.TYPE);
@@ -118,6 +117,8 @@ public class Time extends TimeBase<Time> {
 
 	/**
 	 * Create a clone of this Time.
+	 *
+	 * @return the time
 	 */
 	@Override
 	public Time clone() {

@@ -209,13 +209,13 @@ public class EmfPersistence {
 	}
 
 	/**
-	 * Run DFS on EObject reference tree
-	 * 
-	 * @param object
-	 * @param node
-	 * @param alreadyHandled
-	 * @return
-	 * @throws Exception
+	 * Run DFS on EObject reference tree.
+	 *
+	 * @param object the object
+	 * @param node the node
+	 * @param alreadyHandled the already handled
+	 * @param namespaces the namespaces
+	 * @throws Exception the exception
 	 */
 	protected static void dfs(EObject object, Element node, Set<EObject> alreadyHandled, Map<String, String> namespaces) throws Exception {
 
@@ -271,8 +271,10 @@ public class EmfPersistence {
 	}
 
 	/**
-	 * 
-	 * @param d
+	 * Sets the global name spaces.
+	 *
+	 * @param d the d
+	 * @param namespaces the namespaces
 	 */
 	private static void setGlobalNameSpaces(Document d, Map<String, String> namespaces) {
 		d.getDocumentElement().setAttribute(XMLNS_XSI, modelMetaData.XSI_URI);
@@ -284,11 +286,12 @@ public class EmfPersistence {
 	}
 
 	/**
-	 * Serialize an object to XML using standard EMF
-	 * 
-	 * @param object
-	 * @return
-	 * @throws Exception
+	 * Serialize an object to XML using standard EMF.
+	 *
+	 * @param object the object
+	 * @param namespaces the namespaces
+	 * @return the document
+	 * @throws Exception the exception
 	 */
 	private static Document createDocFromEObject(EObject object, Map<String, String> namespaces) throws Exception {
 		HashMap<String, Object> options = new HashMap<String, Object>();
@@ -349,13 +352,15 @@ public class EmfPersistence {
 	}
 
 	/**
-	 * Update member contents with resolved data
-	 * 
-	 * @param node
-	 * @param memberReference
-	 * @param memberDocument
-	 * @return
-	 * @throws Exception
+	 * Update member contents with resolved data.
+	 *
+	 * @param node the node
+	 * @param memberReference the member reference
+	 * @param id the id
+	 * @param memberObject the member object
+	 * @param memberDocument the member document
+	 * @return the element
+	 * @throws Exception the exception
 	 */
 	private static Element updateMember(Element node, EReference memberReference, int id, EObject memberObject, Document memberDocument) throws Exception {
 		Node currentMemberNode = XMLUtils.getChildNodeWithNameAndId(node, modelMetaData.getName(memberReference), modelMetaData.getNamespace(memberReference), id);

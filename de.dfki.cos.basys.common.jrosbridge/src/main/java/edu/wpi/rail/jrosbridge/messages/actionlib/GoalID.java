@@ -34,7 +34,10 @@ public class GoalID extends Message {
 	 */
 	public static final String TYPE = "actionlib_msgs/GoalID";
 
+	/** The stamp. */
 	private final Time stamp;
+	
+	/** The id. */
 	private final String id;
 
 	/**
@@ -46,11 +49,9 @@ public class GoalID extends Message {
 
 	/**
 	 * Create a new GoalID with the given values.
-	 * 
-	 * @param stamp
-	 *            The timestamp for the ID.
-	 * @param ID
-	 *            The unique goal ID.
+	 *
+	 * @param stamp            The timestamp for the ID.
+	 * @param id the id
 	 */
 	public GoalID(Time stamp, String id) {
 		// build the JSON object
@@ -81,6 +82,8 @@ public class GoalID extends Message {
 
 	/**
 	 * Create a clone of this GoalID.
+	 *
+	 * @return the goal ID
 	 */
 	@Override
 	public GoalID clone() {

@@ -40,11 +40,13 @@ import org.xml.sax.InputSource;
  * 
  */
 public class XMLUtils {
+	
 	/**
-	 * 
-	 * @param xmlDoc
-	 * @return
-	 * @throws Exception
+	 * Parses the from string.
+	 *
+	 * @param xmlDoc the xml doc
+	 * @return the document
+	 * @throws Exception the exception
 	 */
 	public static Document parseFromString(String xmlDoc) throws Exception {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -61,11 +63,11 @@ public class XMLUtils {
 
 	/**
 	 * Returns the value of the child node with the given name.
-	 * 
-	 * @param base
-	 *            the element from where to search.
-	 * @param name
-	 *            of the element to get.
+	 *
+	 * @param base the element from where to search.
+	 * @param name name of the element to get.
+	 * @param namespace the namespace
+	 * @param id the id
 	 * @return the value of this element.
 	 */
 	public static Node getChildNodeWithNameAndId(final Element base, final String name, final String namespace, final int id) {
@@ -75,10 +77,11 @@ public class XMLUtils {
 	}
 
 	/**
-	 * 
-	 * @param memberObject
-	 * @param from
-	 * @param to
+	 * Copy E object attributes.
+	 *
+	 * @param memberObject the member object
+	 * @param from the from
+	 * @param to the to
 	 */
 	public static void copyEObjectAttributes(EObject memberObject, Element from, Element to) {
 		Set<String> objAttrs = new HashSet<String>();
@@ -96,11 +99,13 @@ public class XMLUtils {
 	}
 
 	/**
-	 * 
-	 * @param doc
-	 * @param out
-	 * @throws IOException
-	 * @throws TransformerException
+	 * Prints the document.
+	 *
+	 * @param doc the doc
+	 * @param out the out
+	 * @param prettyPrint the pretty print
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws TransformerException the transformer exception
 	 */
 	public static void printDocument(Node doc, OutputStream out, boolean prettyPrint) throws IOException, TransformerException {
 		TransformerFactory tf = TransformerFactory.newInstance();
@@ -127,10 +132,12 @@ public class XMLUtils {
 	}
 
 	/**
-	 * 
-	 * @param doc
-	 * @param out
-	 * @throws Exception
+	 * Run xslt.
+	 *
+	 * @param xslIs the xsl is
+	 * @param doc the doc
+	 * @param out the out
+	 * @throws Exception the exception
 	 */
 	private static void runXslt(InputStream xslIs, Node doc, OutputStream out) throws Exception {
 		TransformerFactory factory = TransformerFactory.newInstance();
@@ -143,19 +150,21 @@ public class XMLUtils {
 	}
 
 	/**
-	 * 
-	 * @param doc
-	 * @param out
-	 * @throws Exception
+	 * Strip white spaces.
+	 *
+	 * @param doc the doc
+	 * @param out the out
+	 * @throws Exception the exception
 	 */
 	public static void stripWhiteSpaces(Node doc, OutputStream out) throws Exception {
 		runXslt(XMLUtils.class.getResourceAsStream("strip.xsl"), doc, out);
 	}
 
 	/**
-	 * 
-	 * @param doc
-	 * @param namespaces_
+	 * Collect namespace.
+	 *
+	 * @param doc the doc
+	 * @param namespaces_ the namespaces
 	 */
 	public static void collectNamespace(Document doc, Map<String, String> namespaces_) {
 		if (doc.getDocumentElement().hasAttributes()) {

@@ -50,9 +50,8 @@ public class Duration extends TimeBase<Duration> {
 
 	/**
 	 * Create a new Duration with the given duration in nanoseconds.
-	 * 
-	 * @param sec
-	 *            The duration in nanoseconds.
+	 *
+	 * @param nano the nano
 	 */
 	public Duration(long nano) {
 		super(nano, Duration.TYPE);
@@ -103,6 +102,8 @@ public class Duration extends TimeBase<Duration> {
 
 	/**
 	 * Create a clone of this Duration.
+	 *
+	 * @return the duration
 	 */
 	@Override
 	public Duration clone() {
