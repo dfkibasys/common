@@ -137,11 +137,15 @@ public class TestTopic {
 		Thread.yield();
 
 		assertNotNull(DummyHandler.latest);
-		assertEquals(
-				"{\"op\":\"subscribe\",\"id\":\"subscribe:myTopic1:0\",\"type\":\"myType1\","
-						+ "\"topic\":\"myTopic1\",\"compression\":\"none\",\"throttle_rate\":0}",
-				DummyHandler.latest.toString());
+//		assertEquals(
+//				"{\"op\":\"subscribe\",\"id\":\"subscribe:myTopic1:0\",\"type\":\"myType1\","
+//						+ "\"topic\":\"myTopic1\",\"compression\":\"none\",\"throttle_rate\":0}",
+//				DummyHandler.latest.toString());
 
+		assertEquals(
+				"{\"op\":\"unsubscribe\",\"id\":\"subscribe:myTopic1:0\",\"topic\":\"myTopic1\"}",
+				DummyHandler.latest.toString());
+		
 		assertNull(cb.latest);
 		assertFalse(t1.isAdvertised());
 		assertFalse(t1.isSubscribed());
