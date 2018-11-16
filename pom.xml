@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>de.dfki.cos.basys</groupId>
 		<artifactId>pom</artifactId>
-		<version>0.1.1</version>
+		<version>0.2.0</version>
 		<relativePath></relativePath>
 	</parent>
 
@@ -15,9 +15,7 @@
 
 	<name>BaSys 4.0 Common</name>
 
-	<!-- | describe your project here -->
-
-	<description>Generated using Pax-Construct</description>
+	<description>Common libraries for use in BaSys 4.0</description>
 
 	<packaging>pom</packaging>
 
@@ -32,9 +30,9 @@
 	</modules>
 
 	<scm>
-		<url>https://lns-90165.sb.dfki.de/gitlab/i40/basys/common</url>
-		<connection>scm:git:ssh://git@lns-90165.sb.dfki.de:10022/i40/basys/common.git</connection>
-		<developerConnection>scm:git:ssh://git@lns-90165.sb.dfki.de:10022/i40/basys/common.git</developerConnection>
+		<url>https://github.com/BaSys-PC1</url>
+		<connection>${gitUrl}/common.git</connection>
+		<developerConnection>${gitUrl}/common.git</developerConnection>
+		<tag>HEAD</tag>
 	</scm>
-
 </project>
