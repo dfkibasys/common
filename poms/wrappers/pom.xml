@@ -5,13 +5,13 @@
     <groupId>de.dfki.cos.basys.pom</groupId>
     <artifactId>wrapper-bundle-settings</artifactId>
 		<version>0.2.0</version>
-	<relativePath></relativePath>
+	<relativePath />
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.dfki.cos.basys.common</groupId>
   <artifactId>wrapper-bundle-settings</artifactId>
-	<version>0.1.1-SNAPSHOT</version>
+	<version>0.2.0</version>
 
   <name>BaSys 4.0 Common - Wrapper Instructions</name>
 

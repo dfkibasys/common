@@ -5,13 +5,13 @@
 		<groupId>de.dfki.cos.basys</groupId>
 		<artifactId>pom</artifactId>
 		<version>0.2.0</version>
-		<relativePath></relativePath>
+		<relativePath />
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.dfki.cos.basys</groupId>
 	<artifactId>common</artifactId>
-	<version>0.1.1-SNAPSHOT</version>
+	<version>0.2.0</version>
 
 	<name>BaSys 4.0 Common</name>
 
@@ -33,6 +33,6 @@
 		<url>https://github.com/BaSys-PC1</url>
 		<connection>${gitUrl}/common.git</connection>
 		<developerConnection>${gitUrl}/common.git</developerConnection>
-		<tag>HEAD</tag>
+		<tag>v0.2.0</tag>
 	</scm>
 </project>
