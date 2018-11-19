@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>de.dfki.cos.basys</groupId>
 		<artifactId>pom</artifactId>
-		<version>0.2.0</version>
+		<version>0.2.1</version>
 		<relativePath />
 	</parent>
 
@@ -27,6 +27,7 @@
 		<module>de.dfki.cos.basys.common.emf.jaxrs</module>
 		<module>de.dfki.cos.basys.common.scxml</module>
 		<module>de.dfki.cos.basys.common.jrosbridge</module>	
+		<module>karaf</module>	
 	</modules>
 
 	<scm>
