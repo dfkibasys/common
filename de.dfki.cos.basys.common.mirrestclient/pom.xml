@@ -9,12 +9,12 @@
 	</parent>
 
 	<properties>
-		<bundle.symbolicName>de.dfki.cos.basys.common.emf.jaxrs</bundle.symbolicName>
-		<bundle.namespace>de.dfki.iui.basys.common.emf.jaxrs</bundle.namespace>
+		<bundle.symbolicName>de.dfki.cos.basys.common.mirrestclient</bundle.symbolicName>
+		<bundle.namespace>de.dfki.iui.basys.common.mirrestclient</bundle.namespace>
 	</properties>
 
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>de.dfki.cos.basys.common.emf.jaxrs</artifactId>
+	<artifactId>de.dfki.cos.basys.common.mirrestclient</artifactId>
 
 	<name>${bundle.symbolicName}</name>
 
@@ -22,35 +22,13 @@
 
 	<dependencies>
 	
-		<dependency>
-			<groupId>de.dfki.cos.basys.common</groupId>
-			<artifactId>de.dfki.cos.basys.common.emf</artifactId>
-			<version>${project.version}</version>
-			<type>bundle</type>
-		</dependency>
-	
-		<dependency>
-			<groupId>de.dfki.cos.basys.common</groupId>
-			<artifactId>de.dfki.cos.basys.common.emf.json</artifactId>
-			<version>${project.version}</version>
-			<type>bundle</type>
-		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/org.osgi/org.osgi.service.component.annotations -->
-		<dependency>
-			<groupId>org.osgi</groupId>
-			<artifactId>org.osgi.service.component.annotations</artifactId>
-			<version>1.4.0</version>
-			<scope>provided</scope>
-		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api -->
 		<dependency>
 		    <groupId>javax.ws.rs</groupId>
 		    <artifactId>javax.ws.rs-api</artifactId>
 		    <version>${jaxrs-version}</version>	
 		</dependency>
-
+	
 		<!-- comment to remove all imported (non-local) bundles from your compilation 
 			classpath -->
 		<dependency>
@@ -59,6 +37,29 @@
 			<artifactId>provision</artifactId>			
 			<version>${project.version}</version>
 			<optional>true</optional>
+		</dependency>
+		        
+     	<!-- https://mvnrepository.com/artifact/junit/junit/4.12 -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+		   
+		<dependency>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>${jersey-version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.media/jersey-media-json-jackson -->
+		<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-json-jackson</artifactId>
+			<version>${jersey-version}</version>
+			<scope>test</scope>
 		</dependency>
 
 	</dependencies>

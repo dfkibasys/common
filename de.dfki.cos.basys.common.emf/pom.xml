@@ -16,7 +16,6 @@
 	</properties>
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>de.dfki.cos.basys.common</groupId>
 	<artifactId>de.dfki.cos.basys.common.emf</artifactId>
 
 	<name>${bundle.symbolicName}</name>
