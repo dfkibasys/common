@@ -27,6 +27,7 @@
 		<module>de.dfki.cos.basys.common.emf.jaxrs</module>
 		<module>de.dfki.cos.basys.common.scxml</module>
 		<module>de.dfki.cos.basys.common.jrosbridge</module>	
+		<module>de.dfki.cos.basys.common.mirrestclient</module>	
 		<module>karaf</module>	
 	</modules>
 
