@@ -50,7 +50,7 @@ public class MirRestClientTests {
 		assertEquals(MiRState.PAUSED.id(),status.state_id);
 		
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -61,17 +61,6 @@ public class MirRestClientTests {
 		assertEquals("MiR_R197",status.robot_name);
 		assertEquals(MiRState.READY.id(),status.state_id);
 		
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		status = client.setRobotStatus(MiRState.PAUSED);
-		assertNotNull(status);
-		assertEquals("MiR_R197",status.robot_name);
-		assertEquals(MiRState.PAUSED.id(),status.state_id);
 	}
 	
 
@@ -116,39 +105,57 @@ public class MirRestClientTests {
 	
 /*
 {
-   "allowed_methods": [
-       "PUT",
-       "GET",
-       "DELETE"
-   ],
-   "created_by": "/v2.0.0/users/mirconst-guid-0000-0005-users0000000",
-   "created_by_id": "mirconst-guid-0000-0005-users0000000",
-   "created_by_name": "Administrator",
-   "docking_offsets": "/v2.0.0/positions/a7813fb9-a6bd-11e8-8661-f44d3061d5d6/docking_offsets",
-   "guid": "a7813fb9-a6bd-11e8-8661-f44d3061d5d6",
-   "help_positions": "/v2.0.0/positions/a7813fb9-a6bd-11e8-8661-f44d3061d5d6/helper_positions",
-   "map": "/v2.0.0/maps/d0a136fd-9676-11e8-8b15-f44d3061d5d6",
-   "map_id": "d0a136fd-9676-11e8-8b15-f44d3061d5d6",
-   "name": "Station-Cola",
-   "orientation": 101.565,
-   "parent": null,
-   "parent_id": null,
-   "pos_x": 26.117,
-   "pos_y": 13.387,
-   "type": "/v2.0.0/position_types/0",
-   "type_id": 0 
+    "allowed_methods": [
+        "PUT",
+        "GET",
+        "DELETE"
+    ],
+    "created_by": "/v2.0.0/users/mirconst-guid-0000-0005-users0000000",
+    "created_by_id": "mirconst-guid-0000-0005-users0000000",
+    "created_by_name": "Administrator",
+    "docking_offsets": "/v2.0.0/positions/4300e514-e113-11e8-b57c-f44d3061d5d6/docking_offsets",
+    "guid": "4300e514-e113-11e8-b57c-f44d3061d5d6",
+    "help_positions": "/v2.0.0/positions/4300e514-e113-11e8-b57c-f44d3061d5d6/helper_positions",
+    "map": "/v2.0.0/maps/605911f3-dc39-11e8-8b31-f44d3061d5d6",
+    "map_id": "605911f3-dc39-11e8-8b31-f44d3061d5d6",
+    "name": "ColaStation",
+    "orientation": 94.956,
+    "parent": null,
+    "parent_id": null,
+    "pos_x": 15.646,
+    "pos_y": 15.284,
+    "type": "/v2.0.0/position_types/0",
+    "type_id": 0
 }
 */
 	
 	@Test
 	@Ignore
 	public void testGotoColaStationSymbolic() {
-		String positionName = "Station-Cola";
+		//String positionName = "EntryPosition";
+		String positionName = "ColaStation";
 		MissionInstanceInfo instance = client.gotoSymbolicPosition(positionName);
 		assertNotNull(instance);
 		
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		client.dequeueMissionInstance(instance.id);
+	}
+	
+	@Test
+	@Ignore
+	public void testGotoEntryPositionSymbolic() {
+		String positionName = "EntryPosition";
+		MissionInstanceInfo instance = client.gotoSymbolicPosition(positionName);
+		assertNotNull(instance);
+		
+		try {
+			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -160,11 +167,11 @@ public class MirRestClientTests {
 	@Test
 	@Ignore
 	public void testGotoColaStationAbsolute() {
-		MissionInstanceInfo instance = client.gotoAbsolutePosition(26.117f, 13.387f, 101.565f);
+		MissionInstanceInfo instance = client.gotoAbsolutePosition(15.646f, 15.284f, 94.956f);
 		assertNotNull(instance);
 		
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -182,7 +189,24 @@ public class MirRestClientTests {
 		assertNotNull(instance);
 		
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		client.dequeueMissionInstance(instance.id);
+	}
+	
+	@Test
+	@Ignore
+	public void testEnqueueDequeueMissionByName() {
+		String missionDefinitionName = "restTest";
+		MissionInstanceInfo instance = client.enqueueMissionInstanceByName(missionDefinitionName);
+		assertNotNull(instance);
+		
+		try {
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
