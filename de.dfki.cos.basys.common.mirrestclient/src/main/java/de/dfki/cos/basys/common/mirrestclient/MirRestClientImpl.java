@@ -14,9 +14,11 @@ import javax.ws.rs.core.MediaType;
 
 import javax.ws.rs.core.Response;
 
-import org.glassfish.jersey.filter.LoggingFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+//import com.fasterxml.jackson.core.JsonProcessingException;
+//import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.dfki.cos.basys.common.mirrestclient.dto.MissionDefinition;
 import de.dfki.cos.basys.common.mirrestclient.dto.MissionInstance;
@@ -48,7 +50,6 @@ public class MirRestClientImpl implements MirRestClient {
 	public MirRestClientImpl(String host, String auth) {
 		this.endpoint = client.target(host).path(pathSegment);	
 		this.auth = auth;
-		client.register(new LoggingFilter());
 		init();
 	}
 	
@@ -104,6 +105,15 @@ public class MirRestClientImpl implements MirRestClient {
 
 	@Override
 	public MissionInstanceInfo enqueueMissionInstance(MissionOrder order) {
+//		ObjectMapper mapper = new ObjectMapper();
+//		try {
+//			String jsonInString = mapper.writeValueAsString(order);
+//			LOGGER.debug(jsonInString);
+//		} catch (JsonProcessingException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
 		MissionInstanceInfo instance = endpoint.path("/mission_queue").request(MediaType.APPLICATION_JSON_TYPE).header("Authorization", "Basic " + auth)
 				.post(Entity.entity(order, MediaType.APPLICATION_JSON),MissionInstanceInfo.class);
 		
@@ -211,7 +221,7 @@ public class MirRestClientImpl implements MirRestClient {
 			MissionOrder order = new MissionOrder(gotoSymbolicPositionId, "");
 			Parameter p = new Parameter();
 			p.id = "Position";
-			//p.label = position.name;
+			p.label = position.name;
 			p.value = position.guid;
 			order.parameters.add(p);
 			return enqueueMissionInstance(order);
@@ -224,28 +234,23 @@ public class MirRestClientImpl implements MirRestClient {
 		MissionOrder order = new MissionOrder(gotoAbsolutePositionId, "");
 		Parameter x = new Parameter();
 		x.id = "X";
+		x.label = "X";
 		x.value = posX;
 		
 		Parameter y = new Parameter();
 		y.id = "Y";
+		y.label = "Y";
 		y.value = posY;
 		
 		Parameter o = new Parameter();
 		o.id = "Orientation";
+		o.label = "Orientation";
 		o.value = orientation;
 
 		order.parameters.add(x);
 		order.parameters.add(y);
 		order.parameters.add(o);
 		
-//		ObjectMapper mapper = new ObjectMapper();
-//		try {
-//			String jsonInString = mapper.writeValueAsString(order);
-//			System.out.println(jsonInString);
-//		} catch (JsonProcessingException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 		return enqueueMissionInstance(order);
 
 	}
