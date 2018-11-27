@@ -25,6 +25,7 @@
 		<module>de.dfki.cos.basys.common.emf</module>
 		<module>de.dfki.cos.basys.common.emf.json</module>
 		<module>de.dfki.cos.basys.common.emf.jaxrs</module>
+		<module>de.dfki.cos.basys.common.jersey-min</module>
 		<module>de.dfki.cos.basys.common.scxml</module>
 		<module>de.dfki.cos.basys.common.jrosbridge</module>	
 		<module>de.dfki.cos.basys.common.mirrestclient</module>	
