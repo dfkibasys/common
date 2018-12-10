@@ -3,17 +3,3 @@
 #-----------------------------------------------------------------
 
 #Bundle-Activator: ${bundle.namespace}.internal.ExampleActivator
-#Service-Component: OSGI-INF/*.xml
-Export-Package: \
-	org.apache.commons.scxml2,\
-	org.apache.commons.scxml2.env,\
-	org.apache.commons.scxml2.env.groovy,\
-	org.apache.commons.scxml2.env.javascript,\
-	org.apache.commons.scxml2.env.jexl,\
-	org.apache.commons.scxml2.env.minimal,\
-	org.apache.commons.scxml2.invoke,\
-	org.apache.commons.scxml2.io,\
-	org.apache.commons.scxml2.model,\
-	org.apache.commons.scxml2.semantics,\
-	org.apache.commons.scxml2.system,\
-	org.apache.commons.scxml2.test

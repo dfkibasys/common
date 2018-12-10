@@ -10,7 +10,7 @@
 
 	<properties>
 		<bundle.symbolicName>de.dfki.cos.basys.common.scxml</bundle.symbolicName>
-		<bundle.namespace>de.dfki.iui.basys.common.scxml</bundle.namespace>
+		<bundle.namespace>org.apache.commons.scxml2</bundle.namespace>
 		<commons.componentid>scxml2</commons.componentid>
 		<commons.module.name>org.apache.commons.scxml2</commons.module.name>
 		<commons.release.version>2.0-alpha-1</commons.release.version>

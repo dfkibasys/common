@@ -3,15 +3,3 @@
 #-----------------------------------------------------------------
 
 #Bundle-Activator: ${bundle.namespace}.internal.ExampleActivator
-#Service-Component: OSGI-INF/*.xml
-Export-Package: \
-	edu.wpi.rail.jrosbridge,\
-	edu.wpi.rail.jrosbridge.callback,\
-	edu.wpi.rail.jrosbridge.handler,\
-	edu.wpi.rail.jrosbridge.messages,\
-	edu.wpi.rail.jrosbridge.messages.actionlib,\
-	edu.wpi.rail.jrosbridge.messages.geometry,\
-	edu.wpi.rail.jrosbridge.messages.std,\
-	edu.wpi.rail.jrosbridge.primitives,\
-	edu.wpi.rail.jrosbridge.services,\
-	edu.wpi.rail.jrosbridge.services.std

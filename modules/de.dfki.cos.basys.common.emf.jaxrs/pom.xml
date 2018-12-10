@@ -10,7 +10,7 @@
 
 	<properties>
 		<bundle.symbolicName>de.dfki.cos.basys.common.emf.jaxrs</bundle.symbolicName>
-		<bundle.namespace>de.dfki.iui.basys.common.emf.jaxrs</bundle.namespace>
+		<bundle.namespace>de.dfki.cos.basys.common.emf.jaxrs</bundle.namespace>
 	</properties>
 
 	<modelVersion>4.0.0</modelVersion>
