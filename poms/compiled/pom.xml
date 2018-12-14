@@ -11,14 +11,9 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.dfki.cos.basys.common</groupId>
   <artifactId>compiled-bundle-settings</artifactId>
-  <version>0.2.3</version>
+  <version>0.2.4-SNAPSHOT</version>
 
   <name>BaSys 4.0 Common - Bundle Instructions</name>
 
   <packaging>pom</packaging>
-
-
-  <scm>
-    <tag>v0.2.3</tag>
-  </scm>
 </project>
