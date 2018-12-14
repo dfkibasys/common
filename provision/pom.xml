@@ -11,7 +11,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.dfki.cos.basys.common</groupId>
 	<artifactId>provision</artifactId>
-	<version>0.2.3-SNAPSHOT</version>
+	<version>0.2.3</version>
 
 	<name>BaSys 4.0 Common - Imported Bundles</name>
 
@@ -24,4 +24,8 @@
 	<dependencies>
 	</dependencies>
 
+
+  <scm>
+    <tag>v0.2.3</tag>
+  </scm>
 </project>
