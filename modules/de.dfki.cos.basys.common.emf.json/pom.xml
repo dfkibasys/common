@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<parent>
-		<relativePath>../poms/compiled/</relativePath>
+		<relativePath>../../poms/compiled/</relativePath>
 		<groupId>de.dfki.cos.basys.common</groupId>
 		<artifactId>compiled-bundle-settings</artifactId>
 		<version>0.2.2-SNAPSHOT</version>
@@ -11,13 +11,6 @@
 	<properties>
 		<bundle.symbolicName>de.dfki.cos.basys.common.emf.json</bundle.symbolicName>
 		<bundle.namespace>de.dfki.cos.basys.common.emf.json</bundle.namespace>
-	<!-- versions see parent POM
-		<emf-version>2.12.0</emf-version>
-		<commons-io-version>2.6</commons-io-version>
-		<jackson-version>2.9.5</jackson-version>
-		<emfjson-jackson-version>1.0.1</emfjson-jackson-version>		
-		<jaxrs-version>2.0.1</jaxrs-version>
-	 -->
 	</properties>
 	
 	<modelVersion>4.0.0</modelVersion>
