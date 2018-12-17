@@ -2,7 +2,7 @@
 
 The Common Library contains reusable software artifacts. Typically, these artifacts are used in Platform artifacts, so they do not need to be explicitly declared as dependencies. However, these artifacts can be used standalone outside the BaSys 4.0 Platform.
 
-All artifacts can be downloaded from [Maven Central] (https://mvnrepository.com/artifact/de.dfki.cos.basys.common). The current version of the library is 0.2.4.
+All artifacts can be downloaded from [Maven Central](https://mvnrepository.com/artifact/de.dfki.cos.basys.common). The current version of the library is 0.2.4.
 
 ### EMF Utils ###
 
