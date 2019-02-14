@@ -2,6 +2,7 @@ package de.dfki.cos.basys.common.wmrestclient.dto;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 import de.dfki.cos.basys.common.wmrestclient.dto.Sector.SectorEnum;
 
@@ -20,17 +21,50 @@ public class Frame {
 	
 	// logical coordinates
 	int index; 
-	
-	// geometrical coordinates; can we derive this information from the logical coords?
-	int posX, posY;	
-	
+
 	FrameType type;
 	SectorEnum hullRegion;
 	
 	// children	
 	List<RivetPosition> rivetPositions = new LinkedList<RivetPosition>();
 
-	public List<RivetPosition> generateChildren() {
+	
+	
+	public Frame(int index, FrameType type) {
+		this(UUID.randomUUID().toString(), index, type, true);
+	}
+	
+	public Frame(String id, int index, FrameType type, boolean generateRivetPositions) {
+		this.id = id;
+		this.index = index;
+		this.type = type;
+		if (generateRivetPositions) {
+			rivetPositions = generateRivetPositions();
+		}
+	}
+
+	public String getParentId() {
+		return parentId;
+	}
+	
+	public Frame setParentId(String parentId) {
+		this.parentId = parentId;
+		return this;
+	}
+	
+	public String getId() {
+		return id;
+	}
+	
+	public int getIndex() {
+		return index;
+	}
+	
+	public FrameType getType() {
+		return type;
+	}
+	
+	public List<RivetPosition> generateRivetPositions() {
 		int n = 0;
 
 		if (type == FrameType.H_9x2)
@@ -41,9 +75,13 @@ public class Frame {
 			n = 12;
 			
 		List<RivetPosition> result = new LinkedList<RivetPosition>();
-		for (int i = 0; i < n; i++) {
-			//RivetPosition rp = new RivetPosition(i);
-			//result.add(rp);
+		for (int i = 1; i <= n; i++) {
+			RivetPosition rp = new RivetPosition(i)
+					.setFrameIndex(getIndex())
+					.setFrameType(getType())
+					.setParentId(getId());
+			result.add(rp);
+			
 		}
 		return result;
 	}

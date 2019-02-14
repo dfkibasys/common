@@ -9,8 +9,10 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import de.dfki.cos.basys.common.wmrestclient.WorldModelCreator;
 import de.dfki.cos.basys.common.wmrestclient.WorldModelRestClient;
 import de.dfki.cos.basys.common.wmrestclient.WorldModelRestClientImpl;
+import de.dfki.cos.basys.common.wmrestclient.dto.Hull;
 import junit.framework.Assert;
 
 
@@ -28,6 +30,13 @@ public class WorldModelRestClientTests {
 	public void tearDown() throws Exception {
 	}
 
+	@Test
+	//@Ignore
+	public void testCreateHull() {
+		Hull hull = WorldModelCreator.createHullHMI();
+		assertTrue(hull.getFrames().size() == 57);
+	}
+	
 	@Test
 	//@Ignore
 	public void testGetHull() {
