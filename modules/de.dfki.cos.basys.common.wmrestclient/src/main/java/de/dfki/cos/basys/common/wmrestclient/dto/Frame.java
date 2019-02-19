@@ -39,7 +39,7 @@ public class Frame {
 		this.index = index;
 		this.type = type;
 		if (generateRivetPositions) {
-			rivetPositions = generateRivetPositions();
+			// rivetPositions = generateRivetPositions();
 		}
 	}
 
