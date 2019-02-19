@@ -1,5 +1,11 @@
 package de.dfki.cos.basys.common.wmrestclient;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import de.dfki.cos.basys.common.wmrestclient.Queries.Queries;
+import de.dfki.cos.basys.common.wmrestclient.QueryResponses.ParentFrameResponse;
+import de.dfki.cos.basys.common.wmrestclient.QueryResponses.RivetPositionBySectorResponse;
+import de.dfki.cos.basys.common.wmrestclient.QueryResponses.StateResponse;
+import de.dfki.cos.basys.common.wmrestclient.SparqlClient.SparqlCommunicator;
 import java.util.List;
 
 import javax.ws.rs.client.Client;
@@ -10,78 +16,150 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.dfki.cos.basys.common.wmrestclient.dto.Frame;
+import de.dfki.cos.basys.common.wmrestclient.dto.Frame.FrameType;
 import de.dfki.cos.basys.common.wmrestclient.dto.Hull;
 import de.dfki.cos.basys.common.wmrestclient.dto.RivetPosition;
 import de.dfki.cos.basys.common.wmrestclient.dto.RivetPosition.State;
 import de.dfki.cos.basys.common.wmrestclient.dto.Sector.SectorEnum;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.LinkedList;
+import java.util.logging.Level;
 
 public class WorldModelRestClientImpl implements WorldModelRestClient {
 
-	protected final Logger LOGGER = LoggerFactory.getLogger(WorldModelRestClientImpl.class.getName());
+    protected final Logger LOGGER = LoggerFactory.getLogger(WorldModelRestClientImpl.class.getName());
 
-	private final String pathSegment = "/api/v2.0.0";
-	
-	protected Client client = ClientBuilder.newClient();
-	protected WebTarget endpoint = null;
+    // private final String pathSegment = "/api/v2.0.0";
+    // protected Client client = ClientBuilder.newClient();
+    // protected WebTarget endpoint = null;
+    String remoteRepository;
+    SparqlCommunicator sparqlCommunicator;
+    ObjectMapper objectMapper = new ObjectMapper();
 
-	
-	public WorldModelRestClientImpl(String host) {
-		this.endpoint = client.target(host).path(pathSegment);
-	}
+    public WorldModelRestClientImpl(String remoteEndpointUri) {
+        remoteRepository = remoteEndpointUri;
+        sparqlCommunicator = new SparqlCommunicator(remoteRepository);
+    }
 
-	@Override
-	public Hull getHull(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public Hull getHull(String id) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	@Override
-	public List<Frame> getFrames(String hullId, SectorEnum hullRegion) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public List<Frame> getFrames(String hullId, SectorEnum hullRegion) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	@Override
-	public Frame getFrame(String frameId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public List<RivetPosition> getRivetPositions(String hullId, SectorEnum hullRegion) {
+        List<RivetPosition> results = new LinkedList<RivetPosition>();
 
-	@Override
-	public Frame getFrame(String hullId, int frameIndex) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+        try {
+            String parameterizedQuery = String.format(Queries.BySector, hullRegion.ordinal());
+            String responseString = sparqlCommunicator.performQuery(parameterizedQuery);
+            RivetPositionBySectorResponse[] receivedObjects
+                    = objectMapper.readValue(responseString, RivetPositionBySectorResponse[].class);
+            for (RivetPositionBySectorResponse r : receivedObjects) {
+                RivetPosition receivedRivet = new RivetPosition(r.id, r.rivetUri, r.index);
+                GetRivetPositionData(receivedRivet);
+                results.add(receivedRivet);
+            }
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (URISyntaxException ex) {
+            java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return results;
+    }
 
-	@Override
-	public RivetPosition getRivetPosition(String rivetPositionId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public Frame getFrame(String frameId) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	@Override
-	public RivetPosition getRivetPosition(String hullId, int frameIndex, int rivetPositionIndex) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public Frame getFrame(String hullId, int frameIndex) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	@Override
-	public List<RivetPosition> getRivetPositions(String hullId, int frameIndex, int count, State state) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public RivetPosition getRivetPosition(String rivetPositionId) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	@Override
-	public List<RivetPosition> getRivetPositions(String hullId, SectorEnum hullRegion, int count, State state,
-			boolean forceFrame) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public RivetPosition getRivetPosition(String hullId, int frameIndex, int rivetPositionIndex) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	@Override
-	public boolean updateRivetPosition(RivetPosition rivetPosition) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public List<RivetPosition> getRivetPositions(String hullId, int frameIndex, int count, State state) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public List<RivetPosition> getRivetPositions(String hullId, SectorEnum hullRegion, int count, State state,
+            boolean forceFrame) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public boolean updateRivetPosition(RivetPosition rivetPosition) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    private RivetPosition GetRivetPositionData(RivetPosition rivetPosition) {
+        Frame parentFrame = GetFrameForRivet(rivetPosition.getResourceUri());
+        rivetPosition.setFrameIndex(parentFrame.getIndex());
+        rivetPosition.setParentId(parentFrame.getId());
+        rivetPosition.setFrameType(parentFrame.getType());
+
+        StateResponse state = GetStateForRivet(rivetPosition.getId());
+        rivetPosition.setState(state.state);
+        rivetPosition.setStateAttributeUri(state.stateUri);
+        return rivetPosition;
+    }
+
+    private Frame GetFrameForRivet(String rivetUri) {
+        Frame result = new Frame(0, FrameType.H_9x2);
+        String parameterizedQuery = String.format(Queries.RivetPositionParentFrame, rivetUri);
+        try {
+            String resultString = sparqlCommunicator.performQuery(parameterizedQuery);
+            ParentFrameResponse[] receivedObjects
+                    = objectMapper.readValue(resultString, ParentFrameResponse[].class);
+            ParentFrameResponse firstObject = receivedObjects[0];
+            return new Frame(firstObject.id, firstObject.index, firstObject.type, false);
+        } catch (URISyntaxException ex) {
+            java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
+    private StateResponse GetStateForRivet(String rivetID) {
+        String parameterizedQuery = String.format(Queries.RivetPositionState, rivetID);
+        try {
+            String resultString = sparqlCommunicator.performQuery(parameterizedQuery);
+            StateResponse[] receivedObjects;
+            receivedObjects = objectMapper.readValue(resultString, StateResponse[].class);
+            return receivedObjects[0];
+        } catch (URISyntaxException ex) {
+            java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
 }
