@@ -97,8 +97,13 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
     @Override
     public List<RivetPosition> getRivetPositions(String hullId, SectorEnum hullRegion, int count, State state,
             boolean forceFrame) {
-        // TODO Auto-generated method stub
-        return null;
+        String parameterizedQuery = String.format(Queries.BySectorAndStateLimited, hullRegion, state, count);
+        try {
+            return PerformQueryForRivetList(parameterizedQuery);
+        } catch (URISyntaxException | IOException ex) {
+            java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     @Override
