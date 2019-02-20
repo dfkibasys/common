@@ -55,24 +55,13 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
     }
 
     public List<RivetPosition> getRivetPositions(String hullId, SectorEnum hullRegion) {
-        List<RivetPosition> results = new LinkedList<RivetPosition>();
-
         try {
-            String parameterizedQuery = String.format(Queries.BySector, hullRegion.ordinal());
-            String responseString = sparqlCommunicator.performQuery(parameterizedQuery);
-            RivetPositionBySectorResponse[] receivedObjects
-                    = objectMapper.readValue(responseString, RivetPositionBySectorResponse[].class);
-            for (RivetPositionBySectorResponse r : receivedObjects) {
-                RivetPosition receivedRivet = new RivetPosition(r.id, r.rivetUri, r.index);
-                GetRivetPositionData(receivedRivet);
-                results.add(receivedRivet);
-            }
-        } catch (IOException ex) {
+            String parameterizedQuery = String.format(Queries.BySector, hullRegion);
+            return PerformQueryForRivetList(parameterizedQuery);
+        } catch (IOException | URISyntaxException ex) {
             java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (URISyntaxException ex) {
-            java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
-        return results;
     }
 
     @Override
@@ -116,6 +105,20 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
     public boolean updateRivetPosition(RivetPosition rivetPosition) {
         // TODO Auto-generated method stub
         return false;
+    }
+
+    private List<RivetPosition> PerformQueryForRivetList(String parameterizedQuery) throws URISyntaxException, IOException {
+        List<RivetPosition> results = new LinkedList<>();
+        String responseString = sparqlCommunicator.performQuery(parameterizedQuery);
+        RivetPositionBySectorResponse[] receivedObjects
+                = objectMapper.readValue(responseString, RivetPositionBySectorResponse[].class);
+        for (RivetPositionBySectorResponse r : receivedObjects) {
+            RivetPosition receivedRivet = new RivetPosition(r.id, r.rivetUri, r.index);
+            GetRivetPositionData(receivedRivet);
+            results.add(receivedRivet);
+        }
+
+        return results;
     }
 
     private RivetPosition GetRivetPositionData(RivetPosition rivetPosition) {
