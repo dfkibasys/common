@@ -129,8 +129,8 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
         rivetPosition.setFrameType(parentFrame.getType());
 
         StateResponse state = GetStateForRivet(rivetPosition.getId());
-        rivetPosition.setState(state.state);
         rivetPosition.setStateAttributeUri(state.stateUri);
+        rivetPosition.setState(state.state);
         return rivetPosition;
     }
 
