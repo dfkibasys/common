@@ -8,10 +8,6 @@ import de.dfki.cos.basys.common.wmrestclient.QueryResponses.StateResponse;
 import de.dfki.cos.basys.common.wmrestclient.SparqlClient.SparqlCommunicator;
 import java.util.List;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.WebTarget;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
