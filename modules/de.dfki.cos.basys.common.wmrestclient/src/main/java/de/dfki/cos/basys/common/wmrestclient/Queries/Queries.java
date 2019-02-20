@@ -76,4 +76,24 @@ public class Queries {
             + "rdf:value \"%s\"^^<xsd:attributeValue> .\n"
             + "FILTER isLiteral(?index)\n"
             + "}";
+
+    public static String BySectorAndStateLimited = "prefix ldp: <http://www.w3.org/ns/ldp#>"
+            + "prefix dct: <http://purl.org/dc/terms/>"
+            + "prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>"
+            + "SELECT ?rivetUri ?id ?index WHERE {"
+            + "?rivetUri dct:hasPart ?rivetComponent ;"
+            + "dct:identifier ?id ."
+            + "?rivetComponent dct:identifier 'rivetposition'^^<xsd:string>;"
+            + "dct:hasPart ?indAttr;"
+            + "dct:hasPart ?stateAttr;"
+            + "dct:hasPart ?sectorAttr ."
+            + "?indAttr dct:identifier \"index\"^^<xsd:string> ;"
+            + "rdf:value ?index ."
+            + "?sectorAttr dct:identifier \"sector\"^^<xsd:string>;"
+            + "rdf:value \"%1$s\"^^<xsd:attributeValue> ."
+            + "?stateAttr dct:identifier \"status\"^^<xsd:string>;"
+            + "rdf:value \"%2$s\"^^<xsd:attributeValue> ."
+            + "FILTER isLiteral(?index)"
+            + "}"
+            + "LIMIT %3$d";
 }
