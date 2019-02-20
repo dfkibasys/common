@@ -4,6 +4,12 @@ import java.util.UUID;
 
 import de.dfki.cos.basys.common.wmrestclient.dto.Frame.FrameType;
 import de.dfki.cos.basys.common.wmrestclient.dto.Sector.SectorEnum;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 public class RivetPosition {
 
@@ -35,7 +41,7 @@ public class RivetPosition {
     public RivetPosition(String id, int index) {
         this.id = id;
         this.index = index;
-        this.state = State.EMPTY;
+        this.state = State.UNDEFINED;
     }
 
     public RivetPosition(String id, String uri, int index) {
@@ -87,12 +93,24 @@ public class RivetPosition {
     }
 
     public RivetPosition setState(State state) {
-        this.state = state;
+        if (state != this.state) {
+            this.state = state;
+
+            updateStateOnServer();
+        }
         return this;
     }
 
     public void setStateAttributeUri(String uri) {
         stateAttributeUri = uri;
+    }
+
+    private void updateStateOnServer() {
+        Client client = ClientBuilder.newClient();
+        WebTarget endpoint = client.target(stateAttributeUri);
+        Response response = endpoint
+                .request(MediaType.APPLICATION_JSON_TYPE)
+                .post(Entity.json(String.format("\"%d\"", state.ordinal())));
     }
 
 }
