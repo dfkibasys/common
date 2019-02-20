@@ -93,7 +93,10 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
     @Override
     public List<RivetPosition> getRivetPositions(String hullId, SectorEnum hullRegion, int count, State state,
             boolean forceFrame) {
-        String parameterizedQuery = String.format(Queries.BySectorAndStateLimited, hullRegion, state, count);
+        String parameterizedQuery = forceFrame ?
+                String.format(Queries.BySectorAndStateLimitedForceFrame, hullRegion, state, count) :
+                String.format(Queries.BySectorAndStateLimited, hullRegion, state, count);
+
         try {
             return PerformQueryForRivetList(parameterizedQuery);
         } catch (URISyntaxException | IOException ex) {
