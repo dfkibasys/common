@@ -24,7 +24,18 @@ public class Queries {
             + "FILTER isLiteral(?index)"
             + "}";
 
-    public static String RivetPositionById = "";
+    public static String RivetPositionById = "prefix ldp: <http://www.w3.org/ns/ldp#>\n"
+            + "prefix dct: <http://purl.org/dc/terms/>\n"
+            + "prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
+            + "SELECT DISTINCT ?rivetUri ?index WHERE {\n"
+            + "?rivetUri dct:hasPart ?rivetComponent ;\n"
+            + "dct:identifier %s .\n"
+            + "?rivetComponent dct:identifier 'rivetposition'^^<xsd:string>;\n"
+	    + "dct:hasPart ?indAttr;\n"
+	    + "?indAttr dct:identifier \"index\"^^<xsd:string> ;"
+	    + "rdf:value ?index .\n"
+	    + "}";
+
 
     public static String RivetPositionState = "prefix ldp: <http://www.w3.org/ns/ldp#>\n"
             + "prefix dct: <http://purl.org/dc/terms/>\n"
