@@ -95,22 +95,12 @@ public class RivetPosition {
     public RivetPosition setState(State state) {
         if (state != this.state) {
             this.state = state;
-
-            updateStateOnServer();
         }
         return this;
     }
 
     public void setStateAttributeUri(String uri) {
         stateAttributeUri = uri;
-    }
-
-    private void updateStateOnServer() {
-        Client client = ClientBuilder.newClient();
-        WebTarget endpoint = client.target(stateAttributeUri);
-        Response response = endpoint
-                .request(MediaType.APPLICATION_JSON_TYPE)
-                .post(Entity.json(String.format("\"%d\"", state.ordinal())));
     }
 
 }
