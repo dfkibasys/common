@@ -6,13 +6,15 @@
 package de.dfki.cos.basys.common.wmrestclient.QueryResponses;
 
 import de.dfki.cos.basys.common.wmrestclient.dto.Frame;
+import de.dfki.cos.basys.common.wmrestclient.dto.Sector;
 
 /**
  *
  * @author tospie
  */
-public class ParentFrameResponse {
+public class FrameResponse {
     public String id;
     public int index;
     public Frame.FrameType type;
+    public Sector.SectorEnum hullregion;
 }

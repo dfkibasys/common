@@ -7,12 +7,9 @@ package de.dfki.cos.basys.common.wmrestclient.QueryResponses;
 
 /**
  *
- * @author tospie
+ * @author tosp01
  */
-public class RivetPositionResponse {
-   public int index;
-   public String rivetUri;
-   public String id;
-
-   public RivetPositionResponse() {}
+public class HullsResponse {
+    public String hullId;
+    public String hullUri;
 }
