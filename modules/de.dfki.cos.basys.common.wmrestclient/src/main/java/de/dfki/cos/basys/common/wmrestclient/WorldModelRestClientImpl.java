@@ -64,8 +64,38 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
 
     @Override
     public Hull getHull(String id) {
-        // TODO Auto-generated method stub
+        String paratemerizedQuery = String.format(Queries.getHullById, id);
+        String hullsResponse;
+        try {
+            hullsResponse = sparqlCommunicator.performQuery(paratemerizedQuery);
+            HullsResponse[] responseObjects = objectMapper.readValue(hullsResponse, HullsResponse[].class);
+            if (responseObjects.length > 0) {
+                return getAllHullData(new Hull(id));
+            }
+        } catch (URISyntaxException | IOException ex) {
+            java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         return null;
+    }
+
+    private Hull getAllHullData(Hull hull) throws IOException, URISyntaxException {
+        String parameterizedQuery = String.format(Queries.FramesInHull, hull.getId());
+        String framesResponse = sparqlCommunicator.performQuery(parameterizedQuery);
+        FrameResponse[] responseObjects = objectMapper.readValue(framesResponse, FrameResponse[].class);
+        for (FrameResponse r : responseObjects) {
+            Frame frame = new Frame(r.id, r.index, r.type, r.hullregion, false);
+            getRivetsForFrame(frame);
+            hull.addFrame(frame);
+        }
+        return hull;
+    }
+
+    private Frame getRivetsForFrame(Frame frame) throws URISyntaxException, IOException {
+        String parameterizedQuery = String.format(Queries.RivetPositionsInFrame, frame.getId());
+        List<RivetPosition> rivets = PerformQueryForRivetList(parameterizedQuery);
+        frame.AddRivetPositions(rivets);
+        return frame;
     }
 
     @Override
