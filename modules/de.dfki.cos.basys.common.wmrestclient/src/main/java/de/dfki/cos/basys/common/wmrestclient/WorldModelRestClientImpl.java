@@ -145,21 +145,6 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
     }
 
     @Override
-    public List<RivetPosition> getRivetPositions(String hullId, SectorEnum hullRegion, int count, State state,
-            boolean forceFrame) {
-        String parameterizedQuery = forceFrame
-                ? String.format(Queries.BySectorAndStateLimitedForceFrame, hullRegion, state, count)
-                : String.format(Queries.BySectorAndStateLimited, hullRegion, state, count);
-
-        try {
-            return PerformQueryForRivetList(parameterizedQuery);
-        } catch (URISyntaxException | IOException ex) {
-            java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
-    }
-
-    @Override
     public boolean updateRivetPosition(RivetPosition rivetPosition) {
     	LOGGER.debug("updateRivetPosition({})", rivetPosition.toString());
     	StateResponse state = GetStateForRivet(rivetPosition.getId());
@@ -228,5 +213,25 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
         }
         return null;
     }
+	@Override
+	public List<RivetPosition> getRivetPositions(String hullId, SectorEnum hullRegion, int count, State state,
+			boolean forceFrame) {
+		String parameterizedQuery = String.format(Queries.BySectorAndState, hullRegion, state, count);
+
+		try {
+			List<RivetPosition> returnedRivets = PerformQueryForRivetList(parameterizedQuery);
+			returnedRivets.stream().sorted((RivetPosition r1, RivetPosition r2) -> r1.getIndex() - r2.getIndex());
+			//returnedRivets.stream().filter(r -> r.getFrameIndex() )count(r)
+			if (forceFrame) {
+				int firstFrame = returnedRivets.get(0).getFrameIndex();
+				return returnedRivets.stream().filter(p -> p.getFrameIndex() == firstFrame).collect(Collectors.toList());
+			}
+
+			return returnedRivets;
+		} catch (URISyntaxException | IOException ex) {
+			java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
+			return null;
+		}
+	}
 
 }
