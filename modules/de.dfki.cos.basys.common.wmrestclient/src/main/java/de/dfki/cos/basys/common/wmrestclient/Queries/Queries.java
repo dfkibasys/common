@@ -180,7 +180,7 @@ public class Queries {
 	    + "}"
 	    + "LIMIT %3$d";
 
-    public static String BySectorAndStateLimitedForceFrame = "prefix ldp: <http://www.w3.org/ns/ldp#>"
+    public static String BySectorAndState = "prefix ldp: <http://www.w3.org/ns/ldp#>"
 	    + "prefix dct: <http://purl.org/dc/terms/>"
 	    + "prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>"
 	    + "SELECT ?rivetUri ?id ?index WHERE {"
