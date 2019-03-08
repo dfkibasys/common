@@ -43,6 +43,11 @@ public class Frame {
 		}
 	}
 
+	public Frame(String id, int index, FrameType type, SectorEnum hullRegion, boolean generateRivetPositions) {
+		this(id, index, type, generateRivetPositions);
+		this.hullRegion = hullRegion;
+	}
+
 	public String getParentId() {
 		return parentId;
 	}
