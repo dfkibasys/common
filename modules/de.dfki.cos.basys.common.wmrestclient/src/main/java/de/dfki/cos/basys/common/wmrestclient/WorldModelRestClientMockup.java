@@ -88,4 +88,9 @@ public class WorldModelRestClientMockup implements WorldModelRestClient {
 		return false;
 	}
 
+	@Override
+	public List<Hull> getHulls() {
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+
 }
