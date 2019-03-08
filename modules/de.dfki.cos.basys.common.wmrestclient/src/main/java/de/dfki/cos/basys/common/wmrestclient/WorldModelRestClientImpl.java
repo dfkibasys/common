@@ -174,9 +174,9 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
     private List<RivetPosition> PerformQueryForRivetList(String parameterizedQuery) throws URISyntaxException, IOException {
         List<RivetPosition> results = new LinkedList<>();
         String responseString = sparqlCommunicator.performQuery(parameterizedQuery);
-        RivetPositionBySectorResponse[] receivedObjects
-                = objectMapper.readValue(responseString, RivetPositionBySectorResponse[].class);
-        for (RivetPositionBySectorResponse r : receivedObjects) {
+        RivetPositionResponse[] receivedObjects
+                = objectMapper.readValue(responseString, RivetPositionResponse[].class);
+        for (RivetPositionResponse r : receivedObjects) {
             RivetPosition receivedRivet = new RivetPosition(r.id, r.rivetUri, r.index);
             GetRivetPositionData(receivedRivet);
             results.add(receivedRivet);
@@ -202,9 +202,9 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
         String parameterizedQuery = String.format(Queries.RivetPositionParentFrame, rivetUri);
         try {
             String resultString = sparqlCommunicator.performQuery(parameterizedQuery);
-            ParentFrameResponse[] receivedObjects
-                    = objectMapper.readValue(resultString, ParentFrameResponse[].class);
-            ParentFrameResponse firstObject = receivedObjects[0];
+            FrameResponse[] receivedObjects
+                    = objectMapper.readValue(resultString, FrameResponse[].class);
+            FrameResponse firstObject = receivedObjects[0];
             return new Frame(firstObject.id, firstObject.index, firstObject.type, false);
         } catch (URISyntaxException ex) {
             java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
