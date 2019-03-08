@@ -167,7 +167,7 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
     	WebTarget endpoint = client.target(state.stateUri);
     	Response response = endpoint
     			.request(MediaType.APPLICATION_JSON_TYPE)
-    			.post(Entity.json(String.format("\"%d\"", rivetPosition.getState().ordinal())));
+			.post(Entity.json(String.format("\"%d\"", rivetPosition.getState())));
     	return response.getStatus() == 204;
     }
 
