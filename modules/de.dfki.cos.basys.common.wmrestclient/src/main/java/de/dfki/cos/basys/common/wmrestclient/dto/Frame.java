@@ -85,6 +85,18 @@ public class Frame {
 		}
 		return result;
 	}
+
+	public boolean AddRivetPosition(RivetPosition rivetPosition) {
+		if (rivetPositions.stream().anyMatch((r) -> (r.getId().equals(rivetPosition.getId())))) {
+			return false;
+		}
+		rivetPositions.add(rivetPosition);
+		return true;
+	}
+
+	public boolean AddRivetPositions(List<RivetPosition> rivetPositionList) {
+		return rivetPositions.addAll(rivetPositionList);
+	}
 	
 	
 //	public Frame addRivetPosition(RivetPosition rivetPosition) {
