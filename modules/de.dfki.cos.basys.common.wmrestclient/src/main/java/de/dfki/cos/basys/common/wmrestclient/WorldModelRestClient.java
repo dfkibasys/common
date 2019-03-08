@@ -22,6 +22,7 @@ public interface WorldModelRestClient {
 	/*
 	 * Domain-specific methods, can reside in separate interface, e.g., HullModel
 	 */
+	List<Hull> getHulls();
 	
 	
 	Hull getHull(String id);

@@ -47,6 +47,22 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
     }
 
     @Override
+    public List<Hull> getHulls() {
+        try {
+            String hullsResponse = sparqlCommunicator.performQuery(Queries.getHulls);
+            HullsResponse[] responseObjects = objectMapper.readValue(hullsResponse, HullsResponse[].class);
+            List<Hull> result = new LinkedList<>();
+            for (HullsResponse r : responseObjects) {
+                result.add(new Hull(r.hullId));
+            }
+            return result;
+        } catch (IOException | URISyntaxException ex) {
+            java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
+    @Override
     public Hull getHull(String id) {
         // TODO Auto-generated method stub
         return null;
