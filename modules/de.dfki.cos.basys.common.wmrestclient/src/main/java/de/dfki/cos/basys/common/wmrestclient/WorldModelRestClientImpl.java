@@ -213,25 +213,40 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
         }
         return null;
     }
-	@Override
-	public List<RivetPosition> getRivetPositions(String hullId, SectorEnum hullRegion, int count, State state,
-			boolean forceFrame) {
-		String parameterizedQuery = String.format(Queries.BySectorAndState, hullRegion, state, count);
 
-		try {
-			List<RivetPosition> returnedRivets = PerformQueryForRivetList(parameterizedQuery);
-			returnedRivets.stream().sorted((RivetPosition r1, RivetPosition r2) -> r1.getIndex() - r2.getIndex());
-			//returnedRivets.stream().filter(r -> r.getFrameIndex() )count(r)
-			if (forceFrame) {
-				int firstFrame = returnedRivets.get(0).getFrameIndex();
-				return returnedRivets.stream().filter(p -> p.getFrameIndex() == firstFrame).collect(Collectors.toList());
-			}
+    @Override
+    public List<RivetPosition> getRivetPositions(String hullId, SectorEnum hullRegion, int count, State state,
+            boolean forceFrame) {
+        String parameterizedQuery = String.format(Queries.BySectorAndState, hullRegion, state, count);
 
-			return returnedRivets;
-		} catch (URISyntaxException | IOException ex) {
-			java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
-			return null;
-		}
-	}
+        try {
+            List<RivetPosition> returnedRivets = PerformQueryForRivetList(parameterizedQuery);
+            returnedRivets.stream().sorted((RivetPosition r1, RivetPosition r2) -> r1.getIndex() - r2.getIndex());
+            //returnedRivets.stream().filter(r -> r.getFrameIndex() )count(r)
+            if (forceFrame) {
 
+                final int fromFrame = getFrameWithMostRivets(returnedRivets);
+                return returnedRivets.stream().filter(p -> p.getFrameIndex() == fromFrame).collect(Collectors.toList());
+            }
+            return returnedRivets;
+
+        } catch (URISyntaxException | IOException ex) {
+            java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
+    private int getFrameWithMostRivets(List<RivetPosition> rivetPositions) {
+        int maxCount = 0;
+        int maxFrame = 0;
+        for (RivetPosition p : rivetPositions) {
+            int frameIndex = p.getFrameIndex();
+            int numOccurrence = (int) rivetPositions.stream().filter(r -> r.getFrameIndex() == frameIndex).count();
+            if (numOccurrence > maxCount) {
+                maxCount = numOccurrence;
+                maxFrame = frameIndex;
+            }
+        }
+        return maxFrame;
+    }
 }
