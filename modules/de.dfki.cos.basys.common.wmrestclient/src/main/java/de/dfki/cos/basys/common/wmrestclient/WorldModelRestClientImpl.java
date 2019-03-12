@@ -140,7 +140,13 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
 
     @Override
     public List<RivetPosition> getRivetPositions(String hullId, int frameIndex, int count, State state) {
-        // TODO Auto-generated method stub
+        try {
+            String parameterizedQuery = String.format(Queries.ByParentFrameIndexAndState, frameIndex, state, count);
+            return PerformQueryForRivetList(parameterizedQuery);
+        } catch (URISyntaxException | IOException ex) {
+            java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         return null;
     }
 
