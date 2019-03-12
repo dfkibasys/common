@@ -81,7 +81,15 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
 
     @Override
     public List<Frame> getFrames(String hullId, SectorEnum hullRegion) {
-        // TODO Auto-generated method stub
+        try {
+            String parameterizedQuery = String.format(Queries.FramesInHull,
+                    hullId,
+                    "",
+                    String.format("rdf:value '%s'^^<xsd:attributeValue> ;", hullRegion));
+            return performQueryForFramesList(parameterizedQuery);
+        } catch (URISyntaxException | IOException ex) {
+            java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
     }
 
@@ -105,7 +113,8 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
     public Frame getFrame(String hullId, int frameIndex) {
         String parameterizedQuery = String.format(Queries.FramesInHull,
                 hullId,
-                String.format("rdf:value '%d'^^<xsd:attributeValue> ;", frameIndex));
+                String.format("rdf:value '%d'^^<xsd:attributeValue> ;", frameIndex),
+                "");
         try {
             List<Frame> frameResults = performQueryForFramesList(parameterizedQuery);
             // The query parameters will match one exact frame, or none. In case we have a result,
@@ -199,7 +208,7 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
     }
 
     private Hull getAllHullData(Hull hull) throws IOException, URISyntaxException {
-        String parameterizedQuery = String.format(Queries.FramesInHull, hull.getId(), "");
+        String parameterizedQuery = String.format(Queries.FramesInHull, hull.getId(), "", "");
         List<Frame> framesResponse = performQueryForFramesList(parameterizedQuery);
         framesResponse.forEach((frame) -> {
             hull.addFrame(frame);
