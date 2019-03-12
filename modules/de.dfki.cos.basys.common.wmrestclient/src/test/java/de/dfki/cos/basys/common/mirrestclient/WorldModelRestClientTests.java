@@ -9,6 +9,9 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import de.dfki.cos.basys.common.wmrestclient.WorldModelCreator;
 import de.dfki.cos.basys.common.wmrestclient.WorldModelRestClient;
 import de.dfki.cos.basys.common.wmrestclient.WorldModelRestClientImpl;
@@ -35,6 +38,21 @@ public class WorldModelRestClientTests {
 	public void testCreateHull() {
 		Hull hull = WorldModelCreator.createHullHMI();
 		assertTrue(hull.getFrames().size() == 57);
+	}
+	
+	@Test
+	//@Ignore
+	public void testCreateHullHorizontalAndSerialize() {
+		Hull hull = WorldModelCreator.createHullHorizontalHMI();
+		assertTrue(hull.getFrames().size() == 45);
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(hull);
+			System.out.println(json);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@Test

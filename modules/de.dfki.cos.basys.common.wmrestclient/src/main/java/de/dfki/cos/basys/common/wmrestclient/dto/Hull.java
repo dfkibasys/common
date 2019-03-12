@@ -1,11 +1,20 @@
 package de.dfki.cos.basys.common.wmrestclient.dto;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
-public class Hull {
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
+public class Hull implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	// a UUID
 	String id;
 

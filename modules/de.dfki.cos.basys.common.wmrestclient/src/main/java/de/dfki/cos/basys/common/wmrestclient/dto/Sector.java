@@ -2,6 +2,9 @@ package de.dfki.cos.basys.common.wmrestclient.dto;
 
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Sector {
 
 	public enum SectorEnum {

@@ -25,6 +25,7 @@ public class WorldModelRestClientMockup implements WorldModelRestClient {
 	protected Client client = ClientBuilder.newClient();
 	protected WebTarget endpoint = null;
 
+	private Hull hull = WorldModelCreator.createHullHMI();
 	
 	public WorldModelRestClientMockup(String host) {
 		this.endpoint = client.target(host).path(pathSegment);
@@ -32,8 +33,7 @@ public class WorldModelRestClientMockup implements WorldModelRestClient {
 
 	@Override
 	public Hull getHull(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		return hull;
 	}
 
 	@Override
@@ -90,7 +90,9 @@ public class WorldModelRestClientMockup implements WorldModelRestClient {
 
 	@Override
 	public List<Hull> getHulls() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		List<Hull> result = new LinkedList<Hull>();
+		result.add(hull);
+		return result;
 	}
 
 }

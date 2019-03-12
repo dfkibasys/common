@@ -1,17 +1,25 @@
 package de.dfki.cos.basys.common.wmrestclient.dto;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import de.dfki.cos.basys.common.wmrestclient.dto.Sector.SectorEnum;
 import java.util.Collections;
 
+@XmlRootElement
+public class Frame implements Serializable {
 
-public class Frame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public enum FrameType {
-		H_9x2, V_6x2, V_10x2
+		H_8x2, H_9x2, V_6x2, V_10x2
 	};
 		
 	// a UUID
@@ -27,9 +35,9 @@ public class Frame {
 	SectorEnum hullRegion;
 	
 	// children	
-	List<RivetPosition> rivetPositions = new LinkedList<RivetPosition>();
+	public List<RivetPosition> rivetPositions = new LinkedList<RivetPosition>();
 
-	
+	public Frame() {}
 	
 	public Frame(int index, FrameType type) {
 		this(UUID.randomUUID().toString(), index, type, true);
@@ -40,7 +48,7 @@ public class Frame {
 		this.index = index;
 		this.type = type;
 		if (generateRivetPositions) {
-			// rivetPositions = generateRivetPositions();
+			rivetPositions = generateRivetPositions();
 		}
 	}
 
@@ -73,6 +81,8 @@ public class Frame {
 	public List<RivetPosition> generateRivetPositions() {
 		int n = 0;
 
+		if (type == FrameType.H_8x2)
+			n = 16;
 		if (type == FrameType.H_9x2)
 			n = 18;
 		if (type == FrameType.V_10x2)

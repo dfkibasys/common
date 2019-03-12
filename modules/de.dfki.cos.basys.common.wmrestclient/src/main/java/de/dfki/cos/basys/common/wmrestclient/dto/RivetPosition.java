@@ -1,5 +1,6 @@
 package de.dfki.cos.basys.common.wmrestclient.dto;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import de.dfki.cos.basys.common.wmrestclient.dto.Frame.FrameType;
@@ -10,10 +11,17 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.xml.bind.annotation.XmlRootElement;
 
-public class RivetPosition {
+@XmlRootElement
+public class RivetPosition implements Serializable  {
 
-    public enum State {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public enum State {
         UNDEFINED, EMPTY, SQUEEZING, SQUEEZED, CHECKING, CHECKED_IO, CHECKED_NIO, SEALING, SEALED
     }
 
@@ -34,6 +42,9 @@ public class RivetPosition {
 
     String resourceUri;
 
+    public RivetPosition() {
+    }    
+    
     public RivetPosition(int index) {
         this(UUID.randomUUID().toString(), index);
     }
