@@ -97,6 +97,27 @@ public class Queries {
 	    + "FILTER isLiteral(?index)"
 	    + "}";
 
+    public static String SinlgeFrameById = "prefix ldp: <http://www.w3.org/ns/ldp#>"
+	    + "prefix dct: <http://purl.org/dc/terms/>"
+	    + "prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>"
+	    + "SELECT DISTINCT ?index ?id ?type ?hullregion WHERE {"
+            + ""
+	    + "?frameUri dct:hasPart ?frameComponent ;"
+	    + "dct:identifier ?id; "
+            + "dct:identifier '%s'^^<xsd:string> ."
+            + ""
+	    + "?frameComponent dct:identifier 'frameposition'^^<xsd:string>;"
+	    + "dct:hasPart ?typeAttr;"
+            + "dct:hasPart ?hullregion"
+            + "dct:hasPart ?indAttr ."
+            + ""
+	    + "?indAttr dct:identifier 'index'^^<xsd:string> ;"
+	    + "rdf:value ?index ."
+            + ""
+            + "FILTER isLiteral(?id)"
+            + "FILTER isLiteral(?index)"
+	    + "}";
+
     public static String SinlgeRivetPositionById = "prefix ldp: <http://www.w3.org/ns/ldp#>"
 	    + "prefix dct: <http://purl.org/dc/terms/>"
 	    + "prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>"
