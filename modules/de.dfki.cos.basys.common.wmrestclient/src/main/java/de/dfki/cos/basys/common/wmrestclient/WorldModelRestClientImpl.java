@@ -176,7 +176,9 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
     @Override
     public boolean updateRivetPosition(RivetPosition rivetPosition) {
         LOGGER.debug("updateRivetPosition({})", rivetPosition.toString());
-        StateResponse state = GetStateForRivet(rivetPosition.getId());
+        String hullID = getHulls().get(0).getId();
+        rivetPosition = getRivetPosition(hullID, rivetPosition.getFrameIndex(), rivetPosition.getIndex());
+        StateResponse state = GetStateForRivet(rivetPosition.getId());        
         Client client = ClientBuilder.newClient();
         WebTarget endpoint = client.target(state.stateUri);
         Response response = endpoint
