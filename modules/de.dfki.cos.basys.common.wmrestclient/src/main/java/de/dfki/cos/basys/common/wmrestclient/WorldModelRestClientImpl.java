@@ -146,14 +146,14 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
 
     @Override
     public boolean updateRivetPosition(RivetPosition rivetPosition) {
-    	LOGGER.debug("updateRivetPosition({})", rivetPosition.toString());
-    	StateResponse state = GetStateForRivet(rivetPosition.getId());
-    	Client client = ClientBuilder.newClient();
-    	WebTarget endpoint = client.target(state.stateUri);
-    	Response response = endpoint
-    			.request(MediaType.APPLICATION_JSON_TYPE)
-			.post(Entity.json(String.format("\"%s\"", rivetPosition.getState())));
-    	return response.getStatus() == 204;
+        LOGGER.debug("updateRivetPosition({})", rivetPosition.toString());
+        StateResponse state = GetStateForRivet(rivetPosition.getId());
+        Client client = ClientBuilder.newClient();
+        WebTarget endpoint = client.target(state.stateUri);
+        Response response = endpoint
+                .request(MediaType.APPLICATION_JSON_TYPE)
+                .post(Entity.json(String.format("\"%s\"", rivetPosition.getState())));
+        return response.getStatus() == 204;
     }
 
     private List<RivetPosition> PerformQueryForRivetList(String parameterizedQuery) throws URISyntaxException, IOException {
