@@ -79,39 +79,10 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
         return null;
     }
 
-    private Hull getAllHullData(Hull hull) throws IOException, URISyntaxException {
-        String parameterizedQuery = String.format(Queries.FramesInHull, hull.getId());
-        String framesResponse = sparqlCommunicator.performQuery(parameterizedQuery);
-        FrameResponse[] responseObjects = objectMapper.readValue(framesResponse, FrameResponse[].class);
-        for (FrameResponse r : responseObjects) {
-            Frame frame = new Frame(r.id, r.index, r.type, r.hullregion, false);
-            getRivetsForFrame(frame);
-            hull.addFrame(frame);
-        }
-        return hull;
-    }
-
-    private Frame getRivetsForFrame(Frame frame) throws URISyntaxException, IOException {
-        String parameterizedQuery = String.format(Queries.RivetPositionsInFrame, frame.getId());
-        List<RivetPosition> rivets = PerformQueryForRivetList(parameterizedQuery);
-        frame.AddRivetPositions(rivets);
-        return frame;
-    }
-
     @Override
     public List<Frame> getFrames(String hullId, SectorEnum hullRegion) {
         // TODO Auto-generated method stub
         return null;
-    }
-
-    public List<RivetPosition> getRivetPositions(String hullId, SectorEnum hullRegion) {
-        try {
-            String parameterizedQuery = String.format(Queries.BySector, hullRegion);
-            return PerformQueryForRivetList(parameterizedQuery);
-        } catch (IOException | URISyntaxException ex) {
-            java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
     }
 
     @Override
@@ -141,7 +112,7 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
     @Override
     public List<RivetPosition> getRivetPositions(String hullId, int frameIndex, int count, State state) {
         try {
-            String parameterizedQuery = String.format(Queries.ByParentFrameIndexAndState, frameIndex, state, count);
+            String parameterizedQuery = String.format(Queries.ByParentFrameIndexAndState, hullId, frameIndex, state, count);
             return PerformQueryForRivetList(parameterizedQuery);
         } catch (URISyntaxException | IOException ex) {
             java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
@@ -160,6 +131,47 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
                 .request(MediaType.APPLICATION_JSON_TYPE)
                 .post(Entity.json(String.format("\"%s\"", rivetPosition.getState())));
         return response.getStatus() == 204;
+    }
+
+    @Override
+    public List<RivetPosition> getRivetPositions(String hullId, SectorEnum hullRegion, int count, State state,
+            boolean forceFrame) {
+        String parameterizedQuery = String.format(Queries.BySectorAndState, hullId, hullRegion, state, count);
+
+        try {
+            List<RivetPosition> returnedRivets = PerformQueryForRivetList(parameterizedQuery);
+            returnedRivets.stream().sorted((RivetPosition r1, RivetPosition r2) -> r1.getIndex() - r2.getIndex());
+            //returnedRivets.stream().filter(r -> r.getFrameIndex() )count(r)
+            if (forceFrame) {
+
+                final int fromFrame = getFrameWithMostRivets(returnedRivets);
+                return returnedRivets.stream().filter(p -> p.getFrameIndex() == fromFrame).collect(Collectors.toList());
+            }
+            return returnedRivets;
+
+        } catch (URISyntaxException | IOException ex) {
+            java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
+    private Hull getAllHullData(Hull hull) throws IOException, URISyntaxException {
+        String parameterizedQuery = String.format(Queries.FramesInHull, hull.getId());
+        String framesResponse = sparqlCommunicator.performQuery(parameterizedQuery);
+        FrameResponse[] responseObjects = objectMapper.readValue(framesResponse, FrameResponse[].class);
+        for (FrameResponse r : responseObjects) {
+            Frame frame = new Frame(r.id, r.index, r.type, r.hullregion, false);
+            getRivetsForFrame(frame);
+            hull.addFrame(frame);
+        }
+        return hull;
+    }
+
+    private Frame getRivetsForFrame(Frame frame) throws URISyntaxException, IOException {
+        String parameterizedQuery = String.format(Queries.RivetPositionsInFrame, frame.getId());
+        List<RivetPosition> rivets = PerformQueryForRivetList(parameterizedQuery);
+        frame.AddRivetPositions(rivets);
+        return frame;
     }
 
     private List<RivetPosition> PerformQueryForRivetList(String parameterizedQuery) throws URISyntaxException, IOException {
@@ -218,28 +230,6 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
             java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-    }
-
-    @Override
-    public List<RivetPosition> getRivetPositions(String hullId, SectorEnum hullRegion, int count, State state,
-            boolean forceFrame) {
-        String parameterizedQuery = String.format(Queries.BySectorAndState, hullRegion, state, count);
-
-        try {
-            List<RivetPosition> returnedRivets = PerformQueryForRivetList(parameterizedQuery);
-            returnedRivets.stream().sorted((RivetPosition r1, RivetPosition r2) -> r1.getIndex() - r2.getIndex());
-            //returnedRivets.stream().filter(r -> r.getFrameIndex() )count(r)
-            if (forceFrame) {
-
-                final int fromFrame = getFrameWithMostRivets(returnedRivets);
-                return returnedRivets.stream().filter(p -> p.getFrameIndex() == fromFrame).collect(Collectors.toList());
-            }
-            return returnedRivets;
-
-        } catch (URISyntaxException | IOException ex) {
-            java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
     }
 
     private int getFrameWithMostRivets(List<RivetPosition> rivetPositions) {
