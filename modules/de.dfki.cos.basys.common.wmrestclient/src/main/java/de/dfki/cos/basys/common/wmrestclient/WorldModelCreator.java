@@ -12,16 +12,14 @@ public class WorldModelCreator {
 
     public static void Reset(WorldModelRestClientImpl client) {
         String hullId = client.getHulls().get(0).getId();
-        List<RivetPosition> leftRivets = client.getRivetPositions(hullId, Sector.SectorEnum.LEFT);
-        List<RivetPosition> centerRivets = client.getRivetPositions(hullId, Sector.SectorEnum.CENTER);
-        List<RivetPosition> rightRivets = client.getRivetPositions(hullId, Sector.SectorEnum.RIGHT);
+        Hull hull = client.getHull(hullId);
         List<RivetPosition> allRivets = new LinkedList<>();
-        allRivets.addAll(leftRivets);
-        allRivets.addAll(centerRivets);
-        allRivets.addAll(rightRivets);
-        for (RivetPosition r : allRivets) {
-            r.setState(RivetPosition.State.EMPTY);
-            client.updateRivetPosition(r);
+        for (Frame f : hull.getFrames()) {
+            List<RivetPosition> rivetsInFrame = f.getRivetPositions();
+            for (RivetPosition r : rivetsInFrame) {
+                r.setState(RivetPosition.State.EMPTY);
+                client.updateRivetPosition(r);
+            }
         }
     }
 
