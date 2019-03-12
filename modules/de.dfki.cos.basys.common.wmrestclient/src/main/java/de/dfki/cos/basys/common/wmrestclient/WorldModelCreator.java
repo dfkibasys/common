@@ -16,10 +16,12 @@ public class WorldModelCreator {
         List<RivetPosition> allRivets = new LinkedList<>();
         for (Frame f : hull.getFrames()) {
             List<RivetPosition> rivetsInFrame = f.getRivetPositions();
-            for (RivetPosition r : rivetsInFrame) {
+            rivetsInFrame.stream().map((r) -> {
                 r.setState(RivetPosition.State.EMPTY);
+                return r;
+            }).forEachOrdered((r) -> {
                 client.updateRivetPosition(r);
-            }
+            });
         }
     }
 
