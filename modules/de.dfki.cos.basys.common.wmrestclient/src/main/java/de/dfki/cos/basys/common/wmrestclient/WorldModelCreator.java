@@ -3,8 +3,27 @@ package de.dfki.cos.basys.common.wmrestclient;
 import de.dfki.cos.basys.common.wmrestclient.dto.Frame;
 import de.dfki.cos.basys.common.wmrestclient.dto.Frame.FrameType;
 import de.dfki.cos.basys.common.wmrestclient.dto.Hull;
+import de.dfki.cos.basys.common.wmrestclient.dto.RivetPosition;
+import de.dfki.cos.basys.common.wmrestclient.dto.Sector;
+import java.util.LinkedList;
+import java.util.List;
 
 public class WorldModelCreator {
+
+    public static void Reset(WorldModelRestClientImpl client) {
+        String hullId = client.getHulls().get(0).getId();
+        List<RivetPosition> leftRivets = client.getRivetPositions(hullId, Sector.SectorEnum.LEFT);
+        List<RivetPosition> centerRivets = client.getRivetPositions(hullId, Sector.SectorEnum.CENTER);
+        List<RivetPosition> rightRivets = client.getRivetPositions(hullId, Sector.SectorEnum.RIGHT);
+        List<RivetPosition> allRivets = new LinkedList<>();
+        allRivets.addAll(leftRivets);
+        allRivets.addAll(centerRivets);
+        allRivets.addAll(rightRivets);
+        for (RivetPosition r : allRivets) {
+            r.setState(RivetPosition.State.EMPTY);
+            client.updateRivetPosition(r);
+        }
+    }
 
 	public static Hull createHullHMI( ) {
 		Hull hull = new Hull()
