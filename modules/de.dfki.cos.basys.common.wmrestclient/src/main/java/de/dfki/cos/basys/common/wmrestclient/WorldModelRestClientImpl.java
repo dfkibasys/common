@@ -204,6 +204,7 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
         for (FrameResponse r : responseObjects) {
             Frame frame = new Frame(r.id, r.index, r.type, r.hullregion, false);
             getRivetsForFrame(frame);
+            frame.setParentId(r.hullId);
             resultList.add(frame);
         }
         return resultList;

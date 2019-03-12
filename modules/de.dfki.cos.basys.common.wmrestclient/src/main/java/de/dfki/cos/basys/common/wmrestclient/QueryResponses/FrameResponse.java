@@ -16,5 +16,6 @@ public class FrameResponse {
     public String id;
     public int index;
     public Frame.FrameType type;
+    public String hullId;
     public Sector.SectorEnum hullregion;
 }
