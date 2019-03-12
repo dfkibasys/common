@@ -105,7 +105,12 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
 
     @Override
     public RivetPosition getRivetPosition(String hullId, int frameIndex, int rivetPositionIndex) {
-        // TODO Auto-generated method stub
+        try {
+            String parameterizedQuery = String.format(Queries.SingleRivetByFrameAndRivetIndex, hullId, frameIndex, rivetPositionIndex);
+            return PerformQueryForRivetList(parameterizedQuery).get(0);
+        } catch (URISyntaxException | IOException ex) {
+            java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
     }
 
