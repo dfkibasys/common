@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import de.dfki.cos.basys.common.wmrestclient.dto.Sector.SectorEnum;
+import java.util.Collections;
 
 
 public class Frame {
@@ -91,6 +92,10 @@ public class Frame {
 		return result;
 	}
 
+        public List<RivetPosition> getRivetPositions()
+        {
+            return Collections.unmodifiableList(rivetPositions);
+        }
 	public boolean AddRivetPosition(RivetPosition rivetPosition) {
 		if (rivetPositions.stream().anyMatch((r) -> (r.getId().equals(rivetPosition.getId())))) {
 			return false;
