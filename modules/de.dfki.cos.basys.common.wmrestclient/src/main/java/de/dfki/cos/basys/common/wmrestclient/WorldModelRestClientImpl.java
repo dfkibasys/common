@@ -93,7 +93,13 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
 
     @Override
     public Frame getFrame(String hullId, int frameIndex) {
-        // TODO Auto-generated method stub
+        String parameterizedQuery = String.format(Queries.FramesInHull,
+                String.format("?index '%d'^^<xsd:attributeValue> ;", frameIndex));
+        try {
+            return performQueryForFramesList(parameterizedQuery).get(0);
+        } catch (URISyntaxException | IOException ex) {
+            java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
     }
 
@@ -166,15 +172,24 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
     }
 
     private Hull getAllHullData(Hull hull) throws IOException, URISyntaxException {
-        String parameterizedQuery = String.format(Queries.FramesInHull, hull.getId());
+        String parameterizedQuery = String.format(Queries.FramesInHull, hull.getId(), "");
+        List<Frame> framesResponse = performQueryForFramesList(parameterizedQuery);
+        framesResponse.forEach((frame) -> {
+            hull.addFrame(frame);
+        });
+        return hull;
+    }
+
+    private List<Frame> performQueryForFramesList(String parameterizedQuery) throws URISyntaxException, IOException {
         String framesResponse = sparqlCommunicator.performQuery(parameterizedQuery);
         FrameResponse[] responseObjects = objectMapper.readValue(framesResponse, FrameResponse[].class);
+        List<Frame> resultList = new LinkedList<>();
         for (FrameResponse r : responseObjects) {
             Frame frame = new Frame(r.id, r.index, r.type, r.hullregion, false);
             getRivetsForFrame(frame);
-            hull.addFrame(frame);
+            resultList.add(frame);
         }
-        return hull;
+        return resultList;
     }
 
     private Frame getRivetsForFrame(Frame frame) throws URISyntaxException, IOException {
