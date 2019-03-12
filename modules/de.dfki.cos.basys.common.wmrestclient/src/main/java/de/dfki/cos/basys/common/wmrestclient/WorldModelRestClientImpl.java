@@ -234,9 +234,7 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
                     = objectMapper.readValue(resultString, FrameResponse[].class);
             FrameResponse firstObject = receivedObjects[0];
             return new Frame(firstObject.id, firstObject.index, firstObject.type, false);
-        } catch (URISyntaxException ex) {
-            java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        } catch (URISyntaxException | IOException ex) {
             java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
@@ -249,9 +247,7 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
             StateResponse[] receivedObjects;
             receivedObjects = objectMapper.readValue(resultString, StateResponse[].class);
             return receivedObjects[0];
-        } catch (URISyntaxException ex) {
-            java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        } catch (URISyntaxException | IOException ex) {
             java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
