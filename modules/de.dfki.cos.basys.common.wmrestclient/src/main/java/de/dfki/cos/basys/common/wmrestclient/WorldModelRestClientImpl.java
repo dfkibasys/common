@@ -97,7 +97,12 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
                 hullId,
                 String.format("rdf:value '%d'^^<xsd:attributeValue> ;", frameIndex));
         try {
-            return performQueryForFramesList(parameterizedQuery).get(0);
+            List<Frame> frameResults = performQueryForFramesList(parameterizedQuery);
+            // The query parameters will match one exact frame, or none. In case we have a result,
+            // the only and first one in the list is the one that was queried
+            if (!frameResults.isEmpty()) {
+                return frameResults.get(0);
+            }
         } catch (URISyntaxException | IOException ex) {
             java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -108,7 +113,12 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
     public RivetPosition getRivetPosition(String rivetPositionId) {
         String parameterizedQuery = String.format(Queries.SinlgeRivetPositionById, rivetPositionId);
         try {
-            return PerformQueryForRivetList(parameterizedQuery).get(0);
+            List<RivetPosition> rivetResults = PerformQueryForRivetList(parameterizedQuery);
+            // The query parameters will match one exact rivet, or none. In case we have a result,
+            // the only and first one in the list is the one that was queried
+            if (!rivetResults.isEmpty()) {
+                return rivetResults.get(0);
+            }
         } catch (URISyntaxException | IOException ex) {
             java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -119,7 +129,13 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
     public RivetPosition getRivetPosition(String hullId, int frameIndex, int rivetPositionIndex) {
         try {
             String parameterizedQuery = String.format(Queries.SingleRivetByFrameAndRivetIndex, hullId, frameIndex, rivetPositionIndex);
-            return PerformQueryForRivetList(parameterizedQuery).get(0);
+            List<RivetPosition> rivetResults = PerformQueryForRivetList(parameterizedQuery);
+            // The query parameters will match one exact rivet, or none. In case we have a result,
+            // the only and first one in the list is the one that was queried
+            if (!rivetResults.isEmpty()) {
+                return rivetResults.get(0);
+            }
+
         } catch (URISyntaxException | IOException ex) {
             java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
