@@ -87,7 +87,17 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
 
     @Override
     public Frame getFrame(String frameId) {
-        // TODO Auto-generated method stub
+        String parameterizedQuery = String.format(Queries.SingleFrameById, frameId);
+        try {
+            List<Frame> frameResults = performQueryForFramesList(parameterizedQuery);
+            // The query parameters will match one exact frame, or none. In case we have a result,
+            // the only and first one in the list is the one that was queried
+            if (!frameResults.isEmpty()) {
+                return frameResults.get(0);
+            }
+        } catch (URISyntaxException | IOException ex) {
+            java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
     }
 
