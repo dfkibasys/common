@@ -94,7 +94,8 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
     @Override
     public Frame getFrame(String hullId, int frameIndex) {
         String parameterizedQuery = String.format(Queries.FramesInHull,
-                String.format("?index '%d'^^<xsd:attributeValue> ;", frameIndex));
+                hullId,
+                String.format("rdf:value '%d'^^<xsd:attributeValue> ;", frameIndex));
         try {
             return performQueryForFramesList(parameterizedQuery).get(0);
         } catch (URISyntaxException | IOException ex) {
