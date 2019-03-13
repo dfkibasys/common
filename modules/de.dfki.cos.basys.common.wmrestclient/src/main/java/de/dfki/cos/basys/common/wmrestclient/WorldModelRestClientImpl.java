@@ -279,17 +279,31 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
         return result;
     }
 
-    private StateResponse GetStateForRivet(String rivetID) {
-        String parameterizedQuery = String.format(Queries.RivetPositionState, rivetID);
+    private StateResponse GetStateForRivet(int frameIndex, int rivetIndex) {
+        String parameterizedQuery = String.format(Queries.RivetStatusByIndices, frameIndex, rivetIndex);
         try {
-            String resultString = sparqlCommunicator.performQuery(parameterizedQuery);
-            StateResponse[] receivedObjects;
-            receivedObjects = objectMapper.readValue(resultString, StateResponse[].class);
-            return receivedObjects[0];
+            return performQueryForRivetState(parameterizedQuery);
         } catch (URISyntaxException | IOException ex) {
             java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    private StateResponse GetStateForRivet(String rivetID) {
+        String parameterizedQuery = String.format(Queries.RivetPositionState, rivetID);
+        try {
+            return performQueryForRivetState(parameterizedQuery);
+        } catch (URISyntaxException | IOException ex) {
+            java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    private StateResponse performQueryForRivetState(String parameterizedQuery) throws URISyntaxException, IOException {
+        String resultString = sparqlCommunicator.performQuery(parameterizedQuery);
+        StateResponse[] receivedObjects;
+        receivedObjects = objectMapper.readValue(resultString, StateResponse[].class);
+        return receivedObjects[0];
     }
 
     private int getFrameWithMostRivets(List<RivetPosition> rivetPositions) {
