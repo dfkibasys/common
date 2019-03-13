@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import de.dfki.cos.basys.common.wmrestclient.Queries.Queries;
 import de.dfki.cos.basys.common.wmrestclient.QueryResponses.HullsResponse;
 import de.dfki.cos.basys.common.wmrestclient.QueryResponses.FrameResponse;
+import de.dfki.cos.basys.common.wmrestclient.QueryResponses.FrameUriResponse;
+import de.dfki.cos.basys.common.wmrestclient.QueryResponses.NumRivetsResponse;
 import de.dfki.cos.basys.common.wmrestclient.QueryResponses.RivetPositionResponse;
 import de.dfki.cos.basys.common.wmrestclient.QueryResponses.StateResponse;
 import de.dfki.cos.basys.common.wmrestclient.SparqlClient.SparqlCommunicator;
@@ -187,21 +189,20 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
     }
 
     @Override
-    public List<RivetPosition> getRivetPositions(String hullId, SectorEnum hullRegion, int count, State state,
+    public List<RivetPosition> getRivetPositions(String hullId, SectorEnum hullRegion, int maxCount, State state,
             boolean forceFrame) {
-        String parameterizedQuery = String.format(Queries.BySectorAndState, hullId, hullRegion, state, count);
 
         try {
-            List<RivetPosition> returnedRivets = PerformQueryForRivetList(parameterizedQuery);
-            returnedRivets.stream().sorted((RivetPosition r1, RivetPosition r2) -> r1.getIndex() - r2.getIndex());
-            //returnedRivets.stream().filter(r -> r.getFrameIndex() )count(r)
+            List<RivetPosition> returnedRivets = new LinkedList<>();
             if (forceFrame) {
+                returnedRivets = GetRivetsInSingleFrameByStatus(hullId, hullRegion, state, maxCount);
+            } else {
+                String parameterizedQuery = String.format(Queries.BySectorAndState, hullId, hullRegion, state, maxCount);
 
-                final int fromFrame = getFrameWithMostRivets(returnedRivets);
-                return returnedRivets.stream().filter(p -> p.getFrameIndex() == fromFrame).collect(Collectors.toList());
+                returnedRivets = PerformQueryForRivetList(parameterizedQuery);
+                returnedRivets.stream().sorted((RivetPosition r1, RivetPosition r2) -> r1.getIndex() - r2.getIndex());
             }
             return returnedRivets;
-
         } catch (URISyntaxException | IOException ex) {
             java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
             return null;
@@ -235,6 +236,28 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
         List<RivetPosition> rivets = PerformQueryForRivetList(parameterizedQuery);
         frame.AddRivetPositions(rivets);
         return frame;
+    }
+
+    private List<RivetPosition> GetRivetsInSingleFrameByStatus(String hullId, SectorEnum sector, State state, int maxCount) throws IOException, URISyntaxException {
+        String parameterizedQuery = String.format(Queries.FrameUriInSector, sector);
+        String responseString = sparqlCommunicator.performQuery(parameterizedQuery);
+        FrameUriResponse[] receivedObjects = objectMapper.readValue(responseString, FrameUriResponse[].class);
+        for (FrameUriResponse frame : receivedObjects) {
+            if (GetCountOfRivetsWithState(frame.frameUri, state) > 0) {
+                return getRivetPositions(hullId, frame.frameIndex, maxCount, state);
+            }
+        }
+        return new LinkedList<>();
+    }
+
+    private int GetCountOfRivetsWithState(String frameUri, State state) throws IOException, URISyntaxException {
+        String parameterizedQuery = String.format(Queries.CountRivetsWithStateInFrame, frameUri, state);
+        String responseString = sparqlCommunicator.performQuery(parameterizedQuery);
+        NumRivetsResponse[] receivedObjects = objectMapper.readValue(responseString, NumRivetsResponse[].class);
+        if (receivedObjects.length > 0) {
+            return receivedObjects[0].numRivets;
+        }
+        return 0;
     }
 
     private List<RivetPosition> PerformQueryForRivetList(String parameterizedQuery) throws URISyntaxException, IOException {
