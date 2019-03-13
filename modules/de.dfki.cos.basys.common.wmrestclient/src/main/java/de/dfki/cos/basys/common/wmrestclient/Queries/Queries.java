@@ -311,9 +311,10 @@ public class Queries {
             + "}";
 
     public static String ByParentFrameIndexAndState = "prefix ldp: <http://www.w3.org/ns/ldp#>"
-	    + "prefix dct: <http://purl.org/dc/terms/>"
-	    + "prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>"
-	    + "SELECT ?rivetUri ?id ?index WHERE {"
+            + "prefix dct: <http://purl.org/dc/terms/>"
+            + "prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>"
+            + "prefix xsd: <http://www.w3.org/2001/XMLSchema#>"
+            + "SELECT ?rivetUri ?id ?index WHERE {"
             + "?hullUri dct:identifier '%1$s'^^<xsd:string> ;"
             + "dct:hasPart ?hullComponent ."
             + ""
@@ -349,6 +350,7 @@ public class Queries {
             + ""
             + "FILTER isLiteral(?index)"
             + "}"
+            + "ORDER BY xsd:integer(?index)"
             + "LIMIT %4$d";
 
     public static String BySector = "prefix ldp: <http://www.w3.org/ns/ldp#>\n"
