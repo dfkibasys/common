@@ -22,7 +22,7 @@ public class RivetPosition implements Serializable  {
 	private static final long serialVersionUID = 1L;
 
 	public enum State {
-        UNDEFINED, EMPTY, SQUEEZING, SQUEEZED, CHECKING, CHECKED_IO, CHECKED_NIO, SEALING, SEALED
+        UNDEFINED, EMPTY, INSERTED, SQUEEZING, SQUEEZED, SQUEEZED_NIO, CHECKING, CHECKED_IO, CHECKED_NIO, SEALING, SEALED
     }
 
     // a UUID
