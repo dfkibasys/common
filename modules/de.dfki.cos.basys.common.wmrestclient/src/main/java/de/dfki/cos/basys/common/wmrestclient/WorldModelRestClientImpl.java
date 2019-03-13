@@ -5,6 +5,7 @@ import de.dfki.cos.basys.common.wmrestclient.Queries.Queries;
 import de.dfki.cos.basys.common.wmrestclient.QueryResponses.HullsResponse;
 import de.dfki.cos.basys.common.wmrestclient.QueryResponses.FrameResponse;
 import de.dfki.cos.basys.common.wmrestclient.QueryResponses.FrameUriResponse;
+import de.dfki.cos.basys.common.wmrestclient.QueryResponses.HullDataResponse;
 import de.dfki.cos.basys.common.wmrestclient.QueryResponses.NumRivetsResponse;
 import de.dfki.cos.basys.common.wmrestclient.QueryResponses.RivetPositionResponse;
 import de.dfki.cos.basys.common.wmrestclient.QueryResponses.StateResponse;
@@ -66,19 +67,17 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
 
     @Override
     public Hull getHull(String id) {
-        String paratemerizedQuery = String.format(Queries.getHullById, id);
-        String hullsResponse;
         try {
-            hullsResponse = sparqlCommunicator.performQuery(paratemerizedQuery);
-            HullsResponse[] responseObjects = objectMapper.readValue(hullsResponse, HullsResponse[].class);
-            if (responseObjects.length > 0) {
-                return getAllHullData(new Hull(id));
-            }
+            String paratemerizedQuery = String.format(Queries.HullQueries.GetAllRivetPositions, id);
+            String responseString = sparqlCommunicator.performQuery(paratemerizedQuery);
+            Hull hull = new Hull(id);
+            HullDataResponse[] receivedObjects = objectMapper.readValue(responseString, HullDataResponse[].class);
+            BuildFrames(receivedObjects, hull);
+            return hull;
         } catch (URISyntaxException | IOException ex) {
             java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
-
-        return null;
     }
 
     @Override
@@ -209,13 +208,26 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
         }
     }
 
-    private Hull getAllHullData(Hull hull) throws IOException, URISyntaxException {
-        String parameterizedQuery = String.format(Queries.FramesInHull, hull.getId(), "", "");
-        List<Frame> framesResponse = performQueryForFramesList(parameterizedQuery);
-        framesResponse.forEach((frame) -> {
-            hull.addFrame(frame);
-        });
-        return hull;
+    private void BuildFrames(HullDataResponse[] hullData, Hull hull) {
+        for (HullDataResponse data : hullData) {
+            Frame frameForRivet = new Frame(data.frameId, data.frameIndex, data.frameType, data.hullRegion, false);
+            frameForRivet.setParentId(hull.getId());
+            if (hull.getFrames().stream().filter(f -> f.getId().equals(data.frameId)).findFirst().isPresent()) {
+                frameForRivet = hull.getFrames().stream().filter(f -> f.getId().equals(data.frameId)).findFirst().get();
+            } else {
+                hull.addFrame(frameForRivet);
+            }
+            AddRivetToFrame(frameForRivet, data);
+        }
+    }
+
+    private void AddRivetToFrame(Frame frame, HullDataResponse data) {
+        RivetPosition r = new RivetPosition(data.rivetId, data.rivetUri, data.index);
+        r.setFrameIndex(data.frameIndex);
+        r.setFrameType(data.frameType);
+        r.setParentId(data.frameId);
+        r.setState(data.status);
+        frame.AddRivetPosition(r);
     }
 
     private List<Frame> performQueryForFramesList(String parameterizedQuery) throws URISyntaxException, IOException {
