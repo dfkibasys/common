@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class WorldModelCreator {
 
-    public static void Reset(WorldModelRestClientImpl client) {
+    public static void ResetAllToEmpty(WorldModelRestClientImpl client) {
         String hullId = client.getHulls().get(0).getId();
         Hull hull = client.getHull(hullId);
         List<RivetPosition> allRivets = new LinkedList<>();
