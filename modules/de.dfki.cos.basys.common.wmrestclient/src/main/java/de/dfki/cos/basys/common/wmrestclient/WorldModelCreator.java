@@ -4,9 +4,14 @@ import de.dfki.cos.basys.common.wmrestclient.dto.Frame;
 import de.dfki.cos.basys.common.wmrestclient.dto.Frame.FrameType;
 import de.dfki.cos.basys.common.wmrestclient.dto.Hull;
 import de.dfki.cos.basys.common.wmrestclient.dto.RivetPosition;
-import de.dfki.cos.basys.common.wmrestclient.dto.Sector;
+import de.dfki.cos.basys.common.wmrestclient.dto.RivetPosition.State;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class WorldModelCreator {
 
@@ -23,6 +28,53 @@ public class WorldModelCreator {
                 client.updateRivetPosition(r);
             });
         }
+    }
+
+    /**
+     *
+     * @param fileName Path to csv file relative to the calling project (e.g.
+     * 'resources/my_configuration.csv')
+     * @param separator Separator character(s) to separate values in csv file
+     * @param client WorldModelRestClient that is communicating with the roa
+     * world server
+     *
+     * Example of usage from the application that imports WorkdModelCreator:
+     * WorldModelCreate.SetStateFromFile('path/to/resourceofcallingapplication',
+     * ';', client);
+     *
+     * @throws IOException
+     *
+     */
+    public static void SetStateFromFile(String fileName, String separator, WorldModelRestClient client) throws IOException {
+
+        String line;
+        BufferedReader br;
+        Hull hull = client.getHull(client.getHulls().get(0).getId());
+        br = new BufferedReader(new FileReader(fileName));
+        Map<Integer, Map<Integer, State>> rivetsByIndices = new HashMap<>();
+
+        while ((line = br.readLine()) != null) {
+            String[] rivetToSet = line.split(separator);
+            int frameIndex = Integer.parseInt(rivetToSet[0]);
+            int rivetIndex = Integer.parseInt(rivetToSet[1]);
+
+            if (rivetsByIndices.get(frameIndex) == null) {
+                rivetsByIndices.put(Integer.parseInt(rivetToSet[0]), new HashMap<>());
+            }
+
+            rivetsByIndices.get(Integer.parseInt(rivetToSet[0])).put(Integer.parseInt(rivetToSet[1]), State.valueOf(rivetToSet[2]));
+        }
+
+        hull.getFrames().forEach((Frame f) -> {
+            if (rivetsByIndices.containsKey(f.getIndex())) {
+                f.getRivetPositions().forEach((RivetPosition r) -> {
+                    if (rivetsByIndices.get(f.getIndex()).containsKey(r.getIndex())) {
+                        r.setState(rivetsByIndices.get(f.getIndex()).get(r.getIndex()));
+                    }
+                    client.updateRivetPosition(r);
+                });
+            }
+        });
     }
 
 	public static Hull createHullHMI( ) {
