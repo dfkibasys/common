@@ -57,7 +57,10 @@ public class WorldModelCreator {
         br = new BufferedReader(new FileReader(fileName));
         Map<Integer, Map<Integer, State>> rivetsByIndices = new HashMap<>();
 
+        int lineNumber = 0;
+
         while ((line = br.readLine()) != null) {
+            lineNumber++;
             String[] rivetToSet = line.split(separator);
             int frameIndex = 0;
             int rivetIndex = 0;
@@ -66,7 +69,7 @@ public class WorldModelCreator {
                 frameIndex = Integer.parseInt(rivetToSet[0]);
                 rivetIndex = Integer.parseInt(rivetToSet[1]);
             } catch (NumberFormatException ex) {
-                LOGGER.debug("FAILED TO INITIALIZE STATE OF RIVET AS INDEX VALUE COULD NOT BE PARSED");
+                LOGGER.debug(String.format("FAILED TO INITIALIZE STATE OF RIVET IN LINE %d AS INDEX VALUE COULD NOT BE PARSED", lineNumber));
                 continue;
             }
 
