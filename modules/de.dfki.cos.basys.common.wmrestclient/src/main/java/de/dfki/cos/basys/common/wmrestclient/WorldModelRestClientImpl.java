@@ -227,6 +227,7 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
         r.setFrameType(data.frameType);
         r.setParentId(data.frameId);
         r.setState(data.status);
+        r.setStateAttributeUri(data.statusUri);
         frame.AddRivetPosition(r);
     }
 

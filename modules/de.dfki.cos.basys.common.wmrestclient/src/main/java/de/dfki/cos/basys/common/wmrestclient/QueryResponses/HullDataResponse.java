@@ -21,6 +21,7 @@ public class HullDataResponse {
     public int frameIndex;
     public int index;
     public State status;
+    public String statusUri;
     public SectorEnum hullRegion;
     public FrameType frameType;
 }
