@@ -74,11 +74,11 @@ public class WorldModelCreator {
             }
 
             if (rivetsByIndices.get(frameIndex) == null) {
-                rivetsByIndices.put(Integer.parseInt(rivetToSet[0]), new HashMap<>());
+                rivetsByIndices.put(frameIndex, new HashMap<>());
             }
 
             try {
-                rivetsByIndices.get(Integer.parseInt(rivetToSet[0])).put(Integer.parseInt(rivetToSet[1]), State.valueOf(rivetToSet[2]));
+                rivetsByIndices.get(frameIndex).put(rivetIndex, State.valueOf(rivetToSet[2]));
             } catch (IllegalArgumentException ex) {
                 LOGGER.debug(String.format("FAILED TO INITIALIZED STATE OF RIVET [%s | %s] AS STATE %s IS NO VALID STATE",
                         rivetToSet[0],
