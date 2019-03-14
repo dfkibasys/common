@@ -61,7 +61,7 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
             return result;
         } catch (IOException | URISyntaxException ex) {
             java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
+            return new LinkedList<>();
         }
     }
 
@@ -91,7 +91,7 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
         } catch (URISyntaxException | IOException ex) {
             java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        return new LinkedList<>();
     }
 
     @Override
@@ -171,7 +171,7 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
             java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return null;
+        return new LinkedList<>();
     }
 
     @Override
@@ -204,7 +204,7 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
             return returnedRivets;
         } catch (URISyntaxException | IOException ex) {
             java.util.logging.Logger.getLogger(WorldModelRestClientImpl.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
+            return new LinkedList<>();
         }
     }
 
