@@ -12,8 +12,12 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class WorldModelCreator {
+
+    protected static final Logger LOGGER = LoggerFactory.getLogger(WorldModelRestClientImpl.class.getName());
 
     public static void ResetAllToEmpty(WorldModelRestClientImpl client) {
         String hullId = client.getHulls().get(0).getId();
@@ -55,14 +59,29 @@ public class WorldModelCreator {
 
         while ((line = br.readLine()) != null) {
             String[] rivetToSet = line.split(separator);
-            int frameIndex = Integer.parseInt(rivetToSet[0]);
-            int rivetIndex = Integer.parseInt(rivetToSet[1]);
+            int frameIndex = 0;
+            int rivetIndex = 0;
+
+            try {
+                frameIndex = Integer.parseInt(rivetToSet[0]);
+                rivetIndex = Integer.parseInt(rivetToSet[1]);
+            } catch (NumberFormatException ex) {
+                LOGGER.debug("FAILED TO INITIALIZE STATE OF RIVET AS INDEX VALUE COULD NOT BE PARSED");
+                continue;
+            }
 
             if (rivetsByIndices.get(frameIndex) == null) {
                 rivetsByIndices.put(Integer.parseInt(rivetToSet[0]), new HashMap<>());
             }
 
-            rivetsByIndices.get(Integer.parseInt(rivetToSet[0])).put(Integer.parseInt(rivetToSet[1]), State.valueOf(rivetToSet[2]));
+            try {
+                rivetsByIndices.get(Integer.parseInt(rivetToSet[0])).put(Integer.parseInt(rivetToSet[1]), State.valueOf(rivetToSet[2]));
+            } catch (IllegalArgumentException ex) {
+                LOGGER.debug(String.format("FAILED TO INITIALIZED STATE OF RIVET [%s | %s] AS STATE %s IS NO VALID STATE",
+                        rivetToSet[0],
+                        rivetToSet[1],
+                        rivetToSet[2]));
+            }
         }
 
         hull.getFrames().forEach((Frame f) -> {
