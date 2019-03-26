@@ -53,6 +53,12 @@ public class MirRestClientImpl implements MirRestClient {
 		init();
 	}
 	
+	public MirRestClientImpl(WebTarget endpoint, String auth) {
+		this.endpoint = endpoint.path(pathSegment);	
+		this.auth = auth;
+		init();
+	}
+	
 	private void init() {
 		missionDefinitions = getMissionDefinitions();
 		allMissionInstances = getAllMissionInstancesInQueue();
