@@ -39,6 +39,13 @@
             <optional>true</optional>
         </dependency>
 		        
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+ 		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson-version}</version>
+		</dependency>
+		
         <!-- https://mvnrepository.com/artifact/junit/junit/4.12 -->
         <dependency>
             <groupId>junit</groupId>
@@ -59,6 +66,7 @@
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-json-jackson</artifactId>
             <version>${jersey-version}</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
