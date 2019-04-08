@@ -11,7 +11,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.dfki.cos.basys.common</groupId>
   <artifactId>wrapper-bundle-settings</artifactId>
-  <version>0.2.6-SNAPSHOT</version>
+  <version>0.2.6</version>
 
   <name>BaSys 4.0 Common - Wrapper Instructions</name>
 
@@ -28,6 +28,6 @@
   </modules>
 
   <scm>
-    <tag>v0.2.5</tag>
+    <tag>v0.2.6</tag>
   </scm>
 </project>
