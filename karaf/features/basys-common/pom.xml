@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>de.dfki.cos.basys.common.karaf</groupId>
 		<artifactId>features</artifactId>
-		<version>0.2.5-SNAPSHOT</version>
+		<version>0.2.7-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>basys-common</artifactId>
