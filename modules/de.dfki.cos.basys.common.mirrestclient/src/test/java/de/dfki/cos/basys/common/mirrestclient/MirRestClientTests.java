@@ -36,6 +36,7 @@ public class MirRestClientTests {
 	}
 
 	@Test
+	@Ignore
 	public void testGetStatus() {
 		Status status = client.getRobotStatus();
 		assertNotNull(status);
@@ -43,6 +44,7 @@ public class MirRestClientTests {
 	}
 	
 	@Test
+	@Ignore
 	public void testSetStatus() {
 		Status status = client.setRobotStatus(MiRState.PAUSED);
 		assertNotNull(status);
@@ -65,30 +67,35 @@ public class MirRestClientTests {
 	
 
 	@Test
+	@Ignore
 	public void testGetMissionDefinitions() {
 		List<MissionDefinition> missionDefinitions = client.getMissionDefinitions();
 		assertNotNull(missionDefinitions);
 	}
 
 	@Test
+	@Ignore
 	public void testGetAllMissionInstancesInQueue() {
 		List<MissionInstance> missionInstances = client.getAllMissionInstancesInQueue();
 		assertNotNull(missionInstances);
 	}
 	
 	@Test
+	@Ignore
 	public void testGetMissionInstanceInfo() {
 		MissionInstanceInfo info = client.getMissionInstanceInfo(666);
 		assertNotNull(info);
 	}
 
 	@Test
+	@Ignore
 	public void testGetPositions() {
 		List<SymbolicPosition> positions = client.getPositions();
 		assertNotNull(positions);
 	}
 	
 	@Test
+	@Ignore
 	public void testGetMapPositions() {
 		String mapId = "605911f3-dc39-11e8-8b31-f44d3061d5d6";
 		List<SymbolicPosition> positions = client.getMapPositions(mapId);
@@ -96,6 +103,7 @@ public class MirRestClientTests {
 	}
 	
 	@Test
+	@Ignore
 	public void testGetPositionInfo() {
 		String positionId = "4300e514-e113-11e8-b57c-f44d3061d5d6";
 		SymbolicPositionInfo info = client.getPositionInfo(positionId);
