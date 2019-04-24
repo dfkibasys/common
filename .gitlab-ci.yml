@@ -23,8 +23,6 @@ test:
   stage: test
   script:
     - mvn $MAVEN_CLI_OPTS test
-  only:
-    - master
 
 deploy:
   stage: deploy
