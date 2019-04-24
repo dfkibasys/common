@@ -122,9 +122,20 @@ public class TestDuration {
 	@Test
 	public void testSleepTooManyNanos() {
 		Duration d = new Duration(0, 500000000);
-		long t = System.nanoTime();
+		long t1 = System.nanoTime();
 		assertTrue(d.sleep());
-		assertTrue(greaterThanEquals(System.nanoTime(), t + d.toNSec()));
+		long t2 = System.nanoTime();			
+		// because of the precision of Thread.sleep, we have to add a millisecond
+		boolean b = greaterThanEquals(t2+Duration.MILLI_TO_NSECS, t1 + d.toNSec());
+		if (!b) {
+			System.out.println(t1);
+			System.out.println(t1+d.toNSec());
+			System.out.println(t2);
+			System.out.println(t2-t1-d.toNSec());
+			System.out.println(t2+Duration.MILLI_TO_NSECS-t1-d.toNSec());
+		}
+		assertTrue(b);
+		
 	}
 
 	@Test

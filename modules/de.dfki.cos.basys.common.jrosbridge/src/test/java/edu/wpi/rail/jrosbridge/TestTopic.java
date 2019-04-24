@@ -136,6 +136,13 @@ public class TestTopic {
 								+ "\":{\"test1\":\"test2\"}}").build());
 		Thread.yield();
 
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		assertNotNull(DummyHandler.latest);
 //		assertEquals(
 //				"{\"op\":\"subscribe\",\"id\":\"subscribe:myTopic1:0\",\"type\":\"myType1\","
