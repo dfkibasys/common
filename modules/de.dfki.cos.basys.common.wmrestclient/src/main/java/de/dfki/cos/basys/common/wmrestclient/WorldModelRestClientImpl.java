@@ -256,7 +256,7 @@ public class WorldModelRestClientImpl implements WorldModelRestClient {
         String responseString = sparqlCommunicator.performQuery(parameterizedQuery);
         FrameUriResponse[] receivedObjects = objectMapper.readValue(responseString, FrameUriResponse[].class);
         for (FrameUriResponse frame : receivedObjects) {
-            if (GetCountOfRivetsWithState(frame.frameUri, state) > 0) {
+            if (GetCountOfRivetsWithState(frame.frameUri, state) > 0 && frame.frameIndex > 12 && frame.frameIndex < 37) {
                 return getRivetPositions(hullId, frame.frameIndex, maxCount, state);
             }
         }
