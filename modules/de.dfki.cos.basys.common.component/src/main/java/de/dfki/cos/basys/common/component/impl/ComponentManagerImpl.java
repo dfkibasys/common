@@ -30,8 +30,15 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 	private Map<String, Component> components = new HashMap<>();
 	private Gson gson = new Gson();
 	
+	private boolean recursive = false;
+	
 	public ComponentManagerImpl(ComponentConfiguration config) {
 		super(config);
+		
+		if (config.getProperties().get("recursive") != null) {
+			recursive = Boolean.parseBoolean(config.getProperties().get("recursive"));
+			LOGGER.info("recursive = " + recursive);
+		}
 	}
 
 	@Override
@@ -46,7 +53,7 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 					File file = new File(fileString);
 					try {
 						if (file.isDirectory()) {
-							createComponents(file, true);
+							createComponents(file, recursive);
 						} else {
 							createComponent(file);
 						}
@@ -57,7 +64,7 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 						throw new RuntimeException(e);
 					}
 				}
-				LOGGER.info("connectToExternal complete");
+				LOGGER.info("component creation complete");
 				
 			}
 		};

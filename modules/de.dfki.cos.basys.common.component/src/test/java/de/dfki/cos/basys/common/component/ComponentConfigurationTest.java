@@ -20,10 +20,10 @@ public class ComponentConfigurationTest {
 	@Before
 	public void setUp() throws Exception {
 		config = new ComponentConfiguration.Builder()
-				.id("id")
-				.name("name")
+				.id("component-manager")
+				.name("component-manager")
 				.externalConnectionString("externalConnectionString")
-				.implementationJavaClass("implementationJavaClass")
+				.implementationJavaClass("de.dfki.cos.basys.common.component.impl.ComponentManagerImpl")
 				.addProperty("key1", "value1")
 				.addProperty("key2", "value2")
 				.addProperty("key3", "value3")
@@ -43,7 +43,7 @@ public class ComponentConfigurationTest {
 	
 	@Test
 	public void testFromJson() {		
-		String filename = "src/test/resources/config.json";
+		String filename = "src/test/resources/component-1.json";
 		Gson gson = new Gson();
 		JsonReader reader;
 		try {
