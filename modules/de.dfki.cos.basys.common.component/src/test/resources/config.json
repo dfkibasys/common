@@ -1,0 +1,11 @@
+{
+  "id": "id",
+  "name": "name",
+  "externalConnectionString": "externalConnectionString",
+  "implementationJavaClass": "implementationJavaClass",
+  "properties": {
+    "key1": "value1",
+    "key2": "value2",
+    "key3": "value3"
+  }
+}

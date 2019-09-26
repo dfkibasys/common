@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <parent>
+        <relativePath>../../poms/compiled/</relativePath>
+        <groupId>de.dfki.cos.basys.common</groupId>
+        <artifactId>compiled-bundle-settings</artifactId>
+        <version>0.2.7-SNAPSHOT</version>
+    </parent>
+
+    <properties>
+        <bundle.symbolicName>de.dfki.cos.basys.common.component</bundle.symbolicName>
+        <bundle.namespace>de.dfki.cos.basys.common.component</bundle.namespace>
+    </properties>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>de.dfki.cos.basys.common.component</artifactId>
+
+    <name>${bundle.symbolicName}</name>
+
+    <packaging>bundle</packaging>
+
+    <dependencies>
+    	<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+		<dependency>
+		    <groupId>${project.groupId}</groupId>
+		    <artifactId>de.dfki.cos.basys.common.emf</artifactId>
+		    <version>${project.version}</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+		<dependency>
+		    <groupId>com.google.guava</groupId>
+		    <artifactId>guava</artifactId>
+		    <version>28.1-jre</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+		<dependency>
+		    <groupId>com.google.code.gson</groupId>
+		    <artifactId>gson</artifactId>
+		    <version>2.8.5</version>
+		</dependency>
+	
+        <!-- comment to remove all imported (non-local) bundles from your compilation 
+        classpath -->
+        <dependency>
+            <type>pom</type>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>provision</artifactId>			
+            <version>${project.version}</version>
+            <optional>true</optional>
+        </dependency>
+		
+        <!-- https://mvnrepository.com/artifact/junit/junit/4.12 -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+
+
+</project>
