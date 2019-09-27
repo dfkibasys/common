@@ -30,14 +30,19 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 	private Map<String, Component> components = new HashMap<>();
 	private Gson gson = new Gson();
 	
-	private boolean recursive = false;
+	private boolean recursive, async = false;
 	
 	public ComponentManagerImpl(ComponentConfiguration config) {
 		super(config);
-		
+
 		if (config.getProperties().get("recursive") != null) {
 			recursive = Boolean.parseBoolean(config.getProperties().get("recursive"));
 			LOGGER.info("recursive = " + recursive);
+		}
+		
+		if (config.getProperties().get("async") != null) {
+			async = Boolean.parseBoolean(config.getProperties().get("async"));
+			LOGGER.info("async = " + async);
 		}
 	}
 
@@ -68,14 +73,17 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 				
 			}
 		};
-		
-		//scheduledExecutorService.schedule(r, 10, TimeUnit.SECONDS);
-			
-		CompletableFuture<Void> cf = CompletableFuture.runAsync(r, context.getScheduledExecutorService()).exceptionally(e-> {		    
-			e.printStackTrace();
-			LOGGER.error(e.getMessage(), e);
-		    return null;
-		});
+		if (async) {
+			//scheduledExecutorService.schedule(r, 10, TimeUnit.SECONDS);
+				
+			CompletableFuture<Void> cf = CompletableFuture.runAsync(r, context.getScheduledExecutorService()).exceptionally(e-> {		    
+				e.printStackTrace();
+				LOGGER.error(e.getMessage(), e);
+			    return null;
+			});
+		} else {
+			r.run();
+		}
 	}
 	
 	@Override
