@@ -2,6 +2,8 @@ package de.dfki.cos.basys.common.component;
 
 import static org.junit.Assert.*;
 
+import java.util.Properties;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,18 +12,17 @@ import de.dfki.cos.basys.common.component.impl.ComponentManagerImpl;
 
 public class ComponentManagerTest {
 
-	ComponentConfiguration config = new ComponentConfiguration.Builder()
-			.id("component-manager")
-			.name("component-manager")
-			.externalConnectionString("src/test/resources/components")
-			.implementationJavaClass("de.dfki.cos.basys.common.component.impl.ComponentManagerImpl")
-			.addProperty("recursive", "true")
-			.build();
 	
 	ComponentManager manager = null;	
 	
 	@Before
 	public void setUp() throws Exception {	
+		Properties config = new Properties();
+		config.put(Component.id, "component-manager");
+		config.put(Component.name, "component-manager");
+		config.put(Component.connectionString, "src/test/resources/components");
+		config.put("recursive", "true");
+		
 		manager = new ComponentManagerImpl(config);	
 	}
 

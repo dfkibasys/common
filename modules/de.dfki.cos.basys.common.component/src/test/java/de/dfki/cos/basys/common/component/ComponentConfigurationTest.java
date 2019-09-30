@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.Properties;
 
 import org.junit.After;
 import org.junit.Before;
@@ -15,19 +16,15 @@ import com.google.gson.stream.JsonReader;
 
 public class ComponentConfigurationTest {
 	
-	ComponentConfiguration config;
+	Properties config;
 	
 	@Before
 	public void setUp() throws Exception {
-		config = new ComponentConfiguration.Builder()
-				.id("component-manager")
-				.name("component-manager")
-				.externalConnectionString("externalConnectionString")
-				.implementationJavaClass("de.dfki.cos.basys.common.component.impl.ComponentManagerImpl")
-				.addProperty("key1", "value1")
-				.addProperty("key2", "value2")
-				.addProperty("key3", "value3")
-				.build();
+		Properties config = new Properties();
+		config.put(Component.id, "component-manager");
+		config.put(Component.name, "component-manager");
+		config.put(Component.connectionString, "src/test/resources/components");
+		config.put("recursive", "true");
 	}
 
 	@After
@@ -48,7 +45,7 @@ public class ComponentConfigurationTest {
 		JsonReader reader;
 		try {
 			reader = new JsonReader(new FileReader(filename));		
-			ComponentConfiguration config2 = gson.fromJson(reader, ComponentConfiguration.class);
+			Properties config2 = gson.fromJson(reader, Properties.class);
 			System.out.println(config2);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

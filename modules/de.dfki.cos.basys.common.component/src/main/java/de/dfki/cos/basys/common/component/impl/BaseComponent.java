@@ -1,5 +1,6 @@
 package de.dfki.cos.basys.common.component.impl;
 
+import java.util.Properties;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
@@ -7,39 +8,37 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.dfki.cos.basys.common.component.Component;
-import de.dfki.cos.basys.common.component.ComponentConfiguration;
 import de.dfki.cos.basys.common.component.ComponentContext;
 import de.dfki.cos.basys.common.component.ComponentException;
+import de.dfki.cos.basys.common.component.ConnectionManager;
 
 public class BaseComponent implements Component {
 
 	public final Logger LOGGER;
-	protected ComponentConfiguration config;
+	protected Properties config;
 	protected boolean activated = false;
 	protected ComponentContext context;
-	
-	protected boolean connectedToExternal = false;
-	protected boolean observeExternalConnection = false;
-	private ScheduledFuture<?> externalConnectionHandle = null;
-	
-	public BaseComponent(ComponentConfiguration config) {
+
+	protected ConnectionManager connectionManager = null;
+		
+	public BaseComponent(Properties config) {
 		this.config = config;
-		LOGGER = LoggerFactory.getLogger("basys.component." + config.getName().replaceAll(" ", "-"));
-
-		if (config.getProperties().get("observeExternalConnection") != null) {
-			observeExternalConnection = Boolean.parseBoolean(config.getProperties().get("observeExternalConnection"));
-			LOGGER.info("observeExternalConnection = " + observeExternalConnection);
-		}
+		LOGGER = LoggerFactory.getLogger("basys.component." + getName().replaceAll(" ", "-"));
 	}
-
+	
 	@Override
 	public String getId() {
-		return config.getId();
+		return config.getProperty(Component.id);
 	}
 
 	@Override
 	public String getName() {		
-		return config.getName();
+		return config.getProperty(Component.name);
+	}
+	
+	@Override
+	public ConnectionManager getConnectionManager() {
+		return connectionManager;
 	}
 
 	@Override
@@ -54,27 +53,8 @@ public class BaseComponent implements Component {
 			
 			this.context = context;	
 			
-			if (config.getExternalConnectionString() != null && !config.getExternalConnectionString().equals("")) {
-								
-				LOGGER.info("connectToExternal: " + config.getExternalConnectionString());
-				try {
-					if (canConnectToExternal()) {
-						connectToExternal();
-						setConnectedToExternal(true);
-					} else {
-						LOGGER.warn("component cannot connectToExternal(), skip ...");
-					}
-					LOGGER.debug("connectToExternal - finished");
-				} catch (ComponentException e) {
-					LOGGER.error(e.getMessage());
-					LOGGER.warn("component could not connectToExternal()");
-					//e.printStackTrace();
-					setConnectedToExternal(false);
-				}
-				
-				observeExternalConnection();
-				
-			}
+			if (connectionManager != null)
+				connectionManager.connect(config.getProperty(Component.connectionString));
 
 			doActivate();		
 			
@@ -93,11 +73,8 @@ public class BaseComponent implements Component {
 			doDeactivate();
 			setActivated(false);
 			
-			if (connectedToExternal) {				
-				unobserveExternalConnection();
-				disconnectFromExternal();
-				setConnectedToExternal(false);
-			}
+			if (connectionManager != null)
+				connectionManager.disconnect();
 			
 			context = null;
 			LOGGER.info("deactivate - finished");
@@ -115,20 +92,6 @@ public class BaseComponent implements Component {
 	}
 
 	@Override
-	public void connectToExternal() {
-		//empty, override in derived classes if needed
-	}
-	
-	@Override
-	public void disconnectFromExternal() {
-		//empty, override in derived classes if needed
-	}
-	
-	protected boolean canConnectToExternal() throws ComponentException {
-		//return always true, override in derived classes if needed
-		return true;
-	}
-	@Override
 	public boolean isActivated() {
 		return activated;
 	}
@@ -138,53 +101,6 @@ public class BaseComponent implements Component {
 		notifyChange();
 	}	
 
-	@Override
-	public boolean isConnectedToExternal() {
-		return connectedToExternal;
-	}
-	
-	private void setConnectedToExternal(boolean value) {
-		connectedToExternal = value;
-		notifyChange();
-	}
-
-	private void observeExternalConnection() {
-		if (observeExternalConnection) {
-			LOGGER.info("observeExternalConnection()");
-			externalConnectionHandle = context.getScheduledExecutorService().scheduleWithFixedDelay(new Runnable() {
-				
-				@Override
-				public void run() {			
-					
-					if (!isConnectedToExternal()) {
-						LOGGER.info("connectToExternal: " + config.getExternalConnectionString());
-						try {
-							if (canConnectToExternal()) {
-								connectToExternal();
-								//connectedToExternal = true;
-							} else {
-								LOGGER.warn("component cannot connectToExternal(), retry ...");
-							}
-							LOGGER.debug("connectToExternal - finished");
-						} catch (ComponentException e) {
-							LOGGER.error(e.getMessage());
-							LOGGER.warn("component could not connectToExternal(), retry ...");
-							e.printStackTrace();
-						}
-					}
-					
-				}
-				
-			}, 5000, 5000, TimeUnit.MILLISECONDS);
-		}				
-	}
-	
-	private void unobserveExternalConnection() {
-		if (observeExternalConnection) {
-			LOGGER.info("unobserveExternalConnection()");
-			externalConnectionHandle.cancel(true);
-		}
-	}
 	
 	protected void notifyChange() {
 		//empty, override in derived classes if needed

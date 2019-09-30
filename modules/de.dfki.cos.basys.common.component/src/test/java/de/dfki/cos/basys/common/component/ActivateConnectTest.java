@@ -2,18 +2,20 @@ package de.dfki.cos.basys.common.component;
 
 import static org.junit.Assert.*;
 
+import java.util.Properties;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.dfki.cos.basys.common.component.ComponentConfiguration;
 import de.dfki.cos.basys.common.component.ComponentOrderStatus;
+import de.dfki.cos.basys.common.component.impl.BaseConnectionManager;
 import de.dfki.cos.basys.common.component.util.TestComponent;
 
 public class ActivateConnectTest {
 
-	ComponentConfiguration config;
-	Component component;
+	Properties config;
+	TestComponent component;
 	
 	String user_a = "user_a";
 	String user_b = "user_b";
@@ -21,17 +23,11 @@ public class ActivateConnectTest {
 	ComponentOrderStatus status = null;	
 	
 	@Before
-	public void setUp() throws Exception {
-		
-		config = new ComponentConfiguration.Builder()
-				.id("some_id")
-				.name("test-control-component")
-				.externalConnectionString("")
-				.implementationJavaClass("")
-				.build();
-	
-		component = new TestComponent(config);
-		
+	public void setUp() throws Exception {		
+		config = new Properties();
+		config.put(Component.id, "test-component");
+		config.put(Component.name, "test-component");	
+		component = new TestComponent(config);	
 	}
 
 	@After
@@ -42,13 +38,13 @@ public class ActivateConnectTest {
 	public void testActivateDeactivate() {
 		try {
 			assertFalse(component.isActivated());
-			assertFalse(component.isConnectedToExternal());
+			//assertFalse(component.isConnectedToExternal());
 			component.activate(ComponentContext.getStaticContext());
 			assertTrue(component.isActivated());
-			assertFalse(component.isConnectedToExternal());
+			//assertFalse(component.isConnectedToExternal());
 			component.deactivate();
 			assertFalse(component.isActivated());
-			assertFalse(component.isConnectedToExternal());
+			//assertFalse(component.isConnectedToExternal());
 		} catch (Exception e) {
 			fail();
 		}
@@ -57,18 +53,18 @@ public class ActivateConnectTest {
 	@Test
 	public void testConnectDisconnectToExternal() {
 		try {
-			config.setExternalConnectionString("somewhere");
+			config.put(Component.connectionString, "somewhere");
 			
 			assertFalse(component.isActivated());
-			assertFalse(component.isConnectedToExternal());
+			assertFalse(component.getConnectionManager().isConnected());
 			component.activate(ComponentContext.getStaticContext());
 			assertTrue(component.isActivated());
 			
-			assertTrue(component.isConnectedToExternal());
+			assertTrue(component.getConnectionManager().isConnected());
 			
 			component.deactivate();
 			assertFalse(component.isActivated());
-			assertFalse(component.isConnectedToExternal());
+			assertFalse(component.getConnectionManager().isConnected());
 		} catch (Exception e) {
 			fail();
 		}

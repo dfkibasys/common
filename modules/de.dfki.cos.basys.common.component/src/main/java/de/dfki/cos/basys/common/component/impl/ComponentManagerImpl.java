@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.concurrent.CompletableFuture;
 
 import org.apache.commons.io.filefilter.SuffixFileFilter;
@@ -17,9 +18,11 @@ import org.eclipse.emf.common.util.URI;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
+//import com.google.inject.Guice;
+//import com.google.inject.Injector;
+//import com.google.inject.Module;
 
 import de.dfki.cos.basys.common.component.Component;
-import de.dfki.cos.basys.common.component.ComponentConfiguration;
 import de.dfki.cos.basys.common.component.ComponentException;
 import de.dfki.cos.basys.common.component.ComponentManager;
 import de.dfki.cos.basys.common.component.ComponentManagerException;
@@ -32,16 +35,16 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 	
 	private boolean recursive, async = false;
 	
-	public ComponentManagerImpl(ComponentConfiguration config) {
+	public ComponentManagerImpl(Properties config) {
 		super(config);
 
-		if (config.getProperties().get("recursive") != null) {
-			recursive = Boolean.parseBoolean(config.getProperties().get("recursive"));
+		if (config.containsKey("recursive")) {
+			recursive = Boolean.parseBoolean(config.getProperty("recursive"));
 			LOGGER.info("recursive = " + recursive);
 		}
 		
-		if (config.getProperties().get("async") != null) {
-			async = Boolean.parseBoolean(config.getProperties().get("async"));
+		if (config.containsKey("async")) {
+			async = Boolean.parseBoolean(config.getProperty("async"));
 			LOGGER.info("async = " + async);
 		}
 	}
@@ -51,7 +54,7 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 		Runnable r = new Runnable() {				
 			@Override
 			public void run() {
-				URI uri = URI.createFileURI(config.getExternalConnectionString());
+				URI uri = URI.createFileURI(config.getProperty(Component.connectionString));
 				if (uri.isFile()) {
 					String fileString = uri.toFileString();
 
@@ -113,14 +116,14 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 	}
 
 	@Override
-	public Component createComponent(ComponentConfiguration config) throws ComponentManagerException {
+	public Component createComponent(Properties config) throws ComponentManagerException {
 		//FIXME: actually, we must check globally via the registry
-		if (components.containsKey(config.getId())) {
-			Component old = components.get(config.getId());
-			LOGGER.error("Duplicate component with Id: " + config.getId());
+		if (components.containsKey(config.getProperty(Component.id))) {
+			Component old = components.get(config.getProperty(Component.id));
+			LOGGER.error("Duplicate component with Id: " + config.getProperty(Component.id));
 			LOGGER.error("Name of 1st component: " + old.getName());
-			LOGGER.error("Name of 2nd component: " + config.getName());
-			throw new ComponentManagerException("Duplicate component with Id " + config.getId());
+			LOGGER.error("Name of 2nd component: " + config.getProperty(Component.name));
+			throw new ComponentManagerException("Duplicate component with Id " + config.getProperty(Component.id));
 		}
 		
 		Class c = null;
@@ -134,15 +137,20 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 //			
 //			c = componentCreationClassLoader.loadClass(config.getComponentImplementationJavaClass());
 			
-			c = Class.forName(config.getImplementationJavaClass());
+			c = Class.forName(config.getProperty("implementationJavaClass"));
 		} catch (ClassNotFoundException e) {
 			throw new ComponentManagerException(e);
 		}
 
-		Component component = null;
-
+		Component component = null;		
+		
 		try {
-			Constructor<Component> constructor = c.getConstructor(ComponentConfiguration.class);
+//			Constructor<Module> constructor = c.getConstructor();
+//			Module module = constructor.newInstance();
+//			Injector injector = Guice.createInjector(module);
+//			component = injector.getInstance(Component.class);
+			
+			Constructor<Component> constructor = c.getConstructor(Properties.class);
 			component = constructor.newInstance(config);
 			addComponent(component);
 
@@ -187,7 +195,7 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 		Component component = null;
 		try {			
 			JsonReader reader = new JsonReader(new FileReader(configFile));		
-			ComponentConfiguration config = gson.fromJson(reader, ComponentConfiguration.class);
+			Properties config = gson.fromJson(reader, Properties.class);
 			component = createComponent(config);
 		} catch (IOException e) {
 			throw new ComponentManagerException(e);
