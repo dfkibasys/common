@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.dfki.cos.basys.common.component.ComponentOrderStatus;
-import de.dfki.cos.basys.common.component.impl.BaseConnectionManager;
+import de.dfki.cos.basys.common.component.impl.ConnectionManagerImpl;
 import de.dfki.cos.basys.common.component.util.TestComponent;
 
 public class ActivateConnectTest {

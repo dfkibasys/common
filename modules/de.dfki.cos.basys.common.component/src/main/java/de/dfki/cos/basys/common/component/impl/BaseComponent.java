@@ -11,6 +11,7 @@ import de.dfki.cos.basys.common.component.Component;
 import de.dfki.cos.basys.common.component.ComponentContext;
 import de.dfki.cos.basys.common.component.ComponentException;
 import de.dfki.cos.basys.common.component.ConnectionManager;
+import de.dfki.cos.basys.common.component.FunctionalClient;
 
 public class BaseComponent implements Component {
 
@@ -24,6 +25,7 @@ public class BaseComponent implements Component {
 	public BaseComponent(Properties config) {
 		this.config = config;
 		LOGGER = LoggerFactory.getLogger("basys.component." + getName().replaceAll(" ", "-"));
+		connectionManager = new ConnectionManagerImpl(config,BaseFunctionalClient::new);
 	}
 	
 	@Override
@@ -54,7 +56,7 @@ public class BaseComponent implements Component {
 			this.context = context;	
 			
 			if (connectionManager != null)
-				connectionManager.connect(config.getProperty(Component.connectionString));
+				connectionManager.connect();
 
 			doActivate();		
 			

@@ -4,13 +4,14 @@ import java.util.Properties;
 
 import de.dfki.cos.basys.common.component.ComponentException;
 import de.dfki.cos.basys.common.component.impl.BaseComponent;
-import de.dfki.cos.basys.common.component.impl.BaseConnectionManager;
+import de.dfki.cos.basys.common.component.impl.BaseFunctionalClient;
+import de.dfki.cos.basys.common.component.impl.ConnectionManagerImpl;
 
 public class TestComponent extends BaseComponent {
 	
-	public TestComponent(Properties properties) {
-		super(properties);		
-		this.connectionManager = new BaseConnectionManager();
+	public TestComponent(Properties config) {
+		super(config);		
+		//connectionManager = new ConnectionManagerImpl(config, BaseFunctionalClient::new);
 	}
 
 }
