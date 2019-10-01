@@ -40,7 +40,7 @@ public class ComponentConfigurationTest {
 	
 	@Test
 	public void testFromJson() {		
-		String filename = "src/test/resources/component-1.json";
+		String filename = "src/test/resources/components/component-1.json";
 		Gson gson = new Gson();
 		JsonReader reader;
 		try {

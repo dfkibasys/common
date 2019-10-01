@@ -53,7 +53,7 @@ public class ConnectionManagerImpl implements ConnectionManager {
 			LOGGER.debug("connect");
 			if (config.containsKey(Component.connectionString)) {
 				String cs = config.getProperty(Component.connectionString);
-				if (cs != null && cs.equalsIgnoreCase("")) {
+				if (cs != null && !cs.equalsIgnoreCase("")) {
 					if (client.connect(cs)) {
 						LOGGER.debug("connect - finished");
 						setConnected(true);
@@ -118,13 +118,11 @@ public class ConnectionManagerImpl implements ConnectionManager {
 
 	@Override
 	public <T extends FunctionalClient> T getFunctionalClient(Class<T> clazz) {
-		// TODO Auto-generated method stub
 		return clazz.cast(client);
 	}
 
 	@Override
 	public FunctionalClient getFunctionalClient() {
-		// TODO Auto-generated method stub
 		return client;
 	}
 	

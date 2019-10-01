@@ -11,7 +11,7 @@ public class TestComponent extends BaseComponent {
 	
 	public TestComponent(Properties config) {
 		super(config);		
-		//connectionManager = new ConnectionManagerImpl(config, BaseFunctionalClient::new);
+		connectionManager = new ConnectionManagerImpl(config, BaseFunctionalClient::new);	
 	}
 
 }
