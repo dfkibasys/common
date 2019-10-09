@@ -25,8 +25,8 @@ public class ActivateConnectTest {
 	@Before
 	public void setUp() throws Exception {		
 		config = new Properties();
-		config.put(Component.id, "test-component");
-		config.put(Component.name, "test-component");	
+		config.put(StringConstants.id, "test-component");
+		config.put(StringConstants.name, "test-component");	
 		component = new TestComponent(config);	
 	}
 
@@ -53,7 +53,7 @@ public class ActivateConnectTest {
 	@Test
 	public void testConnectDisconnectToExternal() {
 		try {
-			config.put(Component.connectionString, "somewhere"); // must not be null or empty for this test
+			config.put(StringConstants.connectionString, "somewhere"); // must not be null or empty for this test
 			
 			assertFalse(component.isActivated());
 			assertFalse(component.getConnectionManager().isConnected());

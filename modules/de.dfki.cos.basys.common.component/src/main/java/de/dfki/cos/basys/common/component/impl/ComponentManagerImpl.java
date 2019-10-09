@@ -26,6 +26,7 @@ import de.dfki.cos.basys.common.component.Component;
 import de.dfki.cos.basys.common.component.ComponentException;
 import de.dfki.cos.basys.common.component.ComponentManager;
 import de.dfki.cos.basys.common.component.ComponentManagerException;
+import de.dfki.cos.basys.common.component.StringConstants;
 
 
 public class ComponentManagerImpl extends BaseComponent implements ComponentManager {
@@ -54,7 +55,7 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 		Runnable r = new Runnable() {				
 			@Override
 			public void run() {
-				URI uri = URI.createFileURI(config.getProperty(Component.connectionString));
+				URI uri = URI.createFileURI(config.getProperty(StringConstants.connectionString));
 				if (uri.isFile()) {
 					String fileString = uri.toFileString();
 
@@ -118,12 +119,12 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 	@Override
 	public Component createComponent(Properties config) throws ComponentManagerException {
 		//FIXME: actually, we must check globally via the registry
-		if (components.containsKey(config.getProperty(Component.id))) {
-			Component old = components.get(config.getProperty(Component.id));
-			LOGGER.error("Duplicate component with Id: " + config.getProperty(Component.id));
+		if (components.containsKey(config.getProperty(StringConstants.id))) {
+			Component old = components.get(config.getProperty(StringConstants.id));
+			LOGGER.error("Duplicate component with Id: " + config.getProperty(StringConstants.id));
 			LOGGER.error("Name of 1st component: " + old.getName());
-			LOGGER.error("Name of 2nd component: " + config.getProperty(Component.name));
-			throw new ComponentManagerException("Duplicate component with Id " + config.getProperty(Component.id));
+			LOGGER.error("Name of 2nd component: " + config.getProperty(StringConstants.name));
+			throw new ComponentManagerException("Duplicate component with Id " + config.getProperty(StringConstants.id));
 		}
 		
 		Class c = null;

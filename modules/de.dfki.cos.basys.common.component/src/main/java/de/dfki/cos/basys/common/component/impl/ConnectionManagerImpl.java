@@ -14,6 +14,7 @@ import de.dfki.cos.basys.common.component.ComponentContext;
 import de.dfki.cos.basys.common.component.ComponentException;
 import de.dfki.cos.basys.common.component.ConnectionManager;
 import de.dfki.cos.basys.common.component.FunctionalClient;
+import de.dfki.cos.basys.common.component.StringConstants;
 
 public class ConnectionManagerImpl implements ConnectionManager {
 	public final Logger LOGGER;
@@ -51,8 +52,8 @@ public class ConnectionManagerImpl implements ConnectionManager {
 	public void connect() throws ComponentException {
 		if (!connected) {
 			LOGGER.debug("connect");
-			if (config.containsKey(Component.connectionString)) {
-				String cs = config.getProperty(Component.connectionString);
+			if (config.containsKey(StringConstants.connectionString)) {
+				String cs = config.getProperty(StringConstants.connectionString);
 				if (cs != null && !cs.equalsIgnoreCase("")) {
 					if (client.connect(cs)) {
 						LOGGER.debug("connect - finished");

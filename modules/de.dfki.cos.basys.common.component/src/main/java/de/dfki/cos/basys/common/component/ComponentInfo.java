@@ -2,80 +2,66 @@
  */
 package de.dfki.cos.basys.common.component;
 
-public class ComponentInfo {
+import java.util.Properties;
 
-	protected String id;
-	protected String name;
-	protected boolean activated;
-	protected boolean connectedToExternal;
+public class ComponentInfo extends Properties {
 
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public ComponentInfo() {
+	}
+	
+	public ComponentInfo(Properties p) {
+		this.putAll(p);
+	}
+	
 	public String getId() {
-		return id;
+		return getProperty(StringConstants.id);
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public <T extends ComponentInfo> T setId(String id) {
+		setProperty(StringConstants.id, id);
+		return (T) this;
 	}
 
 	public String getName() {
-		return name;
+		return getProperty(StringConstants.name);
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public <T extends ComponentInfo> T setName(String name) {
+		setProperty(StringConstants.name, name);
+		return (T) this;
+	}
+	
+	public String getCategors() {
+		return getProperty(StringConstants.category);
+	}
+
+	public <T extends ComponentInfo> T setCategory(String category) {
+		setProperty(StringConstants.category, category);
+		return (T) this;
 	}
 
 	public boolean isActivated() {
-		return activated;
+		return Boolean.parseBoolean(getProperty(StringConstants.activated));
 	}
 
-	public void setActivated(boolean activated) {
-		this.activated = activated;
+	public <T extends ComponentInfo> T setActivated(Boolean value) {
+		setProperty(StringConstants.activated, value.toString());
+		return (T) this;
+	}
+	
+	public boolean isConnected() {
+		return Boolean.parseBoolean(getProperty(StringConstants.connected));
 	}
 
-	public boolean isConnectedToExternal() {
-		return connectedToExternal;
+	public <T extends ComponentInfo> T setConnected(Boolean value) {
+		setProperty(StringConstants.connected, value.toString());
+		return (T) this;
 	}
 
-	public void setConnectedToExternal(boolean connectedToExternal) {
-		this.connectedToExternal = connectedToExternal;
-	}
-
-	public static class Builder {
-		protected String id;
-		protected String name;
-		protected boolean activated;
-		protected boolean connectedToExternal;
-
-		public Builder id(String id) {
-			this.id = id;
-			return this;
-		}
-
-		public Builder name(String name) {
-			this.name = name;
-			return this;
-		}
-
-		public Builder activated(boolean activated) {
-			this.activated = activated;
-			return this;
-		}
-
-		public Builder connectedToExternal(boolean connectedToExternal) {
-			this.connectedToExternal = connectedToExternal;
-			return this;
-		}
-
-		public ComponentInfo build() {
-			return new ComponentInfo(this);
-		}
-	}
-
-	protected ComponentInfo(Builder builder) {
-		this.id = builder.id;
-		this.name = builder.name;
-		this.activated = builder.activated;
-		this.connectedToExternal = builder.connectedToExternal;
-	}
 }

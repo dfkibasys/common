@@ -11,7 +11,9 @@ public class ComponentContext {
 	
 	public static ComponentContext getStaticContext() {
 		if (staticContext == null) {
-			staticContext = new Builder().eventBus(new EventBus()).scheduledExecutorService(Executors.newScheduledThreadPool(32)).build();
+			staticContext = new ComponentContext();
+			staticContext.setEventBus(new EventBus());
+			staticContext.setScheduledExecutorService(Executors.newScheduledThreadPool(32));
 		}
 		return staticContext;
 	}
@@ -19,35 +21,26 @@ public class ComponentContext {
 	private EventBus eventBus;
 	private ScheduledExecutorService scheduledExecutorService;
 
+	public ComponentContext() {
+	}
+	
+	public ComponentContext(ComponentContext context) {
+		this.eventBus = context.getEventBus();
+		this.scheduledExecutorService = context.getScheduledExecutorService();
+	}
+	
 	public EventBus getEventBus() {
 		return eventBus;
 	}
-
+	public void setEventBus(EventBus eventBus) {
+		this.eventBus = eventBus;
+	}
 	public ScheduledExecutorService getScheduledExecutorService() {
 		return scheduledExecutorService;
 	}
-
-	public static class Builder {
-		private EventBus eventBus;
-		private ScheduledExecutorService scheduledExecutorService;
-
-		public Builder eventBus(EventBus eventBus) {
-			this.eventBus = eventBus;
-			return this;
-		}
-
-		public Builder scheduledExecutorService(ScheduledExecutorService scheduledExecutorService) {
-			this.scheduledExecutorService = scheduledExecutorService;
-			return this;
-		}
-
-		public ComponentContext build() {
-			return new ComponentContext(this);
-		}
+	public void setScheduledExecutorService(ScheduledExecutorService scheduledExecutorService) {
+		this.scheduledExecutorService = scheduledExecutorService;
 	}
 
-	private ComponentContext(Builder builder) {
-		this.eventBus = builder.eventBus;
-		this.scheduledExecutorService = builder.scheduledExecutorService;
-	}
+
 }

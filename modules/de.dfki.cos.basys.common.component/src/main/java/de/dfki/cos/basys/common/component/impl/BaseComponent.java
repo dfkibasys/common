@@ -10,8 +10,10 @@ import org.slf4j.LoggerFactory;
 import de.dfki.cos.basys.common.component.Component;
 import de.dfki.cos.basys.common.component.ComponentContext;
 import de.dfki.cos.basys.common.component.ComponentException;
+import de.dfki.cos.basys.common.component.ComponentInfo;
 import de.dfki.cos.basys.common.component.ConnectionManager;
 import de.dfki.cos.basys.common.component.FunctionalClient;
+import de.dfki.cos.basys.common.component.StringConstants;
 
 public class BaseComponent implements Component {
 
@@ -30,12 +32,17 @@ public class BaseComponent implements Component {
 	
 	@Override
 	public String getId() {
-		return config.getProperty(Component.id);
+		return config.getProperty(StringConstants.id);
 	}
 
 	@Override
 	public String getName() {		
-		return config.getProperty(Component.name);
+		return config.getProperty(StringConstants.name);
+	}
+	
+	@Override
+	public String getCategory() {		
+		return config.getProperty(StringConstants.category, "NONE");
 	}
 	
 	@Override
@@ -106,6 +113,17 @@ public class BaseComponent implements Component {
 	
 	protected void notifyChange() {
 		//empty, override in derived classes if needed
+	}
+
+	@Override
+	public ComponentInfo getInfo() {
+		ComponentInfo info = new ComponentInfo()
+				.setId(getId())
+				.setName(getName())
+				.setCategory(getCategory())
+				.setActivated(isActivated())
+				.setConnected(connectionManager.isConnected());
+		return info;
 	}
 
 

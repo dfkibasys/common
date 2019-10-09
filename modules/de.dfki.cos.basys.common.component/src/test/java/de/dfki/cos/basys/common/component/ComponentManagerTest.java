@@ -18,9 +18,9 @@ public class ComponentManagerTest {
 	@Before
 	public void setUp() throws Exception {	
 		Properties config = new Properties();
-		config.put(Component.id, "component-manager");
-		config.put(Component.name, "component-manager");
-		config.put(Component.connectionString, "src/test/resources/components");
+		config.put(StringConstants.id, "component-manager");
+		config.put(StringConstants.name, "component-manager");
+		config.put(StringConstants.connectionString, "src/test/resources/components");
 		config.put("recursive", "true");
 		
 		manager = new ComponentManagerImpl(config);	
