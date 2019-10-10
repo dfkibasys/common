@@ -27,16 +27,21 @@ public class ConnectionManagerImpl implements ConnectionManager {
 	private Supplier<? extends FunctionalClient> ctor;
 	
 	public ConnectionManagerImpl(Properties config, Supplier<? extends FunctionalClient> ctor) {
-		this.LOGGER = LoggerFactory.getLogger(getClass().getSimpleName());
+		this.config = config;
+		this.LOGGER = LoggerFactory.getLogger("basys.component." + getName().replaceAll(" ", "-"));		
 		this.ctor = Objects.requireNonNull(ctor);
 		this.client = ctor.get();
-		this.config = config;
 
 		if (config.getProperty("observeExternalConnection") != null) {
 			observeConnection = Boolean.parseBoolean(config.getProperty("observeExternalConnection"));
 			LOGGER.info("observeExternalConnection = " + observeConnection);
 		}	
 	}
+	
+	private String getName() {		
+		return config.getProperty(StringConstants.name) + ".ConnectionManager";
+	}
+	
 //	@Override	
 //	public <T extends FunctionalClient> T getFunctionalClient() {
 //		return (T)client;

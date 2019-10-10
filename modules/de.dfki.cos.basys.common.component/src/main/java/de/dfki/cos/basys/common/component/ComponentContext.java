@@ -18,8 +18,8 @@ public class ComponentContext {
 		return staticContext;
 	}
 	
-	private EventBus eventBus;
-	private ScheduledExecutorService scheduledExecutorService;
+	protected EventBus eventBus;
+	protected ScheduledExecutorService scheduledExecutorService;
 
 	public ComponentContext() {
 	}

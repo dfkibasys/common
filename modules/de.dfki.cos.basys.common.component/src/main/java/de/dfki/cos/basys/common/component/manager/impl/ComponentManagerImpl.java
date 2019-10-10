@@ -1,4 +1,4 @@
-package de.dfki.cos.basys.common.component.impl;
+package de.dfki.cos.basys.common.component.manager.impl;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -14,19 +14,17 @@ import java.util.Properties;
 import java.util.concurrent.CompletableFuture;
 
 import org.apache.commons.io.filefilter.SuffixFileFilter;
-import org.eclipse.emf.common.util.URI;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
-//import com.google.inject.Guice;
-//import com.google.inject.Injector;
-//import com.google.inject.Module;
 
 import de.dfki.cos.basys.common.component.Component;
 import de.dfki.cos.basys.common.component.ComponentException;
-import de.dfki.cos.basys.common.component.ComponentManager;
-import de.dfki.cos.basys.common.component.ComponentManagerException;
 import de.dfki.cos.basys.common.component.StringConstants;
+import de.dfki.cos.basys.common.component.impl.BaseComponent;
+import de.dfki.cos.basys.common.component.impl.ConnectionManagerImpl;
+import de.dfki.cos.basys.common.component.manager.ComponentManager;
+import de.dfki.cos.basys.common.component.manager.ComponentManagerException;
 
 
 public class ComponentManagerImpl extends BaseComponent implements ComponentManager {
@@ -38,7 +36,8 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 	
 	public ComponentManagerImpl(Properties config) {
 		super(config);
-
+		connectionManager = new ConnectionManagerImpl(config, FileSystemClient::new);
+		
 		if (config.containsKey("recursive")) {
 			recursive = Boolean.parseBoolean(config.getProperty("recursive"));
 			LOGGER.info("recursive = " + recursive);
@@ -52,14 +51,14 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 
 	@Override
 	protected void doActivate() throws ComponentException {	
-		Runnable r = new Runnable() {				
-			@Override
-			public void run() {
-				URI uri = URI.createFileURI(config.getProperty(StringConstants.connectionString));
-				if (uri.isFile()) {
-					String fileString = uri.toFileString();
-
-					File file = new File(fileString);
+		if (this.isConnected()) {
+		
+			Runnable r = new Runnable() {				
+				@Override
+				public void run() {
+					FileSystemClient client = connectionManager.getFunctionalClient(FileSystemClient.class);		
+	
+					File file = client.getFile();
 					try {
 						if (file.isDirectory()) {
 							createComponents(file, recursive);
@@ -72,21 +71,22 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 						//e.printStackTrace();
 						throw new RuntimeException(e);
 					}
+					
+					LOGGER.info("component creation complete");
+					
 				}
-				LOGGER.info("component creation complete");
-				
+			};
+			if (async) {
+				//scheduledExecutorService.schedule(r, 10, TimeUnit.SECONDS);
+					
+				CompletableFuture<Void> cf = CompletableFuture.runAsync(r, context.getScheduledExecutorService()).exceptionally(e-> {		    
+					e.printStackTrace();
+					LOGGER.error(e.getMessage(), e);
+				    return null;
+				});
+			} else {
+				r.run();
 			}
-		};
-		if (async) {
-			//scheduledExecutorService.schedule(r, 10, TimeUnit.SECONDS);
-				
-			CompletableFuture<Void> cf = CompletableFuture.runAsync(r, context.getScheduledExecutorService()).exceptionally(e-> {		    
-				e.printStackTrace();
-				LOGGER.error(e.getMessage(), e);
-			    return null;
-			});
-		} else {
-			r.run();
 		}
 	}
 	
@@ -163,9 +163,8 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 	}
 
 	@Override
-	public void addComponent(Component component) throws ComponentManagerException {	
-
-		LOGGER.debug("addLocalComponent " + component.getName());
+	public void addComponent(Component component) throws ComponentManagerException {
+		LOGGER.debug("addComponent " + component.getName());
 		components.put(component.getId(), component);
 		try {
 			component.activate(context);
@@ -178,10 +177,10 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 
 	@Override
 	public void deleteComponent(String id) throws ComponentManagerException {
-		Component c = components.remove(id);
+		LOGGER.debug("deleteComponent " + id);
+		Component c = components.remove(id);		
 		if (c == null)
 			throw new ComponentManagerException(String.format("No component registered with id %s", id));
-
 		try {
 			c.deactivate();
 		} catch (ComponentException e) {

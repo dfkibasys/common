@@ -1,10 +1,12 @@
 /**
  */
-package de.dfki.cos.basys.common.component;
+package de.dfki.cos.basys.common.component.manager;
 
 import java.io.File;
 import java.util.List;
 import java.util.Properties;
+
+import de.dfki.cos.basys.common.component.Component;
 
 public interface ComponentManager extends Component {
 	

@@ -27,7 +27,7 @@ public class BaseComponent implements Component {
 	public BaseComponent(Properties config) {
 		this.config = config;
 		LOGGER = LoggerFactory.getLogger("basys.component." + getName().replaceAll(" ", "-"));
-		connectionManager = new ConnectionManagerImpl(config,BaseFunctionalClient::new);
+		//connectionManager = new ConnectionManagerImpl(config,BaseFunctionalClient::new);
 	}
 	
 	@Override
@@ -110,6 +110,9 @@ public class BaseComponent implements Component {
 		notifyChange();
 	}	
 
+	public boolean isConnected() {
+		return (connectionManager != null) ? connectionManager.isConnected() : false;
+	}	
 	
 	protected void notifyChange() {
 		//empty, override in derived classes if needed
@@ -122,7 +125,7 @@ public class BaseComponent implements Component {
 				.setName(getName())
 				.setCategory(getCategory())
 				.setActivated(isActivated())
-				.setConnected(connectionManager.isConnected());
+				.setConnected(isConnected());
 		return info;
 	}
 

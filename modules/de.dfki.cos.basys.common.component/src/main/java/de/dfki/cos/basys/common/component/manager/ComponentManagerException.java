@@ -1,4 +1,4 @@
-package de.dfki.cos.basys.common.component;
+package de.dfki.cos.basys.common.component.manager;
 
 public class ComponentManagerException extends Exception {
 
