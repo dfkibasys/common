@@ -54,13 +54,13 @@ public class ConnectionManagerImpl implements ConnectionManager {
 //	
 		
 	@Override
-	public void connect() throws ComponentException {
+	public void connect(ComponentContext context) throws ComponentException {
 		if (!connected) {
 			LOGGER.debug("connect");
 			if (config.containsKey(StringConstants.connectionString)) {
 				String cs = config.getProperty(StringConstants.connectionString);
 				if (cs != null && !cs.equalsIgnoreCase("")) {
-					if (client.connect(cs)) {
+					if (client.connect(context, cs)) {
 						LOGGER.debug("connect - finished");
 						setConnected(true);
 					} else {

@@ -17,7 +17,7 @@ import de.dfki.cos.basys.common.component.manager.impl.ComponentManagerImpl;
 public class ComponentManagerTest {
 
 	
-	ComponentManager componentManager = null;		
+	ComponentManagerImpl componentManager = null;		
 	Properties config = null;
 	
 	@Before

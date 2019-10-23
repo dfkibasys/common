@@ -63,7 +63,7 @@ public class BaseComponent implements Component {
 			this.context = context;	
 			
 			if (connectionManager != null)
-				connectionManager.connect();
+				connectionManager.connect(context);
 
 			doActivate();		
 			

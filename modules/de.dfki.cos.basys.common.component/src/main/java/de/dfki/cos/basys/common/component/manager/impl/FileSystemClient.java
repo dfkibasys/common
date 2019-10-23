@@ -4,6 +4,7 @@ import java.io.File;
 
 import org.eclipse.emf.common.util.URI;
 
+import de.dfki.cos.basys.common.component.ComponentContext;
 import de.dfki.cos.basys.common.component.FunctionalClient;
 import de.dfki.cos.basys.common.component.StringConstants;
 
@@ -16,7 +17,7 @@ public class FileSystemClient implements FunctionalClient {
 	}
 
 	@Override
-	public boolean connect(String connectionString) {
+	public boolean connect(ComponentContext context, String connectionString) {
 		uri = URI.createFileURI(connectionString);
 		if (uri.isFile()) {
 			return true;

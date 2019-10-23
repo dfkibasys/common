@@ -8,7 +8,7 @@ import java.util.Properties;
 
 import de.dfki.cos.basys.common.component.Component;
 
-public interface ComponentManager extends Component {
+public interface ComponentManager {
 	
 	List<Component> getComponents();
 	Component getComponentById(String id);
