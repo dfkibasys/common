@@ -26,8 +26,7 @@ public class ComponentManagerTest {
 		config.put(StringConstants.id, "component-manager");
 		config.put(StringConstants.name, "component-manager");
 		config.put(StringConstants.category, StringConstants.categoryManagement);
-		
-		componentManager = new ComponentManagerImpl(config);	
+			
 	}
 
 	@After
@@ -36,9 +35,10 @@ public class ComponentManagerTest {
 
 	@Test
 	public void testReadFromFolder() throws ComponentException {
-
 		config.put(StringConstants.connectionString, StringConstants.testConfigurationFolder);
 		config.put("recursive", "true");
+
+		componentManager = new ComponentManagerImpl(config);
 		componentManager.activate(ComponentContext.getStaticContext());
 		
 		try {
@@ -56,6 +56,7 @@ public class ComponentManagerTest {
 	@Test
 	public void testAddGetRemoveServiceComponent() throws ComponentException {
 
+		componentManager = new ComponentManagerImpl(config);
 		componentManager.activate(ComponentContext.getStaticContext());
 		
 		try {
