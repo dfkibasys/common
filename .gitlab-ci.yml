@@ -28,4 +28,7 @@ deploy:
   stage: deploy
   script:
     - mvn $MAVEN_CLI_OPTS deploy
+  only:
+    - master
+    - develop
 
