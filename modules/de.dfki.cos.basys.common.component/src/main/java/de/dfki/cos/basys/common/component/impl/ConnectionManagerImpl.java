@@ -19,8 +19,9 @@ import de.dfki.cos.basys.common.component.StringConstants;
 public class ConnectionManagerImpl implements ConnectionManager {
 	public final Logger LOGGER;
 	protected Properties config;
+	private ComponentContext context = null;
 	
-	private boolean connected, observeConnection = false;
+	private boolean observeConnection = false;
 	private ScheduledFuture<?> connectionHandle = null;
 	protected FunctionalClient client = null;
 
@@ -32,9 +33,9 @@ public class ConnectionManagerImpl implements ConnectionManager {
 		this.ctor = Objects.requireNonNull(ctor);
 		this.client = ctor.get();
 
-		if (config.getProperty("observeExternalConnection") != null) {
-			observeConnection = Boolean.parseBoolean(config.getProperty("observeExternalConnection"));
-			LOGGER.info("observeExternalConnection = " + observeConnection);
+		if (config.getProperty("observeConnection") != null) {
+			observeConnection = Boolean.parseBoolean(config.getProperty("observeConnection"));
+			LOGGER.info("observeConnection = " + observeConnection);
 		}	
 	}
 	
@@ -46,23 +47,29 @@ public class ConnectionManagerImpl implements ConnectionManager {
 //	public <T extends FunctionalClient> T getFunctionalClient() {
 //		return (T)client;
 //	}
-//	
-//	@Override
-//	public <T extends FunctionalClient> T getFunctionalClient(Class<T> clazz) {
-//		return clazz.cast(client);
-//	}
-//	
-		
+
+	@Override
+	public <T extends FunctionalClient> T getFunctionalClient(Class<T> clazz) {
+		return clazz.cast(client);
+	}
+
+	@Override
+	public FunctionalClient getFunctionalClient() {
+		return client;
+	}
+	
 	@Override
 	public void connect(ComponentContext context) throws ComponentException {
-		if (!connected) {
+		this.context = context;
+		if (!isConnected()) {
 			LOGGER.debug("connect");
 			if (config.containsKey(StringConstants.connectionString)) {
 				String cs = config.getProperty(StringConstants.connectionString);
 				if (cs != null && !cs.equalsIgnoreCase("")) {
+					LOGGER.debug("provided connection string: " + cs);
 					if (client.connect(context, cs)) {
 						LOGGER.debug("connect - finished");
-						setConnected(true);
+						//setConnected(true);
 					} else {
 						LOGGER.warn("connect - not successful");
 					}
@@ -79,11 +86,12 @@ public class ConnectionManagerImpl implements ConnectionManager {
 
 	@Override
 	public void disconnect() throws ComponentException {
-		if (connected) {
+		if (isConnected()) {
 			LOGGER.debug("disconnect");
-			if (client.disconnect()) {
+			client.disconnect();
+			if (!client.isConnected()) {
 				LOGGER.debug("disconnect - finished");
-				setConnected(false);
+				//setConnected(false);
 			} else {
 				LOGGER.warn("disconnect - not successful");
 			}
@@ -102,53 +110,40 @@ public class ConnectionManagerImpl implements ConnectionManager {
 	
 	@Override
 	public boolean isConnected() {
-		return connected;
+		return getFunctionalClient().isConnected();
 	}
 
-	protected void setConnected(boolean value) {
-		connected = value;
+//	protected void setConnected(boolean value) {
+//		connected = value;
 //		if (observeConnection) {
 //			if (connected) {
-//				observeExternalConnection();
+//				observeConnection();
 //			} else {
-//				unobserveExternalConnection();
+//				unobserveConnection();
 //			}
 //		}
-		notifyChange();
-	}
+//		notifyChange();
+//	}
 	
 
 	
-	protected void notifyChange() {		
-	}
-
-	@Override
-	public <T extends FunctionalClient> T getFunctionalClient(Class<T> clazz) {
-		return clazz.cast(client);
-	}
-
-	@Override
-	public FunctionalClient getFunctionalClient() {
-		return client;
-	}
+//	protected void notifyChange() {		
+//	}
 	
 
-
-
-	
-//
-//	private void observeExternalConnection() {
-//		LOGGER.info("observeExternalConnection()");
+//	private void observeConnection() {
+//		LOGGER.info("observeConnection()");
 //		connectionHandle = context.getScheduledExecutorService().scheduleWithFixedDelay(new Runnable() {
 //
 //			@Override
 //			public void run() {
 //
 //				if (!isConnected()) {
-//					LOGGER.info("connectToExternal: " + config.getExternalConnectionString());
+//					String cs = config.getProperty(StringConstants.connectionString);
+//					LOGGER.info("connectToExternal: " + cs);
 //					try {
 //						if (canConnect()) {
-//							connect();
+//							connect(context);
 //							// connectedToExternal = true;
 //						} else {
 //							LOGGER.warn("component cannot connectToExternal(), retry ...");
@@ -167,10 +162,30 @@ public class ConnectionManagerImpl implements ConnectionManager {
 //
 //	}
 //
-//	private void unobserveExternalConnection() {
+//	protected void unobserveConnection() {
 //		LOGGER.info("unobserveConnection()");
-//		connectionHandle.cancel(true);
+//		if (connectionHandle != null) {
+//			connectionHandle.cancel(true);
+//		}
 //	}
+
+	@Override
+	public void handleConnectionEstablished() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void handleConnectionLost() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void handleConnectionClosed() {
+		// TODO Auto-generated method stub
+		
+	}
 
 
 }

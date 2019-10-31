@@ -28,15 +28,19 @@ public class FileSystemClient implements FunctionalClient {
 	}
 
 	@Override
-	public boolean disconnect() {
+	public void disconnect() {
 		uri = null;
-		return true;
 	}
 
 	public File getFile() {
 		String fileString = uri.toFileString();
 		File file = new File(fileString);
 		return file;
+	}
+
+	@Override
+	public boolean isConnected() {		
+		return uri != null;
 	}
 
 }

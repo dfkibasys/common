@@ -8,4 +8,7 @@ public interface ConnectionManager {
 	<T extends FunctionalClient> T getFunctionalClient(Class<T> clazz);
 	FunctionalClient getFunctionalClient();
 	
+	void handleConnectionEstablished();
+	void handleConnectionLost();
+	void handleConnectionClosed();
 }

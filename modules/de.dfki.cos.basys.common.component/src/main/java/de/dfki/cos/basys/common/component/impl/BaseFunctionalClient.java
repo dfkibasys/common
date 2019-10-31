@@ -12,7 +12,12 @@ public class BaseFunctionalClient implements FunctionalClient {
 	}
 
 	@Override
-	public boolean disconnect() {
+	public void disconnect() {
+		// TODO Auto-generated method stub		
+	}
+
+	@Override
+	public boolean isConnected() {
 		// TODO Auto-generated method stub
 		return true;
 	}
