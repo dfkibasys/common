@@ -5,21 +5,22 @@ import de.dfki.cos.basys.common.component.FunctionalClient;
 
 public class BaseFunctionalClient implements FunctionalClient {
 
+	boolean connected = false;
+	
 	@Override
 	public boolean connect(ComponentContext context, String connectionString) {
-		// TODO Auto-generated method stub
-		return true;
+		connected = true;
+		return connected;
 	}
 
 	@Override
 	public void disconnect() {
-		// TODO Auto-generated method stub		
+		connected = false;		
 	}
 
 	@Override
 	public boolean isConnected() {
-		// TODO Auto-generated method stub
-		return true;
+		return connected;
 	}
 
 }
