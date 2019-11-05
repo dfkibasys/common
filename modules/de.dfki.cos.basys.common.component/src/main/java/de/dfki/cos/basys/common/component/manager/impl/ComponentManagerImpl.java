@@ -2,8 +2,10 @@ package de.dfki.cos.basys.common.component.manager.impl;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -13,6 +15,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.CompletableFuture;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.filefilter.SuffixFileFilter;
 
 import com.google.gson.Gson;
@@ -193,10 +196,18 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 	@Override
 	public Component createComponent(File configFile) throws ComponentManagerException {
 		Component component = null;
-		try {			
-			JsonReader reader = new JsonReader(new FileReader(configFile));		
-			Properties config = gson.fromJson(reader, Properties.class);
-			component = createComponent(config);
+		try {	
+			String ext = FilenameUtils.getExtension(configFile.getName());			
+			if ("json".equals(ext)) {			
+				JsonReader reader = new JsonReader(new FileReader(configFile));		
+				Properties config = gson.fromJson(reader, Properties.class);
+				component = createComponent(config);
+			} else if ("properties".equals(ext)) {			
+				Properties config = new Properties();
+				InputStream input = new FileInputStream(configFile.getAbsoluteFile());
+				config.load(input); 
+				component = createComponent(config);
+			} 
 		} catch (IOException e) {
 			throw new ComponentManagerException(e);
 		}
@@ -206,7 +217,8 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 	@Override
 	public void createComponents(File configFolder, boolean recursive) throws ComponentManagerException {
 
-		FileFilter filter = new SuffixFileFilter(".json");
+		String[] suffixes = {".json","*.properties"};
+		FileFilter filter = new SuffixFileFilter(suffixes);
 
 		for (File entry : configFolder.listFiles(filter)) {
 			createComponent(entry);

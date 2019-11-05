@@ -20,6 +20,13 @@
 		
 		<dependency>
 			<groupId>de.dfki.cos.basys.common</groupId>
+			<artifactId>de.dfki.cos.basys.common.component</artifactId>
+			<version>${project.version}</version>
+			<type>bundle</type>
+		</dependency>
+		
+		<dependency>
+			<groupId>de.dfki.cos.basys.common</groupId>
 			<artifactId>de.dfki.cos.basys.common.emf</artifactId>
 			<version>${project.version}</version>
 			<type>bundle</type>

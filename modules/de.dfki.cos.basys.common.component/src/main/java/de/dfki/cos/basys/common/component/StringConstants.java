@@ -10,6 +10,7 @@ public interface StringConstants {
 	public static final String activated = "activated";	
 	public static final String connected = "connected";
 	
+	public static final String hostName = "hostName";
 	public static final String categoryDevice = "DEVICE_COMPONENT";
 	public static final String categoryService = "SERVICE_COMPONENT";
 	public static final String categoryManagement = "MANAGEMENT_COMPONENT";

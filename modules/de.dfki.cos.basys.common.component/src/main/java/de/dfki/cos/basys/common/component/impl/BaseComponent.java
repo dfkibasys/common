@@ -14,6 +14,8 @@ import de.dfki.cos.basys.common.component.ComponentInfo;
 import de.dfki.cos.basys.common.component.ConnectionManager;
 import de.dfki.cos.basys.common.component.FunctionalClient;
 import de.dfki.cos.basys.common.component.StringConstants;
+import de.dfki.cos.basys.common.component.registry.ComponentRegistration;
+import de.dfki.cos.basys.common.component.registry.ComponentRegistrationException;
 
 public class BaseComponent implements Component {
 
@@ -21,6 +23,7 @@ public class BaseComponent implements Component {
 	protected Properties config;
 	protected boolean activated = false;
 	protected ComponentContext context;
+	protected ComponentRegistration registration;
 
 	protected ConnectionManager connectionManager = null;
 		
@@ -65,7 +68,13 @@ public class BaseComponent implements Component {
 			if (connectionManager != null)
 				connectionManager.connect(context);
 
-			doActivate();		
+			doActivate();	
+			
+			try {
+				register();
+			} catch (ComponentRegistrationException e) {
+				throw new ComponentException(e);
+			}
 			
 			setActivated(true);
 			LOGGER.info("activate - finished");
@@ -78,6 +87,11 @@ public class BaseComponent implements Component {
 	public void deactivate() throws ComponentException {
 		LOGGER.info("deactivate");
 		if (activated) {
+			try {
+				unregister();
+			} catch (ComponentRegistrationException e) {
+				throw new ComponentException(e);
+			}
 			
 			doDeactivate();
 			setActivated(false);
@@ -91,6 +105,34 @@ public class BaseComponent implements Component {
 			LOGGER.info("already deactivated");
 		}
 	}
+	
+
+	protected void register() throws ComponentRegistrationException {
+		LOGGER.debug("register");
+		if (context.getComponentRegistry() != null) {
+			registration = context.getComponentRegistry().createRegistration(this);
+			registration.register();
+			LOGGER.debug("register - finished");
+		} else {
+			LOGGER.info("no component registry available");
+		}
+	}
+
+	protected void unregister() throws ComponentRegistrationException {
+		LOGGER.debug("unregister");
+		if (registration != null) {
+			registration.unregister();
+			registration = null;
+			LOGGER.debug("unregister - finished");
+		} else {
+			LOGGER.debug("not registered");
+		}
+	}
+	
+	public boolean isRegistered() {
+		return registration != null;
+	}
+	
 
 	protected void doActivate() throws ComponentException{ 
 		//empty, override in derived classes if needed
@@ -115,7 +157,39 @@ public class BaseComponent implements Component {
 	}	
 	
 	protected void notifyChange() {
-		//empty, override in derived classes if needed
+		LOGGER.trace("notifyChange");
+		// TODO: something like:Notification not = createStatusUpdate();
+
+		//LOGGER.info(String.format("component '%s' (id=%s) is now in state %s and mode %s", getName(), getId(), getState(), getMode()));
+
+//		if (statusChannel != null && statusChannel.isOpen()) {
+//			LOGGER.trace("send status update notification");
+//			try {
+//				ComponentInfo info = getComponentInfo();
+//				Notification not = cf.createNotification(JsonUtils.toString(info));
+//				statusChannel.sendNotification(not);
+//			} catch (ChannelException | JsonProcessingException e) {
+//				LOGGER.warn("could not send status update notification");
+//				LOGGER.warn(e.getMessage());
+//				e.printStackTrace();
+//			}
+//		} else {
+//			LOGGER.info("cannot send status update notification");
+//		}
+		if (registration != null) {
+			try {
+				LOGGER.trace("update registration");
+				registration.update();
+			} catch (ComponentRegistrationException e) {
+				LOGGER.warn("could not update registration");
+				LOGGER.warn(e.getMessage());
+				e.printStackTrace();
+			}
+		} else {
+			LOGGER.info("cannot update registration, not registered");
+		}
+
+		LOGGER.trace("notifyChange - finished");
 	}
 
 	@Override
