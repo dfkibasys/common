@@ -40,7 +40,7 @@ public class ConnectionManagerImpl implements ConnectionManager {
 	}
 	
 	private String getName() {		
-		return config.getProperty(StringConstants.name) + ".ConnectionManager";
+		return config.getProperty(StringConstants.name) + ".cm";
 	}
 	
 //	@Override	

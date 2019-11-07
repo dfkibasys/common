@@ -14,12 +14,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Supplier;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.filefilter.SuffixFileFilter;
-
-import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
 
 import de.dfki.cos.basys.common.component.Component;
 import de.dfki.cos.basys.common.component.ComponentException;
@@ -33,18 +31,18 @@ import de.dfki.cos.basys.common.component.manager.ComponentManagerException;
 public class ComponentManagerImpl extends BaseComponent implements ComponentManager {
 	
 	private Map<String, Component> components = new HashMap<>();
-	private Gson gson = new Gson();
 	
-	private boolean recursive, async = false;
+	private boolean async = false;
 	
 	public ComponentManagerImpl(Properties config) {
 		super(config);
-		connectionManager = new ConnectionManagerImpl(config, FileSystemClient::new);
-		
-		if (config.containsKey("recursive")) {
-			recursive = Boolean.parseBoolean(config.getProperty("recursive"));
-			LOGGER.info("recursive = " + recursive);
-		}
+		connectionManager = new ConnectionManagerImpl(config, new Supplier<ComponentManagerClient>() {
+			@Override
+			public ComponentManagerClient get() {
+				ComponentManagerClient client = new ComponentManagerClient(config);				
+				return client;
+			}
+		});	
 		
 		if (config.containsKey("async")) {
 			async = Boolean.parseBoolean(config.getProperty("async"));
@@ -59,15 +57,13 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 			Runnable r = new Runnable() {				
 				@Override
 				public void run() {
-					FileSystemClient client = connectionManager.getFunctionalClient(FileSystemClient.class);		
-	
-					File file = client.getFile();
+					ComponentManagerClient client = connectionManager.getFunctionalClient(ComponentManagerClient.class);
+					List<Properties> configs = client.getComponentConfigurations();
+					
 					try {
-						if (file.isDirectory()) {
-							createComponents(file, recursive);
-						} else {
-							createComponent(file);
-						}
+						for (Properties config : configs) {
+							createComponent(config);
+						}						
 					} 
 					catch (ComponentManagerException e) {
 						// TODO Auto-generated catch block
@@ -193,42 +189,6 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 		notifyChange();
 	}
 
-	@Override
-	public Component createComponent(File configFile) throws ComponentManagerException {
-		Component component = null;
-		try {	
-			String ext = FilenameUtils.getExtension(configFile.getName());			
-			if ("json".equals(ext)) {			
-				JsonReader reader = new JsonReader(new FileReader(configFile));		
-				Properties config = gson.fromJson(reader, Properties.class);
-				component = createComponent(config);
-			} else if ("properties".equals(ext)) {			
-				Properties config = new Properties();
-				InputStream input = new FileInputStream(configFile.getAbsoluteFile());
-				config.load(input); 
-				component = createComponent(config);
-			} 
-		} catch (IOException e) {
-			throw new ComponentManagerException(e);
-		}
-		return component;
-	}
 
-	@Override
-	public void createComponents(File configFolder, boolean recursive) throws ComponentManagerException {
-
-		String[] suffixes = {".json","*.properties"};
-		FileFilter filter = new SuffixFileFilter(suffixes);
-
-		for (File entry : configFolder.listFiles(filter)) {
-			createComponent(entry);
-		}
-		if (recursive) {
-			File[] files = configFolder.listFiles(File::isDirectory);
-			for (File entry : configFolder.listFiles(File::isDirectory)) {
-				createComponents(entry ,recursive);
-			}		
-		}
-	}
 	
 }

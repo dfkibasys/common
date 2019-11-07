@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import de.dfki.cos.basys.common.component.manager.ComponentManager;
 import de.dfki.cos.basys.common.component.manager.ComponentManagerException;
+import de.dfki.cos.basys.common.component.manager.impl.ComponentManagerClient;
 import de.dfki.cos.basys.common.component.manager.impl.ComponentManagerImpl;
 
 public class ComponentManagerTest {
@@ -48,7 +49,7 @@ public class ComponentManagerTest {
 			e.printStackTrace();
 		}
 	
-		assertEquals(5,componentManager.getComponents().size());
+		assertEquals(6,componentManager.getComponents().size());
 		
 	}
 
@@ -59,19 +60,23 @@ public class ComponentManagerTest {
 		componentManager = new ComponentManagerImpl(config);
 		componentManager.activate(ComponentContext.getStaticContext());
 		
+		ComponentManagerClient client = new ComponentManagerClient();
 		try {
 			List<Component> components = componentManager.getComponents();
 			assertEquals(0,components.size());
 
-			componentManager.createComponent(new File(StringConstants.testConfigurationFolder + "/component-1.json"));
+			Properties config1 = client.readFile(new File(StringConstants.testConfigurationFolder + "/component-1.json"));
+			componentManager.createComponent(config1);
 			components = componentManager.getComponents();
 			assertEquals(1,components.size());
 
-			componentManager.createComponent(new File(StringConstants.testConfigurationFolder + "/component-2.json"));
+			Properties config2 = client.readFile(new File(StringConstants.testConfigurationFolder + "/component-2.json"));			
+			componentManager.createComponent(config2);
 			components = componentManager.getComponents();
 			assertEquals(2,components.size());
-
-			componentManager.createComponent(new File(StringConstants.testConfigurationFolder + "/component-3.json"));			
+			
+			Properties config3 = client.readFile(new File(StringConstants.testConfigurationFolder + "/component-3.json"));			
+			componentManager.createComponent(config3);			
 			components = componentManager.getComponents();
 			assertEquals(3,components.size());
 

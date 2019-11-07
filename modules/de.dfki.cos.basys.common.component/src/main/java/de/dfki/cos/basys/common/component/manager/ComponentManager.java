@@ -15,8 +15,8 @@ public interface ComponentManager {
 	Component getComponentByName(String name);
 
 	Component createComponent(Properties config) throws ComponentManagerException;
-	Component createComponent(File configFile) throws ComponentManagerException;
-	void createComponents(File configFolder, boolean recursive) throws ComponentManagerException;
+//	Component createComponent(File configFile) throws ComponentManagerException;
+//	void createComponents(File configFolder, boolean recursive) throws ComponentManagerException;
 	void addComponent(Component component) throws ComponentManagerException;
 	void deleteComponent(String id) throws ComponentManagerException;
 
