@@ -5,8 +5,9 @@ public interface ConnectionManager {
 	void connect(ComponentContext context) throws ComponentException;
 	void disconnect() throws ComponentException;	
 	boolean isConnected();
-	<T extends FunctionalClient> T getFunctionalClient(Class<T> clazz);
-	FunctionalClient getFunctionalClient();
+	ServiceConnection getServiceConnection();
+	
+	<T> T getServiceInterface(Class<T> serviceInterface);
 	
 	void handleConnectionEstablished();
 	void handleConnectionLost();

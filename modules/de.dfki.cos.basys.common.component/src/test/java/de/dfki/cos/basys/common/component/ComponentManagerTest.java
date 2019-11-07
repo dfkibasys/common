@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import de.dfki.cos.basys.common.component.manager.ComponentManager;
 import de.dfki.cos.basys.common.component.manager.ComponentManagerException;
-import de.dfki.cos.basys.common.component.manager.impl.ComponentManagerClient;
+import de.dfki.cos.basys.common.component.manager.impl.ComponentConfigurationProviderImpl;
 import de.dfki.cos.basys.common.component.manager.impl.ComponentManagerImpl;
 
 public class ComponentManagerTest {
@@ -60,7 +60,7 @@ public class ComponentManagerTest {
 		componentManager = new ComponentManagerImpl(config);
 		componentManager.activate(ComponentContext.getStaticContext());
 		
-		ComponentManagerClient client = new ComponentManagerClient();
+		ComponentConfigurationProviderImpl client = new ComponentConfigurationProviderImpl();
 		try {
 			List<Component> components = componentManager.getComponents();
 			assertEquals(0,components.size());

@@ -24,6 +24,7 @@ import de.dfki.cos.basys.common.component.ComponentException;
 import de.dfki.cos.basys.common.component.StringConstants;
 import de.dfki.cos.basys.common.component.impl.BaseComponent;
 import de.dfki.cos.basys.common.component.impl.ConnectionManagerImpl;
+import de.dfki.cos.basys.common.component.manager.ComponentConfigurationProvider;
 import de.dfki.cos.basys.common.component.manager.ComponentManager;
 import de.dfki.cos.basys.common.component.manager.ComponentManagerException;
 
@@ -36,11 +37,11 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 	
 	public ComponentManagerImpl(Properties config) {
 		super(config);
-		connectionManager = new ConnectionManagerImpl(config, new Supplier<ComponentManagerClient>() {
+		connectionManager = new ConnectionManagerImpl(config, new Supplier<ComponentConfigurationProviderImpl>() {
 			@Override
-			public ComponentManagerClient get() {
-				ComponentManagerClient client = new ComponentManagerClient(config);				
-				return client;
+			public ComponentConfigurationProviderImpl get() {
+				ComponentConfigurationProviderImpl service = new ComponentConfigurationProviderImpl(config);				
+				return service;
 			}
 		});	
 		
@@ -57,8 +58,8 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 			Runnable r = new Runnable() {				
 				@Override
 				public void run() {
-					ComponentManagerClient client = connectionManager.getFunctionalClient(ComponentManagerClient.class);
-					List<Properties> configs = client.getComponentConfigurations();
+					ComponentConfigurationProvider service = connectionManager.getServiceInterface(ComponentConfigurationProvider.class);
+					List<Properties> configs = service.getComponentConfigurations();
 					
 					try {
 						for (Properties config : configs) {

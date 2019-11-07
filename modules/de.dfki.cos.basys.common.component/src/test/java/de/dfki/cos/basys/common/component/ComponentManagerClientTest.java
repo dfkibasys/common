@@ -12,17 +12,17 @@ import org.junit.Test;
 
 import de.dfki.cos.basys.common.component.manager.ComponentManager;
 import de.dfki.cos.basys.common.component.manager.ComponentManagerException;
-import de.dfki.cos.basys.common.component.manager.impl.ComponentManagerClient;
+import de.dfki.cos.basys.common.component.manager.impl.ComponentConfigurationProviderImpl;
 import de.dfki.cos.basys.common.component.manager.impl.ComponentManagerImpl;
 
 public class ComponentManagerClientTest {
 
 	
-	ComponentManagerClient  client;
+	ComponentConfigurationProviderImpl  client;
 	
 	@Before
 	public void setUp() throws Exception {			
-		client = new ComponentManagerClient();			
+		client = new ComponentConfigurationProviderImpl();			
 	}
 
 	@After

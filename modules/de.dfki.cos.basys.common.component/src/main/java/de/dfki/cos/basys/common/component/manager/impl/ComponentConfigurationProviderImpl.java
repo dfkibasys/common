@@ -24,22 +24,22 @@ import com.google.gson.stream.JsonReader;
 
 import de.dfki.cos.basys.common.component.Component;
 import de.dfki.cos.basys.common.component.ComponentContext;
-import de.dfki.cos.basys.common.component.FunctionalClient;
+import de.dfki.cos.basys.common.component.ServiceConnection;
 import de.dfki.cos.basys.common.component.StringConstants;
 import de.dfki.cos.basys.common.component.manager.ComponentConfigurationProvider;
 import de.dfki.cos.basys.common.component.manager.ComponentManagerException;
 
-public class ComponentManagerClient implements ComponentConfigurationProvider, FunctionalClient {
+public class ComponentConfigurationProviderImpl implements ComponentConfigurationProvider, ServiceConnection {
 
 	private URI uri = null;
 	private boolean recursive = false;
 	private Gson gson = new Gson();
 
-	public ComponentManagerClient() {
+	public ComponentConfigurationProviderImpl() {
 		this(new Properties());
 	}
 
-	public ComponentManagerClient(Properties config) {
+	public ComponentConfigurationProviderImpl(Properties config) {
 		if (config.containsKey("recursive")) {
 			recursive = Boolean.parseBoolean(config.getProperty("recursive"));
 		}

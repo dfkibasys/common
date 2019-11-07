@@ -13,7 +13,7 @@ import de.dfki.cos.basys.common.component.Component;
 import de.dfki.cos.basys.common.component.ComponentContext;
 import de.dfki.cos.basys.common.component.ComponentException;
 import de.dfki.cos.basys.common.component.ConnectionManager;
-import de.dfki.cos.basys.common.component.FunctionalClient;
+import de.dfki.cos.basys.common.component.ServiceConnection;
 import de.dfki.cos.basys.common.component.StringConstants;
 
 public class ConnectionManagerImpl implements ConnectionManager {
@@ -23,11 +23,11 @@ public class ConnectionManagerImpl implements ConnectionManager {
 	
 	private boolean observeConnection = false;
 	private ScheduledFuture<?> connectionHandle = null;
-	protected FunctionalClient client = null;
+	protected ServiceConnection client = null;
 
-	private Supplier<? extends FunctionalClient> ctor;
+	private Supplier<? extends ServiceConnection> ctor;
 	
-	public ConnectionManagerImpl(Properties config, Supplier<? extends FunctionalClient> ctor) {
+	public ConnectionManagerImpl(Properties config, Supplier<? extends ServiceConnection> ctor) {
 		this.config = config;
 		this.LOGGER = LoggerFactory.getLogger("basys.component." + getName().replaceAll(" ", "-"));		
 		this.ctor = Objects.requireNonNull(ctor);
@@ -42,19 +42,14 @@ public class ConnectionManagerImpl implements ConnectionManager {
 	private String getName() {		
 		return config.getProperty(StringConstants.name) + ".cm";
 	}
-	
-//	@Override	
-//	public <T extends FunctionalClient> T getFunctionalClient() {
-//		return (T)client;
-//	}
 
 	@Override
-	public <T extends FunctionalClient> T getFunctionalClient(Class<T> clazz) {
-		return clazz.cast(client);
+	public <T> T getServiceInterface(Class<T> serviceInterface) {
+		return serviceInterface.cast(client);
 	}
 
 	@Override
-	public FunctionalClient getFunctionalClient() {
+	public ServiceConnection getServiceConnection() {
 		return client;
 	}
 	
@@ -110,7 +105,7 @@ public class ConnectionManagerImpl implements ConnectionManager {
 	
 	@Override
 	public boolean isConnected() {
-		return getFunctionalClient().isConnected();
+		return getServiceConnection().isConnected();
 	}
 
 //	protected void setConnected(boolean value) {

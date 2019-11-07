@@ -1,9 +1,9 @@
 package de.dfki.cos.basys.common.component.impl;
 
 import de.dfki.cos.basys.common.component.ComponentContext;
-import de.dfki.cos.basys.common.component.FunctionalClient;
+import de.dfki.cos.basys.common.component.ServiceConnection;
 
-public class BaseFunctionalClient implements FunctionalClient {
+public class BaseBackendConnection implements ServiceConnection {
 
 	boolean connected = false;
 	
