@@ -1,7 +1,7 @@
 {
   "id": "component-3",
   "name": "component-3",
-  "externalConnectionString": "",
+  "serviceConnectionString": "",
   "implementationJavaClass": "de.dfki.cos.basys.common.component.util.TestComponent",
   "key1": "value1",
   "key2": "value2",

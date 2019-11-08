@@ -53,7 +53,7 @@ public class ActivateConnectTest {
 	@Test
 	public void testConnectDisconnectToExternal() {
 		try {
-			config.put(StringConstants.connectionString, "somewhere"); // must not be null or empty for this test
+			config.put(StringConstants.serviceConnectionString, "somewhere"); // must not be null or empty for this test
 			
 			assertFalse(component.isActivated());
 			assertFalse(component.getConnectionManager().isConnected());

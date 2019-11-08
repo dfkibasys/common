@@ -14,6 +14,7 @@ import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
+import java.util.function.Function;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.filefilter.SuffixFileFilter;
@@ -80,13 +81,12 @@ public class ComponentConfigurationProviderImpl implements ComponentConfiguratio
 	}
 
 	@Override
-	public List<Properties> getComponentConfigurations() {
-		List<Properties> configs = new LinkedList<Properties>();
+	public List<String> getComponentConfigurationPaths() {		
 
 		String[] suffixes = { ".json", ".properties" };
 		FileFilter filter = new SuffixFileFilter(suffixes);
 
-		List<Path> paths = new LinkedList<Path>();
+		List<String> paths = new LinkedList<String>();
 
 		int depth = 1;
 		if (recursive)
@@ -96,20 +96,21 @@ public class ComponentConfigurationProviderImpl implements ComponentConfiguratio
 			Files.find(Paths.get(uri.toFileString()), 
 					depth, 
 					(filePath, fileAttr) -> filter.accept(filePath.toFile()))
+					.map(p -> p.toString())					
 					.forEach(paths::add);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		for (Path path : paths) {
-			Properties p = readFile(path.toFile());
-			configs.add(p);
-		}
-
-		return configs;
+		return paths;
 	}
 
+	@Override
+	public Properties getComponentConfiguration(String path) {		
+		return readFile(new File(path));
+	}
+	
 	public Properties readFile(File configFile) {
 		try {
 			String ext = FilenameUtils.getExtension(configFile.getName());
@@ -129,40 +130,6 @@ public class ComponentConfigurationProviderImpl implements ComponentConfiguratio
 		return null;
 	}
 
-	public Component createComponent(File configFile) throws ComponentManagerException {
-		Component component = null;
-		try {
-			String ext = FilenameUtils.getExtension(configFile.getName());
-			if ("json".equals(ext)) {
-				JsonReader reader = new JsonReader(new FileReader(configFile));
-				// Properties config = gson.fromJson(reader, Properties.class);
-				// component = createComponent(config);
-			} else if ("properties".equals(ext)) {
-				Properties config = new Properties();
-				InputStream input = new FileInputStream(configFile.getAbsoluteFile());
-				config.load(input);
-				// component = createComponent(config);
-			}
-		} catch (IOException e) {
-			throw new ComponentManagerException(e);
-		}
-		return component;
-	}
 
-	public void createComponents(File configFolder, boolean recursive) throws ComponentManagerException {
-
-		String[] suffixes = { ".json", "*.properties" };
-		FileFilter filter = new SuffixFileFilter(suffixes);
-
-		for (File entry : configFolder.listFiles(filter)) {
-			createComponent(entry);
-		}
-		if (recursive) {
-			File[] files = configFolder.listFiles(File::isDirectory);
-			for (File entry : configFolder.listFiles(File::isDirectory)) {
-				createComponents(entry, recursive);
-			}
-		}
-	}
 
 }

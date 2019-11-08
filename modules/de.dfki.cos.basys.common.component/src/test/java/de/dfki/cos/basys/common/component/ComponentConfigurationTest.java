@@ -23,7 +23,7 @@ public class ComponentConfigurationTest {
 		Properties config = new Properties();
 		config.put(StringConstants.id, "component-manager");
 		config.put(StringConstants.name, "component-manager");
-		config.put(StringConstants.connectionString, "src/test/resources/components");
+		config.put(StringConstants.serviceConnectionString, "src/test/resources/components");
 		config.put("recursive", "true");
 	}
 

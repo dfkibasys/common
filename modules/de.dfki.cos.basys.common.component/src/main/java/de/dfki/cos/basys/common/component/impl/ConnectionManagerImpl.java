@@ -1,5 +1,7 @@
 package de.dfki.cos.basys.common.component.impl;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Objects;
 import java.util.Properties;
 import java.util.concurrent.ScheduledFuture;
@@ -15,6 +17,7 @@ import de.dfki.cos.basys.common.component.ComponentException;
 import de.dfki.cos.basys.common.component.ConnectionManager;
 import de.dfki.cos.basys.common.component.ServiceConnection;
 import de.dfki.cos.basys.common.component.StringConstants;
+import de.dfki.cos.basys.common.component.manager.ComponentManagerException;
 
 public class ConnectionManagerImpl implements ConnectionManager {
 	public final Logger LOGGER;
@@ -27,16 +30,59 @@ public class ConnectionManagerImpl implements ConnectionManager {
 
 	private Supplier<? extends ServiceConnection> ctor;
 	
+	public ConnectionManagerImpl(Properties config) {
+		this.config = config;
+		this.LOGGER = LoggerFactory.getLogger("basys.component." + getName().replaceAll(" ", "-"));		
+		
+		if (config.getProperty("observeConnection") != null) {
+			observeConnection = Boolean.parseBoolean(config.getProperty("observeConnection"));
+			LOGGER.info("observeConnection = " + observeConnection);
+		}	
+		
+		String serviceImplementationJavaClass = Objects.requireNonNull(config.getProperty(StringConstants.serviceImplementationJavaClass));
+		
+		Class c = null;
+					
+		try {
+			c = Class.forName(serviceImplementationJavaClass);
+		} catch (ClassNotFoundException e2) {
+			e2.printStackTrace();
+		}		
+	
+		Constructor<ServiceConnection> constructor = null;
+		
+		try {
+			try {
+				constructor = c.getConstructor(Properties.class);
+				client = constructor.newInstance(config);
+			} catch (NoSuchMethodException e) {
+				try {
+					constructor = c.getConstructor();
+					client = constructor.newInstance();
+				} catch (NoSuchMethodException e1) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
 	public ConnectionManagerImpl(Properties config, Supplier<? extends ServiceConnection> ctor) {
 		this.config = config;
 		this.LOGGER = LoggerFactory.getLogger("basys.component." + getName().replaceAll(" ", "-"));		
-		this.ctor = Objects.requireNonNull(ctor);
-		this.client = ctor.get();
 
 		if (config.getProperty("observeConnection") != null) {
 			observeConnection = Boolean.parseBoolean(config.getProperty("observeConnection"));
 			LOGGER.info("observeConnection = " + observeConnection);
 		}	
+		
+		this.ctor = Objects.requireNonNull(ctor);
+		this.client = ctor.get();
 	}
 	
 	private String getName() {		
@@ -58,8 +104,8 @@ public class ConnectionManagerImpl implements ConnectionManager {
 		this.context = context;
 		if (!isConnected()) {
 			LOGGER.debug("connect");
-			if (config.containsKey(StringConstants.connectionString)) {
-				String cs = config.getProperty(StringConstants.connectionString);
+			if (config.containsKey(StringConstants.serviceConnectionString)) {
+				String cs = config.getProperty(StringConstants.serviceConnectionString);
 				if (cs != null && !cs.equalsIgnoreCase("")) {
 					LOGGER.debug("provided connection string: " + cs);
 					if (client.connect(context, cs)) {

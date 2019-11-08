@@ -1,8 +1,6 @@
 package de.dfki.cos.basys.common.component.impl;
 
 import java.util.Properties;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +10,6 @@ import de.dfki.cos.basys.common.component.ComponentContext;
 import de.dfki.cos.basys.common.component.ComponentException;
 import de.dfki.cos.basys.common.component.ComponentInfo;
 import de.dfki.cos.basys.common.component.ConnectionManager;
-import de.dfki.cos.basys.common.component.ServiceConnection;
 import de.dfki.cos.basys.common.component.StringConstants;
 import de.dfki.cos.basys.common.component.registry.ComponentRegistration;
 import de.dfki.cos.basys.common.component.registry.ComponentRegistrationException;
@@ -30,7 +27,10 @@ public class BaseComponent implements Component {
 	public BaseComponent(Properties config) {
 		this.config = config;
 		LOGGER = LoggerFactory.getLogger("basys.component." + getName().replaceAll(" ", "-"));
-		//connectionManager = new ConnectionManagerImpl(config,BaseFunctionalClient::new);
+		
+		if (config.containsKey(StringConstants.serviceConnectionString) && connectionManager != null) {
+			connectionManager = new ConnectionManagerImpl(config);
+		}		
 	}
 	
 	@Override
@@ -202,7 +202,5 @@ public class BaseComponent implements Component {
 				.setConnected(isConnected());
 		return info;
 	}
-
-
 
 }

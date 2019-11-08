@@ -36,7 +36,7 @@ public class ComponentManagerTest {
 
 	@Test
 	public void testReadFromFolder() throws ComponentException {
-		config.put(StringConstants.connectionString, StringConstants.testConfigurationFolder);
+		config.put(StringConstants.serviceConnectionString, StringConstants.testConfigurationFolder);
 		config.put("recursive", "true");
 
 		componentManager = new ComponentManagerImpl(config);

@@ -21,6 +21,7 @@ import org.apache.commons.io.filefilter.SuffixFileFilter;
 
 import de.dfki.cos.basys.common.component.Component;
 import de.dfki.cos.basys.common.component.ComponentException;
+import de.dfki.cos.basys.common.component.ServiceConnection;
 import de.dfki.cos.basys.common.component.StringConstants;
 import de.dfki.cos.basys.common.component.impl.BaseComponent;
 import de.dfki.cos.basys.common.component.impl.ConnectionManagerImpl;
@@ -51,6 +52,21 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 		}
 	}
 
+	public ComponentManagerImpl(Properties config, ServiceConnection connection) {
+		super(config);
+		connectionManager = new ConnectionManagerImpl(config, new Supplier<ServiceConnection>() {
+			@Override
+			public ServiceConnection get() {						
+				return connection;
+			}
+		});	
+		
+		if (config.containsKey("async")) {
+			async = Boolean.parseBoolean(config.getProperty("async"));
+			LOGGER.info("async = " + async);
+		}
+	}
+	
 	@Override
 	protected void doActivate() throws ComponentException {	
 		if (this.isConnected()) {
@@ -59,10 +75,11 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 				@Override
 				public void run() {
 					ComponentConfigurationProvider service = connectionManager.getServiceInterface(ComponentConfigurationProvider.class);
-					List<Properties> configs = service.getComponentConfigurations();
+					List<String> configs = service.getComponentConfigurationPaths();
 					
 					try {
-						for (Properties config : configs) {
+						for (String path : configs) {
+							Properties config = service.getComponentConfiguration(path);
 							createComponent(config);
 						}						
 					} 

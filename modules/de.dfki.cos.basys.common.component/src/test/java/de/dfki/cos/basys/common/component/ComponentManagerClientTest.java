@@ -18,11 +18,11 @@ import de.dfki.cos.basys.common.component.manager.impl.ComponentManagerImpl;
 public class ComponentManagerClientTest {
 
 	
-	ComponentConfigurationProviderImpl  client;
+	ComponentConfigurationProviderImpl provider;
 	
 	@Before
 	public void setUp() throws Exception {			
-		client = new ComponentConfigurationProviderImpl();			
+		provider = new ComponentConfigurationProviderImpl();			
 	}
 
 	@After
@@ -31,28 +31,40 @@ public class ComponentManagerClientTest {
 
 	@Test
 	public void testReadJsonConfig() throws ComponentException {
-		Properties config = client.readFile(new File(StringConstants.testConfigurationFolder + "/component-1.json"));
+		Properties config = provider.readFile(new File(StringConstants.testConfigurationFolder + "/component-1.json"));
 		assertEquals("component-1",config.getProperty("id"));
 	}
 	
 	@Test
 	public void testReadPropertiesConfig() throws ComponentException {
-		Properties config = client.readFile(new File(StringConstants.testConfigurationFolder + "/recursive/component-6.properties"));
+		Properties config = provider.readFile(new File(StringConstants.testConfigurationFolder + "/recursive/component-6.properties"));
 		assertEquals("component-6",config.getProperty("id"));		
 	}
 
 	@Test
-	public void testReadFolder() throws ComponentException {
-		client.connect(null, StringConstants.testConfigurationFolder);
-		List<Properties> configs = client.getComponentConfigurations();
+	public void testPaths() throws ComponentException {
+		provider.connect(null, StringConstants.testConfigurationFolder);
+		List<String> configs = provider.getComponentConfigurationPaths();
 		assertEquals(3, configs.size());
 	}
 	
 	@Test
-	public void testReadFolderRecursive() throws ComponentException {
-		client.setRecursive(true);
-		client.connect(null, StringConstants.testConfigurationFolder);
-		List<Properties> configs = client.getComponentConfigurations();
+	public void testReadConfigurations() throws ComponentException {
+		provider.connect(null, StringConstants.testConfigurationFolder);
+		List<String> configs = provider.getComponentConfigurationPaths();				
+		assertEquals(3, configs.size());
+		
+		for (String path : configs) {
+			Properties config = provider.getComponentConfiguration(path);
+			assertNotNull(config);
+		}		
+	}
+	
+	@Test
+	public void testPathsRecursive() throws ComponentException {
+		provider.setRecursive(true);
+		provider.connect(null, StringConstants.testConfigurationFolder);
+		List<String> configs = provider.getComponentConfigurationPaths();
 		assertEquals(6, configs.size());				
 	}
 	
