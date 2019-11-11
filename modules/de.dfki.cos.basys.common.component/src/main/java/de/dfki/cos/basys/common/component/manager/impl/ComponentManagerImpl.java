@@ -76,18 +76,18 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 				public void run() {
 					ComponentConfigurationProvider service = connectionManager.getServiceInterface(ComponentConfigurationProvider.class);
 					List<String> configs = service.getComponentConfigurationPaths();
-					
-					try {
-						for (String path : configs) {
+										
+					for (String path : configs) {
+						try {		
 							Properties config = service.getComponentConfiguration(path);
 							createComponent(config);
-						}						
-					} 
-					catch (ComponentManagerException e) {
-						// TODO Auto-generated catch block
-						//e.printStackTrace();
-						throw new RuntimeException(e);
-					}
+						}
+						catch (ComponentManagerException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							//throw new RuntimeException(e);
+						}												
+					} 					
 					
 					LOGGER.info("component creation complete");
 					
@@ -154,7 +154,7 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 //			c = cl2.loadClass(config.getComponentImplementationJavaClass());
 //			
 //			c = componentCreationClassLoader.loadClass(config.getComponentImplementationJavaClass());
-			
+			LOGGER.debug("Try loading class " + config.getProperty("implementationJavaClass") + " using class loader " + this.getClass().getClassLoader().toString());
 			c = Class.forName(config.getProperty("implementationJavaClass"));
 		} catch (ClassNotFoundException e) {
 			throw new ComponentManagerException(e);
