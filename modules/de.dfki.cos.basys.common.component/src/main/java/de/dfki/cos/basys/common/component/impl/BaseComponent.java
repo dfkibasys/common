@@ -9,7 +9,7 @@ import de.dfki.cos.basys.common.component.Component;
 import de.dfki.cos.basys.common.component.ComponentContext;
 import de.dfki.cos.basys.common.component.ComponentException;
 import de.dfki.cos.basys.common.component.ComponentInfo;
-import de.dfki.cos.basys.common.component.ConnectionManager;
+import de.dfki.cos.basys.common.component.ServiceManager;
 import de.dfki.cos.basys.common.component.StringConstants;
 import de.dfki.cos.basys.common.component.registry.ComponentRegistration;
 import de.dfki.cos.basys.common.component.registry.ComponentRegistrationException;
@@ -22,14 +22,14 @@ public class BaseComponent implements Component {
 	protected ComponentContext context;
 	protected ComponentRegistration registration;
 
-	protected ConnectionManager connectionManager = null;
+	protected ServiceManager connectionManager = null;
 		
 	public BaseComponent(Properties config) {
 		this.config = config;
 		LOGGER = LoggerFactory.getLogger("basys.component." + getName().replaceAll(" ", "-"));
 		
 		if (config.containsKey(StringConstants.serviceConnectionString) && connectionManager != null) {
-			connectionManager = new ConnectionManagerImpl(config);
+			connectionManager = new ServiceManagerImpl(config);
 		}		
 	}
 	
@@ -49,7 +49,7 @@ public class BaseComponent implements Component {
 	}
 	
 	@Override
-	public ConnectionManager getConnectionManager() {
+	public ServiceManager getServiceManager() {
 		return connectionManager;
 	}
 

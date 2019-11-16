@@ -1,11 +1,5 @@
 package de.dfki.cos.basys.common.component.manager.impl;
 
-import java.io.File;
-import java.io.FileFilter;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -16,15 +10,12 @@ import java.util.Properties;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.io.filefilter.SuffixFileFilter;
-
 import de.dfki.cos.basys.common.component.Component;
 import de.dfki.cos.basys.common.component.ComponentException;
 import de.dfki.cos.basys.common.component.ServiceConnection;
 import de.dfki.cos.basys.common.component.StringConstants;
 import de.dfki.cos.basys.common.component.impl.BaseComponent;
-import de.dfki.cos.basys.common.component.impl.ConnectionManagerImpl;
+import de.dfki.cos.basys.common.component.impl.ServiceManagerImpl;
 import de.dfki.cos.basys.common.component.manager.ComponentConfigurationProvider;
 import de.dfki.cos.basys.common.component.manager.ComponentManager;
 import de.dfki.cos.basys.common.component.manager.ComponentManagerException;
@@ -38,7 +29,7 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 	
 	public ComponentManagerImpl(Properties config) {
 		super(config);
-		connectionManager = new ConnectionManagerImpl(config, new Supplier<ComponentConfigurationProviderImpl>() {
+		connectionManager = new ServiceManagerImpl(config, new Supplier<ComponentConfigurationProviderImpl>() {
 			@Override
 			public ComponentConfigurationProviderImpl get() {
 				ComponentConfigurationProviderImpl service = new ComponentConfigurationProviderImpl(config);				
@@ -54,7 +45,7 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 
 	public ComponentManagerImpl(Properties config, ServiceConnection connection) {
 		super(config);
-		connectionManager = new ConnectionManagerImpl(config, new Supplier<ServiceConnection>() {
+		connectionManager = new ServiceManagerImpl(config, new Supplier<ServiceConnection>() {
 			@Override
 			public ServiceConnection get() {						
 				return connection;

@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.dfki.cos.basys.common.component.ComponentOrderStatus;
-import de.dfki.cos.basys.common.component.impl.ConnectionManagerImpl;
+import de.dfki.cos.basys.common.component.impl.ServiceManagerImpl;
 import de.dfki.cos.basys.common.component.util.TestComponent;
 
 public class ActivateConnectTest {
@@ -56,15 +56,15 @@ public class ActivateConnectTest {
 			config.put(StringConstants.serviceConnectionString, "somewhere"); // must not be null or empty for this test
 			
 			assertFalse(component.isActivated());
-			assertFalse(component.getConnectionManager().isConnected());
+			assertFalse(component.getServiceManager().isConnected());
 			component.activate(ComponentContext.getStaticContext());
 			assertTrue(component.isActivated());
 			
-			assertTrue(component.getConnectionManager().isConnected());
+			assertTrue(component.getServiceManager().isConnected());
 			
 			component.deactivate();
 			assertFalse(component.isActivated());
-			assertFalse(component.getConnectionManager().isConnected());
+			assertFalse(component.getServiceManager().isConnected());
 		} catch (Exception e) {
 			fail();
 		}

@@ -18,5 +18,5 @@ public interface Component {
 	
 	boolean isActivated();	
 	
-	ConnectionManager getConnectionManager();
+	ServiceManager getServiceManager();
 }

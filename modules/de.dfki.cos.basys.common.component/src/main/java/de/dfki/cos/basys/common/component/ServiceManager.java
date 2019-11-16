@@ -1,6 +1,6 @@
 package de.dfki.cos.basys.common.component;
 
-public interface ConnectionManager {
+public interface ServiceManager {
 	
 	void connect(ComponentContext context) throws ComponentException;
 	void disconnect() throws ComponentException;	

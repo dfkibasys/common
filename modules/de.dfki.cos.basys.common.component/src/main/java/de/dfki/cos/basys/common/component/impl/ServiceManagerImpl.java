@@ -14,12 +14,12 @@ import org.slf4j.LoggerFactory;
 import de.dfki.cos.basys.common.component.Component;
 import de.dfki.cos.basys.common.component.ComponentContext;
 import de.dfki.cos.basys.common.component.ComponentException;
-import de.dfki.cos.basys.common.component.ConnectionManager;
+import de.dfki.cos.basys.common.component.ServiceManager;
 import de.dfki.cos.basys.common.component.ServiceConnection;
 import de.dfki.cos.basys.common.component.StringConstants;
 import de.dfki.cos.basys.common.component.manager.ComponentManagerException;
 
-public class ConnectionManagerImpl implements ConnectionManager {
+public class ServiceManagerImpl implements ServiceManager {
 	public final Logger LOGGER;
 	protected Properties config;
 	private ComponentContext context = null;
@@ -30,7 +30,7 @@ public class ConnectionManagerImpl implements ConnectionManager {
 
 	private Supplier<? extends ServiceConnection> ctor;
 	
-	public ConnectionManagerImpl(Properties config) {
+	public ServiceManagerImpl(Properties config) {
 		this.config = config;
 		this.LOGGER = LoggerFactory.getLogger("basys.component." + getName().replaceAll(" ", "-"));		
 		
@@ -72,7 +72,7 @@ public class ConnectionManagerImpl implements ConnectionManager {
 
 	}
 	
-	public ConnectionManagerImpl(Properties config, Supplier<? extends ServiceConnection> ctor) {
+	public ServiceManagerImpl(Properties config, Supplier<? extends ServiceConnection> ctor) {
 		this.config = config;
 		this.LOGGER = LoggerFactory.getLogger("basys.component." + getName().replaceAll(" ", "-"));		
 
