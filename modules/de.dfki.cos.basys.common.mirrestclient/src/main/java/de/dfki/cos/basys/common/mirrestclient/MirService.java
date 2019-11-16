@@ -10,7 +10,7 @@ import de.dfki.cos.basys.common.mirrestclient.dto.Status;
 import de.dfki.cos.basys.common.mirrestclient.dto.SymbolicPosition;
 import de.dfki.cos.basys.common.mirrestclient.dto.SymbolicPositionInfo;
 
-public interface MirRestClient {
+public interface MirService {
 
 	// atomic base functions -> REST calls
 	

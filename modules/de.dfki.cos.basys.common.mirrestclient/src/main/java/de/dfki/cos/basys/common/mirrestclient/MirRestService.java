@@ -30,9 +30,9 @@ import de.dfki.cos.basys.common.mirrestclient.dto.StatusChangeRequest;
 import de.dfki.cos.basys.common.mirrestclient.dto.SymbolicPosition;
 import de.dfki.cos.basys.common.mirrestclient.dto.SymbolicPositionInfo;
 
-public class MirRestClientImpl implements MirRestClient {
+public class MirRestService implements MirService {
 
-	protected final Logger LOGGER = LoggerFactory.getLogger(MirRestClientImpl.class.getName());
+	protected final Logger LOGGER = LoggerFactory.getLogger(MirRestService.class.getName());
 
 	private final String pathSegment = "/api/v2.0.0";
 	private final String gotoAbsolutePositionId = "mirconst-guid-0000-0003-actionlist00"; // id for MIR's default taxi mission;
@@ -47,13 +47,13 @@ public class MirRestClientImpl implements MirRestClient {
 	List<MissionInstance> allMissionInstances;
 	List<MissionInstance> currentMissionInstances;	
 	
-	public MirRestClientImpl(String host, String auth) {
+	public MirRestService(String host, String auth) {
 		this.endpoint = client.target(host).path(pathSegment);	
 		this.auth = auth;
 		init();
 	}
 	
-	public MirRestClientImpl(WebTarget endpoint, String auth) {
+	public MirRestService(WebTarget endpoint, String auth) {
 		this.endpoint = endpoint.path(pathSegment);	
 		this.auth = auth;
 		init();

@@ -10,8 +10,8 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import de.dfki.cos.basys.common.mirrestclient.MiRState;
-import de.dfki.cos.basys.common.mirrestclient.MirRestClient;
-import de.dfki.cos.basys.common.mirrestclient.MirRestClientImpl;
+import de.dfki.cos.basys.common.mirrestclient.MirService;
+import de.dfki.cos.basys.common.mirrestclient.MirRestService;
 import de.dfki.cos.basys.common.mirrestclient.dto.MissionDefinition;
 import de.dfki.cos.basys.common.mirrestclient.dto.MissionInstance;
 import de.dfki.cos.basys.common.mirrestclient.dto.MissionInstanceInfo;
@@ -22,13 +22,13 @@ import de.dfki.cos.basys.common.mirrestclient.dto.SymbolicPositionInfo;
 
 public class MirRestClientTests {
 
-	MirRestClient client;
+	MirService client;
 	String url = "http://robot-mir-01.mrk40.dfki.lan";
 	String auth = "YWRtaW46OGM2OTc2ZTViNTQxMDQxNWJkZTkwOGJkNGRlZTE1ZGZiMTY3YTljODczZmM0YmI4YTgxZjZmMmFiNDQ4YTkxOA==";
 	
 	@Before
 	public void setUp() throws Exception {
-		client = new MirRestClientImpl(url, auth);
+		client = new MirRestService(url, auth);
 	}
 
 	@After
