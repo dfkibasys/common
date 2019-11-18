@@ -19,14 +19,14 @@ import de.dfki.cos.basys.common.component.ServiceConnection;
 import de.dfki.cos.basys.common.component.StringConstants;
 import de.dfki.cos.basys.common.component.manager.ComponentManagerException;
 
-public class ServiceManagerImpl implements ServiceManager {
+public class ServiceManagerImpl<T> implements ServiceManager<T> {
 	public final Logger LOGGER;
 	protected Properties config;
 	private ComponentContext context = null;
 	
 	private boolean observeConnection = false;
 	private ScheduledFuture<?> connectionHandle = null;
-	protected ServiceConnection client = null;
+	protected ServiceConnection service = null;
 
 	private Supplier<? extends ServiceConnection> ctor;
 	
@@ -54,11 +54,11 @@ public class ServiceManagerImpl implements ServiceManager {
 		try {
 			try {
 				constructor = c.getConstructor(Properties.class);
-				client = constructor.newInstance(config);
+				service = constructor.newInstance(config);
 			} catch (NoSuchMethodException e) {
 				try {
 					constructor = c.getConstructor();
-					client = constructor.newInstance();
+					service = constructor.newInstance();
 				} catch (NoSuchMethodException e1) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -82,7 +82,7 @@ public class ServiceManagerImpl implements ServiceManager {
 		}	
 		
 		this.ctor = Objects.requireNonNull(ctor);
-		this.client = ctor.get();
+		this.service = ctor.get();
 	}
 	
 	private String getName() {		
@@ -90,13 +90,13 @@ public class ServiceManagerImpl implements ServiceManager {
 	}
 
 	@Override
-	public <T> T getServiceInterface(Class<T> serviceInterface) {
-		return serviceInterface.cast(client);
+	public T getServiceInterface() {
+		return (T)service;
 	}
 
 	@Override
 	public ServiceConnection getServiceConnection() {
-		return client;
+		return service;
 	}
 	
 	@Override
@@ -108,7 +108,7 @@ public class ServiceManagerImpl implements ServiceManager {
 				String cs = config.getProperty(StringConstants.serviceConnectionString);
 				if (cs != null && !cs.equalsIgnoreCase("")) {
 					LOGGER.debug("provided connection string: " + cs);
-					if (client.connect(context, cs)) {
+					if (service.connect(context, cs)) {
 						LOGGER.debug("connect - finished");
 						//setConnected(true);
 					} else {
@@ -129,8 +129,8 @@ public class ServiceManagerImpl implements ServiceManager {
 	public void disconnect() throws ComponentException {
 		if (isConnected()) {
 			LOGGER.debug("disconnect");
-			client.disconnect();
-			if (!client.isConnected()) {
+			service.disconnect();
+			if (!service.isConnected()) {
 				LOGGER.debug("disconnect - finished");
 				//setConnected(false);
 			} else {
@@ -210,23 +210,23 @@ public class ServiceManagerImpl implements ServiceManager {
 //		}
 //	}
 
-	@Override
-	public void handleConnectionEstablished() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void handleConnectionLost() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void handleConnectionClosed() {
-		// TODO Auto-generated method stub
-		
-	}
+//	@Override
+//	public void handleConnectionEstablished() {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	@Override
+//	public void handleConnectionLost() {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	@Override
+//	public void handleConnectionClosed() {
+//		// TODO Auto-generated method stub
+//		
+//	}
 
 
 }

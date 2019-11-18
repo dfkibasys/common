@@ -13,6 +13,7 @@ import java.util.function.Supplier;
 import de.dfki.cos.basys.common.component.Component;
 import de.dfki.cos.basys.common.component.ComponentException;
 import de.dfki.cos.basys.common.component.ServiceConnection;
+import de.dfki.cos.basys.common.component.ServiceManager;
 import de.dfki.cos.basys.common.component.StringConstants;
 import de.dfki.cos.basys.common.component.impl.BaseComponent;
 import de.dfki.cos.basys.common.component.impl.ServiceManagerImpl;
@@ -29,7 +30,7 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 	
 	public ComponentManagerImpl(Properties config) {
 		super(config);
-		connectionManager = new ServiceManagerImpl(config, new Supplier<ComponentConfigurationProviderImpl>() {
+		serviceManager = new ServiceManagerImpl<ComponentConfigurationProvider>(config, new Supplier<ComponentConfigurationProviderImpl>() {
 			@Override
 			public ComponentConfigurationProviderImpl get() {
 				ComponentConfigurationProviderImpl service = new ComponentConfigurationProviderImpl(config);				
@@ -45,7 +46,7 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 
 	public ComponentManagerImpl(Properties config, ServiceConnection connection) {
 		super(config);
-		connectionManager = new ServiceManagerImpl(config, new Supplier<ServiceConnection>() {
+		serviceManager = new ServiceManagerImpl<ComponentConfigurationProvider>(config, new Supplier<ServiceConnection>() {
 			@Override
 			public ServiceConnection get() {						
 				return connection;
@@ -65,7 +66,7 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 			Runnable r = new Runnable() {				
 				@Override
 				public void run() {
-					ComponentConfigurationProvider service = connectionManager.getServiceInterface(ComponentConfigurationProvider.class);
+					ComponentConfigurationProvider service = getService(ComponentConfigurationProvider.class);
 					List<String> configs = service.getComponentConfigurationPaths();
 										
 					for (String path : configs) {

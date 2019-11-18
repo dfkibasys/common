@@ -17,6 +17,8 @@ public interface Component {
 	void deactivate() throws ComponentException;
 	
 	boolean isActivated();	
-	
-	ServiceManager getServiceManager();
+
+	<T> ServiceManager<T> getServiceManager();
+	<T> T getService();
+	<T> T getService(Class<T> serviceInterface);
 }

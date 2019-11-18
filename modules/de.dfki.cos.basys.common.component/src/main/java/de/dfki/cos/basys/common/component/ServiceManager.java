@@ -1,15 +1,15 @@
 package de.dfki.cos.basys.common.component;
 
-public interface ServiceManager {
+public interface ServiceManager<T> {
 	
 	void connect(ComponentContext context) throws ComponentException;
 	void disconnect() throws ComponentException;	
 	boolean isConnected();
 	ServiceConnection getServiceConnection();
 	
-	<T> T getServiceInterface(Class<T> serviceInterface);
+	T getServiceInterface();
 	
-	void handleConnectionEstablished();
-	void handleConnectionLost();
-	void handleConnectionClosed();
+	//void handleConnectionEstablished();
+	//void handleConnectionLost();
+	//void handleConnectionClosed();
 }

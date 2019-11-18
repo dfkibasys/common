@@ -22,15 +22,15 @@ public class BaseComponent implements Component {
 	protected ComponentContext context;
 	protected ComponentRegistration registration;
 
-	protected ServiceManager connectionManager = null;
+	protected ServiceManager serviceManager = null;
 		
 	public BaseComponent(Properties config) {
 		this.config = config;
 		LOGGER = LoggerFactory.getLogger("basys.component." + getName().replaceAll(" ", "-"));
 		
-		if (config.containsKey(StringConstants.serviceConnectionString) && connectionManager != null) {
-			connectionManager = new ServiceManagerImpl(config);
-		}		
+		//if (config.containsKey(StringConstants.serviceConnectionString) && serviceManager != null) {
+		//	serviceManager = new ServiceManagerImpl(config);
+		//}		
 	}
 	
 	@Override
@@ -49,8 +49,18 @@ public class BaseComponent implements Component {
 	}
 	
 	@Override
-	public ServiceManager getServiceManager() {
-		return connectionManager;
+	public <T> ServiceManager<T> getServiceManager() {
+		return serviceManager;
+	}
+	
+	@Override
+	public <T> T getService() {		
+		return (T)serviceManager.getServiceInterface();
+	}	
+	
+	@Override
+	public <T> T getService(Class<T> serviceInterface) {
+		return serviceInterface.cast(serviceManager.getServiceInterface());
 	}
 
 	@Override
@@ -65,8 +75,8 @@ public class BaseComponent implements Component {
 			
 			this.context = context;	
 			
-			if (connectionManager != null)
-				connectionManager.connect(context);
+			if (serviceManager != null)
+				serviceManager.connect(context);
 
 			doActivate();	
 			
@@ -96,8 +106,8 @@ public class BaseComponent implements Component {
 			doDeactivate();
 			setActivated(false);
 			
-			if (connectionManager != null)
-				connectionManager.disconnect();
+			if (serviceManager != null)
+				serviceManager.disconnect();
 			
 			context = null;
 			LOGGER.info("deactivate - finished");
@@ -153,7 +163,7 @@ public class BaseComponent implements Component {
 	}	
 
 	public boolean isConnected() {
-		return (connectionManager != null) ? connectionManager.isConnected() : false;
+		return (serviceManager != null) ? serviceManager.isConnected() : false;
 	}	
 	
 	protected void notifyChange() {
