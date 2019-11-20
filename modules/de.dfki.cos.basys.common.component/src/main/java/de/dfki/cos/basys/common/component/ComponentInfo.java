@@ -16,7 +16,8 @@ public class ComponentInfo extends Properties {
 	}
 	
 	public ComponentInfo(Properties p) {
-		this.putAll(p);
+		super(p);
+		//this.putAll(p);
 	}
 	
 	public String getId() {
@@ -37,7 +38,7 @@ public class ComponentInfo extends Properties {
 		return (T) this;
 	}
 	
-	public String getCategors() {
+	public String getCategory() {
 		return getProperty(StringConstants.category);
 	}
 

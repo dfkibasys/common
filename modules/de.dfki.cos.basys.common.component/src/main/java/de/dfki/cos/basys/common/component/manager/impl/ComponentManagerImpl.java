@@ -7,8 +7,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
+
+import com.google.common.eventbus.Subscribe;
 
 import de.dfki.cos.basys.common.component.Component;
 import de.dfki.cos.basys.common.component.ComponentException;
@@ -20,6 +23,7 @@ import de.dfki.cos.basys.common.component.impl.ServiceManagerImpl;
 import de.dfki.cos.basys.common.component.manager.ComponentConfigurationProvider;
 import de.dfki.cos.basys.common.component.manager.ComponentManager;
 import de.dfki.cos.basys.common.component.manager.ComponentManagerException;
+import de.dfki.cos.basys.common.component.manager.impl.ComponentManagerEvent.Type;
 
 
 public class ComponentManagerImpl extends BaseComponent implements ComponentManager {
@@ -40,7 +44,6 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 		
 		if (config.containsKey("async")) {
 			async = Boolean.parseBoolean(config.getProperty("async"));
-			LOGGER.info("async = " + async);
 		}
 	}
 
@@ -52,45 +55,29 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 				return connection;
 			}
 		});	
-		
+
 		if (config.containsKey("async")) {
 			async = Boolean.parseBoolean(config.getProperty("async"));
-			LOGGER.info("async = " + async);
 		}
 	}
 	
 	@Override
 	protected void doActivate() throws ComponentException {	
-		if (this.isConnected()) {
-		
+		if (this.isConnected()) {			
+			ComponentConfigurationProvider service = getService(ComponentConfigurationProvider.class);
 			Runnable r = new Runnable() {				
 				@Override
 				public void run() {
-					ComponentConfigurationProvider service = getService(ComponentConfigurationProvider.class);
-					List<String> configs = service.getComponentConfigurationPaths();
-										
+					List<String> configs = service.getComponentConfigurationPaths();									
 					for (String path : configs) {
-						try {		
-							Properties config = service.getComponentConfiguration(path);
-							createComponent(config);
-						}
-						catch (ComponentManagerException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-							//throw new RuntimeException(e);
-						}												
-					} 					
-					
-					LOGGER.info("component creation complete");
-					
+						createComponentForPath(path);						
+					}
 				}
 			};
-			if (async) {
-				//scheduledExecutorService.schedule(r, 10, TimeUnit.SECONDS);
-					
+			if (async) {				
 				CompletableFuture<Void> cf = CompletableFuture.runAsync(r, context.getScheduledExecutorService()).exceptionally(e-> {		    
 					e.printStackTrace();
-					LOGGER.error(e.getMessage(), e);
+					//LOGGER.error(e.getMessage(), e);
 				    return null;
 				});
 			} else {
@@ -101,8 +88,14 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 	
 	@Override
 	protected void doDeactivate() throws ComponentException {
-		for (Component c : components.values()) {
-			c.deactivate();
+		Set<String> ids = components.keySet();
+		for (String id : ids) {
+			try {
+				deleteComponent(id);
+			} catch (ComponentManagerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}		
 	}
 
@@ -163,11 +156,12 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 			Constructor<Component> constructor = c.getConstructor(Properties.class);
 			component = constructor.newInstance(config);
 			addComponent(component);
-
 		} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
 				| IllegalArgumentException | InvocationTargetException e) {
 			throw new ComponentManagerException(e);
 		}
+		
+		
 		return component;
 	}
 
@@ -177,11 +171,10 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 		components.put(component.getId(), component);
 		try {
 			component.activate(context);
+			context.getEventBus().post(new ComponentManagerEvent(Type.COMPONENT_ADDED, component.getId()));
 		} catch (ComponentException e) {
 			throw new ComponentManagerException(e);
 		}
-		
-		notifyChange();
 	}
 
 	@Override
@@ -192,13 +185,52 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 			throw new ComponentManagerException(String.format("No component registered with id %s", id));
 		try {
 			c.deactivate();
+			context.getEventBus().post(new ComponentManagerEvent(Type.COMPONENT_DELETED, c.getId()));
 		} catch (ComponentException e) {
 			throw new ComponentManagerException(e);
 		}
-
-		notifyChange();
 	}
 
-
+	private void createComponentForPath(String path) {
+		ComponentConfigurationProvider service = getService(ComponentConfigurationProvider.class);
+		Properties config = service.getComponentConfigurationForPath(path);
+		try {
+			createComponent(config);
+		} catch (ComponentManagerException e) {
+			e.printStackTrace();
+		}	
+	}
+	
+	private void deleteComponentForPath(String path) {
+		ComponentConfigurationProvider service = getService(ComponentConfigurationProvider.class);
+		
+		String id = null;
+		for (Component c : components.values()) {
+			String cPath = c.getInfo().getProperty("path");
+			if (path.equals(cPath)) {
+				id = c.getId();
+			}
+		}
+		
+		if (id != null) {
+			try {
+				deleteComponent(id);
+			} catch (ComponentManagerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	@Subscribe
+	public void onComponentManagerEvent(ComponentManagerEvent ev) {
+		LOGGER.info("onComponentManagerEvent " + ev);
+		if (ev.getType() == Type.CONFIG_FILE_CREATED) {
+			createComponentForPath(ev.getValue());
+		}
+		else if (ev.getType() == Type.CONFIG_FILE_DELETED) {
+			deleteComponentForPath(ev.getValue());
+		}
+	}
 	
 }

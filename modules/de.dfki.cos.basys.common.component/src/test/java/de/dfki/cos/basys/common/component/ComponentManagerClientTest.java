@@ -31,13 +31,13 @@ public class ComponentManagerClientTest {
 
 	@Test
 	public void testReadJsonConfig() throws ComponentException {
-		Properties config = provider.readFile(new File(StringConstants.testConfigurationFolder + "/component-1.json"));
+		Properties config = provider.getComponentConfigurationForPath(StringConstants.testConfigurationFolder + "/component-1.json");
 		assertEquals("component-1",config.getProperty("id"));
 	}
 	
 	@Test
 	public void testReadPropertiesConfig() throws ComponentException {
-		Properties config = provider.readFile(new File(StringConstants.testConfigurationFolder + "/recursive/component-6.properties"));
+		Properties config = provider.getComponentConfigurationForPath(StringConstants.testConfigurationFolder + "/recursive/component-6.properties");
 		assertEquals("component-6",config.getProperty("id"));		
 	}
 
@@ -55,7 +55,7 @@ public class ComponentManagerClientTest {
 		assertEquals(3, configs.size());
 		
 		for (String path : configs) {
-			Properties config = provider.getComponentConfiguration(path);
+			Properties config = provider.getComponentConfigurationForPath(path);
 			assertNotNull(config);
 		}		
 	}

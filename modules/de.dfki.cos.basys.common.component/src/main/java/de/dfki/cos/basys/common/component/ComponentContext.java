@@ -3,6 +3,7 @@ package de.dfki.cos.basys.common.component;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
+import com.google.common.eventbus.AsyncEventBus;
 import com.google.common.eventbus.EventBus;
 
 import de.dfki.cos.basys.common.component.manager.ComponentManager;
@@ -15,8 +16,8 @@ public class ComponentContext {
 	public static ComponentContext getStaticContext() {
 		if (staticContext == null) {
 			staticContext = new ComponentContext();
-			staticContext.setEventBus(new EventBus());
 			staticContext.setScheduledExecutorService(Executors.newScheduledThreadPool(32));
+			staticContext.setEventBus(new AsyncEventBus("BaSysEventBus", staticContext.getScheduledExecutorService()));
 		}
 		return staticContext;
 	}

@@ -6,5 +6,5 @@ import java.util.Properties;
 
 public interface ComponentConfigurationProvider {
 	List<String> getComponentConfigurationPaths();
-	Properties getComponentConfiguration(String path);
+	Properties getComponentConfigurationForPath(String path);
 }

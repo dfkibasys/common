@@ -5,6 +5,7 @@ public interface StringConstants {
 	public static final String name = "name";	
 	public static final String category = "category";
 	public static final String implementationJavaClass = "implementationJavaClass";
+	public static final String path = "path";
 
 	public static final String serviceImplementationJavaClass = "serviceImplementationJavaClass";
 	public static final String serviceConnectionString = "serviceConnectionString";

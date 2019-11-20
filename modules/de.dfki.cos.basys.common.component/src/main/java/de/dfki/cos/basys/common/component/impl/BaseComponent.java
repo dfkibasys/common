@@ -32,7 +32,7 @@ public class BaseComponent implements Component {
 		//	serviceManager = new ServiceManagerImpl(config);
 		//}		
 	}
-	
+
 	@Override
 	public String getId() {
 		return config.getProperty(StringConstants.id);
@@ -73,7 +73,7 @@ public class BaseComponent implements Component {
 				throw new ComponentException("Context must not be null!");
 			}
 			
-			this.context = context;	
+			this.context = context;
 			
 			if (serviceManager != null)
 				serviceManager.connect(context);
@@ -85,6 +85,8 @@ public class BaseComponent implements Component {
 			} catch (ComponentRegistrationException e) {
 				throw new ComponentException(e);
 			}
+
+			this.context.getEventBus().register(this);
 			
 			setActivated(true);
 			LOGGER.info("activate - finished");
@@ -97,6 +99,11 @@ public class BaseComponent implements Component {
 	public void deactivate() throws ComponentException {
 		LOGGER.info("deactivate");
 		if (activated) {
+
+			setActivated(false);
+			
+			this.context.getEventBus().unregister(this);
+			
 			try {
 				unregister();
 			} catch (ComponentRegistrationException e) {
@@ -104,7 +111,6 @@ public class BaseComponent implements Component {
 			}
 			
 			doDeactivate();
-			setActivated(false);
 			
 			if (serviceManager != null)
 				serviceManager.disconnect();
@@ -204,7 +210,7 @@ public class BaseComponent implements Component {
 
 	@Override
 	public ComponentInfo getInfo() {
-		ComponentInfo info = new ComponentInfo()
+		ComponentInfo info = new ComponentInfo(config)
 				.setId(getId())
 				.setName(getName())
 				.setCategory(getCategory())
