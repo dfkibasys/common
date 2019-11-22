@@ -1,4 +1,4 @@
-package de.dfki.cos.basys.common.aas.dto;
+package de.dfki.cos.basys.common.aas.registry.dto;
 
 import org.eclipse.basyx.submodel.metamodel.api.ISubModel;
 import org.eclipse.basyx.submodel.metamodel.api.reference.IReference;

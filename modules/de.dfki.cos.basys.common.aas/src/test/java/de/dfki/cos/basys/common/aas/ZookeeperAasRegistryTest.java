@@ -9,10 +9,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.dfki.cos.basys.common.aas.dto.AasDescriptor;
-import de.dfki.cos.basys.common.aas.dto.Endpoint;
-import de.dfki.cos.basys.common.aas.dto.Identifier;
-import de.dfki.cos.basys.common.aas.dto.SubmodelDescriptor;
+import de.dfki.cos.basys.common.aas.registry.dto.AasDescriptor;
+import de.dfki.cos.basys.common.aas.registry.dto.Endpoint;
+import de.dfki.cos.basys.common.aas.registry.dto.Identifier;
+import de.dfki.cos.basys.common.aas.registry.dto.SubmodelDescriptor;
+import de.dfki.cos.basys.common.aas.registry.server.ZookeeperAasRegistry;
 
 public class ZookeeperAasRegistryTest {
 

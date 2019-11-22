@@ -1,4 +1,4 @@
-package de.dfki.cos.basys.common.aas;
+package de.dfki.cos.basys.common.aas.registry.server;
 
 import java.util.List;
 
@@ -13,8 +13,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import de.dfki.cos.basys.common.aas.dto.AasDescriptor;
-import de.dfki.cos.basys.common.aas.dto.SubmodelDescriptor;
+import de.dfki.cos.basys.common.aas.registry.dto.AasDescriptor;
+import de.dfki.cos.basys.common.aas.registry.dto.SubmodelDescriptor;
 
 @Path("/api/v1/registry")
 public interface AasRegistry {

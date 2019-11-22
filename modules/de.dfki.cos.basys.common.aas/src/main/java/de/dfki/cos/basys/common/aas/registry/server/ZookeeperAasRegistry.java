@@ -1,4 +1,4 @@
-package de.dfki.cos.basys.common.aas;
+package de.dfki.cos.basys.common.aas.registry.server;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -24,8 +24,8 @@ import org.slf4j.LoggerFactory;
 import com.google.common.base.Charsets;
 import com.google.gson.Gson;
 
-import de.dfki.cos.basys.common.aas.dto.AasDescriptor;
-import de.dfki.cos.basys.common.aas.dto.SubmodelDescriptor;
+import de.dfki.cos.basys.common.aas.registry.dto.AasDescriptor;
+import de.dfki.cos.basys.common.aas.registry.dto.SubmodelDescriptor;
 
 
 public class ZookeeperAasRegistry implements AasRegistry {

@@ -27,9 +27,10 @@ import org.eclipse.basyx.vab.protocol.http.server.AASHTTPServer;
 import org.eclipse.basyx.vab.protocol.http.server.BaSyxContext;
 import org.eclipse.basyx.vab.protocol.http.server.VABHTTPInterface;
 
-import de.dfki.cos.basys.common.aas.dto.AasDescriptor;
-import de.dfki.cos.basys.common.aas.dto.Endpoint;
-import de.dfki.cos.basys.common.aas.dto.SubmodelDescriptor;
+import de.dfki.cos.basys.common.aas.registry.dto.AasDescriptor;
+import de.dfki.cos.basys.common.aas.registry.dto.Endpoint;
+import de.dfki.cos.basys.common.aas.registry.dto.SubmodelDescriptor;
+import de.dfki.cos.basys.common.aas.registry.server.ZookeeperAasRegistry;
 
 public class AasTest {
 

@@ -1,4 +1,4 @@
-package de.dfki.cos.basys.common.aas.dto;
+package de.dfki.cos.basys.common.aas.registry.dto;
 
 import java.util.ArrayList;
 import java.util.List;
