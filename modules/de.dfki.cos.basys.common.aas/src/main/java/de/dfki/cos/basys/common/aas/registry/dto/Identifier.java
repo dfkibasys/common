@@ -22,8 +22,7 @@ public class Identifier implements IIdentifier {
 
 	@Override
 	public String getIdType() {
-		// TODO Auto-generated method stub
-		return null;
+		return idType;
 	}
 	
 	public void setIdType(String idType) {
@@ -32,8 +31,7 @@ public class Identifier implements IIdentifier {
 	
 	@Override
 	public String getId() {
-		// TODO Auto-generated method stub
-		return null;
+		return id;
 	}
 	
 	public void setId(String id) {

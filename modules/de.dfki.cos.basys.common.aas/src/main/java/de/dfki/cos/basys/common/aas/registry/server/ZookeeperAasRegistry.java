@@ -23,7 +23,7 @@ public class ZookeeperAasRegistry implements AasRegistry  {
 	public final Logger LOGGER;
 	public static final String PREFIX = "/basys/aas-registry";
 
-	private Gson gson = new Gson();
+	private ObjectMapper mapper = new ObjectMapper();
 	
 	@Context
 	private Application app;
@@ -61,7 +61,6 @@ public class ZookeeperAasRegistry implements AasRegistry  {
 			for (String aasPath : aasPaths) {
 				String content = client.getData(getPath(aasPath));
 				
-				ObjectMapper mapper = new ObjectMapper();
 				AasDescriptor aasDescriptor = mapper.readValue(content, AasDescriptor.class);
 				
 				//AasDescriptor aasDescriptor = gson.fromJson(content, AasDescriptor.class);
@@ -71,7 +70,8 @@ public class ZookeeperAasRegistry implements AasRegistry  {
 				List<SubmodelDescriptor> submodels = new ArrayList<SubmodelDescriptor>(submodelPaths.size());
 				for (String smPath : submodelPaths) {
 					content = client.getData(getPath(aasPath, smPath));
-					SubmodelDescriptor submodelDescriptor = gson.fromJson(content, SubmodelDescriptor.class);
+										
+					SubmodelDescriptor submodelDescriptor = mapper.readValue(content, SubmodelDescriptor.class);
 					submodels.add(submodelDescriptor);	
 				}
 				aasDescriptor.setSubmodels(submodels);
@@ -104,13 +104,13 @@ public class ZookeeperAasRegistry implements AasRegistry  {
 			List<SubmodelDescriptor> submodels = aasDescriptor.getSubmodels();
 			aasDescriptor.setSubmodels(null);
 			
-			String content = gson.toJson(aasDescriptor);		
+			String content = mapper.writeValueAsString(aasDescriptor);
 			client.createPath(path, content);
 
 			for (SubmodelDescriptor submodelDescriptor : submodels) {
 				path = getPath(aasDescriptor.getIdShort(), submodelDescriptor);
 				
-				content = gson.toJson(submodelDescriptor);			
+				content = mapper.writeValueAsString(submodelDescriptor);			
 				client.createPath(path, content);				
 			}
 
@@ -137,13 +137,13 @@ public class ZookeeperAasRegistry implements AasRegistry  {
 			}
 			
 			String content = client.getData(path);
-			AasDescriptor aasDescriptor = gson.fromJson(content, AasDescriptor.class);
+			AasDescriptor aasDescriptor = mapper.readValue(content, AasDescriptor.class);
 			
 			List<String> children = client.getChildren(path);
 			List<SubmodelDescriptor> submodels = new ArrayList<SubmodelDescriptor>(children.size());
 			for (String smPath : children) {
 				content = client.getData(getPath(aasId, smPath));
-				SubmodelDescriptor submodelDescriptor = gson.fromJson(content, SubmodelDescriptor.class);
+				SubmodelDescriptor submodelDescriptor = mapper.readValue(content, SubmodelDescriptor.class);
 				submodels.add(submodelDescriptor);	
 			}
 			aasDescriptor.setSubmodels(submodels);
@@ -200,8 +200,8 @@ public class ZookeeperAasRegistry implements AasRegistry  {
 			List<String> children = client.getChildren(path);
 			List<SubmodelDescriptor> submodels = new ArrayList<SubmodelDescriptor>(children.size());
 			for (String smPath : children) {
-				String content = client.getData(smPath);
-				SubmodelDescriptor submodelDescriptor = gson.fromJson(content, SubmodelDescriptor.class);
+				String content = client.getData(getPath(aasId, smPath));
+				SubmodelDescriptor submodelDescriptor = mapper.readValue(content, SubmodelDescriptor.class);
 				submodels.add(submodelDescriptor);	
 			}
 			
@@ -234,7 +234,7 @@ public class ZookeeperAasRegistry implements AasRegistry  {
 				// 400: The syntax of the passed Asset Administration Shell is not valid or malformed request
 				return Response.status(Status.BAD_REQUEST).build();
 			}		
-			String content = gson.toJson(submodelDescriptor);		
+			String content = mapper.writeValueAsString(submodelDescriptor);		
 			client.createPath(path, content);
 			
 			// 201: The Asset Administration Shell was created successfully
@@ -265,7 +265,7 @@ public class ZookeeperAasRegistry implements AasRegistry  {
 			}
 			
 			String content = client.getData(path);
-			SubmodelDescriptor submodelDescriptor = gson.fromJson(content, SubmodelDescriptor.class);
+			SubmodelDescriptor submodelDescriptor = mapper.readValue(content, SubmodelDescriptor.class);
 			
 			return Response.ok().entity(submodelDescriptor).build();
 		

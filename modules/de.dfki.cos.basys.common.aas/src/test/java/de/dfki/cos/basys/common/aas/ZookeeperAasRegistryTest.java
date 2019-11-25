@@ -27,22 +27,22 @@ public class ZookeeperAasRegistryTest {
 	public void setUp() throws Exception {
 		client = new ZookeeperClient();
 		client.connect(connectionString);
-		registry= new ZookeeperAasRegistry();
+		registry= new ZookeeperAasRegistry(client);
 		
 		
 		aas = new AasDescriptor();
-		aas.setIdShort("myAas2");
-		aas.setIdentification(new Identifier(IdentifierType.Custom, "myAas"));
+		aas.setIdShort("myAas2aasd");
+		aas.setIdentification(new Identifier(IdentifierType.Custom, "myAasasd"));
 		aas.setEndpoints(Collections.singletonList(new Endpoint("http", "http://localhost")));
 
 		sm1 = new SubmodelDescriptor();
 		sm1.setIdShort("mySubmodel1");
-		sm1.setIdentification(new Identifier(IdentifierType.Custom, "mySubmodel1"));
+		sm1.setIdentification(new Identifier(IdentifierType.Custom, "mySubmodel1asdasd"));
 		sm1.setEndpoints(Collections.singletonList(new Endpoint("http", "http://localhost/sm1")));
 
 		sm2 = new SubmodelDescriptor();
 		sm2.setIdShort("mySubmodel2");
-		sm2.setIdentification(new Identifier(IdentifierType.Custom, "mySubmodel2"));
+		sm2.setIdentification(new Identifier(IdentifierType.Custom, "mySubmodeasdasdl2"));
 		sm2.setEndpoints(Collections.singletonList(new Endpoint("http", "http://localhost/sm2")));
 		
 		aas.getSubmodels().add(sm1);	
