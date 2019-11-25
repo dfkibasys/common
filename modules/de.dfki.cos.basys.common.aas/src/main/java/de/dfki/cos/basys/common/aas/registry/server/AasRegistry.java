@@ -16,7 +16,7 @@ import javax.ws.rs.core.Response;
 import de.dfki.cos.basys.common.aas.registry.dto.AasDescriptor;
 import de.dfki.cos.basys.common.aas.registry.dto.SubmodelDescriptor;
 
-@Path("/api/v1/registry")
+@Path("/registry")
 public interface AasRegistry {
 	
 	@GET

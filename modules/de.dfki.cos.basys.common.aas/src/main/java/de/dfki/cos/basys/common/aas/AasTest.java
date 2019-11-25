@@ -156,18 +156,18 @@ public class AasTest {
 		
 		String connectionString = "lns-90165.sb.dfki.de:2181";
 		
-		ZookeeperAasRegistry reg = new ZookeeperAasRegistry();
-		reg.connect(connectionString);
-		//reg.createAasNode(aasDesc);
-		
-		try {
-			Thread.sleep(1000*60*5);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		reg.disconnect();
+//		ZookeeperAasRegistry reg = new ZookeeperAasRegistry();
+//		reg.connect(connectionString);
+//		//reg.createAasNode(aasDesc);
+//		
+//		try {
+//			Thread.sleep(1000*60*5);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		reg.disconnect();
 		
 	}
 

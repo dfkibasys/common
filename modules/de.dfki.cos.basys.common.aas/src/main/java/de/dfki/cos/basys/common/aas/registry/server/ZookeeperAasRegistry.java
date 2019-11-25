@@ -1,88 +1,83 @@
 package de.dfki.cos.basys.common.aas.registry.server;
 
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.ws.rs.core.Application;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import org.apache.curator.framework.CuratorFramework;
-import org.apache.curator.framework.CuratorFrameworkFactory;
-import org.apache.curator.framework.imps.CuratorFrameworkState;
-import org.apache.curator.retry.ExponentialBackoffRetry;
-import org.apache.curator.utils.CloseableUtils;
-import org.apache.zookeeper.CreateMode;
-import org.apache.zookeeper.ZooDefs;
-import org.apache.zookeeper.data.Stat;
-import org.bouncycastle.crypto.tls.NewSessionTicket;
-import org.eclipse.basyx.aas.registration.api.IAASRegistryService;
-import org.eclipse.basyx.submodel.metamodel.api.identifier.IIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.common.base.Charsets;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
 import de.dfki.cos.basys.common.aas.registry.dto.AasDescriptor;
 import de.dfki.cos.basys.common.aas.registry.dto.SubmodelDescriptor;
 
 
-public class ZookeeperAasRegistry implements AasRegistry {
+public class ZookeeperAasRegistry implements AasRegistry  {
 	public final Logger LOGGER;
 	public static final String PREFIX = "/basys/aas-registry";
 
 	private Gson gson = new Gson();
-	private CuratorFramework client;	
+	
+	@Context
+	private Application app;
+	
+	@Inject
+	private ZookeeperClient client;
 	
 	public ZookeeperAasRegistry() {
 		LOGGER = LoggerFactory.getLogger(getClass().getName());
 	}
-
-	public boolean connect(String connectionString) {
-		client = CuratorFrameworkFactory.newClient(connectionString, new ExponentialBackoffRetry(1000, 3));
-		client.start();
-		return isConnected();
-	}
 	
-	public boolean isConnected() {
-		return client.getState() == CuratorFrameworkState.STARTED;
-	}
-	
-	public void disconnect() {
-		CloseableUtils.closeQuietly(client);	
+	@Inject
+	public ZookeeperAasRegistry(ZookeeperClient client) {
+		LOGGER = LoggerFactory.getLogger(getClass().getName());
+		this.client = client;
 	}
 	
 	@Override
 	public Response getRegistry() {
 		try {
-			if (!isConnected()) {
+			
+			if (!client.isConnected()) {
 				// 502: Bad Gateway
 				return Response.status(Status.BAD_GATEWAY).build();
 			}
 			
 			String path = getPath();
-			if (!exists(path)) {
+			if (!client.existsPath(path)) {
 				// 404: No Asset Administration Shells found  
 				return Response.status(Status.OK).entity("[]").build();
 			}
-			
 
-			List<AasDescriptor> aasDescriptors = null;
+			List<String> aasPaths = client.getChildren(path);
+			List<AasDescriptor> aasDescriptors = new ArrayList<>(aasPaths.size());
+			for (String aasPath : aasPaths) {
+				String content = client.getData(getPath(aasPath));
+				
+				ObjectMapper mapper = new ObjectMapper();
+				AasDescriptor aasDescriptor = mapper.readValue(content, AasDescriptor.class);
+				
+				//AasDescriptor aasDescriptor = gson.fromJson(content, AasDescriptor.class);
+				aasDescriptors.add(aasDescriptor);	
+				
+				List<String> submodelPaths = client.getChildren(getPath(aasPath));
+				List<SubmodelDescriptor> submodels = new ArrayList<SubmodelDescriptor>(submodelPaths.size());
+				for (String smPath : submodelPaths) {
+					content = client.getData(getPath(aasPath, smPath));
+					SubmodelDescriptor submodelDescriptor = gson.fromJson(content, SubmodelDescriptor.class);
+					submodels.add(submodelDescriptor);	
+				}
+				aasDescriptor.setSubmodels(submodels);
+			}		
 			
-			String content = new String(client.getData().forPath(path), Charsets.UTF_8);
-			AasDescriptor aasDescriptor = gson.fromJson(content, AasDescriptor.class);
-			
-			List<String> children = client.getChildren().forPath(path);
-			List<SubmodelDescriptor> submodels = new ArrayList<SubmodelDescriptor>(children.size());
-			for (String smPath : children) {
-				content = new String(client.getData().forPath(smPath), Charsets.UTF_8);
-				SubmodelDescriptor submodelDescriptor = gson.fromJson(content, SubmodelDescriptor.class);
-				submodels.add(submodelDescriptor);	
-			}
-			aasDescriptor.setSubmodels(submodels);
-			
-			return Response.ok().entity(aasDescriptor).build();
+			return Response.ok().entity(aasDescriptors).build();
 		
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -93,12 +88,12 @@ public class ZookeeperAasRegistry implements AasRegistry {
 	@Override
 	public Response registerAas(AasDescriptor aasDescriptor) {
 		try {
-			if (!isConnected()) {
+			if (!client.isConnected()) {
 				// 502: Bad Gateway
 				return Response.status(Status.BAD_GATEWAY).build();
 			}
 			String path = getPath(aasDescriptor);
-			if (exists(path)) {
+			if (client.existsPath(path)) {
 				// 422: The passed Asset Administration Shell conflicts with already registered Asset Administration Shells  
 				return Response.status(422).build();
 			}
@@ -107,25 +102,16 @@ public class ZookeeperAasRegistry implements AasRegistry {
 				return Response.status(Status.BAD_REQUEST).build();
 			}		
 			List<SubmodelDescriptor> submodels = aasDescriptor.getSubmodels();
-			aasDescriptor.setSubmodels(null);;
+			aasDescriptor.setSubmodels(null);
 			
-			String content = gson.toJson(aasDescriptor);
-		
-			client.create()
-				.creatingParentsIfNeeded()
-				.withMode(CreateMode.PERSISTENT)
-				.withACL(ZooDefs.Ids.OPEN_ACL_UNSAFE)
-				.forPath(path, content.getBytes(Charsets.UTF_8));
+			String content = gson.toJson(aasDescriptor);		
+			client.createPath(path, content);
 
 			for (SubmodelDescriptor submodelDescriptor : submodels) {
 				path = getPath(aasDescriptor.getIdShort(), submodelDescriptor);
-				content = gson.toJson(submodelDescriptor);
-			
-				client.create()
-					.withMode(CreateMode.PERSISTENT)
-					.withACL(ZooDefs.Ids.OPEN_ACL_UNSAFE)
-					.forPath(path, content.getBytes(Charsets.UTF_8));
 				
+				content = gson.toJson(submodelDescriptor);			
+				client.createPath(path, content);				
 			}
 
 			// 201: The Asset Administration Shell was created successfully
@@ -140,23 +126,23 @@ public class ZookeeperAasRegistry implements AasRegistry {
 	@Override
 	public Response getAas(String aasId) {
 		try {
-			if (!isConnected()) {
+			if (!client.isConnected()) {
 				// 502: Bad Gateway
 				return Response.status(Status.BAD_GATEWAY).build();
 			}
 			String path = getPath(aasId);
-			if (!exists(path)) {
+			if (!client.existsPath(path)) {
 				// 404: No Asset Administration Shell with passed id found  
 				return Response.status(Status.NOT_FOUND).build();
 			}
 			
-			String content = new String(client.getData().forPath(path), Charsets.UTF_8);
+			String content = client.getData(path);
 			AasDescriptor aasDescriptor = gson.fromJson(content, AasDescriptor.class);
 			
-			List<String> children = client.getChildren().forPath(path);
+			List<String> children = client.getChildren(path);
 			List<SubmodelDescriptor> submodels = new ArrayList<SubmodelDescriptor>(children.size());
 			for (String smPath : children) {
-				content = new String(client.getData().forPath(smPath), Charsets.UTF_8);
+				content = client.getData(getPath(aasId, smPath));
 				SubmodelDescriptor submodelDescriptor = gson.fromJson(content, SubmodelDescriptor.class);
 				submodels.add(submodelDescriptor);	
 			}
@@ -178,19 +164,17 @@ public class ZookeeperAasRegistry implements AasRegistry {
 	@Override
 	public Response deleteAas(String aasId) {
 		try {
-			if (!isConnected()) {
+			if (!client.isConnected()) {
 				// 502: Bad Gateway
 				return Response.status(Status.BAD_GATEWAY).build();
 			}
 			String path = getPath(aasId);
-			if (!exists(path)) {
+			if (!client.existsPath(path)) {
 				// 404: No Asset Administration Shell with passed id found  
 				return Response.status(Status.NOT_FOUND).build();
 			}
 			
-			client.delete()
-				.deletingChildrenIfNeeded()
-				.forPath(path);
+			client.deletePath(path);
 			
 			return Response.status(Status.NO_CONTENT).build();
 		
@@ -203,20 +187,20 @@ public class ZookeeperAasRegistry implements AasRegistry {
 	@Override
 	public Response getAasSubmodels(String aasId) {
 		try {
-			if (!isConnected()) {
+			if (!client.isConnected()) {
 				// 502: Bad Gateway
 				return Response.status(Status.BAD_GATEWAY).build();
 			}
 			String path = getPath(aasId);
-			if (!exists(path)) {
+			if (!client.existsPath(path)) {
 				// 404: No Asset Administration Shell with passed id found  
 				return Response.status(Status.NOT_FOUND).build();
 			}
 			
-			List<String> children = client.getChildren().forPath(path);
+			List<String> children = client.getChildren(path);
 			List<SubmodelDescriptor> submodels = new ArrayList<SubmodelDescriptor>(children.size());
 			for (String smPath : children) {
-				String content = new String(client.getData().forPath(smPath), Charsets.UTF_8);
+				String content = client.getData(smPath);
 				SubmodelDescriptor submodelDescriptor = gson.fromJson(content, SubmodelDescriptor.class);
 				submodels.add(submodelDescriptor);	
 			}
@@ -232,17 +216,17 @@ public class ZookeeperAasRegistry implements AasRegistry {
 	@Override
 	public Response registerAasSubmodel(String aasId, SubmodelDescriptor submodelDescriptor) {
 		try {
-			if (!isConnected()) {
+			if (!client.isConnected()) {
 				// 502: Bad Gateway
 				return Response.status(Status.BAD_GATEWAY).build();
 			}
 			String path = getPath(aasId);
-			if (!exists(path)) {
+			if (!client.existsPath(path)) {
 				// 404: No Asset Administration Shell with passed id found  
 				return Response.status(Status.NOT_FOUND).build();
 			}
 			path = getPath(aasId, submodelDescriptor);
-			if (exists(path)) {
+			if (client.existsPath(path)) {
 				// 422: The passed Asset Administration Shell conflicts with already registered Asset Administration Shells  
 				return Response.status(422).build();
 			}
@@ -250,12 +234,8 @@ public class ZookeeperAasRegistry implements AasRegistry {
 				// 400: The syntax of the passed Asset Administration Shell is not valid or malformed request
 				return Response.status(Status.BAD_REQUEST).build();
 			}		
-			String content = gson.toJson(submodelDescriptor);
-		
-			client.create()
-				.withMode(CreateMode.PERSISTENT)
-				.withACL(ZooDefs.Ids.OPEN_ACL_UNSAFE)
-				.forPath(path, content.getBytes(Charsets.UTF_8));
+			String content = gson.toJson(submodelDescriptor);		
+			client.createPath(path, content);
 			
 			// 201: The Asset Administration Shell was created successfully
 			return Response.status(Status.CREATED).build();
@@ -269,22 +249,22 @@ public class ZookeeperAasRegistry implements AasRegistry {
 	@Override
 	public Response getAasSubmodel(String aasId, String submodelId) {
 		try {
-			if (!isConnected()) {
+			if (!client.isConnected()) {
 				// 502: Bad Gateway
 				return Response.status(Status.BAD_GATEWAY).build();
 			}
 			String path = getPath(aasId);
-			if (!exists(path)) {
+			if (!client.existsPath(path)) {
 				// 404: No Asset Administration Shell with passed id found  
 				return Response.status(Status.NOT_FOUND).build();
 			}
 			path = getPath(aasId, submodelId);
-			if (!exists(path)) {
+			if (!client.existsPath(path)) {
 				// 404: No Submodel with passed id found  
 				return Response.status(Status.NOT_FOUND).build();
 			}
 			
-			String content = new String(client.getData().forPath(path), Charsets.UTF_8);
+			String content = client.getData(path);
 			SubmodelDescriptor submodelDescriptor = gson.fromJson(content, SubmodelDescriptor.class);
 			
 			return Response.ok().entity(submodelDescriptor).build();
@@ -298,24 +278,21 @@ public class ZookeeperAasRegistry implements AasRegistry {
 	@Override
 	public Response deleteAasSubmodel(String aasId, String submodelId) {
 		try {
-			if (!isConnected()) {
+			if (!client.isConnected()) {
 				// 502: Bad Gateway
 				return Response.status(Status.BAD_GATEWAY).build();
 			}
 			String path = getPath(aasId);
-			if (!exists(path)) {
+			if (!client.existsPath(path)) {
 				// 404: No Asset Administration Shell with passed id found  
 				return Response.status(Status.NOT_FOUND).build();
 			}
 			path = getPath(aasId, submodelId);
-			if (!exists(path)) {
+			if (!client.existsPath(path)) {
 				// 404: No Submodel with passed id found  
 				return Response.status(Status.NOT_FOUND).build();
 			}
-			
-			client.delete()
-				.deletingChildrenIfNeeded()
-				.forPath(path);
+			client.deletePath(path);
 			
 			return Response.status(Status.NO_CONTENT).build();
 		
@@ -344,12 +321,7 @@ public class ZookeeperAasRegistry implements AasRegistry {
 	private String getPath(String aasId, String smId) {
 		return PREFIX + "/" + aasId + "/" + smId;
 	}
-	
-	private boolean exists(String path) throws Exception {
-		Stat stat = client.checkExists().forPath(path);
-		return stat!=null;
-	}
-	
+
 	private boolean check(AasDescriptor aasDescriptor) {
 		// TODO Auto-generated method stub
 		return true;
@@ -359,12 +331,5 @@ public class ZookeeperAasRegistry implements AasRegistry {
 		// TODO Auto-generated method stub
 		return true;
 	}
-	
-	private AasDescriptor getAasDescriptor(String aasId) {
-		return null;
-	}
 
-	private SubmodelDescriptor getSubmodelDescriptor(String smId) {
-		return null;
-	}
 }

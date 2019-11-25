@@ -10,8 +10,7 @@ public class Reference implements IReference {
 
 	List<IKey> keys = new ArrayList<>();
 	
-	public Reference() {
-	
+	public Reference() {	
 	}
 	
 	public Reference(IReference semanticId) {

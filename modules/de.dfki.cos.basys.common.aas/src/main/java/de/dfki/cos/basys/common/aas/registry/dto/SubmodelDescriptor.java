@@ -7,8 +7,7 @@ public class SubmodelDescriptor extends Descriptor {
 
 	IReference semanticId;
 	
-	public SubmodelDescriptor() {
-		
+	public SubmodelDescriptor() {		
 	}
 	
 	public SubmodelDescriptor(ISubModel submodel) {

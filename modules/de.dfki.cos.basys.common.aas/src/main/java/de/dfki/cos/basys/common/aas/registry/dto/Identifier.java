@@ -7,6 +7,9 @@ public class Identifier implements IIdentifier {
 	String idType;
 	String id;
 	
+	public Identifier() {		
+	}
+	
 	public Identifier(String idType, String id) {
 		this.idType = idType;
 		this.id = id;

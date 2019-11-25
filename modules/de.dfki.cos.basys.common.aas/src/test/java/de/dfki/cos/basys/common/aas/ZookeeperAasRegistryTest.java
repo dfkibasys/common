@@ -14,18 +14,21 @@ import de.dfki.cos.basys.common.aas.registry.dto.Endpoint;
 import de.dfki.cos.basys.common.aas.registry.dto.Identifier;
 import de.dfki.cos.basys.common.aas.registry.dto.SubmodelDescriptor;
 import de.dfki.cos.basys.common.aas.registry.server.ZookeeperAasRegistry;
+import de.dfki.cos.basys.common.aas.registry.server.ZookeeperClient;
 
 public class ZookeeperAasRegistryTest {
 
 	String connectionString = "lns-90165.sb.dfki.de:2181";
-	
+	ZookeeperClient client;
 	ZookeeperAasRegistry registry;
 	AasDescriptor aas;
 	SubmodelDescriptor sm1, sm2;
 	@Before
 	public void setUp() throws Exception {
+		client = new ZookeeperClient();
+		client.connect(connectionString);
 		registry= new ZookeeperAasRegistry();
-		registry.connect(connectionString);
+		
 		
 		aas = new AasDescriptor();
 		aas.setIdShort("myAas2");
@@ -47,12 +50,12 @@ public class ZookeeperAasRegistryTest {
 
 	@After
 	public void tearDown() throws Exception {
-		registry.disconnect();
+		client.disconnect();
 	}
 
 	@Test
 	public void testRegisterAas() {
-		assertTrue(registry.isConnected());
+		assertTrue(client.isConnected());
 		
 		registry.registerAas(aas);
 		

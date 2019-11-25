@@ -12,8 +12,7 @@ public class AasDescriptor extends Descriptor {
 
 	List<SubmodelDescriptor> submodels = new ArrayList<>();
 	
-	public AasDescriptor() {
-		
+	public AasDescriptor() {		
 	}
 	
 	public AasDescriptor(IAssetAdministrationShell aas, Endpoint endpoint) {
