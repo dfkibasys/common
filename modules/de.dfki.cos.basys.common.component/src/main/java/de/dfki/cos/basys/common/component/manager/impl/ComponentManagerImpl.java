@@ -171,7 +171,7 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 		components.put(component.getId(), component);
 		try {
 			component.activate(context);
-			context.getEventBus().post(new ComponentManagerEvent(Type.COMPONENT_ADDED, component.getId()));
+			context.getEventBus().post(new ComponentManagerEvent(Type.COMPONENT_ADDED, component.getId(), component));
 		} catch (ComponentException e) {
 			throw new ComponentManagerException(e);
 		}
