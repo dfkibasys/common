@@ -88,7 +88,8 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 	
 	@Override
 	protected void doDeactivate() throws ComponentException {
-		Set<String> ids = components.keySet();
+		//copy the ids into a new list in order to avoid a concurrent modification exception in line 184cd ..
+		List<String> ids = new ArrayList<String>(components.keySet());
 		for (String id : ids) {
 			try {
 				deleteComponent(id);

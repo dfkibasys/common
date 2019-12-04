@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import org.eclipse.basyx.aas.metamodel.map.AssetAdministrationShell;
 import org.eclipse.basyx.aas.metamodel.map.descriptor.AASDescriptor;
@@ -19,10 +20,13 @@ import org.eclipse.basyx.submodel.metamodel.map.SubModel;
 import org.eclipse.basyx.submodel.metamodel.map.identifier.IdentifierType;
 import org.eclipse.basyx.submodel.metamodel.map.qualifier.Description;
 import org.eclipse.basyx.submodel.metamodel.map.qualifier.haskind.Kind;
+import org.eclipse.basyx.submodel.metamodel.map.submodelelement.SubmodelElementCollection;
 import org.eclipse.basyx.submodel.metamodel.map.submodelelement.operation.Operation;
 import org.eclipse.basyx.submodel.metamodel.map.submodelelement.operation.OperationVariable;
+import org.eclipse.basyx.submodel.metamodel.map.submodelelement.property.Property;
 import org.eclipse.basyx.submodel.restapi.SubModelProvider;
 import org.eclipse.basyx.vab.modelprovider.api.IModelProvider;
+import org.eclipse.basyx.vab.modelprovider.lambda.VABLambdaProviderHelper;
 import org.eclipse.basyx.vab.protocol.http.server.AASHTTPServer;
 import org.eclipse.basyx.vab.protocol.http.server.BaSyxContext;
 import org.eclipse.basyx.vab.protocol.http.server.VABHTTPInterface;
@@ -64,66 +68,87 @@ public class AasTest {
 		System.out.println(aas);
 
 		/* Das Teilmodell erzeugen, IdShort und Identification setzen */
-		SubModel tighteningControl = new SubModel();
-		tighteningControl.setIdShort("TighteningControl");
-		tighteningControl.setIdentification(IdentifierType.Custom, "tighteningControlSubModel");
-
-		/* Die Operation erzeugen und die IdShort setzen */
-		Operation tightenOp = new Operation();
-		tightenOp.setIdShort("tighten");
-
-		/* Die Eingangsvariablen konfigurieren */
-		OperationVariable programNoOV = new OperationVariable();
-		programNoOV.setIdShort("ProgramNo");
-		programNoOV.setType("String");
-
-		OperationVariable timesOV = new OperationVariable();
-		timesOV.setIdShort("Times");
-		timesOV.setType("Integer");
-
-		/* ... und in der Operation ablegen */
-		List<OperationVariable> in = new ArrayList<>();
-		in.add(programNoOV);
-		in.add(timesOV);
-
-		tightenOp.SetParameterTypes(in);
-
-		/* Die Ausgangsvariable konfigurieren */
-		OperationVariable ret = new OperationVariable();
-		ret.setIdShort("TighteningSuccess");
-		ret.setType("Boolean");
-
-		/* ... und in der Operation ablegen */
-		tightenOp.setReturnTypes(Collections.singletonList(ret));
-
-		/* Die Funktion für den Schrauberzugriff als Lambda-Funktion definieren */
-		Function<Object[], Object> func = (arg) -> {
-
-			/* Die Parameter entpacken */
-			String programNo = (String) arg[0];
-			int times = (int) arg[1];
-			return null;
-			/* Das Backend des TighteningService erstellen */
-			// TighteningService tighteningService = new TighteningService();
-			/* ... und die Funktion aufrufen */
-			// return tighteningService.tightenTimes(programNo, times);
-		};
-
-		/* Die Lambda-Funktion in der Operation hinterlegen */
-		tightenOp.setInvocable(func);
-
-		/* ... und die Operation in dem Teilmodell ablegen */
-		tighteningControl.addSubModelElement(tightenOp);
+		SubModel sm = new SubModel();
+		sm.setIdShort("Config");
+		sm.setIdentification(IdentifierType.Custom, "Config");
 
 		
+		
+		//forall signals:
+		SubmodelElementCollection sec = new SubmodelElementCollection();
+		sec.setIdShort("RollForceFS1");
+		Property dataStore = new Property();
+		dataStore.setIdShort("dataStore");
+		//dataStore.set("kafka://...");
+		dataStore.putAll(VABLambdaProviderHelper.createSimple((Supplier<Object>) () -> {
+			return 123;
+		}, null));
+		sec.setElements(Collections.singletonMap(dataStore.getIdShort(), dataStore));
 
-		System.out.println(tighteningControl);
+		Object o = dataStore.get();
+		
+		sm.addSubModelElement(sec);
+//		/* Das Teilmodell erzeugen, IdShort und Identification setzen */
+//		SubModel tighteningControl = new SubModel();
+//		tighteningControl.setIdShort("TighteningControl");
+//		tighteningControl.setIdentification(IdentifierType.Custom, "tighteningControlSubModel");
+//
+//		/* Die Operation erzeugen und die IdShort setzen */
+//		Operation tightenOp = new Operation();
+//		tightenOp.setIdShort("tighten");
+//
+//		/* Die Eingangsvariablen konfigurieren */
+//		OperationVariable programNoOV = new OperationVariable();
+//		programNoOV.setIdShort("ProgramNo");
+//		programNoOV.setType("String");
+//
+//		OperationVariable timesOV = new OperationVariable();
+//		timesOV.setIdShort("Times");
+//		timesOV.setType("Integer");
+//
+//		/* ... und in der Operation ablegen */
+//		List<OperationVariable> in = new ArrayList<>();
+//		in.add(programNoOV);
+//		in.add(timesOV);
+//
+//		tightenOp.SetParameterTypes(in);
+//
+//		/* Die Ausgangsvariable konfigurieren */
+//		OperationVariable ret = new OperationVariable();
+//		ret.setIdShort("TighteningSuccess");
+//		ret.setType("Boolean");
+//
+//		/* ... und in der Operation ablegen */
+//		tightenOp.setReturnTypes(Collections.singletonList(ret));
+//
+//		/* Die Funktion für den Schrauberzugriff als Lambda-Funktion definieren */
+//		Function<Object[], Object> func = (arg) -> {
+//
+//			/* Die Parameter entpacken */
+//			String programNo = (String) arg[0];
+//			int times = (int) arg[1];
+//			return null;
+//			/* Das Backend des TighteningService erstellen */
+//			// TighteningService tighteningService = new TighteningService();
+//			/* ... und die Funktion aufrufen */
+//			// return tighteningService.tightenTimes(programNo, times);
+//		};
+//
+//		/* Die Lambda-Funktion in der Operation hinterlegen */
+//		tightenOp.setInvocable(func);
+//
+//		/* ... und die Operation in dem Teilmodell ablegen */
+//		tighteningControl.addSubModelElement(tightenOp);
+//
+//		
+
+		System.out.println(sec);
 		
 		
 		
 		/* Die Verwaltungsschale in einem Provider ablegen */
 		VABMultiSubmodelProvider provider = new VABMultiSubmodelProvider(new AASModelProvider(aas));
-		SubModelProvider subProvider =  new SubModelProvider(tighteningControl);
+		SubModelProvider subProvider =  new SubModelProvider(sm);
 		/* ... und ihre Teilmodelle ebenfalls  */
 		provider.addSubmodel("TighteningControl", subProvider);
 		//provider.addSubmodel("TechnicalSpecification", new SubModelProvider(technicalSpecification));
@@ -140,7 +165,7 @@ public class AasTest {
 		AASDescriptor aasDescriptor = new AASDescriptor(aas, "http://192.168.178.13:5080/aas");
 
 		AasDescriptor aasDesc = new AasDescriptor(aas, new Endpoint("http", "http://192.168.178.13:5080/aas"));
-		SubmodelDescriptor subDesc = new SubmodelDescriptor(tighteningControl, new Endpoint("http", "http://localhost:5080/aas/submodels/" + tighteningControl.getIdShort()));
+		SubmodelDescriptor subDesc = new SubmodelDescriptor(sm, new Endpoint("http", "http://localhost:5080/aas/submodels/" + sm.getIdShort()));
 		/* Die Teilmodelldeskriptoren mit den jeweiligen Endpunkten erstellen und dem Verwaltungsschalendeskriptor hinzufügen */
 		//aasDescriptor.addSubmodelDescriptor(new SubmodelDescriptor(tighteningControl, "http://localhost:5080/aas/submodels/" + tighteningControl.getIdShort()));
 		//aasDescriptor.addSubmodelDescriptor(new SubmodelDescriptor(tighteningControl, "http://localhost:5080/aas/submodels/" + tighteningControl.getIdShort() + "/submodel"));
