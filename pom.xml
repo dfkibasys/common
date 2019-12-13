@@ -21,7 +21,9 @@
 	<modules>
 		<module>poms</module>
 		<module>provision</module>
+		<!--
 		<module>modules/de.dfki.cos.basys.common.aas</module>
+		-->
 		<module>modules/de.dfki.cos.basys.common.component</module>
 		<module>modules/de.dfki.cos.basys.common.emf</module>
 		<module>modules/de.dfki.cos.basys.common.emf.json</module>

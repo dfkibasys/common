@@ -8,8 +8,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.dfki.cos.basys.common.component.ComponentOrderStatus;
-import de.dfki.cos.basys.common.component.impl.ServiceManagerImpl;
 import de.dfki.cos.basys.common.component.util.TestComponent;
 
 public class ActivateConnectTest {
@@ -19,8 +17,6 @@ public class ActivateConnectTest {
 	
 	String user_a = "user_a";
 	String user_b = "user_b";
-
-	ComponentOrderStatus status = null;	
 	
 	@Before
 	public void setUp() throws Exception {		
