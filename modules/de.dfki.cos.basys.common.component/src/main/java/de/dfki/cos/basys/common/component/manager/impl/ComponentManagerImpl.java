@@ -15,10 +15,9 @@ import com.google.common.eventbus.Subscribe;
 
 import de.dfki.cos.basys.common.component.Component;
 import de.dfki.cos.basys.common.component.ComponentException;
-import de.dfki.cos.basys.common.component.ServiceConnection;
-import de.dfki.cos.basys.common.component.ServiceManager;
+import de.dfki.cos.basys.common.component.ServiceProvider;
 import de.dfki.cos.basys.common.component.StringConstants;
-import de.dfki.cos.basys.common.component.impl.BaseComponent;
+import de.dfki.cos.basys.common.component.impl.ServiceComponent;
 import de.dfki.cos.basys.common.component.impl.ServiceManagerImpl;
 import de.dfki.cos.basys.common.component.manager.ComponentConfigurationProvider;
 import de.dfki.cos.basys.common.component.manager.ComponentManager;
@@ -26,7 +25,7 @@ import de.dfki.cos.basys.common.component.manager.ComponentManagerException;
 import de.dfki.cos.basys.common.component.manager.impl.ComponentManagerEvent.Type;
 
 
-public class ComponentManagerImpl extends BaseComponent implements ComponentManager {
+public class ComponentManagerImpl extends ServiceComponent<ComponentConfigurationProvider> implements ComponentManager {
 	
 	private Map<String, Component> components = new HashMap<>();
 	
@@ -34,27 +33,20 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 	
 	public ComponentManagerImpl(Properties config) {
 		super(config);
-		serviceManager = new ServiceManagerImpl<ComponentConfigurationProvider>(config, new Supplier<ComponentConfigurationProviderImpl>() {
-			@Override
-			public ComponentConfigurationProviderImpl get() {
-				ComponentConfigurationProviderImpl service = new ComponentConfigurationProviderImpl(config);				
-				return service;
-			}
-		});	
+			
+		if (serviceManager == null) {
+			ComponentConfigurationProviderImpl serviceProvider = new ComponentConfigurationProviderImpl(config);
+			serviceManager = new ServiceManagerImpl<ComponentConfigurationProvider>(config, serviceProvider);	
+		}
 		
 		if (config.containsKey("async")) {
 			async = Boolean.parseBoolean(config.getProperty("async"));
 		}
 	}
 
-	public ComponentManagerImpl(Properties config, ServiceConnection connection) {
-		super(config);
-		serviceManager = new ServiceManagerImpl<ComponentConfigurationProvider>(config, new Supplier<ServiceConnection>() {
-			@Override
-			public ServiceConnection get() {						
-				return connection;
-			}
-		});	
+	public ComponentManagerImpl(Properties config, ServiceProvider serviceProvider) {
+		super(config, serviceProvider);
+		serviceManager = new ServiceManagerImpl<ComponentConfigurationProvider>(config, serviceProvider);	
 
 		if (config.containsKey("async")) {
 			async = Boolean.parseBoolean(config.getProperty("async"));
@@ -64,7 +56,7 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 	@Override
 	protected void doActivate() throws ComponentException {	
 		if (this.isConnected()) {			
-			ComponentConfigurationProvider service = getService(ComponentConfigurationProvider.class);
+			ComponentConfigurationProvider service = getService();
 			Runnable r = new Runnable() {				
 				@Override
 				public void run() {
@@ -193,7 +185,7 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 	}
 
 	private void createComponentForPath(String path) {
-		ComponentConfigurationProvider service = getService(ComponentConfigurationProvider.class);
+		ComponentConfigurationProvider service = getService();
 		Properties config = service.getComponentConfigurationForPath(path);
 		try {
 			createComponent(config);
@@ -203,7 +195,7 @@ public class ComponentManagerImpl extends BaseComponent implements ComponentMana
 	}
 	
 	private void deleteComponentForPath(String path) {
-		ComponentConfigurationProvider service = getService(ComponentConfigurationProvider.class);
+		ComponentConfigurationProvider service = getService();
 		
 		String id = null;
 		for (Component c : components.values()) {

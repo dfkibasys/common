@@ -15,7 +15,7 @@ import de.dfki.cos.basys.common.component.Component;
 import de.dfki.cos.basys.common.component.ComponentContext;
 import de.dfki.cos.basys.common.component.ComponentException;
 import de.dfki.cos.basys.common.component.ServiceManager;
-import de.dfki.cos.basys.common.component.ServiceConnection;
+import de.dfki.cos.basys.common.component.ServiceProvider;
 import de.dfki.cos.basys.common.component.StringConstants;
 import de.dfki.cos.basys.common.component.manager.ComponentManagerException;
 
@@ -25,10 +25,8 @@ public class ServiceManagerImpl<T> implements ServiceManager<T> {
 	private ComponentContext context = null;
 	
 	private boolean observeConnection = false;
-	private ScheduledFuture<?> connectionHandle = null;
-	protected ServiceConnection service = null;
-
-	private Supplier<? extends ServiceConnection> ctor;
+	//private ScheduledFuture<?> connectionHandle = null;
+	protected ServiceProvider<T> serviceProvider = null;
 	
 	public ServiceManagerImpl(Properties config) {
 		this.config = config;
@@ -49,16 +47,16 @@ public class ServiceManagerImpl<T> implements ServiceManager<T> {
 			e2.printStackTrace();
 		}		
 	
-		Constructor<ServiceConnection> constructor = null;
+		Constructor<ServiceProvider<T>> constructor = null;
 		
 		try {
 			try {
 				constructor = c.getConstructor(Properties.class);
-				service = constructor.newInstance(config);
+				serviceProvider = constructor.newInstance(config);
 			} catch (NoSuchMethodException e) {
 				try {
 					constructor = c.getConstructor();
-					service = constructor.newInstance();
+					serviceProvider = constructor.newInstance();
 				} catch (NoSuchMethodException e1) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -72,7 +70,7 @@ public class ServiceManagerImpl<T> implements ServiceManager<T> {
 
 	}
 	
-	public ServiceManagerImpl(Properties config, Supplier<? extends ServiceConnection> ctor) {
+	public ServiceManagerImpl(Properties config, ServiceProvider<T> serviceProvider) {
 		this.config = config;
 		this.LOGGER = LoggerFactory.getLogger("basys.component." + getName().replaceAll(" ", "-"));		
 
@@ -81,34 +79,35 @@ public class ServiceManagerImpl<T> implements ServiceManager<T> {
 			LOGGER.info("observeConnection = " + observeConnection);
 		}	
 		
-		this.ctor = Objects.requireNonNull(ctor);
-		this.service = ctor.get();
+		this.serviceProvider = serviceProvider;
 	}
+	
+//	public ServiceManagerImpl(Properties config, Supplier<? extends ServiceConnection> ctor) {
+//		this.config = config;
+//		this.LOGGER = LoggerFactory.getLogger("basys.component." + getName().replaceAll(" ", "-"));		
+//
+//		if (config.getProperty("observeConnection") != null) {
+//			observeConnection = Boolean.parseBoolean(config.getProperty("observeConnection"));
+//			LOGGER.info("observeConnection = " + observeConnection);
+//		}	
+//		
+//		this.service = Objects.requireNonNull(ctor).get();
+//	}
 	
 	private String getName() {		
 		return config.getProperty(StringConstants.name) + ".cm";
 	}
 
 	@Override
-	public T getServiceInterface() {
-		return (T)service;
-	}
-
-	@Override
-	public ServiceConnection getServiceConnection() {
-		return service;
-	}
-	
-	@Override
 	public void connect(ComponentContext context) throws ComponentException {
 		this.context = context;
-		if (!isConnected()) {
+		if (serviceProvider != null && !isConnected()) {
 			LOGGER.debug("connect");
 			if (config.containsKey(StringConstants.serviceConnectionString)) {
 				String cs = config.getProperty(StringConstants.serviceConnectionString);
 				if (cs != null && !cs.equalsIgnoreCase("")) {
 					LOGGER.debug("provided connection string: " + cs);
-					if (service.connect(context, cs)) {
+					if (serviceProvider.connect(context, cs)) {
 						LOGGER.debug("connect - finished");
 						//setConnected(true);
 					} else {
@@ -127,10 +126,10 @@ public class ServiceManagerImpl<T> implements ServiceManager<T> {
 
 	@Override
 	public void disconnect() throws ComponentException {
-		if (isConnected()) {
+		if (serviceProvider != null && isConnected()) {
 			LOGGER.debug("disconnect");
-			service.disconnect();
-			if (!service.isConnected()) {
+			serviceProvider.disconnect();
+			if (!serviceProvider.isConnected()) {
 				LOGGER.debug("disconnect - finished");
 				//setConnected(false);
 			} else {
@@ -140,19 +139,37 @@ public class ServiceManagerImpl<T> implements ServiceManager<T> {
 			LOGGER.info("already disconnected");
 		}
 	}
-
-	protected boolean doConnect( ) {
-		return true;
-	}
-	
-	protected boolean doDisconnect( ) {
-		return true;
-	}
 	
 	@Override
 	public boolean isConnected() {
-		return getServiceConnection().isConnected();
+		return (this.serviceProvider == null) ? false : serviceProvider.isConnected();
 	}
+
+	@Override
+	public ServiceProvider<T> getServiceProvider() {
+		return serviceProvider;
+	}
+
+	@Override
+	public T getService() {
+		return serviceProvider.getService();
+	}
+	
+	@Override
+	public T getServiceMockup() {
+		return null;
+	}
+
+
+	
+//	protected boolean doConnect( ) {
+//		return true;
+//	}
+//	
+//	protected boolean doDisconnect( ) {
+//		return true;
+//	}
+
 
 //	protected void setConnected(boolean value) {
 //		connected = value;

@@ -33,14 +33,14 @@ import com.google.gson.stream.JsonReader;
 
 import de.dfki.cos.basys.common.component.Component;
 import de.dfki.cos.basys.common.component.ComponentContext;
-import de.dfki.cos.basys.common.component.ServiceConnection;
+import de.dfki.cos.basys.common.component.ServiceProvider;
 import de.dfki.cos.basys.common.component.StringConstants;
 import de.dfki.cos.basys.common.component.manager.ComponentConfigurationProvider;
 import de.dfki.cos.basys.common.component.manager.ComponentManager;
 import de.dfki.cos.basys.common.component.manager.ComponentManagerException;
 import de.dfki.cos.basys.common.component.manager.impl.ComponentManagerEvent.Type;
 
-public class ComponentConfigurationProviderImpl implements ComponentConfigurationProvider, ServiceConnection {
+public class ComponentConfigurationProviderImpl implements ComponentConfigurationProvider, ServiceProvider<ComponentConfigurationProvider> {
 
 	private URI uri = null;
 	private boolean recursive, watchFolder = false;
@@ -156,6 +156,12 @@ public class ComponentConfigurationProviderImpl implements ComponentConfiguratio
 	}
 
 	@Override
+	public ComponentConfigurationProvider getService() {
+		return this;
+	}
+
+	
+	@Override
 	public List<String> getComponentConfigurationPaths() {
 
 		String[] suffixes = { ".json", ".properties" };
@@ -184,5 +190,6 @@ public class ComponentConfigurationProviderImpl implements ComponentConfiguratio
 		map.put(path, configFile);
 		return config;
 	}
+
 
 }

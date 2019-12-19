@@ -27,7 +27,7 @@ public class ComponentManagerTest {
 		config.put(StringConstants.id, "component-manager");
 		config.put(StringConstants.name, "component-manager");
 		config.put(StringConstants.category, StringConstants.categoryManagement);
-			
+		//config.put(StringConstants.serviceImplementationJavaClass, "de.dfki.cos.basys.common.component.manager.impl.ComponentConfigurationProviderImpl");
 	}
 
 	@After

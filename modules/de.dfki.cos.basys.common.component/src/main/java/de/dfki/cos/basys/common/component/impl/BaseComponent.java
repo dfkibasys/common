@@ -9,8 +9,10 @@ import de.dfki.cos.basys.common.component.Component;
 import de.dfki.cos.basys.common.component.ComponentContext;
 import de.dfki.cos.basys.common.component.ComponentException;
 import de.dfki.cos.basys.common.component.ComponentInfo;
+import de.dfki.cos.basys.common.component.ServiceProvider;
 import de.dfki.cos.basys.common.component.ServiceManager;
 import de.dfki.cos.basys.common.component.StringConstants;
+import de.dfki.cos.basys.common.component.manager.ComponentConfigurationProvider;
 import de.dfki.cos.basys.common.component.registry.ComponentRegistration;
 import de.dfki.cos.basys.common.component.registry.ComponentRegistrationException;
 
@@ -22,15 +24,9 @@ public class BaseComponent implements Component {
 	protected ComponentContext context;
 	protected ComponentRegistration registration;
 
-	protected ServiceManager serviceManager = null;
-		
 	public BaseComponent(Properties config) {
 		this.config = config;
 		LOGGER = LoggerFactory.getLogger("basys.component." + getName().replaceAll(" ", "-"));
-		
-		//if (config.containsKey(StringConstants.serviceConnectionString) && serviceManager != null) {
-		//	serviceManager = new ServiceManagerImpl(config);
-		//}		
 	}
 
 	@Override
@@ -39,47 +35,29 @@ public class BaseComponent implements Component {
 	}
 
 	@Override
-	public String getName() {		
+	public String getName() {
 		return config.getProperty(StringConstants.name);
 	}
-	
+
 	@Override
-	public String getCategory() {		
+	public String getCategory() {
 		return config.getProperty(StringConstants.category, "NONE");
-	}
-	
-	@Override
-	public <T> ServiceManager<T> getServiceManager() {
-		return serviceManager;
-	}
-	
-	@Override
-	public <T> T getService() {		
-		return (T)serviceManager.getServiceInterface();
-	}	
-	
-	@Override
-	public <T> T getService(Class<T> serviceInterface) {
-		return serviceInterface.cast(serviceManager.getServiceInterface());
 	}
 
 	@Override
 	public void activate(ComponentContext context) throws ComponentException {
 		LOGGER.info("activate");
 		if (!activated) {
-			
+
 			if (context == null) {
 				LOGGER.error("Context must not be null!");
 				throw new ComponentException("Context must not be null!");
 			}
-			
-			this.context = context;
-			
-			if (serviceManager != null)
-				serviceManager.connect(context);
 
-			doActivate();	
-			
+			this.context = context;
+
+			doActivate();
+
 			try {
 				register();
 			} catch (ComponentRegistrationException e) {
@@ -87,41 +65,37 @@ public class BaseComponent implements Component {
 			}
 
 			this.context.getEventBus().register(this);
-			
+
 			setActivated(true);
 			LOGGER.info("activate - finished");
 		} else {
 			LOGGER.info("already activated");
 		}
 	}
-	
+
 	@Override
 	public void deactivate() throws ComponentException {
 		LOGGER.info("deactivate");
 		if (activated) {
 
 			setActivated(false);
-			
+
 			this.context.getEventBus().unregister(this);
-			
+
 			try {
 				unregister();
 			} catch (ComponentRegistrationException e) {
 				throw new ComponentException(e);
 			}
-			
+
 			doDeactivate();
-			
-			if (serviceManager != null)
-				serviceManager.disconnect();
-			
+
 			context = null;
 			LOGGER.info("deactivate - finished");
 		} else {
 			LOGGER.info("already deactivated");
 		}
 	}
-	
 
 	protected void register() throws ComponentRegistrationException {
 		LOGGER.debug("register");
@@ -144,39 +118,35 @@ public class BaseComponent implements Component {
 			LOGGER.debug("not registered");
 		}
 	}
-	
+
 	public boolean isRegistered() {
 		return registration != null;
 	}
+
+	protected void doActivate() throws ComponentException {
+		// empty, override in derived classes if needed
+	}
+
+	protected void doDeactivate() throws ComponentException {
+		// empty, override in derived classes if needed
+	}
 	
-
-	protected void doActivate() throws ComponentException{ 
-		//empty, override in derived classes if needed
-	}
-
-	protected void doDeactivate() throws ComponentException{ 
-		//empty, override in derived classes if needed
-	}
-
 	@Override
 	public boolean isActivated() {
 		return activated;
 	}
-	
+
 	private void setActivated(boolean value) {
 		activated = value;
 		notifyChange();
-	}	
+	}
 
-	public boolean isConnected() {
-		return (serviceManager != null) ? serviceManager.isConnected() : false;
-	}	
-	
 	protected void notifyChange() {
 		LOGGER.trace("notifyChange");
 		// TODO: something like:Notification not = createStatusUpdate();
 
-		//LOGGER.info(String.format("component '%s' (id=%s) is now in state %s and mode %s", getName(), getId(), getState(), getMode()));
+		// LOGGER.info(String.format("component '%s' (id=%s) is now in state %s and mode
+		// %s", getName(), getId(), getState(), getMode()));
 
 //		if (statusChannel != null && statusChannel.isOpen()) {
 //			LOGGER.trace("send status update notification");
@@ -210,12 +180,8 @@ public class BaseComponent implements Component {
 
 	@Override
 	public ComponentInfo getInfo() {
-		ComponentInfo info = new ComponentInfo(config)
-				.setId(getId())
-				.setName(getName())
-				.setCategory(getCategory())
-				.setActivated(isActivated())
-				.setConnected(isConnected());
+		ComponentInfo info = new ComponentInfo(config).setId(getId()).setName(getName()).setCategory(getCategory())
+				.setActivated(isActivated());
 		return info;
 	}
 

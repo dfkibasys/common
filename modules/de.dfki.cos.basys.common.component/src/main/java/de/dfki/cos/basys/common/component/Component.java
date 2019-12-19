@@ -18,7 +18,7 @@ public interface Component {
 	
 	boolean isActivated();	
 
-	<T> ServiceManager<T> getServiceManager();
-	<T> T getService();
-	<T> T getService(Class<T> serviceInterface);
+	//<T> ServiceManager<T> getServiceManager();
+	//<T> T getService();
+	//<T> T getService(Class<T> serviceInterface);
 }

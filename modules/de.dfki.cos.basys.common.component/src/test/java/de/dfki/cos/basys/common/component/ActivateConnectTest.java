@@ -47,7 +47,7 @@ public class ActivateConnectTest {
 	}
 
 	@Test
-	public void testConnectDisconnectToExternal() {
+	public void testConnectDisconnectServiceProvider() {
 		try {
 			config.put(StringConstants.serviceConnectionString, "somewhere"); // must not be null or empty for this test
 			

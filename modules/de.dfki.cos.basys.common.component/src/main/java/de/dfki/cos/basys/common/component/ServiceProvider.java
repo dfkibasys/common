@@ -1,7 +1,8 @@
 package de.dfki.cos.basys.common.component;
 
-public interface ServiceConnection {
+public interface ServiceProvider<T> {
 	boolean connect(ComponentContext context, String connectionString);
 	void disconnect();
 	boolean isConnected();	
+	T getService();
 }
