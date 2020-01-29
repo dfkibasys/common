@@ -18,7 +18,7 @@ import org.eclipse.basyx.aas.restapi.AASModelProvider;
 import org.eclipse.basyx.aas.restapi.VABMultiSubmodelProvider;
 import org.eclipse.basyx.submodel.metamodel.map.SubModel;
 import org.eclipse.basyx.submodel.metamodel.map.identifier.IdentifierType;
-import org.eclipse.basyx.submodel.metamodel.map.qualifier.Description;
+import org.eclipse.basyx.submodel.metamodel.map.qualifier.LangStrings;
 import org.eclipse.basyx.submodel.metamodel.map.qualifier.haskind.Kind;
 import org.eclipse.basyx.submodel.metamodel.map.submodelelement.SubmodelElementCollection;
 import org.eclipse.basyx.submodel.metamodel.map.submodelelement.operation.Operation;
@@ -56,7 +56,7 @@ public class AasTest {
 		aas.setIdentification(IdentifierType.Custom, "whatsoeverAssId");
 		aas.setIdShort("aas");
 		aas.setAdministration("1.0", "0");
-		aas.setDescription(new Description("de-DE", "Test AAS"));
+		aas.setDescription(new LangStrings("de-DE", "Test AAS"));
 
 		Asset asset = new Asset();
 		asset.setKind(Kind.Instance);
