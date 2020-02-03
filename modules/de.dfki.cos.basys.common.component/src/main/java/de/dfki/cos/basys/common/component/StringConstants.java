@@ -9,6 +9,8 @@ public interface StringConstants {
 
 	public static final String serviceImplementationJavaClass = "serviceImplementationJavaClass";
 	public static final String serviceConnectionString = "serviceConnectionString";
+	public static final String username = "username";
+	public static final String password = "password";
 		
 	public static final String activated = "activated";	
 	public static final String connected = "connected";
