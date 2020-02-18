@@ -83,7 +83,7 @@ public class ComponentConfigurationProviderImpl implements ComponentConfiguratio
 				WatchService watcher = FileSystems.getDefault().newWatchService();
 				Path path = Paths.get(uri.toFileString());
 				WatchKey key = path.register(watcher, StandardWatchEventKinds.ENTRY_CREATE,
-						StandardWatchEventKinds.ENTRY_DELETE);
+						StandardWatchEventKinds.ENTRY_DELETE, StandardWatchEventKinds.ENTRY_MODIFY);
 				Runnable run = new Runnable() {
 
 					@Override
@@ -109,6 +109,9 @@ public class ComponentConfigurationProviderImpl implements ComponentConfiguratio
 										}
 										else if (e.kind() == StandardWatchEventKinds.ENTRY_DELETE) {
 											context.getEventBus().post(new ComponentManagerEvent(Type.CONFIG_FILE_DELETED, filePath.toString()));
+										} 
+										else if (e.kind() == StandardWatchEventKinds.ENTRY_MODIFY) {
+											context.getEventBus().post(new ComponentManagerEvent(Type.CONFIG_FILE_MODIFIED, filePath.toString()));
 										} 
 										else {
 											//unknown

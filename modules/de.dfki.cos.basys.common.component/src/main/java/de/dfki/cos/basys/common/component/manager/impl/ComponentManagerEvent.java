@@ -6,8 +6,10 @@ public class ComponentManagerEvent {
 	public enum Type {
 		CONFIG_FILE_CREATED,
 		CONFIG_FILE_DELETED,
+		CONFIG_FILE_MODIFIED,
 		COMPONENT_ADDED,
-		COMPONENT_DELETED
+		COMPONENT_DELETED,
+		COMPONENT_MODIFIED,
 	};
 	
 	public Type type;

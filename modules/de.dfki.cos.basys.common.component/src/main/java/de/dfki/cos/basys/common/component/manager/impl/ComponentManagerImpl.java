@@ -62,7 +62,13 @@ public class ComponentManagerImpl extends ServiceComponent<ComponentConfiguratio
 				public void run() {
 					List<String> configs = service.getComponentConfigurationPaths();									
 					for (String path : configs) {
-						createComponentForPath(path);						
+						Component component = createComponentForPath(path);
+						try {
+							addComponent(component);
+						} catch (ComponentManagerException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
 				}
 			};
@@ -148,7 +154,7 @@ public class ComponentManagerImpl extends ServiceComponent<ComponentConfiguratio
 			
 			Constructor<Component> constructor = c.getConstructor(Properties.class);
 			component = constructor.newInstance(config);
-			addComponent(component);
+			//addComponent(component);
 		} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
 				| IllegalArgumentException | InvocationTargetException e) {
 			throw new ComponentManagerException(e);
@@ -184,45 +190,60 @@ public class ComponentManagerImpl extends ServiceComponent<ComponentConfiguratio
 		}
 	}
 
-	private void createComponentForPath(String path) {
+	private Component createComponentForPath(String path) {
 		ComponentConfigurationProvider service = getService();
 		Properties config = service.getComponentConfigurationForPath(path);
 		try {
-			createComponent(config);
+			return createComponent(config);
 		} catch (ComponentManagerException e) {
 			e.printStackTrace();
 		}	
+		return null;
 	}
 	
-	private void deleteComponentForPath(String path) {
+	private Component getComponentForPath(String path) {
 		ComponentConfigurationProvider service = getService();
 		
-		String id = null;
 		for (Component c : components.values()) {
 			String cPath = c.getInfo().getProperty("path");
 			if (path.equals(cPath)) {
-				id = c.getId();
+				return c;
 			}
 		}
 		
-		if (id != null) {
-			try {
-				deleteComponent(id);
-			} catch (ComponentManagerException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+		return null;
+		
+		
 	}
 	
 	@Subscribe
 	public void onComponentManagerEvent(ComponentManagerEvent ev) {
 		LOGGER.info("onComponentManagerEvent " + ev);
 		if (ev.getType() == Type.CONFIG_FILE_CREATED) {
-			createComponentForPath(ev.getValue());
+			Component component = createComponentForPath(ev.getValue());
+			try {
+				addComponent(component);
+			} catch (ComponentManagerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		else if (ev.getType() == Type.CONFIG_FILE_DELETED) {
-			deleteComponentForPath(ev.getValue());
+			Component component = getComponentForPath(ev.getValue());
+			if (component != null) {
+				try {
+					deleteComponent(component.getId());
+				} catch (ComponentManagerException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		else if (ev.getType() == Type.CONFIG_FILE_MODIFIED) {
+			Component component = getComponentForPath(ev.getValue());
+			//ComponentConfigurationProvider service = getService();
+			//Properties config = service.getComponentConfigurationForPath(ev.getValue());
+			//component.update(config)
 		}
 	}
 	
