@@ -66,17 +66,17 @@ public class ComponentManagerTest {
 			assertEquals(0,components.size());
 
 			Properties config1 = client.getComponentConfigurationForPath(StringConstants.testConfigurationFolder + "/component-1.json");
-			componentManager.createComponent(config1);
+			componentManager.addComponent(config1);
 			components = componentManager.getComponents();
 			assertEquals(1,components.size());
 
 			Properties config2 = client.getComponentConfigurationForPath(StringConstants.testConfigurationFolder + "/component-2.json");			
-			componentManager.createComponent(config2);
+			componentManager.addComponent(config2);
 			components = componentManager.getComponents();
 			assertEquals(2,components.size());
 			
 			Properties config3 = client.getComponentConfigurationForPath(StringConstants.testConfigurationFolder + "/component-3.json");			
-			componentManager.createComponent(config3);			
+			componentManager.addComponent(config3);			
 			components = componentManager.getComponents();
 			assertEquals(3,components.size());
 

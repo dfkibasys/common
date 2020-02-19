@@ -116,7 +116,7 @@ public class ComponentManagerImpl extends ServiceComponent<ComponentConfiguratio
 		}
 		return null;
 	}
-
+	
 	@Override
 	public Component createComponent(Properties config) throws ComponentManagerException {
 		//FIXME: actually, we must check globally via the registry
@@ -153,8 +153,7 @@ public class ComponentManagerImpl extends ServiceComponent<ComponentConfiguratio
 //			component = injector.getInstance(Component.class);
 			
 			Constructor<Component> constructor = c.getConstructor(Properties.class);
-			component = constructor.newInstance(config);
-			//addComponent(component);
+			component = constructor.newInstance(config);			
 		} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
 				| IllegalArgumentException | InvocationTargetException e) {
 			throw new ComponentManagerException(e);
@@ -164,6 +163,14 @@ public class ComponentManagerImpl extends ServiceComponent<ComponentConfiguratio
 		return component;
 	}
 
+	@Override
+	public void addComponent(Properties config) throws ComponentManagerException {
+		Component component = createComponent(config);
+		if (component != null) {
+			addComponent(component);
+		}			
+	}
+	
 	@Override
 	public void addComponent(Component component) throws ComponentManagerException {
 		LOGGER.debug("addComponent " + component.getName());
