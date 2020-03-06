@@ -10,6 +10,7 @@ import edu.wpi.rail.jrosbridge.callback.ActionCallback;
 import edu.wpi.rail.jrosbridge.callback.TopicCallback;
 import edu.wpi.rail.jrosbridge.messages.Message;
 import edu.wpi.rail.jrosbridge.messages.actionlib.GoalID;
+import edu.wpi.rail.jrosbridge.messages.actionlib.GoalMessage;
 import edu.wpi.rail.jrosbridge.messages.actionlib.GoalStatus;
 import edu.wpi.rail.jrosbridge.messages.actionlib.GoalStatusArray;
 
@@ -120,14 +121,6 @@ public class ActionClient {
 		cancelTopic.publish(msg);
 	} 
 	
-	Topic getGoalTopic() {
-		return goalTopic;
-	}
-	
-	Topic getCancelTopic() {
-		return cancelTopic;
-	}
-	
 	/**
 	 * Get the ROS connection handle for this service.
 	 * 
@@ -144,6 +137,15 @@ public class ActionClient {
 
 	public String getActionName() {
 		return actionName;
+	}
+
+	protected void submitGoal(Goal goal) {
+		goals.put(goal.getId(), (ActionCallback) goal);
+		goalTopic.publish(goal.getGoalMessage());		
+	}
+
+	protected void cancelGoal(GoalID goalId) {
+		cancelTopic.publish(goalId);		
 	}
 
 

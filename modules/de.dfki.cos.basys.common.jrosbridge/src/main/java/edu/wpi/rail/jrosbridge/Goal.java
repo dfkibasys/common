@@ -3,6 +3,7 @@ package edu.wpi.rail.jrosbridge;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.json.JsonObject;
 
@@ -18,6 +19,7 @@ public class Goal implements ActionCallback {
 	private ActionClient client;
 	private GoalID goalId;
 	private ActionCallback cb;
+	private GoalMessage goalMessage;	
 	
 	private GoalStatusEnum status;
 	private List<JsonObject> feedback = new LinkedList<JsonObject>();
@@ -25,8 +27,8 @@ public class Goal implements ActionCallback {
 	
 	Goal(ActionClient client) {
 		this.client = client;
-		
-		this.id = "goal_" + Math.random() + "_" + new Date().getTime();
+		this.client.initialize();
+		this.id = "goal_" + UUID.randomUUID().toString();
 		this.goalId = new GoalID(Time.now(), id);		
 	}
 	
@@ -35,18 +37,16 @@ public class Goal implements ActionCallback {
 	}
 
 	public void submit(JsonObject goal) {
-		client.initialize();
-		
-		client.goals.put(getId(), this);
-		
-		GoalMessage goalMessage = new GoalMessage(goalId, goal);
-		client.getGoalTopic().publish(goalMessage);
+		goalMessage = new GoalMessage(goalId, goal);		
+		client.submitGoal(this);
 	}
 
 	public void cancel() {
-		client.initialize();
-		
-		client.getCancelTopic().publish(goalId);
+		client.cancelGoal(goalId);		
+	}
+	
+	public GoalMessage getGoalMessage() {
+		return goalMessage;
 	}
 	
 	public void setActionCallback(ActionCallback cb) {
@@ -158,6 +158,33 @@ public class Goal implements ActionCallback {
 		private GoalStatusEnum(byte value) {
 			this.value = value;
 		}		
+		
+		public static GoalStatusEnum get(byte value) {
+			switch (value) {
+			case GoalStatus.ABORTED:
+				return ABORTED;
+			case GoalStatus.ACTIVE:
+				return ACTIVE;
+			case GoalStatus.LOST:
+				return LOST;
+			case GoalStatus.PENDING:
+				return PENDING;
+			case GoalStatus.PREEMPTED:
+				return PREEMPTED;
+			case GoalStatus.PREEMPTING:
+				return PREEMPTING;
+			case GoalStatus.RECALLED:
+				return RECALLED;
+			case GoalStatus.RECALLING:
+				return RECALLING;
+			case GoalStatus.REJECTED:
+				return REJECTED;
+			case GoalStatus.SUCCEEDED:
+				return SUCCEEDED;
+			default:
+				return PENDING;
+			}
+		}
 	}
 
 }
