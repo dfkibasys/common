@@ -35,7 +35,9 @@
 		-->
 		<module>modules/de.dfki.cos.basys.common.scxml</module>
 		<module>rest</module>		
+		<!--
 		<module>karaf</module>	
+		-->
 	</modules>
 
 	<scm>
