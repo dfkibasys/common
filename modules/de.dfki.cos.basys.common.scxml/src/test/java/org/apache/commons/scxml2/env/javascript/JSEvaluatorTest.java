@@ -289,7 +289,7 @@ public class JSEvaluatorTest {
     public void testScriptFunctions() throws Exception {
         context.set("FIVE", 5);
         Assert.assertEquals(5,context.get("FIVE"));
-        Assert.assertEquals("Invalid function result", 120, evaluator.eval(context,FUNCTION));
+        Assert.assertEquals("Invalid function result", 120, (int) evaluator.eval(context,FUNCTION));
     }
 
 
