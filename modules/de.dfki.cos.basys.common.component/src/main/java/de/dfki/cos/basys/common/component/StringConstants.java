@@ -13,7 +13,8 @@ public interface StringConstants {
 	public static final String password = "password";
 		
 	public static final String activated = "activated";	
-	public static final String connected = "connected";
+	public static final String connected = "connected";	
+	public static final String register = "register";
 	
 	public static final String hostName = "hostName";
 	public static final String categoryDevice = "DEVICE_COMPONENT";

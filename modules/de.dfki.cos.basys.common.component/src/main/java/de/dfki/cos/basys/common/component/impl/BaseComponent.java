@@ -23,10 +23,15 @@ public class BaseComponent implements Component {
 	protected boolean activated = false;
 	protected ComponentContext context;
 	protected ComponentRegistration registration;
+	protected boolean shouldRegister = true;
 
 	public BaseComponent(Properties config) {
 		this.config = config;
 		LOGGER = LoggerFactory.getLogger("basys.component." + getName().replaceAll(" ", "-"));
+		
+		if ( config.getProperty(StringConstants.register) != null) {
+			shouldRegister = Boolean.parseBoolean(config.getProperty(StringConstants.register));
+		}
 	}
 
 	@Override
@@ -99,6 +104,11 @@ public class BaseComponent implements Component {
 
 	protected void register() throws ComponentRegistrationException {
 		LOGGER.debug("register");
+		if (!shouldRegister) {
+			LOGGER.info("component should not be registered");
+			return;
+		} 
+		
 		if (context.getComponentRegistry() != null) {
 			registration = context.getComponentRegistry().createRegistration(this);
 			registration.register();
