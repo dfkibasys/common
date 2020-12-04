@@ -88,7 +88,6 @@ public class ComponentConfigurationProviderImpl implements ComponentConfiguratio
 
 					@Override
 					public void run() {
-						System.out.println("run");
 						while (isConnected()) {
 							try {
 								WatchKey key = watcher.take();

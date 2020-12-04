@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
 import com.google.common.eventbus.Subscribe;
@@ -72,7 +73,8 @@ public class ComponentManagerImpl extends ServiceComponent<ComponentConfiguratio
 					}
 				}
 			};
-			if (async) {				
+			if (async) {
+				//CompletableFuture.delayedExecutor(5000, TimeUnit.MILLISECONDS, context.getScheduledExecutorService()).execute(r);
 				CompletableFuture<Void> cf = CompletableFuture.runAsync(r, context.getScheduledExecutorService()).exceptionally(e-> {		    
 					e.printStackTrace();
 					//LOGGER.error(e.getMessage(), e);

@@ -18,6 +18,9 @@ import de.dfki.cos.basys.common.component.ServiceManager;
 import de.dfki.cos.basys.common.component.ServiceProvider;
 import de.dfki.cos.basys.common.component.StringConstants;
 import de.dfki.cos.basys.common.component.manager.ComponentManagerException;
+//import io.github.classgraph.ClassGraph;
+//import io.github.classgraph.ClassInfo;
+//import io.github.classgraph.ScanResult;
 
 public class ServiceManagerImpl<T> implements ServiceManager<T> {
 	public final Logger LOGGER;
@@ -45,6 +48,21 @@ public class ServiceManagerImpl<T> implements ServiceManager<T> {
 			c = Class.forName(serviceImplementationJavaClass);
 		} catch (ClassNotFoundException e2) {
 			e2.printStackTrace();
+			/*
+			String pkg = "de.dfki.cos.basys";
+			try (ScanResult scanResult =
+			        new ClassGraph()
+			            .verbose()                   // Log to stderr
+			            .enableAllInfo()             // Scan classes, methods, fields, annotations
+			            .acceptPackages(pkg)         // Scan com.xyz and subpackages (omit to scan all packages)
+			            .scan()) {                   // Start the scan
+				System.out.println("------------------------------------------------------------");
+				for (ClassInfo classInfo : scanResult.getAllClasses()) {
+			        System.out.println(classInfo.getName());
+			    }
+				System.out.println("------------------------------------------------------------");
+			}
+			*/
 		}		
 	
 		Constructor<ServiceProvider<T>> constructor = null;
