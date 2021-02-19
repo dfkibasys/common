@@ -26,7 +26,7 @@ import java.util.function.Function;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.filefilter.SuffixFileFilter;
-import org.eclipse.emf.common.util.URI;
+//import org.eclipse.emf.common.util.URI;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
@@ -42,7 +42,8 @@ import de.dfki.cos.basys.common.component.manager.impl.ComponentManagerEvent.Typ
 
 public class ComponentConfigurationProviderImpl implements ComponentConfigurationProvider, ServiceProvider<ComponentConfigurationProvider> {
 
-	private URI uri = null;
+	//private URI uri = null;
+	private String connectionString = null;
 	private boolean recursive, watchFolder = false;
 
 	//private ComponentManager componentManager = null;
@@ -77,11 +78,13 @@ public class ComponentConfigurationProviderImpl implements ComponentConfiguratio
 
 	@Override
 	public boolean connect(ComponentContext context, String connectionString) {
-		uri = URI.createFileURI(connectionString);
+		//uri = URI.createFileURI(connectionString);
+		this.connectionString = connectionString;
 		if (watchFolder) {
 			try {
 				WatchService watcher = FileSystems.getDefault().newWatchService();
-				Path path = Paths.get(uri.toFileString());
+				//Path path = Paths.get(uri.toFileString());
+				Path path = Paths.get(connectionString);
 				WatchKey key = path.register(watcher, StandardWatchEventKinds.ENTRY_CREATE,
 						StandardWatchEventKinds.ENTRY_DELETE, StandardWatchEventKinds.ENTRY_MODIFY);
 				Runnable run = new Runnable() {
@@ -142,19 +145,22 @@ public class ComponentConfigurationProviderImpl implements ComponentConfiguratio
 				e.printStackTrace();
 			}
 		}
-		File file = new File(uri.toFileString());
+		//File file = new File(uri.toFileString());
+		File file = new File(connectionString);
 		return file.exists();
 
 	}
 
 	@Override
 	public void disconnect() {
-		this.uri = null;
+		//this.uri = null;
+		this.connectionString = null;
 	}
 
 	@Override
 	public boolean isConnected() {
-		return uri != null;
+		//return uri != null;
+		return connectionString != null;
 	}
 
 	@Override
@@ -176,8 +182,8 @@ public class ComponentConfigurationProviderImpl implements ComponentConfiguratio
 			depth = Integer.MAX_VALUE;
 
 		try {
-			Files.find(Paths.get(uri.toFileString()), depth, (filePath, fileAttr) -> filter.accept(filePath.toFile()))
-					.map(p -> p.toString()).forEach(paths::add);
+			//Files.find(Paths.get(uri.toFileString()), depth, (filePath, fileAttr) -> filter.accept(filePath.toFile())).map(p -> p.toString()).forEach(paths::add);
+			Files.find(Paths.get(connectionString), depth, (filePath, fileAttr) -> filter.accept(filePath.toFile())).map(p -> p.toString()).forEach(paths::add);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
