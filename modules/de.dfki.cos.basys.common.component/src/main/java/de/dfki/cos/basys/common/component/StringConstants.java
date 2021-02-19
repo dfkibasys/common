@@ -16,6 +16,8 @@ public interface StringConstants {
 	public static final String connected = "connected";	
 	public static final String register = "register";
 	
+	public static final String timestamp = "timestamp";
+	
 	public static final String hostName = "hostName";
 	public static final String categoryDevice = "DEVICE_COMPONENT";
 	public static final String categoryService = "SERVICE_COMPONENT";

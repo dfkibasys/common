@@ -2,6 +2,7 @@
  */
 package de.dfki.cos.basys.common.component;
 
+import java.time.Instant;
 import java.util.Properties;
 
 public class ComponentInfo extends Properties {
@@ -13,11 +14,17 @@ public class ComponentInfo extends Properties {
 	private static final long serialVersionUID = 1L;
 
 	public ComponentInfo() {
+		setProperty(StringConstants.timestamp, Instant.now().toString());
 	}
 	
 	public ComponentInfo(Properties p) {
 		super(p);
+		setProperty(StringConstants.timestamp, Instant.now().toString());
 		//this.putAll(p);
+	}
+	
+	public String getTimestamp() {
+		return getProperty(StringConstants.timestamp);
 	}
 	
 	public String getId() {
