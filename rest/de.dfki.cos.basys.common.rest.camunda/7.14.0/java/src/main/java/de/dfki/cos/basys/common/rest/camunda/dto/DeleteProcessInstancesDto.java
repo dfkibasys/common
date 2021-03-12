@@ -15,59 +15,51 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import de.dfki.cos.basys.common.rest.camunda.dto.HistoricProcessInstanceQueryDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.ProcessInstanceQueryDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
 
 /**
  * DeleteProcessInstancesDto
  */
-@JsonPropertyOrder({
-  DeleteProcessInstancesDto.JSON_PROPERTY_PROCESS_INSTANCE_IDS,
-  DeleteProcessInstancesDto.JSON_PROPERTY_DELETE_REASON,
-  DeleteProcessInstancesDto.JSON_PROPERTY_SKIP_CUSTOM_LISTENERS,
-  DeleteProcessInstancesDto.JSON_PROPERTY_SKIP_SUBPROCESSES,
-  DeleteProcessInstancesDto.JSON_PROPERTY_PROCESS_INSTANCE_QUERY,
-  DeleteProcessInstancesDto.JSON_PROPERTY_HISTORIC_PROCESS_INSTANCE_QUERY
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class DeleteProcessInstancesDto {
-  public static final String JSON_PROPERTY_PROCESS_INSTANCE_IDS = "processInstanceIds";
+  public static final String SERIALIZED_NAME_PROCESS_INSTANCE_IDS = "processInstanceIds";
+  @SerializedName(SERIALIZED_NAME_PROCESS_INSTANCE_IDS)
   private List<String> processInstanceIds = null;
 
-  public static final String JSON_PROPERTY_DELETE_REASON = "deleteReason";
+  public static final String SERIALIZED_NAME_DELETE_REASON = "deleteReason";
+  @SerializedName(SERIALIZED_NAME_DELETE_REASON)
   private String deleteReason;
 
-  public static final String JSON_PROPERTY_SKIP_CUSTOM_LISTENERS = "skipCustomListeners";
-  private JsonNullable<Boolean> skipCustomListeners = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_SKIP_CUSTOM_LISTENERS = "skipCustomListeners";
+  @SerializedName(SERIALIZED_NAME_SKIP_CUSTOM_LISTENERS)
+  private Boolean skipCustomListeners;
 
-  public static final String JSON_PROPERTY_SKIP_SUBPROCESSES = "skipSubprocesses";
-  private JsonNullable<Boolean> skipSubprocesses = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_SKIP_SUBPROCESSES = "skipSubprocesses";
+  @SerializedName(SERIALIZED_NAME_SKIP_SUBPROCESSES)
+  private Boolean skipSubprocesses;
 
-  public static final String JSON_PROPERTY_PROCESS_INSTANCE_QUERY = "processInstanceQuery";
+  public static final String SERIALIZED_NAME_PROCESS_INSTANCE_QUERY = "processInstanceQuery";
+  @SerializedName(SERIALIZED_NAME_PROCESS_INSTANCE_QUERY)
   private ProcessInstanceQueryDto processInstanceQuery;
 
-  public static final String JSON_PROPERTY_HISTORIC_PROCESS_INSTANCE_QUERY = "historicProcessInstanceQuery";
+  public static final String SERIALIZED_NAME_HISTORIC_PROCESS_INSTANCE_QUERY = "historicProcessInstanceQuery";
+  @SerializedName(SERIALIZED_NAME_HISTORIC_PROCESS_INSTANCE_QUERY)
   private HistoricProcessInstanceQueryDto historicProcessInstanceQuery;
 
 
   public DeleteProcessInstancesDto processInstanceIds(List<String> processInstanceIds) {
+    
     this.processInstanceIds = processInstanceIds;
     return this;
   }
@@ -86,8 +78,6 @@ public class DeleteProcessInstancesDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A list process instance ids to delete.")
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_IDS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<String> getProcessInstanceIds() {
     return processInstanceIds;
@@ -100,6 +90,7 @@ public class DeleteProcessInstancesDto {
 
 
   public DeleteProcessInstancesDto deleteReason(String deleteReason) {
+    
     this.deleteReason = deleteReason;
     return this;
   }
@@ -110,8 +101,6 @@ public class DeleteProcessInstancesDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A string with delete reason.")
-  @JsonProperty(JSON_PROPERTY_DELETE_REASON)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getDeleteReason() {
     return deleteReason;
@@ -124,7 +113,8 @@ public class DeleteProcessInstancesDto {
 
 
   public DeleteProcessInstancesDto skipCustomListeners(Boolean skipCustomListeners) {
-    this.skipCustomListeners = JsonNullable.<Boolean>of(skipCustomListeners);
+    
+    this.skipCustomListeners = skipCustomListeners;
     return this;
   }
 
@@ -134,31 +124,20 @@ public class DeleteProcessInstancesDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Skip execution listener invocation for activities that are started or ended as part of this request.")
-  @JsonIgnore
 
   public Boolean getSkipCustomListeners() {
-        return skipCustomListeners.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_SKIP_CUSTOM_LISTENERS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getSkipCustomListeners_JsonNullable() {
     return skipCustomListeners;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SKIP_CUSTOM_LISTENERS)
-  public void setSkipCustomListeners_JsonNullable(JsonNullable<Boolean> skipCustomListeners) {
-    this.skipCustomListeners = skipCustomListeners;
-  }
+
 
   public void setSkipCustomListeners(Boolean skipCustomListeners) {
-    this.skipCustomListeners = JsonNullable.<Boolean>of(skipCustomListeners);
+    this.skipCustomListeners = skipCustomListeners;
   }
 
 
   public DeleteProcessInstancesDto skipSubprocesses(Boolean skipSubprocesses) {
-    this.skipSubprocesses = JsonNullable.<Boolean>of(skipSubprocesses);
+    
+    this.skipSubprocesses = skipSubprocesses;
     return this;
   }
 
@@ -168,30 +147,19 @@ public class DeleteProcessInstancesDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Skip deletion of the subprocesses related to deleted processes as part of this request.")
-  @JsonIgnore
 
   public Boolean getSkipSubprocesses() {
-        return skipSubprocesses.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_SKIP_SUBPROCESSES)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getSkipSubprocesses_JsonNullable() {
     return skipSubprocesses;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SKIP_SUBPROCESSES)
-  public void setSkipSubprocesses_JsonNullable(JsonNullable<Boolean> skipSubprocesses) {
-    this.skipSubprocesses = skipSubprocesses;
-  }
+
 
   public void setSkipSubprocesses(Boolean skipSubprocesses) {
-    this.skipSubprocesses = JsonNullable.<Boolean>of(skipSubprocesses);
+    this.skipSubprocesses = skipSubprocesses;
   }
 
 
   public DeleteProcessInstancesDto processInstanceQuery(ProcessInstanceQueryDto processInstanceQuery) {
+    
     this.processInstanceQuery = processInstanceQuery;
     return this;
   }
@@ -202,8 +170,6 @@ public class DeleteProcessInstancesDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_QUERY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public ProcessInstanceQueryDto getProcessInstanceQuery() {
     return processInstanceQuery;
@@ -216,6 +182,7 @@ public class DeleteProcessInstancesDto {
 
 
   public DeleteProcessInstancesDto historicProcessInstanceQuery(HistoricProcessInstanceQueryDto historicProcessInstanceQuery) {
+    
     this.historicProcessInstanceQuery = historicProcessInstanceQuery;
     return this;
   }
@@ -226,8 +193,6 @@ public class DeleteProcessInstancesDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
-  @JsonProperty(JSON_PROPERTY_HISTORIC_PROCESS_INSTANCE_QUERY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public HistoricProcessInstanceQueryDto getHistoricProcessInstanceQuery() {
     return historicProcessInstanceQuery;
@@ -239,9 +204,6 @@ public class DeleteProcessInstancesDto {
   }
 
 
-  /**
-   * Return true if this DeleteProcessInstancesDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

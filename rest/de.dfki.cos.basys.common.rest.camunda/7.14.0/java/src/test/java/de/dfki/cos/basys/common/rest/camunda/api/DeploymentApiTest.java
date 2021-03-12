@@ -13,8 +13,7 @@
 
 package de.dfki.cos.basys.common.rest.camunda.api;
 
-import de.dfki.cos.basys.common.rest.camunda.*;
-import de.dfki.cos.basys.common.rest.camunda.auth.*;
+import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.dto.CountResultDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.DeploymentDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.DeploymentResourceDto;
@@ -24,10 +23,8 @@ import java.io.File;
 import org.threeten.bp.OffsetDateTime;
 import de.dfki.cos.basys.common.rest.camunda.dto.ParseExceptionDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.RedeploymentDto;
-import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
-
+import org.junit.Ignore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,10 +34,12 @@ import java.util.Map;
 /**
  * API tests for DeploymentApi
  */
+@Ignore
 public class DeploymentApiTest {
 
     private final DeploymentApi api = new DeploymentApi();
 
+    
     /**
      * 
      *
@@ -51,16 +50,17 @@ public class DeploymentApiTest {
      */
     @Test
     public void createDeploymentTest() throws ApiException {
-        //String tenantId = null;
-        //String deploymentSource = null;
-        //Boolean deployChangedOnly = null;
-        //Boolean enableDuplicateFiltering = null;
-        //String deploymentName = null;
-        //File data = null;
-        //DeploymentWithDefinitionsDto response = api.createDeployment(tenantId, deploymentSource, deployChangedOnly, enableDuplicateFiltering, deploymentName, data);
+        String tenantId = null;
+        String deploymentSource = null;
+        Boolean deployChangedOnly = null;
+        Boolean enableDuplicateFiltering = null;
+        String deploymentName = null;
+        File data = null;
+        DeploymentWithDefinitionsDto response = api.createDeployment(tenantId, deploymentSource, deployChangedOnly, enableDuplicateFiltering, deploymentName, data);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -71,14 +71,15 @@ public class DeploymentApiTest {
      */
     @Test
     public void deleteDeploymentTest() throws ApiException {
-        //String id = null;
-        //Boolean cascade = null;
-        //Boolean skipCustomListeners = null;
-        //Boolean skipIoMappings = null;
-        //api.deleteDeployment(id, cascade, skipCustomListeners, skipIoMappings);
+        String id = null;
+        Boolean cascade = null;
+        Boolean skipCustomListeners = null;
+        Boolean skipIoMappings = null;
+        api.deleteDeployment(id, cascade, skipCustomListeners, skipIoMappings);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -89,11 +90,12 @@ public class DeploymentApiTest {
      */
     @Test
     public void getDeploymentTest() throws ApiException {
-        //String id = null;
-        //List<DeploymentDto> response = api.getDeployment(id);
+        String id = null;
+        List<DeploymentDto> response = api.getDeployment(id);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -104,12 +106,13 @@ public class DeploymentApiTest {
      */
     @Test
     public void getDeploymentResourceTest() throws ApiException {
-        //String id = null;
-        //String resourceId = null;
-        //DeploymentResourceDto response = api.getDeploymentResource(id, resourceId);
+        String id = null;
+        String resourceId = null;
+        DeploymentResourceDto response = api.getDeploymentResource(id, resourceId);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -120,12 +123,13 @@ public class DeploymentApiTest {
      */
     @Test
     public void getDeploymentResourceDataTest() throws ApiException {
-        //String id = null;
-        //String resourceId = null;
-        //File response = api.getDeploymentResourceData(id, resourceId);
+        String id = null;
+        String resourceId = null;
+        File response = api.getDeploymentResourceData(id, resourceId);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -136,11 +140,12 @@ public class DeploymentApiTest {
      */
     @Test
     public void getDeploymentResourcesTest() throws ApiException {
-        //String id = null;
-        //List<DeploymentResourceDto> response = api.getDeploymentResources(id);
+        String id = null;
+        List<DeploymentResourceDto> response = api.getDeploymentResources(id);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -151,24 +156,25 @@ public class DeploymentApiTest {
      */
     @Test
     public void getDeploymentsTest() throws ApiException {
-        //String id = null;
-        //String name = null;
-        //String nameLike = null;
-        //String source = null;
-        //Boolean withoutSource = null;
-        //String tenantIdIn = null;
-        //Boolean withoutTenantId = null;
-        //Boolean includeDeploymentsWithoutTenantId = null;
-        //OffsetDateTime after = null;
-        //OffsetDateTime before = null;
-        //String sortBy = null;
-        //String sortOrder = null;
-        //Integer firstResult = null;
-        //Integer maxResults = null;
-        //List<DeploymentDto> response = api.getDeployments(id, name, nameLike, source, withoutSource, tenantIdIn, withoutTenantId, includeDeploymentsWithoutTenantId, after, before, sortBy, sortOrder, firstResult, maxResults);
+        String id = null;
+        String name = null;
+        String nameLike = null;
+        String source = null;
+        Boolean withoutSource = null;
+        String tenantIdIn = null;
+        Boolean withoutTenantId = null;
+        Boolean includeDeploymentsWithoutTenantId = null;
+        OffsetDateTime after = null;
+        OffsetDateTime before = null;
+        String sortBy = null;
+        String sortOrder = null;
+        Integer firstResult = null;
+        Integer maxResults = null;
+        List<DeploymentDto> response = api.getDeployments(id, name, nameLike, source, withoutSource, tenantIdIn, withoutTenantId, includeDeploymentsWithoutTenantId, after, before, sortBy, sortOrder, firstResult, maxResults);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -179,20 +185,21 @@ public class DeploymentApiTest {
      */
     @Test
     public void getDeploymentsCountTest() throws ApiException {
-        //String id = null;
-        //String name = null;
-        //String nameLike = null;
-        //String source = null;
-        //Boolean withoutSource = null;
-        //String tenantIdIn = null;
-        //Boolean withoutTenantId = null;
-        //Boolean includeDeploymentsWithoutTenantId = null;
-        //OffsetDateTime after = null;
-        //OffsetDateTime before = null;
-        //CountResultDto response = api.getDeploymentsCount(id, name, nameLike, source, withoutSource, tenantIdIn, withoutTenantId, includeDeploymentsWithoutTenantId, after, before);
+        String id = null;
+        String name = null;
+        String nameLike = null;
+        String source = null;
+        Boolean withoutSource = null;
+        String tenantIdIn = null;
+        Boolean withoutTenantId = null;
+        Boolean includeDeploymentsWithoutTenantId = null;
+        OffsetDateTime after = null;
+        OffsetDateTime before = null;
+        CountResultDto response = api.getDeploymentsCount(id, name, nameLike, source, withoutSource, tenantIdIn, withoutTenantId, includeDeploymentsWithoutTenantId, after, before);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -203,10 +210,11 @@ public class DeploymentApiTest {
      */
     @Test
     public void redeployTest() throws ApiException {
-        //String id = null;
-        //RedeploymentDto redeploymentDto = null;
-        //DeploymentWithDefinitionsDto response = api.redeploy(id, redeploymentDto);
+        String id = null;
+        RedeploymentDto redeploymentDto = null;
+        DeploymentWithDefinitionsDto response = api.redeploy(id, redeploymentDto);
+
         // TODO: test validations
     }
-
+    
 }

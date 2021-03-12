@@ -15,49 +15,44 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import de.dfki.cos.basys.common.rest.camunda.dto.AuthorizationExceptionDtoAllOf;
 import de.dfki.cos.basys.common.rest.camunda.dto.ExceptionDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.MissingAuthorizationDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
 
 /**
  * AuthorizationExceptionDto
  */
-@JsonPropertyOrder({
-  AuthorizationExceptionDto.JSON_PROPERTY_USER_ID,
-  AuthorizationExceptionDto.JSON_PROPERTY_MISSING_AUTHORIZATIONS,
-  AuthorizationExceptionDto.JSON_PROPERTY_TYPE,
-  AuthorizationExceptionDto.JSON_PROPERTY_MESSAGE
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class AuthorizationExceptionDto {
-  public static final String JSON_PROPERTY_USER_ID = "userId";
+  public static final String SERIALIZED_NAME_USER_ID = "userId";
+  @SerializedName(SERIALIZED_NAME_USER_ID)
   private String userId;
 
-  public static final String JSON_PROPERTY_MISSING_AUTHORIZATIONS = "missingAuthorizations";
+  public static final String SERIALIZED_NAME_MISSING_AUTHORIZATIONS = "missingAuthorizations";
+  @SerializedName(SERIALIZED_NAME_MISSING_AUTHORIZATIONS)
   private List<MissingAuthorizationDto> missingAuthorizations = null;
 
-  public static final String JSON_PROPERTY_TYPE = "type";
+  public static final String SERIALIZED_NAME_TYPE = "type";
+  @SerializedName(SERIALIZED_NAME_TYPE)
   private String type;
 
-  public static final String JSON_PROPERTY_MESSAGE = "message";
+  public static final String SERIALIZED_NAME_MESSAGE = "message";
+  @SerializedName(SERIALIZED_NAME_MESSAGE)
   private String message;
 
 
   public AuthorizationExceptionDto userId(String userId) {
+    
     this.userId = userId;
     return this;
   }
@@ -68,8 +63,6 @@ public class AuthorizationExceptionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the user that does not have expected permissions")
-  @JsonProperty(JSON_PROPERTY_USER_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getUserId() {
     return userId;
@@ -82,6 +75,7 @@ public class AuthorizationExceptionDto {
 
 
   public AuthorizationExceptionDto missingAuthorizations(List<MissingAuthorizationDto> missingAuthorizations) {
+    
     this.missingAuthorizations = missingAuthorizations;
     return this;
   }
@@ -100,8 +94,6 @@ public class AuthorizationExceptionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
-  @JsonProperty(JSON_PROPERTY_MISSING_AUTHORIZATIONS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<MissingAuthorizationDto> getMissingAuthorizations() {
     return missingAuthorizations;
@@ -114,6 +106,7 @@ public class AuthorizationExceptionDto {
 
 
   public AuthorizationExceptionDto type(String type) {
+    
     this.type = type;
     return this;
   }
@@ -124,8 +117,6 @@ public class AuthorizationExceptionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "An exception class indicating the occurred error.")
-  @JsonProperty(JSON_PROPERTY_TYPE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getType() {
     return type;
@@ -138,6 +129,7 @@ public class AuthorizationExceptionDto {
 
 
   public AuthorizationExceptionDto message(String message) {
+    
     this.message = message;
     return this;
   }
@@ -148,8 +140,6 @@ public class AuthorizationExceptionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A detailed message of the error.")
-  @JsonProperty(JSON_PROPERTY_MESSAGE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getMessage() {
     return message;
@@ -161,9 +151,6 @@ public class AuthorizationExceptionDto {
   }
 
 
-  /**
-   * Return true if this AuthorizationExceptionDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

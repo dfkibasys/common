@@ -13,16 +13,13 @@
 
 package de.dfki.cos.basys.common.rest.camunda.api;
 
-import de.dfki.cos.basys.common.rest.camunda.*;
-import de.dfki.cos.basys.common.rest.camunda.auth.*;
+import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.dto.ExceptionDto;
 import java.io.File;
 import de.dfki.cos.basys.common.rest.camunda.dto.PatchVariablesDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.VariableValueDto;
-import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
-
+import org.junit.Ignore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,10 +29,12 @@ import java.util.Map;
 /**
  * API tests for TaskVariableApi
  */
+@Ignore
 public class TaskVariableApiTest {
 
     private final TaskVariableApi api = new TaskVariableApi();
 
+    
     /**
      * 
      *
@@ -46,12 +45,13 @@ public class TaskVariableApiTest {
      */
     @Test
     public void deleteTaskVariableTest() throws ApiException {
-        //String id = null;
-        //String varName = null;
-        //api.deleteTaskVariable(id, varName);
+        String id = null;
+        String varName = null;
+        api.deleteTaskVariable(id, varName);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -62,13 +62,14 @@ public class TaskVariableApiTest {
      */
     @Test
     public void getTaskVariableTest() throws ApiException {
-        //String id = null;
-        //String varName = null;
-        //Boolean deserializeValue = null;
-        //VariableValueDto response = api.getTaskVariable(id, varName, deserializeValue);
+        String id = null;
+        String varName = null;
+        Boolean deserializeValue = null;
+        VariableValueDto response = api.getTaskVariable(id, varName, deserializeValue);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -79,12 +80,13 @@ public class TaskVariableApiTest {
      */
     @Test
     public void getTaskVariableBinaryTest() throws ApiException {
-        //String id = null;
-        //String varName = null;
-        //File response = api.getTaskVariableBinary(id, varName);
+        String id = null;
+        String varName = null;
+        File response = api.getTaskVariableBinary(id, varName);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -95,12 +97,13 @@ public class TaskVariableApiTest {
      */
     @Test
     public void getTaskVariablesTest() throws ApiException {
-        //String id = null;
-        //Boolean deserializeValue = null;
-        //Map<String, VariableValueDto> response = api.getTaskVariables(id, deserializeValue);
+        String id = null;
+        Boolean deserializeValue = null;
+        Map<String, VariableValueDto> response = api.getTaskVariables(id, deserializeValue);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -111,12 +114,13 @@ public class TaskVariableApiTest {
      */
     @Test
     public void modifyTaskVariablesTest() throws ApiException {
-        //String id = null;
-        //PatchVariablesDto patchVariablesDto = null;
-        //api.modifyTaskVariables(id, patchVariablesDto);
+        String id = null;
+        PatchVariablesDto patchVariablesDto = null;
+        api.modifyTaskVariables(id, patchVariablesDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -127,13 +131,14 @@ public class TaskVariableApiTest {
      */
     @Test
     public void putTaskVariableTest() throws ApiException {
-        //String id = null;
-        //String varName = null;
-        //VariableValueDto variableValueDto = null;
-        //api.putTaskVariable(id, varName, variableValueDto);
+        String id = null;
+        String varName = null;
+        VariableValueDto variableValueDto = null;
+        api.putTaskVariable(id, varName, variableValueDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -144,12 +149,13 @@ public class TaskVariableApiTest {
      */
     @Test
     public void setBinaryTaskVariableTest() throws ApiException {
-        //String id = null;
-        //String varName = null;
-        //File data = null;
-        //String valueType = null;
-        //api.setBinaryTaskVariable(id, varName, data, valueType);
+        String id = null;
+        String varName = null;
+        File data = null;
+        String valueType = null;
+        api.setBinaryTaskVariable(id, varName, data, valueType);
+
         // TODO: test validations
     }
-
+    
 }

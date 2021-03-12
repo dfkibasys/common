@@ -8,9 +8,8 @@ Method | HTTP request | Description
 [**querySchemaLog**](SchemaLogApi.md#querySchemaLog) | **POST** /schema/log | 
 
 
-
-## getSchemaLog
-
+<a name="getSchemaLog"></a>
+# **getSchemaLog**
 > List&lt;SchemaLogEntryDto&gt; getSchemaLog(version, firstResult, maxResults)
 
 
@@ -18,40 +17,38 @@ Method | HTTP request | Description
 Queries for schema log entries that fulfill given parameters.
 
 ### Example
-
 ```java
 // Import classes:
 import de.dfki.cos.basys.common.rest.camunda.ApiClient;
 import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.Configuration;
-import de.dfki.cos.basys.common.rest.camunda.model.*;
+import de.dfki.cos.basys.common.rest.camunda.models.*;
 import de.dfki.cos.basys.common.rest.camunda.api.SchemaLogApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("http://localhost:8080/engine-rest");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost:8080/engine-rest");
 
-        SchemaLogApi apiInstance = new SchemaLogApi(defaultClient);
-        String version = "version_example"; // String | Only return schema log entries with a specific version.
-        Integer firstResult = 56; // Integer | Pagination of results. Specifies the index of the first result to return.
-        Integer maxResults = 56; // Integer | Pagination of results. Specifies the maximum number of results to return. Will return less results if there are no more results left.
-        try {
-            List<SchemaLogEntryDto> result = apiInstance.getSchemaLog(version, firstResult, maxResults);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling SchemaLogApi#getSchemaLog");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    SchemaLogApi apiInstance = new SchemaLogApi(defaultClient);
+    String version = "version_example"; // String | Only return schema log entries with a specific version.
+    Integer firstResult = 56; // Integer | Pagination of results. Specifies the index of the first result to return.
+    Integer maxResults = 56; // Integer | Pagination of results. Specifies the maximum number of results to return. Will return less results if there are no more results left.
+    try {
+      List<SchemaLogEntryDto> result = apiInstance.getSchemaLog(version, firstResult, maxResults);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling SchemaLogApi#getSchemaLog");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -69,17 +66,16 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Request successful. **Note**: In order to get any results a user of group &#x60;camunda-admin&#x60; must be authenticated. |  -  |
+**200** | Request successful. **Note**: In order to get any results a user of group &#x60;camunda-admin&#x60; must be authenticated. |  -  |
 
-
-## querySchemaLog
-
+<a name="querySchemaLog"></a>
+# **querySchemaLog**
 > List&lt;SchemaLogEntryDto&gt; querySchemaLog(firstResult, maxResults, schemaLogQueryDto)
 
 
@@ -87,40 +83,38 @@ No authorization required
 Queries for schema log entries that fulfill given parameters.
 
 ### Example
-
 ```java
 // Import classes:
 import de.dfki.cos.basys.common.rest.camunda.ApiClient;
 import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.Configuration;
-import de.dfki.cos.basys.common.rest.camunda.model.*;
+import de.dfki.cos.basys.common.rest.camunda.models.*;
 import de.dfki.cos.basys.common.rest.camunda.api.SchemaLogApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("http://localhost:8080/engine-rest");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost:8080/engine-rest");
 
-        SchemaLogApi apiInstance = new SchemaLogApi(defaultClient);
-        Integer firstResult = 56; // Integer | Pagination of results. Specifies the index of the first result to return.
-        Integer maxResults = 56; // Integer | Pagination of results. Specifies the maximum number of results to return. Will return less results if there are no more results left.
-        SchemaLogQueryDto schemaLogQueryDto = {"version":"7.11.0","sortBy":"timestamp","sortOrder":"asc"}; // SchemaLogQueryDto | 
-        try {
-            List<SchemaLogEntryDto> result = apiInstance.querySchemaLog(firstResult, maxResults, schemaLogQueryDto);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling SchemaLogApi#querySchemaLog");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    SchemaLogApi apiInstance = new SchemaLogApi(defaultClient);
+    Integer firstResult = 56; // Integer | Pagination of results. Specifies the index of the first result to return.
+    Integer maxResults = 56; // Integer | Pagination of results. Specifies the maximum number of results to return. Will return less results if there are no more results left.
+    SchemaLogQueryDto schemaLogQueryDto = {"version":"7.11.0","sortBy":"timestamp","sortOrder":"asc"}; // SchemaLogQueryDto | 
+    try {
+      List<SchemaLogEntryDto> result = apiInstance.querySchemaLog(firstResult, maxResults, schemaLogQueryDto);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling SchemaLogApi#querySchemaLog");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -138,11 +132,11 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Request successful. **Note**: In order to get any results a user of group camunda-admin must be authenticated. |  -  |
+**200** | Request successful. **Note**: In order to get any results a user of group camunda-admin must be authenticated. |  -  |
 

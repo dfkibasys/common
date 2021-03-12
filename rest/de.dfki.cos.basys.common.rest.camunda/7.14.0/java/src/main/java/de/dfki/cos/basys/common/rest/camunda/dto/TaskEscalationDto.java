@@ -15,40 +15,35 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import de.dfki.cos.basys.common.rest.camunda.dto.VariableValueDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
 
 /**
  * TaskEscalationDto
  */
-@JsonPropertyOrder({
-  TaskEscalationDto.JSON_PROPERTY_ESCALATION_CODE,
-  TaskEscalationDto.JSON_PROPERTY_VARIABLES
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class TaskEscalationDto {
-  public static final String JSON_PROPERTY_ESCALATION_CODE = "escalationCode";
+  public static final String SERIALIZED_NAME_ESCALATION_CODE = "escalationCode";
+  @SerializedName(SERIALIZED_NAME_ESCALATION_CODE)
   private String escalationCode;
 
-  public static final String JSON_PROPERTY_VARIABLES = "variables";
+  public static final String SERIALIZED_NAME_VARIABLES = "variables";
+  @SerializedName(SERIALIZED_NAME_VARIABLES)
   private Map<String, VariableValueDto> variables = null;
 
 
   public TaskEscalationDto escalationCode(String escalationCode) {
+    
     this.escalationCode = escalationCode;
     return this;
   }
@@ -59,8 +54,6 @@ public class TaskEscalationDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "An escalation code that indicates the predefined escalation. It is used to identify the BPMN escalation handler.")
-  @JsonProperty(JSON_PROPERTY_ESCALATION_CODE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getEscalationCode() {
     return escalationCode;
@@ -73,6 +66,7 @@ public class TaskEscalationDto {
 
 
   public TaskEscalationDto variables(Map<String, VariableValueDto> variables) {
+    
     this.variables = variables;
     return this;
   }
@@ -91,8 +85,6 @@ public class TaskEscalationDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON object containing variable key-value pairs.")
-  @JsonProperty(JSON_PROPERTY_VARIABLES)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Map<String, VariableValueDto> getVariables() {
     return variables;
@@ -104,9 +96,6 @@ public class TaskEscalationDto {
   }
 
 
-  /**
-   * Return true if this TaskEscalationDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

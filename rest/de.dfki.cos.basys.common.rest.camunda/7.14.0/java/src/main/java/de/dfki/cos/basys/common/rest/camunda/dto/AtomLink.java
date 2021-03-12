@@ -15,40 +15,35 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
+import java.io.IOException;
 
 /**
  * AtomLink
  */
-@JsonPropertyOrder({
-  AtomLink.JSON_PROPERTY_REL,
-  AtomLink.JSON_PROPERTY_HREF,
-  AtomLink.JSON_PROPERTY_METHOD
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class AtomLink {
-  public static final String JSON_PROPERTY_REL = "rel";
+  public static final String SERIALIZED_NAME_REL = "rel";
+  @SerializedName(SERIALIZED_NAME_REL)
   private String rel;
 
-  public static final String JSON_PROPERTY_HREF = "href";
+  public static final String SERIALIZED_NAME_HREF = "href";
+  @SerializedName(SERIALIZED_NAME_HREF)
   private String href;
 
-  public static final String JSON_PROPERTY_METHOD = "method";
+  public static final String SERIALIZED_NAME_METHOD = "method";
+  @SerializedName(SERIALIZED_NAME_METHOD)
   private String method;
 
 
   public AtomLink rel(String rel) {
+    
     this.rel = rel;
     return this;
   }
@@ -59,8 +54,6 @@ public class AtomLink {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The relation of the link to the object that belongs to.")
-  @JsonProperty(JSON_PROPERTY_REL)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getRel() {
     return rel;
@@ -73,6 +66,7 @@ public class AtomLink {
 
 
   public AtomLink href(String href) {
+    
     this.href = href;
     return this;
   }
@@ -83,8 +77,6 @@ public class AtomLink {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The url of the link.")
-  @JsonProperty(JSON_PROPERTY_HREF)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getHref() {
     return href;
@@ -97,6 +89,7 @@ public class AtomLink {
 
 
   public AtomLink method(String method) {
+    
     this.method = method;
     return this;
   }
@@ -107,8 +100,6 @@ public class AtomLink {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The http method.")
-  @JsonProperty(JSON_PROPERTY_METHOD)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getMethod() {
     return method;
@@ -120,9 +111,6 @@ public class AtomLink {
   }
 
 
-  /**
-   * Return true if this AtomLink object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

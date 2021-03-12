@@ -15,13 +15,11 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import de.dfki.cos.basys.common.rest.camunda.dto.AtomLink;
 import de.dfki.cos.basys.common.rest.camunda.dto.CaseDefinitionDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.DecisionDefinitionDto;
@@ -31,64 +29,61 @@ import de.dfki.cos.basys.common.rest.camunda.dto.DeploymentWithDefinitionsDtoAll
 import de.dfki.cos.basys.common.rest.camunda.dto.ProcessDefinitionDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.threeten.bp.OffsetDateTime;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
 
 /**
  * DeploymentWithDefinitionsDto
  */
-@JsonPropertyOrder({
-  DeploymentWithDefinitionsDto.JSON_PROPERTY_DEPLOYED_PROCESS_DEFINITIONS,
-  DeploymentWithDefinitionsDto.JSON_PROPERTY_DEPLOYED_DECISION_DEFINITIONS,
-  DeploymentWithDefinitionsDto.JSON_PROPERTY_DEPLOYED_DECISION_REQUIREMENTS_DEFINITIONS,
-  DeploymentWithDefinitionsDto.JSON_PROPERTY_DEPLOYED_CASE_DEFINITIONS,
-  DeploymentWithDefinitionsDto.JSON_PROPERTY_ID,
-  DeploymentWithDefinitionsDto.JSON_PROPERTY_TENANT_ID,
-  DeploymentWithDefinitionsDto.JSON_PROPERTY_DEPLOYMENT_TIME,
-  DeploymentWithDefinitionsDto.JSON_PROPERTY_SOURCE,
-  DeploymentWithDefinitionsDto.JSON_PROPERTY_NAME,
-  DeploymentWithDefinitionsDto.JSON_PROPERTY_LINKS
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class DeploymentWithDefinitionsDto {
-  public static final String JSON_PROPERTY_DEPLOYED_PROCESS_DEFINITIONS = "deployedProcessDefinitions";
+  public static final String SERIALIZED_NAME_DEPLOYED_PROCESS_DEFINITIONS = "deployedProcessDefinitions";
+  @SerializedName(SERIALIZED_NAME_DEPLOYED_PROCESS_DEFINITIONS)
   private Map<String, ProcessDefinitionDto> deployedProcessDefinitions = null;
 
-  public static final String JSON_PROPERTY_DEPLOYED_DECISION_DEFINITIONS = "deployedDecisionDefinitions";
+  public static final String SERIALIZED_NAME_DEPLOYED_DECISION_DEFINITIONS = "deployedDecisionDefinitions";
+  @SerializedName(SERIALIZED_NAME_DEPLOYED_DECISION_DEFINITIONS)
   private Map<String, DecisionDefinitionDto> deployedDecisionDefinitions = null;
 
-  public static final String JSON_PROPERTY_DEPLOYED_DECISION_REQUIREMENTS_DEFINITIONS = "deployedDecisionRequirementsDefinitions";
+  public static final String SERIALIZED_NAME_DEPLOYED_DECISION_REQUIREMENTS_DEFINITIONS = "deployedDecisionRequirementsDefinitions";
+  @SerializedName(SERIALIZED_NAME_DEPLOYED_DECISION_REQUIREMENTS_DEFINITIONS)
   private Map<String, DecisionRequirementsDefinitionDto> deployedDecisionRequirementsDefinitions = null;
 
-  public static final String JSON_PROPERTY_DEPLOYED_CASE_DEFINITIONS = "deployedCaseDefinitions";
+  public static final String SERIALIZED_NAME_DEPLOYED_CASE_DEFINITIONS = "deployedCaseDefinitions";
+  @SerializedName(SERIALIZED_NAME_DEPLOYED_CASE_DEFINITIONS)
   private Map<String, CaseDefinitionDto> deployedCaseDefinitions = null;
 
-  public static final String JSON_PROPERTY_ID = "id";
+  public static final String SERIALIZED_NAME_ID = "id";
+  @SerializedName(SERIALIZED_NAME_ID)
   private String id;
 
-  public static final String JSON_PROPERTY_TENANT_ID = "tenantId";
+  public static final String SERIALIZED_NAME_TENANT_ID = "tenantId";
+  @SerializedName(SERIALIZED_NAME_TENANT_ID)
   private String tenantId;
 
-  public static final String JSON_PROPERTY_DEPLOYMENT_TIME = "deploymentTime";
+  public static final String SERIALIZED_NAME_DEPLOYMENT_TIME = "deploymentTime";
+  @SerializedName(SERIALIZED_NAME_DEPLOYMENT_TIME)
   private OffsetDateTime deploymentTime;
 
-  public static final String JSON_PROPERTY_SOURCE = "source";
+  public static final String SERIALIZED_NAME_SOURCE = "source";
+  @SerializedName(SERIALIZED_NAME_SOURCE)
   private String source;
 
-  public static final String JSON_PROPERTY_NAME = "name";
+  public static final String SERIALIZED_NAME_NAME = "name";
+  @SerializedName(SERIALIZED_NAME_NAME)
   private String name;
 
-  public static final String JSON_PROPERTY_LINKS = "links";
+  public static final String SERIALIZED_NAME_LINKS = "links";
+  @SerializedName(SERIALIZED_NAME_LINKS)
   private List<AtomLink> links = null;
 
 
   public DeploymentWithDefinitionsDto deployedProcessDefinitions(Map<String, ProcessDefinitionDto> deployedProcessDefinitions) {
+    
     this.deployedProcessDefinitions = deployedProcessDefinitions;
     return this;
   }
@@ -107,8 +102,6 @@ public class DeploymentWithDefinitionsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON Object containing a property for each of the process definitions, which are successfully deployed with that deployment. The key is the process definition id, the value is a JSON Object corresponding to the process definition.")
-  @JsonProperty(JSON_PROPERTY_DEPLOYED_PROCESS_DEFINITIONS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Map<String, ProcessDefinitionDto> getDeployedProcessDefinitions() {
     return deployedProcessDefinitions;
@@ -121,6 +114,7 @@ public class DeploymentWithDefinitionsDto {
 
 
   public DeploymentWithDefinitionsDto deployedDecisionDefinitions(Map<String, DecisionDefinitionDto> deployedDecisionDefinitions) {
+    
     this.deployedDecisionDefinitions = deployedDecisionDefinitions;
     return this;
   }
@@ -139,8 +133,6 @@ public class DeploymentWithDefinitionsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON Object containing a property for each of the decision definitions, which are successfully deployed with that deployment. The key is the decision definition id, the value is a JSON Object corresponding to the decision definition.")
-  @JsonProperty(JSON_PROPERTY_DEPLOYED_DECISION_DEFINITIONS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Map<String, DecisionDefinitionDto> getDeployedDecisionDefinitions() {
     return deployedDecisionDefinitions;
@@ -153,6 +145,7 @@ public class DeploymentWithDefinitionsDto {
 
 
   public DeploymentWithDefinitionsDto deployedDecisionRequirementsDefinitions(Map<String, DecisionRequirementsDefinitionDto> deployedDecisionRequirementsDefinitions) {
+    
     this.deployedDecisionRequirementsDefinitions = deployedDecisionRequirementsDefinitions;
     return this;
   }
@@ -171,8 +164,6 @@ public class DeploymentWithDefinitionsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON Object containing a property for each of the decision requirements definitions, which are successfully deployed with that deployment. The key is the decision requirements definition id, the value is a JSON Object corresponding to the decision requirements definition.")
-  @JsonProperty(JSON_PROPERTY_DEPLOYED_DECISION_REQUIREMENTS_DEFINITIONS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Map<String, DecisionRequirementsDefinitionDto> getDeployedDecisionRequirementsDefinitions() {
     return deployedDecisionRequirementsDefinitions;
@@ -185,6 +176,7 @@ public class DeploymentWithDefinitionsDto {
 
 
   public DeploymentWithDefinitionsDto deployedCaseDefinitions(Map<String, CaseDefinitionDto> deployedCaseDefinitions) {
+    
     this.deployedCaseDefinitions = deployedCaseDefinitions;
     return this;
   }
@@ -203,8 +195,6 @@ public class DeploymentWithDefinitionsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON Object containing a property for each of the case definitions, which are successfully deployed with that deployment. The key is the case definition id, the value is a JSON Object corresponding to the case definition.")
-  @JsonProperty(JSON_PROPERTY_DEPLOYED_CASE_DEFINITIONS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Map<String, CaseDefinitionDto> getDeployedCaseDefinitions() {
     return deployedCaseDefinitions;
@@ -217,6 +207,7 @@ public class DeploymentWithDefinitionsDto {
 
 
   public DeploymentWithDefinitionsDto id(String id) {
+    
     this.id = id;
     return this;
   }
@@ -227,8 +218,6 @@ public class DeploymentWithDefinitionsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the deployment.")
-  @JsonProperty(JSON_PROPERTY_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getId() {
     return id;
@@ -241,6 +230,7 @@ public class DeploymentWithDefinitionsDto {
 
 
   public DeploymentWithDefinitionsDto tenantId(String tenantId) {
+    
     this.tenantId = tenantId;
     return this;
   }
@@ -251,8 +241,6 @@ public class DeploymentWithDefinitionsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The tenant id of the deployment.")
-  @JsonProperty(JSON_PROPERTY_TENANT_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getTenantId() {
     return tenantId;
@@ -265,6 +253,7 @@ public class DeploymentWithDefinitionsDto {
 
 
   public DeploymentWithDefinitionsDto deploymentTime(OffsetDateTime deploymentTime) {
+    
     this.deploymentTime = deploymentTime;
     return this;
   }
@@ -275,8 +264,6 @@ public class DeploymentWithDefinitionsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The time when the deployment was created.")
-  @JsonProperty(JSON_PROPERTY_DEPLOYMENT_TIME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public OffsetDateTime getDeploymentTime() {
     return deploymentTime;
@@ -289,6 +276,7 @@ public class DeploymentWithDefinitionsDto {
 
 
   public DeploymentWithDefinitionsDto source(String source) {
+    
     this.source = source;
     return this;
   }
@@ -299,8 +287,6 @@ public class DeploymentWithDefinitionsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The source of the deployment.")
-  @JsonProperty(JSON_PROPERTY_SOURCE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getSource() {
     return source;
@@ -313,6 +299,7 @@ public class DeploymentWithDefinitionsDto {
 
 
   public DeploymentWithDefinitionsDto name(String name) {
+    
     this.name = name;
     return this;
   }
@@ -323,8 +310,6 @@ public class DeploymentWithDefinitionsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The name of the deployment.")
-  @JsonProperty(JSON_PROPERTY_NAME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getName() {
     return name;
@@ -337,6 +322,7 @@ public class DeploymentWithDefinitionsDto {
 
 
   public DeploymentWithDefinitionsDto links(List<AtomLink> links) {
+    
     this.links = links;
     return this;
   }
@@ -355,8 +341,6 @@ public class DeploymentWithDefinitionsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The links associated to this resource, with `method`, `href` and `rel`.")
-  @JsonProperty(JSON_PROPERTY_LINKS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<AtomLink> getLinks() {
     return links;
@@ -368,9 +352,6 @@ public class DeploymentWithDefinitionsDto {
   }
 
 
-  /**
-   * Return true if this DeploymentWithDefinitionsDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

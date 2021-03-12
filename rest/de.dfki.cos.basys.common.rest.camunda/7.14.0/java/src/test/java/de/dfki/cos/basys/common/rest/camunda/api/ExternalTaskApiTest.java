@@ -13,8 +13,7 @@
 
 package de.dfki.cos.basys.common.rest.camunda.api;
 
-import de.dfki.cos.basys.common.rest.camunda.*;
-import de.dfki.cos.basys.common.rest.camunda.auth.*;
+import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.dto.BatchDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.CompleteExternalTaskDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.CountResultDto;
@@ -30,10 +29,8 @@ import org.threeten.bp.OffsetDateTime;
 import de.dfki.cos.basys.common.rest.camunda.dto.PriorityDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.RetriesDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.SetRetriesForExternalTasksDto;
-import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
-
+import org.junit.Ignore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,10 +40,12 @@ import java.util.Map;
 /**
  * API tests for ExternalTaskApi
  */
+@Ignore
 public class ExternalTaskApiTest {
 
     private final ExternalTaskApi api = new ExternalTaskApi();
 
+    
     /**
      * 
      *
@@ -57,12 +56,13 @@ public class ExternalTaskApiTest {
      */
     @Test
     public void completeExternalTaskResourceTest() throws ApiException {
-        //String id = null;
-        //CompleteExternalTaskDto completeExternalTaskDto = null;
-        //api.completeExternalTaskResource(id, completeExternalTaskDto);
+        String id = null;
+        CompleteExternalTaskDto completeExternalTaskDto = null;
+        api.completeExternalTaskResource(id, completeExternalTaskDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -73,12 +73,13 @@ public class ExternalTaskApiTest {
      */
     @Test
     public void extendLockTest() throws ApiException {
-        //String id = null;
-        //ExtendLockOnExternalTaskDto extendLockOnExternalTaskDto = null;
-        //api.extendLock(id, extendLockOnExternalTaskDto);
+        String id = null;
+        ExtendLockOnExternalTaskDto extendLockOnExternalTaskDto = null;
+        api.extendLock(id, extendLockOnExternalTaskDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -89,11 +90,12 @@ public class ExternalTaskApiTest {
      */
     @Test
     public void fetchAndLockTest() throws ApiException {
-        //FetchExternalTasksDto fetchExternalTasksDto = null;
-        //List<LockedExternalTaskDto> response = api.fetchAndLock(fetchExternalTasksDto);
+        FetchExternalTasksDto fetchExternalTasksDto = null;
+        List<LockedExternalTaskDto> response = api.fetchAndLock(fetchExternalTasksDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -104,11 +106,12 @@ public class ExternalTaskApiTest {
      */
     @Test
     public void getExternalTaskTest() throws ApiException {
-        //String id = null;
-        //ExternalTaskDto response = api.getExternalTask(id);
+        String id = null;
+        ExternalTaskDto response = api.getExternalTask(id);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -119,11 +122,12 @@ public class ExternalTaskApiTest {
      */
     @Test
     public void getExternalTaskErrorDetailsTest() throws ApiException {
-        //String id = null;
-        //String response = api.getExternalTaskErrorDetails(id);
+        String id = null;
+        String response = api.getExternalTaskErrorDetails(id);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -134,35 +138,36 @@ public class ExternalTaskApiTest {
      */
     @Test
     public void getExternalTasksTest() throws ApiException {
-        //String externalTaskId = null;
-        //String externalTaskIdIn = null;
-        //String topicName = null;
-        //String workerId = null;
-        //Boolean locked = null;
-        //Boolean notLocked = null;
-        //Boolean withRetriesLeft = null;
-        //Boolean noRetriesLeft = null;
-        //OffsetDateTime lockExpirationAfter = null;
-        //OffsetDateTime lockExpirationBefore = null;
-        //String activityId = null;
-        //String activityIdIn = null;
-        //String executionId = null;
-        //String processInstanceId = null;
-        //String processInstanceIdIn = null;
-        //String processDefinitionId = null;
-        //String tenantIdIn = null;
-        //Boolean active = null;
-        //Boolean suspended = null;
-        //Long priorityHigherThanOrEquals = null;
-        //Long priorityLowerThanOrEquals = null;
-        //String sortBy = null;
-        //String sortOrder = null;
-        //Integer firstResult = null;
-        //Integer maxResults = null;
-        //List<ExternalTaskDto> response = api.getExternalTasks(externalTaskId, externalTaskIdIn, topicName, workerId, locked, notLocked, withRetriesLeft, noRetriesLeft, lockExpirationAfter, lockExpirationBefore, activityId, activityIdIn, executionId, processInstanceId, processInstanceIdIn, processDefinitionId, tenantIdIn, active, suspended, priorityHigherThanOrEquals, priorityLowerThanOrEquals, sortBy, sortOrder, firstResult, maxResults);
+        String externalTaskId = null;
+        String externalTaskIdIn = null;
+        String topicName = null;
+        String workerId = null;
+        Boolean locked = null;
+        Boolean notLocked = null;
+        Boolean withRetriesLeft = null;
+        Boolean noRetriesLeft = null;
+        OffsetDateTime lockExpirationAfter = null;
+        OffsetDateTime lockExpirationBefore = null;
+        String activityId = null;
+        String activityIdIn = null;
+        String executionId = null;
+        String processInstanceId = null;
+        String processInstanceIdIn = null;
+        String processDefinitionId = null;
+        String tenantIdIn = null;
+        Boolean active = null;
+        Boolean suspended = null;
+        Long priorityHigherThanOrEquals = null;
+        Long priorityLowerThanOrEquals = null;
+        String sortBy = null;
+        String sortOrder = null;
+        Integer firstResult = null;
+        Integer maxResults = null;
+        List<ExternalTaskDto> response = api.getExternalTasks(externalTaskId, externalTaskIdIn, topicName, workerId, locked, notLocked, withRetriesLeft, noRetriesLeft, lockExpirationAfter, lockExpirationBefore, activityId, activityIdIn, executionId, processInstanceId, processInstanceIdIn, processDefinitionId, tenantIdIn, active, suspended, priorityHigherThanOrEquals, priorityLowerThanOrEquals, sortBy, sortOrder, firstResult, maxResults);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -173,31 +178,32 @@ public class ExternalTaskApiTest {
      */
     @Test
     public void getExternalTasksCountTest() throws ApiException {
-        //String externalTaskId = null;
-        //String externalTaskIdIn = null;
-        //String topicName = null;
-        //String workerId = null;
-        //Boolean locked = null;
-        //Boolean notLocked = null;
-        //Boolean withRetriesLeft = null;
-        //Boolean noRetriesLeft = null;
-        //OffsetDateTime lockExpirationAfter = null;
-        //OffsetDateTime lockExpirationBefore = null;
-        //String activityId = null;
-        //String activityIdIn = null;
-        //String executionId = null;
-        //String processInstanceId = null;
-        //String processInstanceIdIn = null;
-        //String processDefinitionId = null;
-        //String tenantIdIn = null;
-        //Boolean active = null;
-        //Boolean suspended = null;
-        //Long priorityHigherThanOrEquals = null;
-        //Long priorityLowerThanOrEquals = null;
-        //CountResultDto response = api.getExternalTasksCount(externalTaskId, externalTaskIdIn, topicName, workerId, locked, notLocked, withRetriesLeft, noRetriesLeft, lockExpirationAfter, lockExpirationBefore, activityId, activityIdIn, executionId, processInstanceId, processInstanceIdIn, processDefinitionId, tenantIdIn, active, suspended, priorityHigherThanOrEquals, priorityLowerThanOrEquals);
+        String externalTaskId = null;
+        String externalTaskIdIn = null;
+        String topicName = null;
+        String workerId = null;
+        Boolean locked = null;
+        Boolean notLocked = null;
+        Boolean withRetriesLeft = null;
+        Boolean noRetriesLeft = null;
+        OffsetDateTime lockExpirationAfter = null;
+        OffsetDateTime lockExpirationBefore = null;
+        String activityId = null;
+        String activityIdIn = null;
+        String executionId = null;
+        String processInstanceId = null;
+        String processInstanceIdIn = null;
+        String processDefinitionId = null;
+        String tenantIdIn = null;
+        Boolean active = null;
+        Boolean suspended = null;
+        Long priorityHigherThanOrEquals = null;
+        Long priorityLowerThanOrEquals = null;
+        CountResultDto response = api.getExternalTasksCount(externalTaskId, externalTaskIdIn, topicName, workerId, locked, notLocked, withRetriesLeft, noRetriesLeft, lockExpirationAfter, lockExpirationBefore, activityId, activityIdIn, executionId, processInstanceId, processInstanceIdIn, processDefinitionId, tenantIdIn, active, suspended, priorityHigherThanOrEquals, priorityLowerThanOrEquals);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -208,13 +214,14 @@ public class ExternalTaskApiTest {
      */
     @Test
     public void getTopicNamesTest() throws ApiException {
-        //Boolean withLockedTasks = null;
-        //Boolean withUnlockedTasks = null;
-        //Boolean withRetriesLeft = null;
-        //List<String> response = api.getTopicNames(withLockedTasks, withUnlockedTasks, withRetriesLeft);
+        Boolean withLockedTasks = null;
+        Boolean withUnlockedTasks = null;
+        Boolean withRetriesLeft = null;
+        List<String> response = api.getTopicNames(withLockedTasks, withUnlockedTasks, withRetriesLeft);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -225,12 +232,13 @@ public class ExternalTaskApiTest {
      */
     @Test
     public void handleExternalTaskBpmnErrorTest() throws ApiException {
-        //String id = null;
-        //ExternalTaskBpmnError externalTaskBpmnError = null;
-        //api.handleExternalTaskBpmnError(id, externalTaskBpmnError);
+        String id = null;
+        ExternalTaskBpmnError externalTaskBpmnError = null;
+        api.handleExternalTaskBpmnError(id, externalTaskBpmnError);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -241,12 +249,13 @@ public class ExternalTaskApiTest {
      */
     @Test
     public void handleFailureTest() throws ApiException {
-        //String id = null;
-        //ExternalTaskFailureDto externalTaskFailureDto = null;
-        //api.handleFailure(id, externalTaskFailureDto);
+        String id = null;
+        ExternalTaskFailureDto externalTaskFailureDto = null;
+        api.handleFailure(id, externalTaskFailureDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -257,13 +266,14 @@ public class ExternalTaskApiTest {
      */
     @Test
     public void queryExternalTasksTest() throws ApiException {
-        //Integer firstResult = null;
-        //Integer maxResults = null;
-        //ExternalTaskQueryDto externalTaskQueryDto = null;
-        //List<ExternalTaskDto> response = api.queryExternalTasks(firstResult, maxResults, externalTaskQueryDto);
+        Integer firstResult = null;
+        Integer maxResults = null;
+        ExternalTaskQueryDto externalTaskQueryDto = null;
+        List<ExternalTaskDto> response = api.queryExternalTasks(firstResult, maxResults, externalTaskQueryDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -274,11 +284,12 @@ public class ExternalTaskApiTest {
      */
     @Test
     public void queryExternalTasksCountTest() throws ApiException {
-        //ExternalTaskQueryDto externalTaskQueryDto = null;
-        //CountResultDto response = api.queryExternalTasksCount(externalTaskQueryDto);
+        ExternalTaskQueryDto externalTaskQueryDto = null;
+        CountResultDto response = api.queryExternalTasksCount(externalTaskQueryDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -289,12 +300,13 @@ public class ExternalTaskApiTest {
      */
     @Test
     public void setExternalTaskResourcePriorityTest() throws ApiException {
-        //String id = null;
-        //PriorityDto priorityDto = null;
-        //api.setExternalTaskResourcePriority(id, priorityDto);
+        String id = null;
+        PriorityDto priorityDto = null;
+        api.setExternalTaskResourcePriority(id, priorityDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -305,12 +317,13 @@ public class ExternalTaskApiTest {
      */
     @Test
     public void setExternalTaskResourceRetriesTest() throws ApiException {
-        //String id = null;
-        //RetriesDto retriesDto = null;
-        //api.setExternalTaskResourceRetries(id, retriesDto);
+        String id = null;
+        RetriesDto retriesDto = null;
+        api.setExternalTaskResourceRetries(id, retriesDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -321,11 +334,12 @@ public class ExternalTaskApiTest {
      */
     @Test
     public void setExternalTaskRetriesTest() throws ApiException {
-        //SetRetriesForExternalTasksDto setRetriesForExternalTasksDto = null;
-        //api.setExternalTaskRetries(setRetriesForExternalTasksDto);
+        SetRetriesForExternalTasksDto setRetriesForExternalTasksDto = null;
+        api.setExternalTaskRetries(setRetriesForExternalTasksDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -336,11 +350,12 @@ public class ExternalTaskApiTest {
      */
     @Test
     public void setExternalTaskRetriesAsyncOperationTest() throws ApiException {
-        //SetRetriesForExternalTasksDto setRetriesForExternalTasksDto = null;
-        //BatchDto response = api.setExternalTaskRetriesAsyncOperation(setRetriesForExternalTasksDto);
+        SetRetriesForExternalTasksDto setRetriesForExternalTasksDto = null;
+        BatchDto response = api.setExternalTaskRetriesAsyncOperation(setRetriesForExternalTasksDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -351,9 +366,10 @@ public class ExternalTaskApiTest {
      */
     @Test
     public void unlockTest() throws ApiException {
-        //String id = null;
-        //api.unlock(id);
+        String id = null;
+        api.unlock(id);
+
         // TODO: test validations
     }
-
+    
 }

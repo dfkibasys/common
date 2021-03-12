@@ -13,15 +13,12 @@
 
 package de.dfki.cos.basys.common.rest.camunda.api;
 
-import de.dfki.cos.basys.common.rest.camunda.*;
-import de.dfki.cos.basys.common.rest.camunda.auth.*;
+import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.dto.CorrelationMessageDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.ExceptionDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.MessageCorrelationResultWithVariableDto;
-import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
-
+import org.junit.Ignore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,10 +28,12 @@ import java.util.Map;
 /**
  * API tests for MessageApi
  */
+@Ignore
 public class MessageApiTest {
 
     private final MessageApi api = new MessageApi();
 
+    
     /**
      * 
      *
@@ -45,9 +44,10 @@ public class MessageApiTest {
      */
     @Test
     public void deliverMessageTest() throws ApiException {
-        //CorrelationMessageDto correlationMessageDto = null;
-        //List<MessageCorrelationResultWithVariableDto> response = api.deliverMessage(correlationMessageDto);
+        CorrelationMessageDto correlationMessageDto = null;
+        List<MessageCorrelationResultWithVariableDto> response = api.deliverMessage(correlationMessageDto);
+
         // TODO: test validations
     }
-
+    
 }

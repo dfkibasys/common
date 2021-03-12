@@ -15,58 +15,53 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import de.dfki.cos.basys.common.rest.camunda.dto.AtomLink;
 import de.dfki.cos.basys.common.rest.camunda.dto.DeploymentDtoAllOf;
 import de.dfki.cos.basys.common.rest.camunda.dto.LinkableDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.threeten.bp.OffsetDateTime;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
 
 /**
  * DeploymentDto
  */
-@JsonPropertyOrder({
-  DeploymentDto.JSON_PROPERTY_ID,
-  DeploymentDto.JSON_PROPERTY_TENANT_ID,
-  DeploymentDto.JSON_PROPERTY_DEPLOYMENT_TIME,
-  DeploymentDto.JSON_PROPERTY_SOURCE,
-  DeploymentDto.JSON_PROPERTY_NAME,
-  DeploymentDto.JSON_PROPERTY_LINKS
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class DeploymentDto {
-  public static final String JSON_PROPERTY_ID = "id";
+  public static final String SERIALIZED_NAME_ID = "id";
+  @SerializedName(SERIALIZED_NAME_ID)
   private String id;
 
-  public static final String JSON_PROPERTY_TENANT_ID = "tenantId";
+  public static final String SERIALIZED_NAME_TENANT_ID = "tenantId";
+  @SerializedName(SERIALIZED_NAME_TENANT_ID)
   private String tenantId;
 
-  public static final String JSON_PROPERTY_DEPLOYMENT_TIME = "deploymentTime";
+  public static final String SERIALIZED_NAME_DEPLOYMENT_TIME = "deploymentTime";
+  @SerializedName(SERIALIZED_NAME_DEPLOYMENT_TIME)
   private OffsetDateTime deploymentTime;
 
-  public static final String JSON_PROPERTY_SOURCE = "source";
+  public static final String SERIALIZED_NAME_SOURCE = "source";
+  @SerializedName(SERIALIZED_NAME_SOURCE)
   private String source;
 
-  public static final String JSON_PROPERTY_NAME = "name";
+  public static final String SERIALIZED_NAME_NAME = "name";
+  @SerializedName(SERIALIZED_NAME_NAME)
   private String name;
 
-  public static final String JSON_PROPERTY_LINKS = "links";
+  public static final String SERIALIZED_NAME_LINKS = "links";
+  @SerializedName(SERIALIZED_NAME_LINKS)
   private List<AtomLink> links = null;
 
 
   public DeploymentDto id(String id) {
+    
     this.id = id;
     return this;
   }
@@ -77,8 +72,6 @@ public class DeploymentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the deployment.")
-  @JsonProperty(JSON_PROPERTY_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getId() {
     return id;
@@ -91,6 +84,7 @@ public class DeploymentDto {
 
 
   public DeploymentDto tenantId(String tenantId) {
+    
     this.tenantId = tenantId;
     return this;
   }
@@ -101,8 +95,6 @@ public class DeploymentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The tenant id of the deployment.")
-  @JsonProperty(JSON_PROPERTY_TENANT_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getTenantId() {
     return tenantId;
@@ -115,6 +107,7 @@ public class DeploymentDto {
 
 
   public DeploymentDto deploymentTime(OffsetDateTime deploymentTime) {
+    
     this.deploymentTime = deploymentTime;
     return this;
   }
@@ -125,8 +118,6 @@ public class DeploymentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The time when the deployment was created.")
-  @JsonProperty(JSON_PROPERTY_DEPLOYMENT_TIME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public OffsetDateTime getDeploymentTime() {
     return deploymentTime;
@@ -139,6 +130,7 @@ public class DeploymentDto {
 
 
   public DeploymentDto source(String source) {
+    
     this.source = source;
     return this;
   }
@@ -149,8 +141,6 @@ public class DeploymentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The source of the deployment.")
-  @JsonProperty(JSON_PROPERTY_SOURCE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getSource() {
     return source;
@@ -163,6 +153,7 @@ public class DeploymentDto {
 
 
   public DeploymentDto name(String name) {
+    
     this.name = name;
     return this;
   }
@@ -173,8 +164,6 @@ public class DeploymentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The name of the deployment.")
-  @JsonProperty(JSON_PROPERTY_NAME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getName() {
     return name;
@@ -187,6 +176,7 @@ public class DeploymentDto {
 
 
   public DeploymentDto links(List<AtomLink> links) {
+    
     this.links = links;
     return this;
   }
@@ -205,8 +195,6 @@ public class DeploymentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The links associated to this resource, with `method`, `href` and `rel`.")
-  @JsonProperty(JSON_PROPERTY_LINKS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<AtomLink> getLinks() {
     return links;
@@ -218,9 +206,6 @@ public class DeploymentDto {
   }
 
 
-  /**
-   * Return true if this DeploymentDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

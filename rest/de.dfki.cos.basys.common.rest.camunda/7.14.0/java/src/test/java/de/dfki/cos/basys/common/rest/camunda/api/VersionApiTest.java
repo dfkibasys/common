@@ -13,13 +13,10 @@
 
 package de.dfki.cos.basys.common.rest.camunda.api;
 
-import de.dfki.cos.basys.common.rest.camunda.*;
-import de.dfki.cos.basys.common.rest.camunda.auth.*;
+import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.dto.VersionDto;
-import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
-
+import org.junit.Ignore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,10 +26,12 @@ import java.util.Map;
 /**
  * API tests for VersionApi
  */
+@Ignore
 public class VersionApiTest {
 
     private final VersionApi api = new VersionApi();
 
+    
     /**
      * 
      *
@@ -43,8 +42,9 @@ public class VersionApiTest {
      */
     @Test
     public void getRestAPIVersionTest() throws ApiException {
-        //VersionDto response = api.getRestAPIVersion();
+        VersionDto response = api.getRestAPIVersion();
+
         // TODO: test validations
     }
-
+    
 }

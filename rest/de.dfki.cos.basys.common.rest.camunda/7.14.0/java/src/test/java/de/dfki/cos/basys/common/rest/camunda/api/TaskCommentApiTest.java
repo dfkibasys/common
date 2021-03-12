@@ -13,15 +13,12 @@
 
 package de.dfki.cos.basys.common.rest.camunda.api;
 
-import de.dfki.cos.basys.common.rest.camunda.*;
-import de.dfki.cos.basys.common.rest.camunda.auth.*;
+import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.dto.AuthorizationExceptionDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.CommentDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.ExceptionDto;
-import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
-
+import org.junit.Ignore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,10 +28,12 @@ import java.util.Map;
 /**
  * API tests for TaskCommentApi
  */
+@Ignore
 public class TaskCommentApiTest {
 
     private final TaskCommentApi api = new TaskCommentApi();
 
+    
     /**
      * 
      *
@@ -45,12 +44,13 @@ public class TaskCommentApiTest {
      */
     @Test
     public void createCommentTest() throws ApiException {
-        //String id = null;
-        //CommentDto commentDto = null;
-        //CommentDto response = api.createComment(id, commentDto);
+        String id = null;
+        CommentDto commentDto = null;
+        CommentDto response = api.createComment(id, commentDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -61,12 +61,13 @@ public class TaskCommentApiTest {
      */
     @Test
     public void getCommentTest() throws ApiException {
-        //String id = null;
-        //String commentId = null;
-        //CommentDto response = api.getComment(id, commentId);
+        String id = null;
+        String commentId = null;
+        CommentDto response = api.getComment(id, commentId);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -77,9 +78,10 @@ public class TaskCommentApiTest {
      */
     @Test
     public void getCommentsTest() throws ApiException {
-        //String id = null;
-        //List<CommentDto> response = api.getComments(id);
+        String id = null;
+        List<CommentDto> response = api.getComments(id);
+
         // TODO: test validations
     }
-
+    
 }

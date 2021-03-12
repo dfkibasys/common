@@ -15,41 +15,25 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import de.dfki.cos.basys.common.rest.camunda.dto.TriggerVariableValueDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
+import java.io.IOException;
 
 /**
  * ProcessInstanceModificationInstructionDto
  */
-@JsonPropertyOrder({
-  ProcessInstanceModificationInstructionDto.JSON_PROPERTY_TYPE,
-  ProcessInstanceModificationInstructionDto.JSON_PROPERTY_VARIABLES,
-  ProcessInstanceModificationInstructionDto.JSON_PROPERTY_ACTIVITY_ID,
-  ProcessInstanceModificationInstructionDto.JSON_PROPERTY_TRANSITION_ID,
-  ProcessInstanceModificationInstructionDto.JSON_PROPERTY_ACTIVITY_INSTANCE_ID,
-  ProcessInstanceModificationInstructionDto.JSON_PROPERTY_TRANSITION_INSTANCE_ID,
-  ProcessInstanceModificationInstructionDto.JSON_PROPERTY_ANCESTOR_ACTIVITY_INSTANCE_ID,
-  ProcessInstanceModificationInstructionDto.JSON_PROPERTY_CANCEL_CURRENT_ACTIVE_ACTIVITY_INSTANCES
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class ProcessInstanceModificationInstructionDto {
   /**
    * **Mandatory**. One of the following values: &#x60;cancel&#x60;, &#x60;startBeforeActivity&#x60;, &#x60;startAfterActivity&#x60;, &#x60;startTransition&#x60;.  * A cancel instruction requests cancellation of a single activity instance or all instances of one activity. * A startBeforeActivity instruction requests to enter a given activity. * A startAfterActivity instruction requests to execute the single outgoing sequence flow of a given activity. * A startTransition instruction requests to execute a specific sequence flow.
    */
+  @JsonAdapter(TypeEnum.Adapter.class)
   public enum TypeEnum {
     CANCEL("cancel"),
     
@@ -65,7 +49,6 @@ public class ProcessInstanceModificationInstructionDto {
       this.value = value;
     }
 
-    @JsonValue
     public String getValue() {
       return value;
     }
@@ -75,7 +58,6 @@ public class ProcessInstanceModificationInstructionDto {
       return String.valueOf(value);
     }
 
-    @JsonCreator
     public static TypeEnum fromValue(String value) {
       for (TypeEnum b : TypeEnum.values()) {
         if (b.value.equals(value)) {
@@ -84,34 +66,56 @@ public class ProcessInstanceModificationInstructionDto {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
+
+    public static class Adapter extends TypeAdapter<TypeEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final TypeEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public TypeEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return TypeEnum.fromValue(value);
+      }
+    }
   }
 
-  public static final String JSON_PROPERTY_TYPE = "type";
+  public static final String SERIALIZED_NAME_TYPE = "type";
+  @SerializedName(SERIALIZED_NAME_TYPE)
   private TypeEnum type;
 
-  public static final String JSON_PROPERTY_VARIABLES = "variables";
+  public static final String SERIALIZED_NAME_VARIABLES = "variables";
+  @SerializedName(SERIALIZED_NAME_VARIABLES)
   private TriggerVariableValueDto variables = null;
 
-  public static final String JSON_PROPERTY_ACTIVITY_ID = "activityId";
+  public static final String SERIALIZED_NAME_ACTIVITY_ID = "activityId";
+  @SerializedName(SERIALIZED_NAME_ACTIVITY_ID)
   private String activityId;
 
-  public static final String JSON_PROPERTY_TRANSITION_ID = "transitionId";
+  public static final String SERIALIZED_NAME_TRANSITION_ID = "transitionId";
+  @SerializedName(SERIALIZED_NAME_TRANSITION_ID)
   private String transitionId;
 
-  public static final String JSON_PROPERTY_ACTIVITY_INSTANCE_ID = "activityInstanceId";
+  public static final String SERIALIZED_NAME_ACTIVITY_INSTANCE_ID = "activityInstanceId";
+  @SerializedName(SERIALIZED_NAME_ACTIVITY_INSTANCE_ID)
   private String activityInstanceId;
 
-  public static final String JSON_PROPERTY_TRANSITION_INSTANCE_ID = "transitionInstanceId";
+  public static final String SERIALIZED_NAME_TRANSITION_INSTANCE_ID = "transitionInstanceId";
+  @SerializedName(SERIALIZED_NAME_TRANSITION_INSTANCE_ID)
   private String transitionInstanceId;
 
-  public static final String JSON_PROPERTY_ANCESTOR_ACTIVITY_INSTANCE_ID = "ancestorActivityInstanceId";
+  public static final String SERIALIZED_NAME_ANCESTOR_ACTIVITY_INSTANCE_ID = "ancestorActivityInstanceId";
+  @SerializedName(SERIALIZED_NAME_ANCESTOR_ACTIVITY_INSTANCE_ID)
   private String ancestorActivityInstanceId;
 
-  public static final String JSON_PROPERTY_CANCEL_CURRENT_ACTIVE_ACTIVITY_INSTANCES = "cancelCurrentActiveActivityInstances";
-  private JsonNullable<Boolean> cancelCurrentActiveActivityInstances = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_CANCEL_CURRENT_ACTIVE_ACTIVITY_INSTANCES = "cancelCurrentActiveActivityInstances";
+  @SerializedName(SERIALIZED_NAME_CANCEL_CURRENT_ACTIVE_ACTIVITY_INSTANCES)
+  private Boolean cancelCurrentActiveActivityInstances;
 
 
   public ProcessInstanceModificationInstructionDto type(TypeEnum type) {
+    
     this.type = type;
     return this;
   }
@@ -121,8 +125,6 @@ public class ProcessInstanceModificationInstructionDto {
    * @return type
   **/
   @ApiModelProperty(required = true, value = "**Mandatory**. One of the following values: `cancel`, `startBeforeActivity`, `startAfterActivity`, `startTransition`.  * A cancel instruction requests cancellation of a single activity instance or all instances of one activity. * A startBeforeActivity instruction requests to enter a given activity. * A startAfterActivity instruction requests to execute the single outgoing sequence flow of a given activity. * A startTransition instruction requests to execute a specific sequence flow.")
-  @JsonProperty(JSON_PROPERTY_TYPE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public TypeEnum getType() {
     return type;
@@ -135,6 +137,7 @@ public class ProcessInstanceModificationInstructionDto {
 
 
   public ProcessInstanceModificationInstructionDto variables(TriggerVariableValueDto variables) {
+    
     this.variables = variables;
     return this;
   }
@@ -145,8 +148,6 @@ public class ProcessInstanceModificationInstructionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
-  @JsonProperty(JSON_PROPERTY_VARIABLES)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public TriggerVariableValueDto getVariables() {
     return variables;
@@ -159,6 +160,7 @@ public class ProcessInstanceModificationInstructionDto {
 
 
   public ProcessInstanceModificationInstructionDto activityId(String activityId) {
+    
     this.activityId = activityId;
     return this;
   }
@@ -169,8 +171,6 @@ public class ProcessInstanceModificationInstructionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Can be used with instructions of types `startTransition`. Specifies the sequence flow to start.")
-  @JsonProperty(JSON_PROPERTY_ACTIVITY_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getActivityId() {
     return activityId;
@@ -183,6 +183,7 @@ public class ProcessInstanceModificationInstructionDto {
 
 
   public ProcessInstanceModificationInstructionDto transitionId(String transitionId) {
+    
     this.transitionId = transitionId;
     return this;
   }
@@ -193,8 +194,6 @@ public class ProcessInstanceModificationInstructionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Can be used with instructions of types `startTransition`. Specifies the sequence flow to start.")
-  @JsonProperty(JSON_PROPERTY_TRANSITION_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getTransitionId() {
     return transitionId;
@@ -207,6 +206,7 @@ public class ProcessInstanceModificationInstructionDto {
 
 
   public ProcessInstanceModificationInstructionDto activityInstanceId(String activityInstanceId) {
+    
     this.activityInstanceId = activityInstanceId;
     return this;
   }
@@ -217,8 +217,6 @@ public class ProcessInstanceModificationInstructionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Can be used with instructions of type `cancel`. Specifies the activity instance to cancel. Valid values are the activity instance IDs supplied by the [Get Activity Instance request](https://docs.camunda.org/manual/7.14/reference/rest/process-instance/get-activity-instances/).")
-  @JsonProperty(JSON_PROPERTY_ACTIVITY_INSTANCE_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getActivityInstanceId() {
     return activityInstanceId;
@@ -231,6 +229,7 @@ public class ProcessInstanceModificationInstructionDto {
 
 
   public ProcessInstanceModificationInstructionDto transitionInstanceId(String transitionInstanceId) {
+    
     this.transitionInstanceId = transitionInstanceId;
     return this;
   }
@@ -241,8 +240,6 @@ public class ProcessInstanceModificationInstructionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Can be used with instructions of type `cancel`. Specifies the transition instance to cancel. Valid values are the transition instance IDs supplied by the [Get Activity Instance request](https://docs.camunda.org/manual/7.14/reference/rest/process-instance/get-activity-instances/).")
-  @JsonProperty(JSON_PROPERTY_TRANSITION_INSTANCE_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getTransitionInstanceId() {
     return transitionInstanceId;
@@ -255,6 +252,7 @@ public class ProcessInstanceModificationInstructionDto {
 
 
   public ProcessInstanceModificationInstructionDto ancestorActivityInstanceId(String ancestorActivityInstanceId) {
+    
     this.ancestorActivityInstanceId = ancestorActivityInstanceId;
     return this;
   }
@@ -265,8 +263,6 @@ public class ProcessInstanceModificationInstructionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Can be used with instructions of type `startBeforeActivity`, `startAfterActivity`, and `startTransition`. Valid values are the activity instance IDs supplied by the Get Activity Instance request. If there are multiple parent activity instances of the targeted activity, this specifies the ancestor scope in which hierarchy the activity/transition is to be instantiated.  Example: When there are two instances of a subprocess and an activity contained in the subprocess is to be started, this parameter allows to specifiy under which subprocess instance the activity should be started.")
-  @JsonProperty(JSON_PROPERTY_ANCESTOR_ACTIVITY_INSTANCE_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getAncestorActivityInstanceId() {
     return ancestorActivityInstanceId;
@@ -279,7 +275,8 @@ public class ProcessInstanceModificationInstructionDto {
 
 
   public ProcessInstanceModificationInstructionDto cancelCurrentActiveActivityInstances(Boolean cancelCurrentActiveActivityInstances) {
-    this.cancelCurrentActiveActivityInstances = JsonNullable.<Boolean>of(cancelCurrentActiveActivityInstances);
+    
+    this.cancelCurrentActiveActivityInstances = cancelCurrentActiveActivityInstances;
     return this;
   }
 
@@ -289,32 +286,17 @@ public class ProcessInstanceModificationInstructionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Can be used with instructions of type cancel. Prevents the deletion of new created activity instances.")
-  @JsonIgnore
 
   public Boolean getCancelCurrentActiveActivityInstances() {
-        return cancelCurrentActiveActivityInstances.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_CANCEL_CURRENT_ACTIVE_ACTIVITY_INSTANCES)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getCancelCurrentActiveActivityInstances_JsonNullable() {
     return cancelCurrentActiveActivityInstances;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CANCEL_CURRENT_ACTIVE_ACTIVITY_INSTANCES)
-  public void setCancelCurrentActiveActivityInstances_JsonNullable(JsonNullable<Boolean> cancelCurrentActiveActivityInstances) {
+
+
+  public void setCancelCurrentActiveActivityInstances(Boolean cancelCurrentActiveActivityInstances) {
     this.cancelCurrentActiveActivityInstances = cancelCurrentActiveActivityInstances;
   }
 
-  public void setCancelCurrentActiveActivityInstances(Boolean cancelCurrentActiveActivityInstances) {
-    this.cancelCurrentActiveActivityInstances = JsonNullable.<Boolean>of(cancelCurrentActiveActivityInstances);
-  }
 
-
-  /**
-   * Return true if this ProcessInstanceModificationInstructionDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

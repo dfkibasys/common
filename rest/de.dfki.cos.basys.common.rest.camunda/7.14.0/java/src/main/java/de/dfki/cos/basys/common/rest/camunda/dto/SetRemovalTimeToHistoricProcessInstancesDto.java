@@ -15,61 +15,53 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import de.dfki.cos.basys.common.rest.camunda.dto.AbstractSetRemovalTimeDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.HistoricProcessInstanceQueryDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.SetRemovalTimeToHistoricProcessInstancesDtoAllOf;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.threeten.bp.OffsetDateTime;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
 
 /**
  * SetRemovalTimeToHistoricProcessInstancesDto
  */
-@JsonPropertyOrder({
-  SetRemovalTimeToHistoricProcessInstancesDto.JSON_PROPERTY_HISTORIC_PROCESS_INSTANCE_IDS,
-  SetRemovalTimeToHistoricProcessInstancesDto.JSON_PROPERTY_HISTORIC_PROCESS_INSTANCE_QUERY,
-  SetRemovalTimeToHistoricProcessInstancesDto.JSON_PROPERTY_HIERARCHICAL,
-  SetRemovalTimeToHistoricProcessInstancesDto.JSON_PROPERTY_ABSOLUTE_REMOVAL_TIME,
-  SetRemovalTimeToHistoricProcessInstancesDto.JSON_PROPERTY_CLEARED_REMOVAL_TIME,
-  SetRemovalTimeToHistoricProcessInstancesDto.JSON_PROPERTY_CALCULATED_REMOVAL_TIME
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class SetRemovalTimeToHistoricProcessInstancesDto {
-  public static final String JSON_PROPERTY_HISTORIC_PROCESS_INSTANCE_IDS = "historicProcessInstanceIds";
+  public static final String SERIALIZED_NAME_HISTORIC_PROCESS_INSTANCE_IDS = "historicProcessInstanceIds";
+  @SerializedName(SERIALIZED_NAME_HISTORIC_PROCESS_INSTANCE_IDS)
   private List<String> historicProcessInstanceIds = null;
 
-  public static final String JSON_PROPERTY_HISTORIC_PROCESS_INSTANCE_QUERY = "historicProcessInstanceQuery";
+  public static final String SERIALIZED_NAME_HISTORIC_PROCESS_INSTANCE_QUERY = "historicProcessInstanceQuery";
+  @SerializedName(SERIALIZED_NAME_HISTORIC_PROCESS_INSTANCE_QUERY)
   private HistoricProcessInstanceQueryDto historicProcessInstanceQuery;
 
-  public static final String JSON_PROPERTY_HIERARCHICAL = "hierarchical";
-  private JsonNullable<Boolean> hierarchical = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_HIERARCHICAL = "hierarchical";
+  @SerializedName(SERIALIZED_NAME_HIERARCHICAL)
+  private Boolean hierarchical;
 
-  public static final String JSON_PROPERTY_ABSOLUTE_REMOVAL_TIME = "absoluteRemovalTime";
-  private JsonNullable<OffsetDateTime> absoluteRemovalTime = JsonNullable.<OffsetDateTime>undefined();
+  public static final String SERIALIZED_NAME_ABSOLUTE_REMOVAL_TIME = "absoluteRemovalTime";
+  @SerializedName(SERIALIZED_NAME_ABSOLUTE_REMOVAL_TIME)
+  private OffsetDateTime absoluteRemovalTime;
 
-  public static final String JSON_PROPERTY_CLEARED_REMOVAL_TIME = "clearedRemovalTime";
-  private JsonNullable<Boolean> clearedRemovalTime = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_CLEARED_REMOVAL_TIME = "clearedRemovalTime";
+  @SerializedName(SERIALIZED_NAME_CLEARED_REMOVAL_TIME)
+  private Boolean clearedRemovalTime;
 
-  public static final String JSON_PROPERTY_CALCULATED_REMOVAL_TIME = "calculatedRemovalTime";
-  private JsonNullable<Boolean> calculatedRemovalTime = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_CALCULATED_REMOVAL_TIME = "calculatedRemovalTime";
+  @SerializedName(SERIALIZED_NAME_CALCULATED_REMOVAL_TIME)
+  private Boolean calculatedRemovalTime;
 
 
   public SetRemovalTimeToHistoricProcessInstancesDto historicProcessInstanceIds(List<String> historicProcessInstanceIds) {
+    
     this.historicProcessInstanceIds = historicProcessInstanceIds;
     return this;
   }
@@ -88,8 +80,6 @@ public class SetRemovalTimeToHistoricProcessInstancesDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the process instance.")
-  @JsonProperty(JSON_PROPERTY_HISTORIC_PROCESS_INSTANCE_IDS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<String> getHistoricProcessInstanceIds() {
     return historicProcessInstanceIds;
@@ -102,6 +92,7 @@ public class SetRemovalTimeToHistoricProcessInstancesDto {
 
 
   public SetRemovalTimeToHistoricProcessInstancesDto historicProcessInstanceQuery(HistoricProcessInstanceQueryDto historicProcessInstanceQuery) {
+    
     this.historicProcessInstanceQuery = historicProcessInstanceQuery;
     return this;
   }
@@ -112,8 +103,6 @@ public class SetRemovalTimeToHistoricProcessInstancesDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
-  @JsonProperty(JSON_PROPERTY_HISTORIC_PROCESS_INSTANCE_QUERY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public HistoricProcessInstanceQueryDto getHistoricProcessInstanceQuery() {
     return historicProcessInstanceQuery;
@@ -126,7 +115,8 @@ public class SetRemovalTimeToHistoricProcessInstancesDto {
 
 
   public SetRemovalTimeToHistoricProcessInstancesDto hierarchical(Boolean hierarchical) {
-    this.hierarchical = JsonNullable.<Boolean>of(hierarchical);
+    
+    this.hierarchical = hierarchical;
     return this;
   }
 
@@ -136,31 +126,20 @@ public class SetRemovalTimeToHistoricProcessInstancesDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Sets the removal time to all historic process instances in the hierarchy. Value may only be `true`, as `false` is the default behavior.")
-  @JsonIgnore
 
   public Boolean getHierarchical() {
-        return hierarchical.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_HIERARCHICAL)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getHierarchical_JsonNullable() {
     return hierarchical;
   }
-  
-  @JsonProperty(JSON_PROPERTY_HIERARCHICAL)
-  public void setHierarchical_JsonNullable(JsonNullable<Boolean> hierarchical) {
-    this.hierarchical = hierarchical;
-  }
+
 
   public void setHierarchical(Boolean hierarchical) {
-    this.hierarchical = JsonNullable.<Boolean>of(hierarchical);
+    this.hierarchical = hierarchical;
   }
 
 
   public SetRemovalTimeToHistoricProcessInstancesDto absoluteRemovalTime(OffsetDateTime absoluteRemovalTime) {
-    this.absoluteRemovalTime = JsonNullable.<OffsetDateTime>of(absoluteRemovalTime);
+    
+    this.absoluteRemovalTime = absoluteRemovalTime;
     return this;
   }
 
@@ -170,31 +149,20 @@ public class SetRemovalTimeToHistoricProcessInstancesDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The date for which the instances shall be removed. Value may not be `null`.  **Note:** Cannot be set in conjunction with `clearedRemovalTime` or `calculatedRemovalTime`.")
-  @JsonIgnore
 
   public OffsetDateTime getAbsoluteRemovalTime() {
-        return absoluteRemovalTime.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_ABSOLUTE_REMOVAL_TIME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<OffsetDateTime> getAbsoluteRemovalTime_JsonNullable() {
     return absoluteRemovalTime;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ABSOLUTE_REMOVAL_TIME)
-  public void setAbsoluteRemovalTime_JsonNullable(JsonNullable<OffsetDateTime> absoluteRemovalTime) {
-    this.absoluteRemovalTime = absoluteRemovalTime;
-  }
+
 
   public void setAbsoluteRemovalTime(OffsetDateTime absoluteRemovalTime) {
-    this.absoluteRemovalTime = JsonNullable.<OffsetDateTime>of(absoluteRemovalTime);
+    this.absoluteRemovalTime = absoluteRemovalTime;
   }
 
 
   public SetRemovalTimeToHistoricProcessInstancesDto clearedRemovalTime(Boolean clearedRemovalTime) {
-    this.clearedRemovalTime = JsonNullable.<Boolean>of(clearedRemovalTime);
+    
+    this.clearedRemovalTime = clearedRemovalTime;
     return this;
   }
 
@@ -204,31 +172,20 @@ public class SetRemovalTimeToHistoricProcessInstancesDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Sets the removal time to `null`. Value may only be `true`, as `false` is the default behavior.  **Note:** Cannot be set in conjunction with `absoluteRemovalTime` or `calculatedRemovalTime`.")
-  @JsonIgnore
 
   public Boolean getClearedRemovalTime() {
-        return clearedRemovalTime.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_CLEARED_REMOVAL_TIME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getClearedRemovalTime_JsonNullable() {
     return clearedRemovalTime;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CLEARED_REMOVAL_TIME)
-  public void setClearedRemovalTime_JsonNullable(JsonNullable<Boolean> clearedRemovalTime) {
-    this.clearedRemovalTime = clearedRemovalTime;
-  }
+
 
   public void setClearedRemovalTime(Boolean clearedRemovalTime) {
-    this.clearedRemovalTime = JsonNullable.<Boolean>of(clearedRemovalTime);
+    this.clearedRemovalTime = clearedRemovalTime;
   }
 
 
   public SetRemovalTimeToHistoricProcessInstancesDto calculatedRemovalTime(Boolean calculatedRemovalTime) {
-    this.calculatedRemovalTime = JsonNullable.<Boolean>of(calculatedRemovalTime);
+    
+    this.calculatedRemovalTime = calculatedRemovalTime;
     return this;
   }
 
@@ -238,32 +195,17 @@ public class SetRemovalTimeToHistoricProcessInstancesDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The removal time is calculated based on the engine's configuration settings. Value may only be `true`, as `false` is the default behavior.  **Note:** Cannot be set in conjunction with `absoluteRemovalTime` or `clearedRemovalTime`.")
-  @JsonIgnore
 
   public Boolean getCalculatedRemovalTime() {
-        return calculatedRemovalTime.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_CALCULATED_REMOVAL_TIME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getCalculatedRemovalTime_JsonNullable() {
     return calculatedRemovalTime;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CALCULATED_REMOVAL_TIME)
-  public void setCalculatedRemovalTime_JsonNullable(JsonNullable<Boolean> calculatedRemovalTime) {
+
+
+  public void setCalculatedRemovalTime(Boolean calculatedRemovalTime) {
     this.calculatedRemovalTime = calculatedRemovalTime;
   }
 
-  public void setCalculatedRemovalTime(Boolean calculatedRemovalTime) {
-    this.calculatedRemovalTime = JsonNullable.<Boolean>of(calculatedRemovalTime);
-  }
 
-
-  /**
-   * Return true if this SetRemovalTimeToHistoricProcessInstancesDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

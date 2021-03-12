@@ -13,16 +13,13 @@
 
 package de.dfki.cos.basys.common.rest.camunda.api;
 
-import de.dfki.cos.basys.common.rest.camunda.*;
-import de.dfki.cos.basys.common.rest.camunda.auth.*;
+import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.dto.AttachmentDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.AuthorizationExceptionDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.ExceptionDto;
 import java.io.File;
-import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
-
+import org.junit.Ignore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,10 +29,12 @@ import java.util.Map;
 /**
  * API tests for TaskAttachmentApi
  */
+@Ignore
 public class TaskAttachmentApiTest {
 
     private final TaskAttachmentApi api = new TaskAttachmentApi();
 
+    
     /**
      * 
      *
@@ -46,16 +45,17 @@ public class TaskAttachmentApiTest {
      */
     @Test
     public void addAttachmentTest() throws ApiException {
-        //String id = null;
-        //String attachmentName = null;
-        //String attachmentDescription = null;
-        //String attachmentType = null;
-        //String url = null;
-        //File content = null;
-        //AttachmentDto response = api.addAttachment(id, attachmentName, attachmentDescription, attachmentType, url, content);
+        String id = null;
+        String attachmentName = null;
+        String attachmentDescription = null;
+        String attachmentType = null;
+        String url = null;
+        File content = null;
+        AttachmentDto response = api.addAttachment(id, attachmentName, attachmentDescription, attachmentType, url, content);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -66,12 +66,13 @@ public class TaskAttachmentApiTest {
      */
     @Test
     public void deleteAttachmentTest() throws ApiException {
-        //String id = null;
-        //String attachmentId = null;
-        //api.deleteAttachment(id, attachmentId);
+        String id = null;
+        String attachmentId = null;
+        api.deleteAttachment(id, attachmentId);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -82,12 +83,13 @@ public class TaskAttachmentApiTest {
      */
     @Test
     public void getAttachmentTest() throws ApiException {
-        //String id = null;
-        //String attachmentId = null;
-        //AttachmentDto response = api.getAttachment(id, attachmentId);
+        String id = null;
+        String attachmentId = null;
+        AttachmentDto response = api.getAttachment(id, attachmentId);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -98,12 +100,13 @@ public class TaskAttachmentApiTest {
      */
     @Test
     public void getAttachmentDataTest() throws ApiException {
-        //String id = null;
-        //String attachmentId = null;
-        //File response = api.getAttachmentData(id, attachmentId);
+        String id = null;
+        String attachmentId = null;
+        File response = api.getAttachmentData(id, attachmentId);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -114,9 +117,10 @@ public class TaskAttachmentApiTest {
      */
     @Test
     public void getAttachmentsTest() throws ApiException {
-        //String id = null;
-        //List<AttachmentDto> response = api.getAttachments(id);
+        String id = null;
+        List<AttachmentDto> response = api.getAttachments(id);
+
         // TODO: test validations
     }
-
+    
 }

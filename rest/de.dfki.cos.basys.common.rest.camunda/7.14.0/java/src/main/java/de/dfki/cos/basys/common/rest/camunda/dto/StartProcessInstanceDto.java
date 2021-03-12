@@ -15,65 +15,57 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import de.dfki.cos.basys.common.rest.camunda.dto.ProcessInstanceModificationInstructionDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.VariableValueDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
 
 /**
  * StartProcessInstanceDto
  */
-@JsonPropertyOrder({
-  StartProcessInstanceDto.JSON_PROPERTY_BUSINESS_KEY,
-  StartProcessInstanceDto.JSON_PROPERTY_VARIABLES,
-  StartProcessInstanceDto.JSON_PROPERTY_CASE_INSTANCE_ID,
-  StartProcessInstanceDto.JSON_PROPERTY_START_INSTRUCTIONS,
-  StartProcessInstanceDto.JSON_PROPERTY_SKIP_CUSTOM_LISTENERS,
-  StartProcessInstanceDto.JSON_PROPERTY_SKIP_IO_MAPPINGS,
-  StartProcessInstanceDto.JSON_PROPERTY_WITH_VARIABLES_IN_RETURN
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class StartProcessInstanceDto {
-  public static final String JSON_PROPERTY_BUSINESS_KEY = "businessKey";
+  public static final String SERIALIZED_NAME_BUSINESS_KEY = "businessKey";
+  @SerializedName(SERIALIZED_NAME_BUSINESS_KEY)
   private String businessKey;
 
-  public static final String JSON_PROPERTY_VARIABLES = "variables";
+  public static final String SERIALIZED_NAME_VARIABLES = "variables";
+  @SerializedName(SERIALIZED_NAME_VARIABLES)
   private Map<String, VariableValueDto> variables = null;
 
-  public static final String JSON_PROPERTY_CASE_INSTANCE_ID = "caseInstanceId";
+  public static final String SERIALIZED_NAME_CASE_INSTANCE_ID = "caseInstanceId";
+  @SerializedName(SERIALIZED_NAME_CASE_INSTANCE_ID)
   private String caseInstanceId;
 
-  public static final String JSON_PROPERTY_START_INSTRUCTIONS = "startInstructions";
+  public static final String SERIALIZED_NAME_START_INSTRUCTIONS = "startInstructions";
+  @SerializedName(SERIALIZED_NAME_START_INSTRUCTIONS)
   private List<ProcessInstanceModificationInstructionDto> startInstructions = null;
 
-  public static final String JSON_PROPERTY_SKIP_CUSTOM_LISTENERS = "skipCustomListeners";
-  private JsonNullable<Boolean> skipCustomListeners = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_SKIP_CUSTOM_LISTENERS = "skipCustomListeners";
+  @SerializedName(SERIALIZED_NAME_SKIP_CUSTOM_LISTENERS)
+  private Boolean skipCustomListeners;
 
-  public static final String JSON_PROPERTY_SKIP_IO_MAPPINGS = "skipIoMappings";
-  private JsonNullable<Boolean> skipIoMappings = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_SKIP_IO_MAPPINGS = "skipIoMappings";
+  @SerializedName(SERIALIZED_NAME_SKIP_IO_MAPPINGS)
+  private Boolean skipIoMappings;
 
-  public static final String JSON_PROPERTY_WITH_VARIABLES_IN_RETURN = "withVariablesInReturn";
-  private JsonNullable<Boolean> withVariablesInReturn = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_WITH_VARIABLES_IN_RETURN = "withVariablesInReturn";
+  @SerializedName(SERIALIZED_NAME_WITH_VARIABLES_IN_RETURN)
+  private Boolean withVariablesInReturn;
 
 
   public StartProcessInstanceDto businessKey(String businessKey) {
+    
     this.businessKey = businessKey;
     return this;
   }
@@ -84,8 +76,6 @@ public class StartProcessInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The business key of the process instance.")
-  @JsonProperty(JSON_PROPERTY_BUSINESS_KEY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getBusinessKey() {
     return businessKey;
@@ -98,6 +88,7 @@ public class StartProcessInstanceDto {
 
 
   public StartProcessInstanceDto variables(Map<String, VariableValueDto> variables) {
+    
     this.variables = variables;
     return this;
   }
@@ -116,8 +107,6 @@ public class StartProcessInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
-  @JsonProperty(JSON_PROPERTY_VARIABLES)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Map<String, VariableValueDto> getVariables() {
     return variables;
@@ -130,6 +119,7 @@ public class StartProcessInstanceDto {
 
 
   public StartProcessInstanceDto caseInstanceId(String caseInstanceId) {
+    
     this.caseInstanceId = caseInstanceId;
     return this;
   }
@@ -140,8 +130,6 @@ public class StartProcessInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The case instance id the process instance is to be initialized with.")
-  @JsonProperty(JSON_PROPERTY_CASE_INSTANCE_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getCaseInstanceId() {
     return caseInstanceId;
@@ -154,6 +142,7 @@ public class StartProcessInstanceDto {
 
 
   public StartProcessInstanceDto startInstructions(List<ProcessInstanceModificationInstructionDto> startInstructions) {
+    
     this.startInstructions = startInstructions;
     return this;
   }
@@ -172,8 +161,6 @@ public class StartProcessInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "**Optional**. A JSON array of instructions that specify which activities to start the process instance at. If this property is omitted, the process instance starts at its default blank start event.")
-  @JsonProperty(JSON_PROPERTY_START_INSTRUCTIONS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<ProcessInstanceModificationInstructionDto> getStartInstructions() {
     return startInstructions;
@@ -186,7 +173,8 @@ public class StartProcessInstanceDto {
 
 
   public StartProcessInstanceDto skipCustomListeners(Boolean skipCustomListeners) {
-    this.skipCustomListeners = JsonNullable.<Boolean>of(skipCustomListeners);
+    
+    this.skipCustomListeners = skipCustomListeners;
     return this;
   }
 
@@ -196,31 +184,20 @@ public class StartProcessInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Skip execution listener invocation for activities that are started or ended as part of this request. **Note**: This option is currently only respected when start instructions are submitted via the `startInstructions` property.")
-  @JsonIgnore
 
   public Boolean getSkipCustomListeners() {
-        return skipCustomListeners.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_SKIP_CUSTOM_LISTENERS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getSkipCustomListeners_JsonNullable() {
     return skipCustomListeners;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SKIP_CUSTOM_LISTENERS)
-  public void setSkipCustomListeners_JsonNullable(JsonNullable<Boolean> skipCustomListeners) {
-    this.skipCustomListeners = skipCustomListeners;
-  }
+
 
   public void setSkipCustomListeners(Boolean skipCustomListeners) {
-    this.skipCustomListeners = JsonNullable.<Boolean>of(skipCustomListeners);
+    this.skipCustomListeners = skipCustomListeners;
   }
 
 
   public StartProcessInstanceDto skipIoMappings(Boolean skipIoMappings) {
-    this.skipIoMappings = JsonNullable.<Boolean>of(skipIoMappings);
+    
+    this.skipIoMappings = skipIoMappings;
     return this;
   }
 
@@ -230,31 +207,20 @@ public class StartProcessInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Skip execution of [input/output variable mappings](https://docs.camunda.org/manual/7.14/user-guide/process-engine/variables/#input-output-variable-mapping) for activities that are started or ended as part of this request. **Note**: This option is currently only respected when start instructions are submitted via the `startInstructions` property.")
-  @JsonIgnore
 
   public Boolean getSkipIoMappings() {
-        return skipIoMappings.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_SKIP_IO_MAPPINGS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getSkipIoMappings_JsonNullable() {
     return skipIoMappings;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SKIP_IO_MAPPINGS)
-  public void setSkipIoMappings_JsonNullable(JsonNullable<Boolean> skipIoMappings) {
-    this.skipIoMappings = skipIoMappings;
-  }
+
 
   public void setSkipIoMappings(Boolean skipIoMappings) {
-    this.skipIoMappings = JsonNullable.<Boolean>of(skipIoMappings);
+    this.skipIoMappings = skipIoMappings;
   }
 
 
   public StartProcessInstanceDto withVariablesInReturn(Boolean withVariablesInReturn) {
-    this.withVariablesInReturn = JsonNullable.<Boolean>of(withVariablesInReturn);
+    
+    this.withVariablesInReturn = withVariablesInReturn;
     return this;
   }
 
@@ -264,32 +230,17 @@ public class StartProcessInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Indicates if the variables, which was used by the process instance during execution, should be returned. Default value: `false`")
-  @JsonIgnore
 
   public Boolean getWithVariablesInReturn() {
-        return withVariablesInReturn.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_WITH_VARIABLES_IN_RETURN)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getWithVariablesInReturn_JsonNullable() {
     return withVariablesInReturn;
   }
-  
-  @JsonProperty(JSON_PROPERTY_WITH_VARIABLES_IN_RETURN)
-  public void setWithVariablesInReturn_JsonNullable(JsonNullable<Boolean> withVariablesInReturn) {
+
+
+  public void setWithVariablesInReturn(Boolean withVariablesInReturn) {
     this.withVariablesInReturn = withVariablesInReturn;
   }
 
-  public void setWithVariablesInReturn(Boolean withVariablesInReturn) {
-    this.withVariablesInReturn = JsonNullable.<Boolean>of(withVariablesInReturn);
-  }
 
-
-  /**
-   * Return true if this StartProcessInstanceDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

@@ -15,44 +15,39 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import de.dfki.cos.basys.common.rest.camunda.dto.VariableValueDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
 
 /**
  * TaskBpmnErrorDto
  */
-@JsonPropertyOrder({
-  TaskBpmnErrorDto.JSON_PROPERTY_ERROR_CODE,
-  TaskBpmnErrorDto.JSON_PROPERTY_ERROR_MESSAGE,
-  TaskBpmnErrorDto.JSON_PROPERTY_VARIABLES
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class TaskBpmnErrorDto {
-  public static final String JSON_PROPERTY_ERROR_CODE = "errorCode";
+  public static final String SERIALIZED_NAME_ERROR_CODE = "errorCode";
+  @SerializedName(SERIALIZED_NAME_ERROR_CODE)
   private String errorCode;
 
-  public static final String JSON_PROPERTY_ERROR_MESSAGE = "errorMessage";
+  public static final String SERIALIZED_NAME_ERROR_MESSAGE = "errorMessage";
+  @SerializedName(SERIALIZED_NAME_ERROR_MESSAGE)
   private String errorMessage;
 
-  public static final String JSON_PROPERTY_VARIABLES = "variables";
+  public static final String SERIALIZED_NAME_VARIABLES = "variables";
+  @SerializedName(SERIALIZED_NAME_VARIABLES)
   private Map<String, VariableValueDto> variables = null;
 
 
   public TaskBpmnErrorDto errorCode(String errorCode) {
+    
     this.errorCode = errorCode;
     return this;
   }
@@ -63,8 +58,6 @@ public class TaskBpmnErrorDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "An error code that indicates the predefined error. It is used to identify the BPMN error handler.")
-  @JsonProperty(JSON_PROPERTY_ERROR_CODE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getErrorCode() {
     return errorCode;
@@ -77,6 +70,7 @@ public class TaskBpmnErrorDto {
 
 
   public TaskBpmnErrorDto errorMessage(String errorMessage) {
+    
     this.errorMessage = errorMessage;
     return this;
   }
@@ -87,8 +81,6 @@ public class TaskBpmnErrorDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "An error message that describes the error.")
-  @JsonProperty(JSON_PROPERTY_ERROR_MESSAGE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getErrorMessage() {
     return errorMessage;
@@ -101,6 +93,7 @@ public class TaskBpmnErrorDto {
 
 
   public TaskBpmnErrorDto variables(Map<String, VariableValueDto> variables) {
+    
     this.variables = variables;
     return this;
   }
@@ -119,8 +112,6 @@ public class TaskBpmnErrorDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON object containing variable key-value pairs.")
-  @JsonProperty(JSON_PROPERTY_VARIABLES)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Map<String, VariableValueDto> getVariables() {
     return variables;
@@ -132,9 +123,6 @@ public class TaskBpmnErrorDto {
   }
 
 
-  /**
-   * Return true if this TaskBpmnErrorDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

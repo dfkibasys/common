@@ -15,40 +15,35 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
+import java.io.IOException;
 
 /**
  * MissingAuthorizationDto
  */
-@JsonPropertyOrder({
-  MissingAuthorizationDto.JSON_PROPERTY_PERMISSION_NAME,
-  MissingAuthorizationDto.JSON_PROPERTY_RESOURCE_NAME,
-  MissingAuthorizationDto.JSON_PROPERTY_RESOURCE_ID
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class MissingAuthorizationDto {
-  public static final String JSON_PROPERTY_PERMISSION_NAME = "permissionName";
+  public static final String SERIALIZED_NAME_PERMISSION_NAME = "permissionName";
+  @SerializedName(SERIALIZED_NAME_PERMISSION_NAME)
   private String permissionName;
 
-  public static final String JSON_PROPERTY_RESOURCE_NAME = "resourceName";
+  public static final String SERIALIZED_NAME_RESOURCE_NAME = "resourceName";
+  @SerializedName(SERIALIZED_NAME_RESOURCE_NAME)
   private String resourceName;
 
-  public static final String JSON_PROPERTY_RESOURCE_ID = "resourceId";
+  public static final String SERIALIZED_NAME_RESOURCE_ID = "resourceId";
+  @SerializedName(SERIALIZED_NAME_RESOURCE_ID)
   private String resourceId;
 
 
   public MissingAuthorizationDto permissionName(String permissionName) {
+    
     this.permissionName = permissionName;
     return this;
   }
@@ -59,8 +54,6 @@ public class MissingAuthorizationDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The permission name that the user is missing.")
-  @JsonProperty(JSON_PROPERTY_PERMISSION_NAME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getPermissionName() {
     return permissionName;
@@ -73,6 +66,7 @@ public class MissingAuthorizationDto {
 
 
   public MissingAuthorizationDto resourceName(String resourceName) {
+    
     this.resourceName = resourceName;
     return this;
   }
@@ -83,8 +77,6 @@ public class MissingAuthorizationDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The name of the resource that the user is missing permission for.")
-  @JsonProperty(JSON_PROPERTY_RESOURCE_NAME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getResourceName() {
     return resourceName;
@@ -97,6 +89,7 @@ public class MissingAuthorizationDto {
 
 
   public MissingAuthorizationDto resourceId(String resourceId) {
+    
     this.resourceId = resourceId;
     return this;
   }
@@ -107,8 +100,6 @@ public class MissingAuthorizationDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the resource that the user is missing permission for.")
-  @JsonProperty(JSON_PROPERTY_RESOURCE_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getResourceId() {
     return resourceId;
@@ -120,9 +111,6 @@ public class MissingAuthorizationDto {
   }
 
 
-  /**
-   * Return true if this MissingAuthorizationDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

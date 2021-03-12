@@ -15,88 +15,80 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import org.threeten.bp.OffsetDateTime;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
 
 /**
  * IncidentDto
  */
-@JsonPropertyOrder({
-  IncidentDto.JSON_PROPERTY_ID,
-  IncidentDto.JSON_PROPERTY_PROCESS_DEFINITION_ID,
-  IncidentDto.JSON_PROPERTY_PROCESS_INSTANCE_ID,
-  IncidentDto.JSON_PROPERTY_EXECUTION_ID,
-  IncidentDto.JSON_PROPERTY_INCIDENT_TIMESTAMP,
-  IncidentDto.JSON_PROPERTY_INCIDENT_TYPE,
-  IncidentDto.JSON_PROPERTY_ACTIVITY_ID,
-  IncidentDto.JSON_PROPERTY_FAILED_ACTIVITY_ID,
-  IncidentDto.JSON_PROPERTY_CAUSE_INCIDENT_ID,
-  IncidentDto.JSON_PROPERTY_ROOT_CAUSE_INCIDENT_ID,
-  IncidentDto.JSON_PROPERTY_CONFIGURATION,
-  IncidentDto.JSON_PROPERTY_TENANT_ID,
-  IncidentDto.JSON_PROPERTY_INCIDENT_MESSAGE,
-  IncidentDto.JSON_PROPERTY_JOB_DEFINITION_ID
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class IncidentDto {
-  public static final String JSON_PROPERTY_ID = "id";
+  public static final String SERIALIZED_NAME_ID = "id";
+  @SerializedName(SERIALIZED_NAME_ID)
   private String id;
 
-  public static final String JSON_PROPERTY_PROCESS_DEFINITION_ID = "processDefinitionId";
+  public static final String SERIALIZED_NAME_PROCESS_DEFINITION_ID = "processDefinitionId";
+  @SerializedName(SERIALIZED_NAME_PROCESS_DEFINITION_ID)
   private String processDefinitionId;
 
-  public static final String JSON_PROPERTY_PROCESS_INSTANCE_ID = "processInstanceId";
+  public static final String SERIALIZED_NAME_PROCESS_INSTANCE_ID = "processInstanceId";
+  @SerializedName(SERIALIZED_NAME_PROCESS_INSTANCE_ID)
   private String processInstanceId;
 
-  public static final String JSON_PROPERTY_EXECUTION_ID = "executionId";
+  public static final String SERIALIZED_NAME_EXECUTION_ID = "executionId";
+  @SerializedName(SERIALIZED_NAME_EXECUTION_ID)
   private String executionId;
 
-  public static final String JSON_PROPERTY_INCIDENT_TIMESTAMP = "incidentTimestamp";
-  private JsonNullable<OffsetDateTime> incidentTimestamp = JsonNullable.<OffsetDateTime>undefined();
+  public static final String SERIALIZED_NAME_INCIDENT_TIMESTAMP = "incidentTimestamp";
+  @SerializedName(SERIALIZED_NAME_INCIDENT_TIMESTAMP)
+  private OffsetDateTime incidentTimestamp;
 
-  public static final String JSON_PROPERTY_INCIDENT_TYPE = "incidentType";
+  public static final String SERIALIZED_NAME_INCIDENT_TYPE = "incidentType";
+  @SerializedName(SERIALIZED_NAME_INCIDENT_TYPE)
   private String incidentType;
 
-  public static final String JSON_PROPERTY_ACTIVITY_ID = "activityId";
+  public static final String SERIALIZED_NAME_ACTIVITY_ID = "activityId";
+  @SerializedName(SERIALIZED_NAME_ACTIVITY_ID)
   private String activityId;
 
-  public static final String JSON_PROPERTY_FAILED_ACTIVITY_ID = "failedActivityId";
+  public static final String SERIALIZED_NAME_FAILED_ACTIVITY_ID = "failedActivityId";
+  @SerializedName(SERIALIZED_NAME_FAILED_ACTIVITY_ID)
   private String failedActivityId;
 
-  public static final String JSON_PROPERTY_CAUSE_INCIDENT_ID = "causeIncidentId";
+  public static final String SERIALIZED_NAME_CAUSE_INCIDENT_ID = "causeIncidentId";
+  @SerializedName(SERIALIZED_NAME_CAUSE_INCIDENT_ID)
   private String causeIncidentId;
 
-  public static final String JSON_PROPERTY_ROOT_CAUSE_INCIDENT_ID = "rootCauseIncidentId";
+  public static final String SERIALIZED_NAME_ROOT_CAUSE_INCIDENT_ID = "rootCauseIncidentId";
+  @SerializedName(SERIALIZED_NAME_ROOT_CAUSE_INCIDENT_ID)
   private String rootCauseIncidentId;
 
-  public static final String JSON_PROPERTY_CONFIGURATION = "configuration";
+  public static final String SERIALIZED_NAME_CONFIGURATION = "configuration";
+  @SerializedName(SERIALIZED_NAME_CONFIGURATION)
   private String _configuration;
 
-  public static final String JSON_PROPERTY_TENANT_ID = "tenantId";
+  public static final String SERIALIZED_NAME_TENANT_ID = "tenantId";
+  @SerializedName(SERIALIZED_NAME_TENANT_ID)
   private String tenantId;
 
-  public static final String JSON_PROPERTY_INCIDENT_MESSAGE = "incidentMessage";
+  public static final String SERIALIZED_NAME_INCIDENT_MESSAGE = "incidentMessage";
+  @SerializedName(SERIALIZED_NAME_INCIDENT_MESSAGE)
   private String incidentMessage;
 
-  public static final String JSON_PROPERTY_JOB_DEFINITION_ID = "jobDefinitionId";
+  public static final String SERIALIZED_NAME_JOB_DEFINITION_ID = "jobDefinitionId";
+  @SerializedName(SERIALIZED_NAME_JOB_DEFINITION_ID)
   private String jobDefinitionId;
 
 
   public IncidentDto id(String id) {
+    
     this.id = id;
     return this;
   }
@@ -107,8 +99,6 @@ public class IncidentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the incident.")
-  @JsonProperty(JSON_PROPERTY_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getId() {
     return id;
@@ -121,6 +111,7 @@ public class IncidentDto {
 
 
   public IncidentDto processDefinitionId(String processDefinitionId) {
+    
     this.processDefinitionId = processDefinitionId;
     return this;
   }
@@ -131,8 +122,6 @@ public class IncidentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the process definition this incident is associated with.")
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getProcessDefinitionId() {
     return processDefinitionId;
@@ -145,6 +134,7 @@ public class IncidentDto {
 
 
   public IncidentDto processInstanceId(String processInstanceId) {
+    
     this.processInstanceId = processInstanceId;
     return this;
   }
@@ -155,8 +145,6 @@ public class IncidentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the process instance this incident is associated with.")
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getProcessInstanceId() {
     return processInstanceId;
@@ -169,6 +157,7 @@ public class IncidentDto {
 
 
   public IncidentDto executionId(String executionId) {
+    
     this.executionId = executionId;
     return this;
   }
@@ -179,8 +168,6 @@ public class IncidentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the execution this incident is associated with.")
-  @JsonProperty(JSON_PROPERTY_EXECUTION_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getExecutionId() {
     return executionId;
@@ -193,7 +180,8 @@ public class IncidentDto {
 
 
   public IncidentDto incidentTimestamp(OffsetDateTime incidentTimestamp) {
-    this.incidentTimestamp = JsonNullable.<OffsetDateTime>of(incidentTimestamp);
+    
+    this.incidentTimestamp = incidentTimestamp;
     return this;
   }
 
@@ -203,30 +191,19 @@ public class IncidentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The time this incident happened. By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.")
-  @JsonIgnore
 
   public OffsetDateTime getIncidentTimestamp() {
-        return incidentTimestamp.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_INCIDENT_TIMESTAMP)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<OffsetDateTime> getIncidentTimestamp_JsonNullable() {
     return incidentTimestamp;
   }
-  
-  @JsonProperty(JSON_PROPERTY_INCIDENT_TIMESTAMP)
-  public void setIncidentTimestamp_JsonNullable(JsonNullable<OffsetDateTime> incidentTimestamp) {
-    this.incidentTimestamp = incidentTimestamp;
-  }
+
 
   public void setIncidentTimestamp(OffsetDateTime incidentTimestamp) {
-    this.incidentTimestamp = JsonNullable.<OffsetDateTime>of(incidentTimestamp);
+    this.incidentTimestamp = incidentTimestamp;
   }
 
 
   public IncidentDto incidentType(String incidentType) {
+    
     this.incidentType = incidentType;
     return this;
   }
@@ -237,8 +214,6 @@ public class IncidentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The type of incident, for example: `failedJobs` will be returned in case of an incident which identified a failed job during the execution of a process instance. See the [User Guide](https://docs.camunda.org/manual/7.14/user-guide/process-engine/incidents/#incident-types) for a list of incident types.")
-  @JsonProperty(JSON_PROPERTY_INCIDENT_TYPE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getIncidentType() {
     return incidentType;
@@ -251,6 +226,7 @@ public class IncidentDto {
 
 
   public IncidentDto activityId(String activityId) {
+    
     this.activityId = activityId;
     return this;
   }
@@ -261,8 +237,6 @@ public class IncidentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the activity this incident is associated with.")
-  @JsonProperty(JSON_PROPERTY_ACTIVITY_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getActivityId() {
     return activityId;
@@ -275,6 +249,7 @@ public class IncidentDto {
 
 
   public IncidentDto failedActivityId(String failedActivityId) {
+    
     this.failedActivityId = failedActivityId;
     return this;
   }
@@ -285,8 +260,6 @@ public class IncidentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the activity on which the last exception occurred.")
-  @JsonProperty(JSON_PROPERTY_FAILED_ACTIVITY_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getFailedActivityId() {
     return failedActivityId;
@@ -299,6 +272,7 @@ public class IncidentDto {
 
 
   public IncidentDto causeIncidentId(String causeIncidentId) {
+    
     this.causeIncidentId = causeIncidentId;
     return this;
   }
@@ -309,8 +283,6 @@ public class IncidentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the associated cause incident which has been triggered.")
-  @JsonProperty(JSON_PROPERTY_CAUSE_INCIDENT_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getCauseIncidentId() {
     return causeIncidentId;
@@ -323,6 +295,7 @@ public class IncidentDto {
 
 
   public IncidentDto rootCauseIncidentId(String rootCauseIncidentId) {
+    
     this.rootCauseIncidentId = rootCauseIncidentId;
     return this;
   }
@@ -333,8 +306,6 @@ public class IncidentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the associated root cause incident which has been triggered.")
-  @JsonProperty(JSON_PROPERTY_ROOT_CAUSE_INCIDENT_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getRootCauseIncidentId() {
     return rootCauseIncidentId;
@@ -347,6 +318,7 @@ public class IncidentDto {
 
 
   public IncidentDto _configuration(String _configuration) {
+    
     this._configuration = _configuration;
     return this;
   }
@@ -357,8 +329,6 @@ public class IncidentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The payload of this incident.")
-  @JsonProperty(JSON_PROPERTY_CONFIGURATION)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getConfiguration() {
     return _configuration;
@@ -371,6 +341,7 @@ public class IncidentDto {
 
 
   public IncidentDto tenantId(String tenantId) {
+    
     this.tenantId = tenantId;
     return this;
   }
@@ -381,8 +352,6 @@ public class IncidentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the tenant this incident is associated with.")
-  @JsonProperty(JSON_PROPERTY_TENANT_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getTenantId() {
     return tenantId;
@@ -395,6 +364,7 @@ public class IncidentDto {
 
 
   public IncidentDto incidentMessage(String incidentMessage) {
+    
     this.incidentMessage = incidentMessage;
     return this;
   }
@@ -405,8 +375,6 @@ public class IncidentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The message of this incident.")
-  @JsonProperty(JSON_PROPERTY_INCIDENT_MESSAGE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getIncidentMessage() {
     return incidentMessage;
@@ -419,6 +387,7 @@ public class IncidentDto {
 
 
   public IncidentDto jobDefinitionId(String jobDefinitionId) {
+    
     this.jobDefinitionId = jobDefinitionId;
     return this;
   }
@@ -429,8 +398,6 @@ public class IncidentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The job definition id the incident is associated with.")
-  @JsonProperty(JSON_PROPERTY_JOB_DEFINITION_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getJobDefinitionId() {
     return jobDefinitionId;
@@ -442,9 +409,6 @@ public class IncidentDto {
   }
 
 
-  /**
-   * Return true if this IncidentDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

@@ -15,51 +15,43 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import de.dfki.cos.basys.common.rest.camunda.dto.ProcessInstanceModificationInstructionDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
 
 /**
  * ProcessInstanceModificationDto
  */
-@JsonPropertyOrder({
-  ProcessInstanceModificationDto.JSON_PROPERTY_SKIP_CUSTOM_LISTENERS,
-  ProcessInstanceModificationDto.JSON_PROPERTY_SKIP_IO_MAPPINGS,
-  ProcessInstanceModificationDto.JSON_PROPERTY_INSTRUCTIONS,
-  ProcessInstanceModificationDto.JSON_PROPERTY_ANNOTATION
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class ProcessInstanceModificationDto {
-  public static final String JSON_PROPERTY_SKIP_CUSTOM_LISTENERS = "skipCustomListeners";
-  private JsonNullable<Boolean> skipCustomListeners = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_SKIP_CUSTOM_LISTENERS = "skipCustomListeners";
+  @SerializedName(SERIALIZED_NAME_SKIP_CUSTOM_LISTENERS)
+  private Boolean skipCustomListeners;
 
-  public static final String JSON_PROPERTY_SKIP_IO_MAPPINGS = "skipIoMappings";
-  private JsonNullable<Boolean> skipIoMappings = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_SKIP_IO_MAPPINGS = "skipIoMappings";
+  @SerializedName(SERIALIZED_NAME_SKIP_IO_MAPPINGS)
+  private Boolean skipIoMappings;
 
-  public static final String JSON_PROPERTY_INSTRUCTIONS = "instructions";
+  public static final String SERIALIZED_NAME_INSTRUCTIONS = "instructions";
+  @SerializedName(SERIALIZED_NAME_INSTRUCTIONS)
   private List<ProcessInstanceModificationInstructionDto> instructions = null;
 
-  public static final String JSON_PROPERTY_ANNOTATION = "annotation";
+  public static final String SERIALIZED_NAME_ANNOTATION = "annotation";
+  @SerializedName(SERIALIZED_NAME_ANNOTATION)
   private String annotation;
 
 
   public ProcessInstanceModificationDto skipCustomListeners(Boolean skipCustomListeners) {
-    this.skipCustomListeners = JsonNullable.<Boolean>of(skipCustomListeners);
+    
+    this.skipCustomListeners = skipCustomListeners;
     return this;
   }
 
@@ -69,31 +61,20 @@ public class ProcessInstanceModificationDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Skip execution listener invocation for activities that are started or ended as part of this request.")
-  @JsonIgnore
 
   public Boolean getSkipCustomListeners() {
-        return skipCustomListeners.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_SKIP_CUSTOM_LISTENERS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getSkipCustomListeners_JsonNullable() {
     return skipCustomListeners;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SKIP_CUSTOM_LISTENERS)
-  public void setSkipCustomListeners_JsonNullable(JsonNullable<Boolean> skipCustomListeners) {
-    this.skipCustomListeners = skipCustomListeners;
-  }
+
 
   public void setSkipCustomListeners(Boolean skipCustomListeners) {
-    this.skipCustomListeners = JsonNullable.<Boolean>of(skipCustomListeners);
+    this.skipCustomListeners = skipCustomListeners;
   }
 
 
   public ProcessInstanceModificationDto skipIoMappings(Boolean skipIoMappings) {
-    this.skipIoMappings = JsonNullable.<Boolean>of(skipIoMappings);
+    
+    this.skipIoMappings = skipIoMappings;
     return this;
   }
 
@@ -103,30 +84,19 @@ public class ProcessInstanceModificationDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Skip execution of [input/output variable mappings](https://docs.camunda.org/manual/7.14/user-guide/process-engine/variables/#input-output-variable-mapping) for activities that are started or ended as part of this request.")
-  @JsonIgnore
 
   public Boolean getSkipIoMappings() {
-        return skipIoMappings.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_SKIP_IO_MAPPINGS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getSkipIoMappings_JsonNullable() {
     return skipIoMappings;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SKIP_IO_MAPPINGS)
-  public void setSkipIoMappings_JsonNullable(JsonNullable<Boolean> skipIoMappings) {
-    this.skipIoMappings = skipIoMappings;
-  }
+
 
   public void setSkipIoMappings(Boolean skipIoMappings) {
-    this.skipIoMappings = JsonNullable.<Boolean>of(skipIoMappings);
+    this.skipIoMappings = skipIoMappings;
   }
 
 
   public ProcessInstanceModificationDto instructions(List<ProcessInstanceModificationInstructionDto> instructions) {
+    
     this.instructions = instructions;
     return this;
   }
@@ -145,8 +115,6 @@ public class ProcessInstanceModificationDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "JSON array of modification instructions. The instructions are executed in the order they are in.")
-  @JsonProperty(JSON_PROPERTY_INSTRUCTIONS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<ProcessInstanceModificationInstructionDto> getInstructions() {
     return instructions;
@@ -159,6 +127,7 @@ public class ProcessInstanceModificationDto {
 
 
   public ProcessInstanceModificationDto annotation(String annotation) {
+    
     this.annotation = annotation;
     return this;
   }
@@ -169,8 +138,6 @@ public class ProcessInstanceModificationDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "An arbitrary text annotation set by a user for auditing reasons.")
-  @JsonProperty(JSON_PROPERTY_ANNOTATION)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getAnnotation() {
     return annotation;
@@ -182,9 +149,6 @@ public class ProcessInstanceModificationDto {
   }
 
 
-  /**
-   * Return true if this ProcessInstanceModificationDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

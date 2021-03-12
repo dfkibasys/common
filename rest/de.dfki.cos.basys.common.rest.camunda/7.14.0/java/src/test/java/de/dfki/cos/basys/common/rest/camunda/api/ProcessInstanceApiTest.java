@@ -13,8 +13,7 @@
 
 package de.dfki.cos.basys.common.rest.camunda.api;
 
-import de.dfki.cos.basys.common.rest.camunda.*;
-import de.dfki.cos.basys.common.rest.camunda.auth.*;
+import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.dto.ActivityInstanceDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.AuthorizationExceptionDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.BatchDto;
@@ -32,10 +31,8 @@ import de.dfki.cos.basys.common.rest.camunda.dto.SetJobRetriesByProcessDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.SetVariablesAsyncDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.SuspensionStateDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.VariableValueDto;
-import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
-
+import org.junit.Ignore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,10 +42,12 @@ import java.util.Map;
 /**
  * API tests for ProcessInstanceApi
  */
+@Ignore
 public class ProcessInstanceApiTest {
 
     private final ProcessInstanceApi api = new ProcessInstanceApi();
 
+    
     /**
      * 
      *
@@ -59,11 +58,12 @@ public class ProcessInstanceApiTest {
      */
     @Test
     public void deleteAsyncHistoricQueryBasedTest() throws ApiException {
-        //DeleteProcessInstancesDto deleteProcessInstancesDto = null;
-        //BatchDto response = api.deleteAsyncHistoricQueryBased(deleteProcessInstancesDto);
+        DeleteProcessInstancesDto deleteProcessInstancesDto = null;
+        BatchDto response = api.deleteAsyncHistoricQueryBased(deleteProcessInstancesDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -74,15 +74,16 @@ public class ProcessInstanceApiTest {
      */
     @Test
     public void deleteProcessInstanceTest() throws ApiException {
-        //String id = null;
-        //Boolean skipCustomListeners = null;
-        //Boolean skipIoMappings = null;
-        //Boolean skipSubprocesses = null;
-        //Boolean failIfNotExists = null;
-        //api.deleteProcessInstance(id, skipCustomListeners, skipIoMappings, skipSubprocesses, failIfNotExists);
+        String id = null;
+        Boolean skipCustomListeners = null;
+        Boolean skipIoMappings = null;
+        Boolean skipSubprocesses = null;
+        Boolean failIfNotExists = null;
+        api.deleteProcessInstance(id, skipCustomListeners, skipIoMappings, skipSubprocesses, failIfNotExists);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -93,12 +94,13 @@ public class ProcessInstanceApiTest {
      */
     @Test
     public void deleteProcessInstanceVariableTest() throws ApiException {
-        //String id = null;
-        //String varName = null;
-        //api.deleteProcessInstanceVariable(id, varName);
+        String id = null;
+        String varName = null;
+        api.deleteProcessInstanceVariable(id, varName);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -109,11 +111,12 @@ public class ProcessInstanceApiTest {
      */
     @Test
     public void deleteProcessInstancesAsyncOperationTest() throws ApiException {
-        //DeleteProcessInstancesDto deleteProcessInstancesDto = null;
-        //BatchDto response = api.deleteProcessInstancesAsyncOperation(deleteProcessInstancesDto);
+        DeleteProcessInstancesDto deleteProcessInstancesDto = null;
+        BatchDto response = api.deleteProcessInstancesAsyncOperation(deleteProcessInstancesDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -124,11 +127,12 @@ public class ProcessInstanceApiTest {
      */
     @Test
     public void getActivityInstanceTreeTest() throws ApiException {
-        //String id = null;
-        //ActivityInstanceDto response = api.getActivityInstanceTree(id);
+        String id = null;
+        ActivityInstanceDto response = api.getActivityInstanceTree(id);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get Process Instance
      *
@@ -139,11 +143,12 @@ public class ProcessInstanceApiTest {
      */
     @Test
     public void getProcessInstanceTest() throws ApiException {
-        //String id = null;
-        //ProcessInstanceDto response = api.getProcessInstance(id);
+        String id = null;
+        ProcessInstanceDto response = api.getProcessInstance(id);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -154,13 +159,14 @@ public class ProcessInstanceApiTest {
      */
     @Test
     public void getProcessInstanceVariableTest() throws ApiException {
-        //String id = null;
-        //String varName = null;
-        //Boolean deserializeValue = null;
-        //VariableValueDto response = api.getProcessInstanceVariable(id, varName, deserializeValue);
+        String id = null;
+        String varName = null;
+        Boolean deserializeValue = null;
+        VariableValueDto response = api.getProcessInstanceVariable(id, varName, deserializeValue);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -171,12 +177,13 @@ public class ProcessInstanceApiTest {
      */
     @Test
     public void getProcessInstanceVariableBinaryTest() throws ApiException {
-        //String id = null;
-        //String varName = null;
-        //File response = api.getProcessInstanceVariableBinary(id, varName);
+        String id = null;
+        String varName = null;
+        File response = api.getProcessInstanceVariableBinary(id, varName);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -187,12 +194,13 @@ public class ProcessInstanceApiTest {
      */
     @Test
     public void getProcessInstanceVariablesTest() throws ApiException {
-        //String id = null;
-        //Boolean deserializeValue = null;
-        //Map<String, VariableValueDto> response = api.getProcessInstanceVariables(id, deserializeValue);
+        String id = null;
+        Boolean deserializeValue = null;
+        Map<String, VariableValueDto> response = api.getProcessInstanceVariables(id, deserializeValue);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -203,43 +211,44 @@ public class ProcessInstanceApiTest {
      */
     @Test
     public void getProcessInstancesTest() throws ApiException {
-        //String sortBy = null;
-        //String sortOrder = null;
-        //Integer firstResult = null;
-        //Integer maxResults = null;
-        //String processInstanceIds = null;
-        //String businessKey = null;
-        //String businessKeyLike = null;
-        //String caseInstanceId = null;
-        //String processDefinitionId = null;
-        //String processDefinitionKey = null;
-        //String processDefinitionKeyIn = null;
-        //String processDefinitionKeyNotIn = null;
-        //String deploymentId = null;
-        //String superProcessInstance = null;
-        //String subProcessInstance = null;
-        //String superCaseInstance = null;
-        //String subCaseInstance = null;
-        //Boolean active = null;
-        //Boolean suspended = null;
-        //Boolean withIncident = null;
-        //String incidentId = null;
-        //String incidentType = null;
-        //String incidentMessage = null;
-        //String incidentMessageLike = null;
-        //String tenantIdIn = null;
-        //Boolean withoutTenantId = null;
-        //Boolean processDefinitionWithoutTenantId = null;
-        //String activityIdIn = null;
-        //Boolean rootProcessInstances = null;
-        //Boolean leafProcessInstances = null;
-        //String variables = null;
-        //Boolean variableNamesIgnoreCase = null;
-        //Boolean variableValuesIgnoreCase = null;
-        //List<ProcessInstanceDto> response = api.getProcessInstances(sortBy, sortOrder, firstResult, maxResults, processInstanceIds, businessKey, businessKeyLike, caseInstanceId, processDefinitionId, processDefinitionKey, processDefinitionKeyIn, processDefinitionKeyNotIn, deploymentId, superProcessInstance, subProcessInstance, superCaseInstance, subCaseInstance, active, suspended, withIncident, incidentId, incidentType, incidentMessage, incidentMessageLike, tenantIdIn, withoutTenantId, processDefinitionWithoutTenantId, activityIdIn, rootProcessInstances, leafProcessInstances, variables, variableNamesIgnoreCase, variableValuesIgnoreCase);
+        String sortBy = null;
+        String sortOrder = null;
+        Integer firstResult = null;
+        Integer maxResults = null;
+        String processInstanceIds = null;
+        String businessKey = null;
+        String businessKeyLike = null;
+        String caseInstanceId = null;
+        String processDefinitionId = null;
+        String processDefinitionKey = null;
+        String processDefinitionKeyIn = null;
+        String processDefinitionKeyNotIn = null;
+        String deploymentId = null;
+        String superProcessInstance = null;
+        String subProcessInstance = null;
+        String superCaseInstance = null;
+        String subCaseInstance = null;
+        Boolean active = null;
+        Boolean suspended = null;
+        Boolean withIncident = null;
+        String incidentId = null;
+        String incidentType = null;
+        String incidentMessage = null;
+        String incidentMessageLike = null;
+        String tenantIdIn = null;
+        Boolean withoutTenantId = null;
+        Boolean processDefinitionWithoutTenantId = null;
+        String activityIdIn = null;
+        Boolean rootProcessInstances = null;
+        Boolean leafProcessInstances = null;
+        String variables = null;
+        Boolean variableNamesIgnoreCase = null;
+        Boolean variableValuesIgnoreCase = null;
+        List<ProcessInstanceDto> response = api.getProcessInstances(sortBy, sortOrder, firstResult, maxResults, processInstanceIds, businessKey, businessKeyLike, caseInstanceId, processDefinitionId, processDefinitionKey, processDefinitionKeyIn, processDefinitionKeyNotIn, deploymentId, superProcessInstance, subProcessInstance, superCaseInstance, subCaseInstance, active, suspended, withIncident, incidentId, incidentType, incidentMessage, incidentMessageLike, tenantIdIn, withoutTenantId, processDefinitionWithoutTenantId, activityIdIn, rootProcessInstances, leafProcessInstances, variables, variableNamesIgnoreCase, variableValuesIgnoreCase);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -250,39 +259,40 @@ public class ProcessInstanceApiTest {
      */
     @Test
     public void getProcessInstancesCountTest() throws ApiException {
-        //String processInstanceIds = null;
-        //String businessKey = null;
-        //String businessKeyLike = null;
-        //String caseInstanceId = null;
-        //String processDefinitionId = null;
-        //String processDefinitionKey = null;
-        //String processDefinitionKeyIn = null;
-        //String processDefinitionKeyNotIn = null;
-        //String deploymentId = null;
-        //String superProcessInstance = null;
-        //String subProcessInstance = null;
-        //String superCaseInstance = null;
-        //String subCaseInstance = null;
-        //Boolean active = null;
-        //Boolean suspended = null;
-        //Boolean withIncident = null;
-        //String incidentId = null;
-        //String incidentType = null;
-        //String incidentMessage = null;
-        //String incidentMessageLike = null;
-        //String tenantIdIn = null;
-        //Boolean withoutTenantId = null;
-        //Boolean processDefinitionWithoutTenantId = null;
-        //String activityIdIn = null;
-        //Boolean rootProcessInstances = null;
-        //Boolean leafProcessInstances = null;
-        //String variables = null;
-        //Boolean variableNamesIgnoreCase = null;
-        //Boolean variableValuesIgnoreCase = null;
-        //CountResultDto response = api.getProcessInstancesCount(processInstanceIds, businessKey, businessKeyLike, caseInstanceId, processDefinitionId, processDefinitionKey, processDefinitionKeyIn, processDefinitionKeyNotIn, deploymentId, superProcessInstance, subProcessInstance, superCaseInstance, subCaseInstance, active, suspended, withIncident, incidentId, incidentType, incidentMessage, incidentMessageLike, tenantIdIn, withoutTenantId, processDefinitionWithoutTenantId, activityIdIn, rootProcessInstances, leafProcessInstances, variables, variableNamesIgnoreCase, variableValuesIgnoreCase);
+        String processInstanceIds = null;
+        String businessKey = null;
+        String businessKeyLike = null;
+        String caseInstanceId = null;
+        String processDefinitionId = null;
+        String processDefinitionKey = null;
+        String processDefinitionKeyIn = null;
+        String processDefinitionKeyNotIn = null;
+        String deploymentId = null;
+        String superProcessInstance = null;
+        String subProcessInstance = null;
+        String superCaseInstance = null;
+        String subCaseInstance = null;
+        Boolean active = null;
+        Boolean suspended = null;
+        Boolean withIncident = null;
+        String incidentId = null;
+        String incidentType = null;
+        String incidentMessage = null;
+        String incidentMessageLike = null;
+        String tenantIdIn = null;
+        Boolean withoutTenantId = null;
+        Boolean processDefinitionWithoutTenantId = null;
+        String activityIdIn = null;
+        Boolean rootProcessInstances = null;
+        Boolean leafProcessInstances = null;
+        String variables = null;
+        Boolean variableNamesIgnoreCase = null;
+        Boolean variableValuesIgnoreCase = null;
+        CountResultDto response = api.getProcessInstancesCount(processInstanceIds, businessKey, businessKeyLike, caseInstanceId, processDefinitionId, processDefinitionKey, processDefinitionKeyIn, processDefinitionKeyNotIn, deploymentId, superProcessInstance, subProcessInstance, superCaseInstance, subCaseInstance, active, suspended, withIncident, incidentId, incidentType, incidentMessage, incidentMessageLike, tenantIdIn, withoutTenantId, processDefinitionWithoutTenantId, activityIdIn, rootProcessInstances, leafProcessInstances, variables, variableNamesIgnoreCase, variableValuesIgnoreCase);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -293,12 +303,13 @@ public class ProcessInstanceApiTest {
      */
     @Test
     public void modifyProcessInstanceTest() throws ApiException {
-        //String id = null;
-        //ProcessInstanceModificationDto processInstanceModificationDto = null;
-        //api.modifyProcessInstance(id, processInstanceModificationDto);
+        String id = null;
+        ProcessInstanceModificationDto processInstanceModificationDto = null;
+        api.modifyProcessInstance(id, processInstanceModificationDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -309,12 +320,13 @@ public class ProcessInstanceApiTest {
      */
     @Test
     public void modifyProcessInstanceAsyncOperationTest() throws ApiException {
-        //String id = null;
-        //ProcessInstanceModificationDto processInstanceModificationDto = null;
-        //BatchDto response = api.modifyProcessInstanceAsyncOperation(id, processInstanceModificationDto);
+        String id = null;
+        ProcessInstanceModificationDto processInstanceModificationDto = null;
+        BatchDto response = api.modifyProcessInstanceAsyncOperation(id, processInstanceModificationDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -325,12 +337,13 @@ public class ProcessInstanceApiTest {
      */
     @Test
     public void modifyProcessInstanceVariablesTest() throws ApiException {
-        //String id = null;
-        //PatchVariablesDto patchVariablesDto = null;
-        //api.modifyProcessInstanceVariables(id, patchVariablesDto);
+        String id = null;
+        PatchVariablesDto patchVariablesDto = null;
+        api.modifyProcessInstanceVariables(id, patchVariablesDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -341,13 +354,14 @@ public class ProcessInstanceApiTest {
      */
     @Test
     public void queryProcessInstancesTest() throws ApiException {
-        //Integer firstResult = null;
-        //Integer maxResults = null;
-        //ProcessInstanceQueryDto processInstanceQueryDto = null;
-        //List<ProcessInstanceDto> response = api.queryProcessInstances(firstResult, maxResults, processInstanceQueryDto);
+        Integer firstResult = null;
+        Integer maxResults = null;
+        ProcessInstanceQueryDto processInstanceQueryDto = null;
+        List<ProcessInstanceDto> response = api.queryProcessInstances(firstResult, maxResults, processInstanceQueryDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -358,11 +372,12 @@ public class ProcessInstanceApiTest {
      */
     @Test
     public void queryProcessInstancesCountTest() throws ApiException {
-        //ProcessInstanceQueryDto processInstanceQueryDto = null;
-        //CountResultDto response = api.queryProcessInstancesCount(processInstanceQueryDto);
+        ProcessInstanceQueryDto processInstanceQueryDto = null;
+        CountResultDto response = api.queryProcessInstancesCount(processInstanceQueryDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -373,13 +388,14 @@ public class ProcessInstanceApiTest {
      */
     @Test
     public void setProcessInstanceVariableTest() throws ApiException {
-        //String id = null;
-        //String varName = null;
-        //VariableValueDto variableValueDto = null;
-        //api.setProcessInstanceVariable(id, varName, variableValueDto);
+        String id = null;
+        String varName = null;
+        VariableValueDto variableValueDto = null;
+        api.setProcessInstanceVariable(id, varName, variableValueDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -390,14 +406,15 @@ public class ProcessInstanceApiTest {
      */
     @Test
     public void setProcessInstanceVariableBinaryTest() throws ApiException {
-        //String id = null;
-        //String varName = null;
-        //File data = null;
-        //String valueType = null;
-        //api.setProcessInstanceVariableBinary(id, varName, data, valueType);
+        String id = null;
+        String varName = null;
+        File data = null;
+        String valueType = null;
+        api.setProcessInstanceVariableBinary(id, varName, data, valueType);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -408,11 +425,12 @@ public class ProcessInstanceApiTest {
      */
     @Test
     public void setRetriesByProcessTest() throws ApiException {
-        //SetJobRetriesByProcessDto setJobRetriesByProcessDto = null;
-        //BatchDto response = api.setRetriesByProcess(setJobRetriesByProcessDto);
+        SetJobRetriesByProcessDto setJobRetriesByProcessDto = null;
+        BatchDto response = api.setRetriesByProcess(setJobRetriesByProcessDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -423,11 +441,12 @@ public class ProcessInstanceApiTest {
      */
     @Test
     public void setRetriesByProcessHistoricQueryBasedTest() throws ApiException {
-        //SetJobRetriesByProcessDto setJobRetriesByProcessDto = null;
-        //BatchDto response = api.setRetriesByProcessHistoricQueryBased(setJobRetriesByProcessDto);
+        SetJobRetriesByProcessDto setJobRetriesByProcessDto = null;
+        BatchDto response = api.setRetriesByProcessHistoricQueryBased(setJobRetriesByProcessDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -438,11 +457,12 @@ public class ProcessInstanceApiTest {
      */
     @Test
     public void setVariablesAsyncOperationTest() throws ApiException {
-        //SetVariablesAsyncDto setVariablesAsyncDto = null;
-        //BatchDto response = api.setVariablesAsyncOperation(setVariablesAsyncDto);
+        SetVariablesAsyncDto setVariablesAsyncDto = null;
+        BatchDto response = api.setVariablesAsyncOperation(setVariablesAsyncDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -453,11 +473,12 @@ public class ProcessInstanceApiTest {
      */
     @Test
     public void updateSuspensionStateTest() throws ApiException {
-        //ProcessInstanceSuspensionStateDto processInstanceSuspensionStateDto = null;
-        //api.updateSuspensionState(processInstanceSuspensionStateDto);
+        ProcessInstanceSuspensionStateDto processInstanceSuspensionStateDto = null;
+        api.updateSuspensionState(processInstanceSuspensionStateDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -468,11 +489,12 @@ public class ProcessInstanceApiTest {
      */
     @Test
     public void updateSuspensionStateAsyncOperationTest() throws ApiException {
-        //ProcessInstanceSuspensionStateAsyncDto processInstanceSuspensionStateAsyncDto = null;
-        //BatchDto response = api.updateSuspensionStateAsyncOperation(processInstanceSuspensionStateAsyncDto);
+        ProcessInstanceSuspensionStateAsyncDto processInstanceSuspensionStateAsyncDto = null;
+        BatchDto response = api.updateSuspensionStateAsyncOperation(processInstanceSuspensionStateAsyncDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -483,10 +505,11 @@ public class ProcessInstanceApiTest {
      */
     @Test
     public void updateSuspensionStateByIdTest() throws ApiException {
-        //String id = null;
-        //SuspensionStateDto suspensionStateDto = null;
-        //api.updateSuspensionStateById(id, suspensionStateDto);
+        String id = null;
+        SuspensionStateDto suspensionStateDto = null;
+        api.updateSuspensionStateById(id, suspensionStateDto);
+
         // TODO: test validations
     }
-
+    
 }

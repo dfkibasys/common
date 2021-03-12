@@ -15,55 +15,47 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import de.dfki.cos.basys.common.rest.camunda.dto.VariableValueDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
 
 /**
  * EvaluationConditionDto
  */
-@JsonPropertyOrder({
-  EvaluationConditionDto.JSON_PROPERTY_VARIABLES,
-  EvaluationConditionDto.JSON_PROPERTY_BUSINESS_KEY,
-  EvaluationConditionDto.JSON_PROPERTY_TENANT_ID,
-  EvaluationConditionDto.JSON_PROPERTY_WITHOUT_TENANT_ID,
-  EvaluationConditionDto.JSON_PROPERTY_PROCESS_DEFINITION_ID
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class EvaluationConditionDto {
-  public static final String JSON_PROPERTY_VARIABLES = "variables";
+  public static final String SERIALIZED_NAME_VARIABLES = "variables";
+  @SerializedName(SERIALIZED_NAME_VARIABLES)
   private Map<String, VariableValueDto> variables = null;
 
-  public static final String JSON_PROPERTY_BUSINESS_KEY = "businessKey";
+  public static final String SERIALIZED_NAME_BUSINESS_KEY = "businessKey";
+  @SerializedName(SERIALIZED_NAME_BUSINESS_KEY)
   private String businessKey;
 
-  public static final String JSON_PROPERTY_TENANT_ID = "tenantId";
+  public static final String SERIALIZED_NAME_TENANT_ID = "tenantId";
+  @SerializedName(SERIALIZED_NAME_TENANT_ID)
   private String tenantId;
 
-  public static final String JSON_PROPERTY_WITHOUT_TENANT_ID = "withoutTenantId";
-  private JsonNullable<Boolean> withoutTenantId = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_WITHOUT_TENANT_ID = "withoutTenantId";
+  @SerializedName(SERIALIZED_NAME_WITHOUT_TENANT_ID)
+  private Boolean withoutTenantId;
 
-  public static final String JSON_PROPERTY_PROCESS_DEFINITION_ID = "processDefinitionId";
+  public static final String SERIALIZED_NAME_PROCESS_DEFINITION_ID = "processDefinitionId";
+  @SerializedName(SERIALIZED_NAME_PROCESS_DEFINITION_ID)
   private String processDefinitionId;
 
 
   public EvaluationConditionDto variables(Map<String, VariableValueDto> variables) {
+    
     this.variables = variables;
     return this;
   }
@@ -82,8 +74,6 @@ public class EvaluationConditionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A map of variables which are used for evaluation of the conditions and are injected into the process instances which have been triggered. Each key is a variable name and each value a JSON variable value object with the following properties.")
-  @JsonProperty(JSON_PROPERTY_VARIABLES)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Map<String, VariableValueDto> getVariables() {
     return variables;
@@ -96,6 +86,7 @@ public class EvaluationConditionDto {
 
 
   public EvaluationConditionDto businessKey(String businessKey) {
+    
     this.businessKey = businessKey;
     return this;
   }
@@ -106,8 +97,6 @@ public class EvaluationConditionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Used for the process instances that have been triggered after the evaluation.")
-  @JsonProperty(JSON_PROPERTY_BUSINESS_KEY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getBusinessKey() {
     return businessKey;
@@ -120,6 +109,7 @@ public class EvaluationConditionDto {
 
 
   public EvaluationConditionDto tenantId(String tenantId) {
+    
     this.tenantId = tenantId;
     return this;
   }
@@ -130,8 +120,6 @@ public class EvaluationConditionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Used to evaluate a condition for a tenant with the given id. Will only evaluate conditions of process definitions which belong to the tenant.")
-  @JsonProperty(JSON_PROPERTY_TENANT_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getTenantId() {
     return tenantId;
@@ -144,7 +132,8 @@ public class EvaluationConditionDto {
 
 
   public EvaluationConditionDto withoutTenantId(Boolean withoutTenantId) {
-    this.withoutTenantId = JsonNullable.<Boolean>of(withoutTenantId);
+    
+    this.withoutTenantId = withoutTenantId;
     return this;
   }
 
@@ -154,30 +143,19 @@ public class EvaluationConditionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A Boolean value that indicates whether the conditions should only be evaluated of process definitions which belong to no tenant or not. Value may only be true, as false is the default behavior.")
-  @JsonIgnore
 
   public Boolean getWithoutTenantId() {
-        return withoutTenantId.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_WITHOUT_TENANT_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getWithoutTenantId_JsonNullable() {
     return withoutTenantId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_WITHOUT_TENANT_ID)
-  public void setWithoutTenantId_JsonNullable(JsonNullable<Boolean> withoutTenantId) {
-    this.withoutTenantId = withoutTenantId;
-  }
+
 
   public void setWithoutTenantId(Boolean withoutTenantId) {
-    this.withoutTenantId = JsonNullable.<Boolean>of(withoutTenantId);
+    this.withoutTenantId = withoutTenantId;
   }
 
 
   public EvaluationConditionDto processDefinitionId(String processDefinitionId) {
+    
     this.processDefinitionId = processDefinitionId;
     return this;
   }
@@ -188,8 +166,6 @@ public class EvaluationConditionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Used to evaluate conditions of the process definition with the given id.")
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getProcessDefinitionId() {
     return processDefinitionId;
@@ -201,9 +177,6 @@ public class EvaluationConditionDto {
   }
 
 
-  /**
-   * Return true if this EvaluationConditionDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

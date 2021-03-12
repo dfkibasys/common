@@ -15,37 +15,28 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
+import java.io.IOException;
 
 /**
  * DurationReportResultDto
  */
-@JsonPropertyOrder({
-  DurationReportResultDto.JSON_PROPERTY_PERIOD,
-  DurationReportResultDto.JSON_PROPERTY_PERIOD_UNIT,
-  DurationReportResultDto.JSON_PROPERTY_MINIMUM,
-  DurationReportResultDto.JSON_PROPERTY_MAXIMUM,
-  DurationReportResultDto.JSON_PROPERTY_AVERAGE
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class DurationReportResultDto {
-  public static final String JSON_PROPERTY_PERIOD = "period";
+  public static final String SERIALIZED_NAME_PERIOD = "period";
+  @SerializedName(SERIALIZED_NAME_PERIOD)
   private Integer period;
 
   /**
    * The unit of the given period. Possible values are &#x60;MONTH&#x60; and &#x60;QUARTER&#x60;.
    */
+  @JsonAdapter(PeriodUnitEnum.Adapter.class)
   public enum PeriodUnitEnum {
     MONTH("MONTH"),
     
@@ -57,7 +48,6 @@ public class DurationReportResultDto {
       this.value = value;
     }
 
-    @JsonValue
     public String getValue() {
       return value;
     }
@@ -67,7 +57,6 @@ public class DurationReportResultDto {
       return String.valueOf(value);
     }
 
-    @JsonCreator
     public static PeriodUnitEnum fromValue(String value) {
       for (PeriodUnitEnum b : PeriodUnitEnum.values()) {
         if (b.value.equals(value)) {
@@ -76,22 +65,40 @@ public class DurationReportResultDto {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
+
+    public static class Adapter extends TypeAdapter<PeriodUnitEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final PeriodUnitEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public PeriodUnitEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return PeriodUnitEnum.fromValue(value);
+      }
+    }
   }
 
-  public static final String JSON_PROPERTY_PERIOD_UNIT = "periodUnit";
+  public static final String SERIALIZED_NAME_PERIOD_UNIT = "periodUnit";
+  @SerializedName(SERIALIZED_NAME_PERIOD_UNIT)
   private PeriodUnitEnum periodUnit;
 
-  public static final String JSON_PROPERTY_MINIMUM = "minimum";
+  public static final String SERIALIZED_NAME_MINIMUM = "minimum";
+  @SerializedName(SERIALIZED_NAME_MINIMUM)
   private Long minimum;
 
-  public static final String JSON_PROPERTY_MAXIMUM = "maximum";
+  public static final String SERIALIZED_NAME_MAXIMUM = "maximum";
+  @SerializedName(SERIALIZED_NAME_MAXIMUM)
   private Long maximum;
 
-  public static final String JSON_PROPERTY_AVERAGE = "average";
+  public static final String SERIALIZED_NAME_AVERAGE = "average";
+  @SerializedName(SERIALIZED_NAME_AVERAGE)
   private Long average;
 
 
   public DurationReportResultDto period(Integer period) {
+    
     this.period = period;
     return this;
   }
@@ -102,8 +109,6 @@ public class DurationReportResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Specifies a timespan within a year. **Note:** The period must be interpreted in conjunction with the returned `periodUnit`.")
-  @JsonProperty(JSON_PROPERTY_PERIOD)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getPeriod() {
     return period;
@@ -116,6 +121,7 @@ public class DurationReportResultDto {
 
 
   public DurationReportResultDto periodUnit(PeriodUnitEnum periodUnit) {
+    
     this.periodUnit = periodUnit;
     return this;
   }
@@ -126,8 +132,6 @@ public class DurationReportResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The unit of the given period. Possible values are `MONTH` and `QUARTER`.")
-  @JsonProperty(JSON_PROPERTY_PERIOD_UNIT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public PeriodUnitEnum getPeriodUnit() {
     return periodUnit;
@@ -140,6 +144,7 @@ public class DurationReportResultDto {
 
 
   public DurationReportResultDto minimum(Long minimum) {
+    
     this.minimum = minimum;
     return this;
   }
@@ -150,8 +155,6 @@ public class DurationReportResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The smallest duration in milliseconds of all completed process instances which were started in the given period.")
-  @JsonProperty(JSON_PROPERTY_MINIMUM)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Long getMinimum() {
     return minimum;
@@ -164,6 +167,7 @@ public class DurationReportResultDto {
 
 
   public DurationReportResultDto maximum(Long maximum) {
+    
     this.maximum = maximum;
     return this;
   }
@@ -174,8 +178,6 @@ public class DurationReportResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The greatest duration in milliseconds of all completed process instances which were started in the given period.")
-  @JsonProperty(JSON_PROPERTY_MAXIMUM)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Long getMaximum() {
     return maximum;
@@ -188,6 +190,7 @@ public class DurationReportResultDto {
 
 
   public DurationReportResultDto average(Long average) {
+    
     this.average = average;
     return this;
   }
@@ -198,8 +201,6 @@ public class DurationReportResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The average duration in milliseconds of all completed process instances which were started in the given period.")
-  @JsonProperty(JSON_PROPERTY_AVERAGE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Long getAverage() {
     return average;
@@ -211,9 +212,6 @@ public class DurationReportResultDto {
   }
 
 
-  /**
-   * Return true if this DurationReportResultDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

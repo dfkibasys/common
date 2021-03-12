@@ -9,49 +9,45 @@ Method | HTTP request | Description
 [**getIdentityLinks**](TaskIdentityLinkApi.md#getIdentityLinks) | **GET** /task/{id}/identity-links | 
 
 
-
-## addIdentityLink
-
+<a name="addIdentityLink"></a>
+# **addIdentityLink**
 > addIdentityLink(id, identityLinkDto)
 
 
 
-Adds an identity link to a task by id. Can be used to link any user or group to a task
-and specify a relation.
+Adds an identity link to a task by id. Can be used to link any user or group to a task and specify a relation.
 
 ### Example
-
 ```java
 // Import classes:
 import de.dfki.cos.basys.common.rest.camunda.ApiClient;
 import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.Configuration;
-import de.dfki.cos.basys.common.rest.camunda.model.*;
+import de.dfki.cos.basys.common.rest.camunda.models.*;
 import de.dfki.cos.basys.common.rest.camunda.api.TaskIdentityLinkApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("http://localhost:8080/engine-rest");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost:8080/engine-rest");
 
-        TaskIdentityLinkApi apiInstance = new TaskIdentityLinkApi(defaultClient);
-        String id = "id_example"; // String | The id of the task to add a link to.
-        IdentityLinkDto identityLinkDto = {"groupId":"aNewGroupId","type":"candidate"}; // IdentityLinkDto | 
-        try {
-            apiInstance.addIdentityLink(id, identityLinkDto);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling TaskIdentityLinkApi#addIdentityLink");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    TaskIdentityLinkApi apiInstance = new TaskIdentityLinkApi(defaultClient);
+    String id = "id_example"; // String | The id of the task to add a link to.
+    IdentityLinkDto identityLinkDto = {"groupId":"aNewGroupId","type":"candidate"}; // IdentityLinkDto | 
+    try {
+      apiInstance.addIdentityLink(id, identityLinkDto);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TaskIdentityLinkApi#addIdentityLink");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -68,18 +64,17 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **204** | Request successful. |  -  |
-| **400** | Task with given id does not exist. See the [Introduction](https://docs.camunda.org/manual/7.14/reference/rest/overview/#error-handling) for the error response format. |  -  |
+**204** | Request successful. |  -  |
+**400** | Task with given id does not exist. See the [Introduction](https://docs.camunda.org/manual/7.14/reference/rest/overview/#error-handling) for the error response format. |  -  |
 
-
-## deleteIdentityLink
-
+<a name="deleteIdentityLink"></a>
+# **deleteIdentityLink**
 > deleteIdentityLink(id, identityLinkDto)
 
 
@@ -87,38 +82,36 @@ No authorization required
 Removes an identity link from a task by id
 
 ### Example
-
 ```java
 // Import classes:
 import de.dfki.cos.basys.common.rest.camunda.ApiClient;
 import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.Configuration;
-import de.dfki.cos.basys.common.rest.camunda.model.*;
+import de.dfki.cos.basys.common.rest.camunda.models.*;
 import de.dfki.cos.basys.common.rest.camunda.api.TaskIdentityLinkApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("http://localhost:8080/engine-rest");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost:8080/engine-rest");
 
-        TaskIdentityLinkApi apiInstance = new TaskIdentityLinkApi(defaultClient);
-        String id = "id_example"; // String | The id of the task to remove a link from.
-        IdentityLinkDto identityLinkDto = {"groupId":"theOldGroupId","type":"candidate"}; // IdentityLinkDto | 
-        try {
-            apiInstance.deleteIdentityLink(id, identityLinkDto);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling TaskIdentityLinkApi#deleteIdentityLink");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    TaskIdentityLinkApi apiInstance = new TaskIdentityLinkApi(defaultClient);
+    String id = "id_example"; // String | The id of the task to remove a link from.
+    IdentityLinkDto identityLinkDto = {"groupId":"theOldGroupId","type":"candidate"}; // IdentityLinkDto | 
+    try {
+      apiInstance.deleteIdentityLink(id, identityLinkDto);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TaskIdentityLinkApi#deleteIdentityLink");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -135,59 +128,55 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **204** | Request successful. |  -  |
-| **400** | Task with given id does not exist. See the [Introduction](https://docs.camunda.org/manual/7.14/reference/rest/overview/#error-handling) for the error response format. |  -  |
+**204** | Request successful. |  -  |
+**400** | Task with given id does not exist. See the [Introduction](https://docs.camunda.org/manual/7.14/reference/rest/overview/#error-handling) for the error response format. |  -  |
 
-
-## getIdentityLinks
-
+<a name="getIdentityLinks"></a>
+# **getIdentityLinks**
 > List&lt;IdentityLinkDto&gt; getIdentityLinks(id, type)
 
 
 
-Gets the identity links for a task by id, which are the users and groups that are in
-*some* relation to it (including assignee and owner).
+Gets the identity links for a task by id, which are the users and groups that are in *some* relation to it (including assignee and owner).
 
 ### Example
-
 ```java
 // Import classes:
 import de.dfki.cos.basys.common.rest.camunda.ApiClient;
 import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.Configuration;
-import de.dfki.cos.basys.common.rest.camunda.model.*;
+import de.dfki.cos.basys.common.rest.camunda.models.*;
 import de.dfki.cos.basys.common.rest.camunda.api.TaskIdentityLinkApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("http://localhost:8080/engine-rest");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost:8080/engine-rest");
 
-        TaskIdentityLinkApi apiInstance = new TaskIdentityLinkApi(defaultClient);
-        String id = "id_example"; // String | The id of the task to retrieve the identity links for.
-        String type = "type_example"; // String | Filter by the type of links to include.
-        try {
-            List<IdentityLinkDto> result = apiInstance.getIdentityLinks(id, type);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling TaskIdentityLinkApi#getIdentityLinks");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    TaskIdentityLinkApi apiInstance = new TaskIdentityLinkApi(defaultClient);
+    String id = "id_example"; // String | The id of the task to retrieve the identity links for.
+    String type = "type_example"; // String | Filter by the type of links to include.
+    try {
+      List<IdentityLinkDto> result = apiInstance.getIdentityLinks(id, type);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TaskIdentityLinkApi#getIdentityLinks");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -204,12 +193,12 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Request successful. |  -  |
-| **400** | Task with given id does not exist. See the [Introduction](https://docs.camunda.org/manual/7.14/reference/rest/overview/#error-handling) for the error response format. |  -  |
+**200** | Request successful. |  -  |
+**400** | Task with given id does not exist. See the [Introduction](https://docs.camunda.org/manual/7.14/reference/rest/overview/#error-handling) for the error response format. |  -  |
 

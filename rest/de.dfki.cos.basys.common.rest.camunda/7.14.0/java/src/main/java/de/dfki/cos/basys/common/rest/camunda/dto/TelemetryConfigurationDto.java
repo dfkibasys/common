@@ -15,36 +15,28 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
+import java.io.IOException;
 
 /**
  * TelemetryConfigurationDto
  */
-@JsonPropertyOrder({
-  TelemetryConfigurationDto.JSON_PROPERTY_ENABLE_TELEMETRY
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class TelemetryConfigurationDto {
-  public static final String JSON_PROPERTY_ENABLE_TELEMETRY = "enableTelemetry";
-  private JsonNullable<Boolean> enableTelemetry = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_ENABLE_TELEMETRY = "enableTelemetry";
+  @SerializedName(SERIALIZED_NAME_ENABLE_TELEMETRY)
+  private Boolean enableTelemetry;
 
 
   public TelemetryConfigurationDto enableTelemetry(Boolean enableTelemetry) {
-    this.enableTelemetry = JsonNullable.<Boolean>of(enableTelemetry);
+    
+    this.enableTelemetry = enableTelemetry;
     return this;
   }
 
@@ -54,32 +46,17 @@ public class TelemetryConfigurationDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Specifies if the telemetry data should be sent or not.")
-  @JsonIgnore
 
   public Boolean getEnableTelemetry() {
-        return enableTelemetry.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_ENABLE_TELEMETRY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getEnableTelemetry_JsonNullable() {
     return enableTelemetry;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ENABLE_TELEMETRY)
-  public void setEnableTelemetry_JsonNullable(JsonNullable<Boolean> enableTelemetry) {
+
+
+  public void setEnableTelemetry(Boolean enableTelemetry) {
     this.enableTelemetry = enableTelemetry;
   }
 
-  public void setEnableTelemetry(Boolean enableTelemetry) {
-    this.enableTelemetry = JsonNullable.<Boolean>of(enableTelemetry);
-  }
 
-
-  /**
-   * Return true if this TelemetryConfigurationDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

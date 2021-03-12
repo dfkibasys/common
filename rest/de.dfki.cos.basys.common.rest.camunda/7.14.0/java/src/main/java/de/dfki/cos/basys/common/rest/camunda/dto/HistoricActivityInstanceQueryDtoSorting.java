@@ -15,31 +15,24 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
+import java.io.IOException;
 
 /**
  * HistoricActivityInstanceQueryDtoSorting
  */
-@JsonPropertyOrder({
-  HistoricActivityInstanceQueryDtoSorting.JSON_PROPERTY_SORT_BY,
-  HistoricActivityInstanceQueryDtoSorting.JSON_PROPERTY_SORT_ORDER
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class HistoricActivityInstanceQueryDtoSorting {
   /**
    * Sort the results lexicographically by a given criterion. Must be used in conjunction with the sortOrder parameter.
    */
+  @JsonAdapter(SortByEnum.Adapter.class)
   public enum SortByEnum {
     ACTIVITYINSTANCEID("activityInstanceId"),
     
@@ -71,7 +64,6 @@ public class HistoricActivityInstanceQueryDtoSorting {
       this.value = value;
     }
 
-    @JsonValue
     public String getValue() {
       return value;
     }
@@ -81,7 +73,6 @@ public class HistoricActivityInstanceQueryDtoSorting {
       return String.valueOf(value);
     }
 
-    @JsonCreator
     public static SortByEnum fromValue(String value) {
       for (SortByEnum b : SortByEnum.values()) {
         if (b.value.equals(value)) {
@@ -90,14 +81,29 @@ public class HistoricActivityInstanceQueryDtoSorting {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
+
+    public static class Adapter extends TypeAdapter<SortByEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final SortByEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public SortByEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return SortByEnum.fromValue(value);
+      }
+    }
   }
 
-  public static final String JSON_PROPERTY_SORT_BY = "sortBy";
+  public static final String SERIALIZED_NAME_SORT_BY = "sortBy";
+  @SerializedName(SERIALIZED_NAME_SORT_BY)
   private SortByEnum sortBy;
 
   /**
    * Sort the results in a given order. Values may be &#x60;asc&#x60; for ascending order or &#x60;desc&#x60; for descending order. Must be used in conjunction with the sortBy parameter.
    */
+  @JsonAdapter(SortOrderEnum.Adapter.class)
   public enum SortOrderEnum {
     ASC("asc"),
     
@@ -109,7 +115,6 @@ public class HistoricActivityInstanceQueryDtoSorting {
       this.value = value;
     }
 
-    @JsonValue
     public String getValue() {
       return value;
     }
@@ -119,7 +124,6 @@ public class HistoricActivityInstanceQueryDtoSorting {
       return String.valueOf(value);
     }
 
-    @JsonCreator
     public static SortOrderEnum fromValue(String value) {
       for (SortOrderEnum b : SortOrderEnum.values()) {
         if (b.value.equals(value)) {
@@ -128,13 +132,28 @@ public class HistoricActivityInstanceQueryDtoSorting {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
+
+    public static class Adapter extends TypeAdapter<SortOrderEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final SortOrderEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public SortOrderEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return SortOrderEnum.fromValue(value);
+      }
+    }
   }
 
-  public static final String JSON_PROPERTY_SORT_ORDER = "sortOrder";
+  public static final String SERIALIZED_NAME_SORT_ORDER = "sortOrder";
+  @SerializedName(SERIALIZED_NAME_SORT_ORDER)
   private SortOrderEnum sortOrder;
 
 
   public HistoricActivityInstanceQueryDtoSorting sortBy(SortByEnum sortBy) {
+    
     this.sortBy = sortBy;
     return this;
   }
@@ -145,8 +164,6 @@ public class HistoricActivityInstanceQueryDtoSorting {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Sort the results lexicographically by a given criterion. Must be used in conjunction with the sortOrder parameter.")
-  @JsonProperty(JSON_PROPERTY_SORT_BY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public SortByEnum getSortBy() {
     return sortBy;
@@ -159,6 +176,7 @@ public class HistoricActivityInstanceQueryDtoSorting {
 
 
   public HistoricActivityInstanceQueryDtoSorting sortOrder(SortOrderEnum sortOrder) {
+    
     this.sortOrder = sortOrder;
     return this;
   }
@@ -169,8 +187,6 @@ public class HistoricActivityInstanceQueryDtoSorting {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Sort the results in a given order. Values may be `asc` for ascending order or `desc` for descending order. Must be used in conjunction with the sortBy parameter.")
-  @JsonProperty(JSON_PROPERTY_SORT_ORDER)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public SortOrderEnum getSortOrder() {
     return sortOrder;
@@ -182,9 +198,6 @@ public class HistoricActivityInstanceQueryDtoSorting {
   }
 
 
-  /**
-   * Return true if this HistoricActivityInstanceQueryDto_sorting object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

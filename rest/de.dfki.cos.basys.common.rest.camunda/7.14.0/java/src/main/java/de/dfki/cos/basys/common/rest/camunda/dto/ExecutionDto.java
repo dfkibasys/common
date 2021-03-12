@@ -15,44 +15,39 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
+import java.io.IOException;
 
 /**
  * ExecutionDto
  */
-@JsonPropertyOrder({
-  ExecutionDto.JSON_PROPERTY_ID,
-  ExecutionDto.JSON_PROPERTY_PROCESS_INSTANCE_ID,
-  ExecutionDto.JSON_PROPERTY_ENDED,
-  ExecutionDto.JSON_PROPERTY_TENANT_ID
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class ExecutionDto {
-  public static final String JSON_PROPERTY_ID = "id";
+  public static final String SERIALIZED_NAME_ID = "id";
+  @SerializedName(SERIALIZED_NAME_ID)
   private String id;
 
-  public static final String JSON_PROPERTY_PROCESS_INSTANCE_ID = "processInstanceId";
+  public static final String SERIALIZED_NAME_PROCESS_INSTANCE_ID = "processInstanceId";
+  @SerializedName(SERIALIZED_NAME_PROCESS_INSTANCE_ID)
   private String processInstanceId;
 
-  public static final String JSON_PROPERTY_ENDED = "ended";
+  public static final String SERIALIZED_NAME_ENDED = "ended";
+  @SerializedName(SERIALIZED_NAME_ENDED)
   private Boolean ended;
 
-  public static final String JSON_PROPERTY_TENANT_ID = "tenantId";
+  public static final String SERIALIZED_NAME_TENANT_ID = "tenantId";
+  @SerializedName(SERIALIZED_NAME_TENANT_ID)
   private String tenantId;
 
 
   public ExecutionDto id(String id) {
+    
     this.id = id;
     return this;
   }
@@ -63,8 +58,6 @@ public class ExecutionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the Execution.")
-  @JsonProperty(JSON_PROPERTY_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getId() {
     return id;
@@ -77,6 +70,7 @@ public class ExecutionDto {
 
 
   public ExecutionDto processInstanceId(String processInstanceId) {
+    
     this.processInstanceId = processInstanceId;
     return this;
   }
@@ -87,8 +81,6 @@ public class ExecutionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the root of the execution tree representing the process instance.")
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getProcessInstanceId() {
     return processInstanceId;
@@ -101,6 +93,7 @@ public class ExecutionDto {
 
 
   public ExecutionDto ended(Boolean ended) {
+    
     this.ended = ended;
     return this;
   }
@@ -111,8 +104,6 @@ public class ExecutionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Indicates if the execution is ended.")
-  @JsonProperty(JSON_PROPERTY_ENDED)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Boolean getEnded() {
     return ended;
@@ -125,6 +116,7 @@ public class ExecutionDto {
 
 
   public ExecutionDto tenantId(String tenantId) {
+    
     this.tenantId = tenantId;
     return this;
   }
@@ -135,8 +127,6 @@ public class ExecutionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the tenant this execution belongs to. Can be `null` if the execution belongs to no single tenant.")
-  @JsonProperty(JSON_PROPERTY_TENANT_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getTenantId() {
     return tenantId;
@@ -148,9 +138,6 @@ public class ExecutionDto {
   }
 
 
-  /**
-   * Return true if this ExecutionDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

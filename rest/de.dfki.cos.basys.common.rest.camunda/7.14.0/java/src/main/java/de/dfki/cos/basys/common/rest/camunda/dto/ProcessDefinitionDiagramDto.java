@@ -15,36 +15,31 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
+import java.io.IOException;
 
 /**
  * ProcessDefinitionDiagramDto
  */
-@JsonPropertyOrder({
-  ProcessDefinitionDiagramDto.JSON_PROPERTY_ID,
-  ProcessDefinitionDiagramDto.JSON_PROPERTY_BPMN20_XML
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class ProcessDefinitionDiagramDto {
-  public static final String JSON_PROPERTY_ID = "id";
+  public static final String SERIALIZED_NAME_ID = "id";
+  @SerializedName(SERIALIZED_NAME_ID)
   private String id;
 
-  public static final String JSON_PROPERTY_BPMN20_XML = "bpmn20Xml";
+  public static final String SERIALIZED_NAME_BPMN20_XML = "bpmn20Xml";
+  @SerializedName(SERIALIZED_NAME_BPMN20_XML)
   private String bpmn20Xml;
 
 
   public ProcessDefinitionDiagramDto id(String id) {
+    
     this.id = id;
     return this;
   }
@@ -55,8 +50,6 @@ public class ProcessDefinitionDiagramDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the process definition.")
-  @JsonProperty(JSON_PROPERTY_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getId() {
     return id;
@@ -69,6 +62,7 @@ public class ProcessDefinitionDiagramDto {
 
 
   public ProcessDefinitionDiagramDto bpmn20Xml(String bpmn20Xml) {
+    
     this.bpmn20Xml = bpmn20Xml;
     return this;
   }
@@ -79,8 +73,6 @@ public class ProcessDefinitionDiagramDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "An escaped XML string containing the XML that this definition was deployed with. Carriage returns, line feeds and quotation marks are escaped.")
-  @JsonProperty(JSON_PROPERTY_BPMN20_XML)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getBpmn20Xml() {
     return bpmn20Xml;
@@ -92,9 +84,6 @@ public class ProcessDefinitionDiagramDto {
   }
 
 
-  /**
-   * Return true if this ProcessDefinitionDiagramDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

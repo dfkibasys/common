@@ -151,15 +151,16 @@ gradlew.bat
 pom.xml
 settings.gradle
 src/main/AndroidManifest.xml
+src/main/java/de/dfki/cos/basys/common/rest/camunda/ApiCallback.java
 src/main/java/de/dfki/cos/basys/common/rest/camunda/ApiClient.java
 src/main/java/de/dfki/cos/basys/common/rest/camunda/ApiException.java
 src/main/java/de/dfki/cos/basys/common/rest/camunda/ApiResponse.java
 src/main/java/de/dfki/cos/basys/common/rest/camunda/Configuration.java
-src/main/java/de/dfki/cos/basys/common/rest/camunda/CustomInstantDeserializer.java
+src/main/java/de/dfki/cos/basys/common/rest/camunda/GzipRequestInterceptor.java
 src/main/java/de/dfki/cos/basys/common/rest/camunda/JSON.java
-src/main/java/de/dfki/cos/basys/common/rest/camunda/JavaTimeFormatter.java
 src/main/java/de/dfki/cos/basys/common/rest/camunda/Pair.java
-src/main/java/de/dfki/cos/basys/common/rest/camunda/RFC3339DateFormat.java
+src/main/java/de/dfki/cos/basys/common/rest/camunda/ProgressRequestBody.java
+src/main/java/de/dfki/cos/basys/common/rest/camunda/ProgressResponseBody.java
 src/main/java/de/dfki/cos/basys/common/rest/camunda/ServerConfiguration.java
 src/main/java/de/dfki/cos/basys/common/rest/camunda/ServerVariable.java
 src/main/java/de/dfki/cos/basys/common/rest/camunda/StringUtil.java
@@ -190,7 +191,6 @@ src/main/java/de/dfki/cos/basys/common/rest/camunda/auth/ApiKeyAuth.java
 src/main/java/de/dfki/cos/basys/common/rest/camunda/auth/Authentication.java
 src/main/java/de/dfki/cos/basys/common/rest/camunda/auth/HttpBasicAuth.java
 src/main/java/de/dfki/cos/basys/common/rest/camunda/auth/HttpBearerAuth.java
-src/main/java/de/dfki/cos/basys/common/rest/camunda/dto/AbstractOpenApiSchema.java
 src/main/java/de/dfki/cos/basys/common/rest/camunda/dto/AbstractSetRemovalTimeDto.java
 src/main/java/de/dfki/cos/basys/common/rest/camunda/dto/ActivityInstanceDto.java
 src/main/java/de/dfki/cos/basys/common/rest/camunda/dto/ActivityInstanceIncidentDto.java

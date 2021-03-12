@@ -15,44 +15,39 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import de.dfki.cos.basys.common.rest.camunda.dto.VariableValueDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
 
 /**
  * CompleteExternalTaskDto
  */
-@JsonPropertyOrder({
-  CompleteExternalTaskDto.JSON_PROPERTY_WORKER_ID,
-  CompleteExternalTaskDto.JSON_PROPERTY_VARIABLES,
-  CompleteExternalTaskDto.JSON_PROPERTY_LOCAL_VARIABLES
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class CompleteExternalTaskDto {
-  public static final String JSON_PROPERTY_WORKER_ID = "workerId";
+  public static final String SERIALIZED_NAME_WORKER_ID = "workerId";
+  @SerializedName(SERIALIZED_NAME_WORKER_ID)
   private String workerId;
 
-  public static final String JSON_PROPERTY_VARIABLES = "variables";
+  public static final String SERIALIZED_NAME_VARIABLES = "variables";
+  @SerializedName(SERIALIZED_NAME_VARIABLES)
   private Map<String, VariableValueDto> variables = null;
 
-  public static final String JSON_PROPERTY_LOCAL_VARIABLES = "localVariables";
+  public static final String SERIALIZED_NAME_LOCAL_VARIABLES = "localVariables";
+  @SerializedName(SERIALIZED_NAME_LOCAL_VARIABLES)
   private Map<String, VariableValueDto> localVariables = null;
 
 
   public CompleteExternalTaskDto workerId(String workerId) {
+    
     this.workerId = workerId;
     return this;
   }
@@ -63,8 +58,6 @@ public class CompleteExternalTaskDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the worker that completes the task. Must match the id of the worker who has most recently locked the task.")
-  @JsonProperty(JSON_PROPERTY_WORKER_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getWorkerId() {
     return workerId;
@@ -77,6 +70,7 @@ public class CompleteExternalTaskDto {
 
 
   public CompleteExternalTaskDto variables(Map<String, VariableValueDto> variables) {
+    
     this.variables = variables;
     return this;
   }
@@ -95,8 +89,6 @@ public class CompleteExternalTaskDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON object containing variable key-value pairs. Each key is a variable name and each value a JSON variable value object with the following properties:")
-  @JsonProperty(JSON_PROPERTY_VARIABLES)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Map<String, VariableValueDto> getVariables() {
     return variables;
@@ -109,6 +101,7 @@ public class CompleteExternalTaskDto {
 
 
   public CompleteExternalTaskDto localVariables(Map<String, VariableValueDto> localVariables) {
+    
     this.localVariables = localVariables;
     return this;
   }
@@ -127,8 +120,6 @@ public class CompleteExternalTaskDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON object containing local variable key-value pairs. Local variables are set only in the scope of external task. Each key is a variable name and each value a JSON variable value object with the following properties:")
-  @JsonProperty(JSON_PROPERTY_LOCAL_VARIABLES)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Map<String, VariableValueDto> getLocalVariables() {
     return localVariables;
@@ -140,9 +131,6 @@ public class CompleteExternalTaskDto {
   }
 
 
-  /**
-   * Return true if this CompleteExternalTaskDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

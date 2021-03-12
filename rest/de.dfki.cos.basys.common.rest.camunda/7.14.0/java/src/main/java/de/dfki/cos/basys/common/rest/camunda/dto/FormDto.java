@@ -15,36 +15,31 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
+import java.io.IOException;
 
 /**
  * FormDto
  */
-@JsonPropertyOrder({
-  FormDto.JSON_PROPERTY_KEY,
-  FormDto.JSON_PROPERTY_CONTEXT_PATH
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class FormDto {
-  public static final String JSON_PROPERTY_KEY = "key";
+  public static final String SERIALIZED_NAME_KEY = "key";
+  @SerializedName(SERIALIZED_NAME_KEY)
   private String key;
 
-  public static final String JSON_PROPERTY_CONTEXT_PATH = "contextPath";
+  public static final String SERIALIZED_NAME_CONTEXT_PATH = "contextPath";
+  @SerializedName(SERIALIZED_NAME_CONTEXT_PATH)
   private String contextPath;
 
 
   public FormDto key(String key) {
+    
     this.key = key;
     return this;
   }
@@ -55,8 +50,6 @@ public class FormDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The form key.")
-  @JsonProperty(JSON_PROPERTY_KEY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getKey() {
     return key;
@@ -69,6 +62,7 @@ public class FormDto {
 
 
   public FormDto contextPath(String contextPath) {
+    
     this.contextPath = contextPath;
     return this;
   }
@@ -79,8 +73,6 @@ public class FormDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The context path of the process application. If the task (or the process definition) does not belong to a process application deployment or a process definition at all, this property is not set.")
-  @JsonProperty(JSON_PROPERTY_CONTEXT_PATH)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getContextPath() {
     return contextPath;
@@ -92,9 +84,6 @@ public class FormDto {
   }
 
 
-  /**
-   * Return true if this FormDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

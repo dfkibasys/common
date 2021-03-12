@@ -15,79 +15,71 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
+import java.io.IOException;
 
 /**
  * DecisionDefinitionDto
  */
-@JsonPropertyOrder({
-  DecisionDefinitionDto.JSON_PROPERTY_ID,
-  DecisionDefinitionDto.JSON_PROPERTY_KEY,
-  DecisionDefinitionDto.JSON_PROPERTY_CATEGORY,
-  DecisionDefinitionDto.JSON_PROPERTY_NAME,
-  DecisionDefinitionDto.JSON_PROPERTY_VERSION,
-  DecisionDefinitionDto.JSON_PROPERTY_RESOURCE,
-  DecisionDefinitionDto.JSON_PROPERTY_DEPLOYMENT_ID,
-  DecisionDefinitionDto.JSON_PROPERTY_TENANT_ID,
-  DecisionDefinitionDto.JSON_PROPERTY_DECISION_REQUIREMENTS_DEFINITION_ID,
-  DecisionDefinitionDto.JSON_PROPERTY_DECISION_REQUIREMENTS_DEFINITION_KEY,
-  DecisionDefinitionDto.JSON_PROPERTY_HISTORY_TIME_TO_LIVE,
-  DecisionDefinitionDto.JSON_PROPERTY_VERSION_TAG
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class DecisionDefinitionDto {
-  public static final String JSON_PROPERTY_ID = "id";
+  public static final String SERIALIZED_NAME_ID = "id";
+  @SerializedName(SERIALIZED_NAME_ID)
   private String id;
 
-  public static final String JSON_PROPERTY_KEY = "key";
+  public static final String SERIALIZED_NAME_KEY = "key";
+  @SerializedName(SERIALIZED_NAME_KEY)
   private String key;
 
-  public static final String JSON_PROPERTY_CATEGORY = "category";
+  public static final String SERIALIZED_NAME_CATEGORY = "category";
+  @SerializedName(SERIALIZED_NAME_CATEGORY)
   private String category;
 
-  public static final String JSON_PROPERTY_NAME = "name";
+  public static final String SERIALIZED_NAME_NAME = "name";
+  @SerializedName(SERIALIZED_NAME_NAME)
   private String name;
 
-  public static final String JSON_PROPERTY_VERSION = "version";
+  public static final String SERIALIZED_NAME_VERSION = "version";
+  @SerializedName(SERIALIZED_NAME_VERSION)
   private Integer version;
 
-  public static final String JSON_PROPERTY_RESOURCE = "resource";
+  public static final String SERIALIZED_NAME_RESOURCE = "resource";
+  @SerializedName(SERIALIZED_NAME_RESOURCE)
   private String resource;
 
-  public static final String JSON_PROPERTY_DEPLOYMENT_ID = "deploymentId";
+  public static final String SERIALIZED_NAME_DEPLOYMENT_ID = "deploymentId";
+  @SerializedName(SERIALIZED_NAME_DEPLOYMENT_ID)
   private String deploymentId;
 
-  public static final String JSON_PROPERTY_TENANT_ID = "tenantId";
+  public static final String SERIALIZED_NAME_TENANT_ID = "tenantId";
+  @SerializedName(SERIALIZED_NAME_TENANT_ID)
   private String tenantId;
 
-  public static final String JSON_PROPERTY_DECISION_REQUIREMENTS_DEFINITION_ID = "decisionRequirementsDefinitionId";
+  public static final String SERIALIZED_NAME_DECISION_REQUIREMENTS_DEFINITION_ID = "decisionRequirementsDefinitionId";
+  @SerializedName(SERIALIZED_NAME_DECISION_REQUIREMENTS_DEFINITION_ID)
   private String decisionRequirementsDefinitionId;
 
-  public static final String JSON_PROPERTY_DECISION_REQUIREMENTS_DEFINITION_KEY = "decisionRequirementsDefinitionKey";
+  public static final String SERIALIZED_NAME_DECISION_REQUIREMENTS_DEFINITION_KEY = "decisionRequirementsDefinitionKey";
+  @SerializedName(SERIALIZED_NAME_DECISION_REQUIREMENTS_DEFINITION_KEY)
   private String decisionRequirementsDefinitionKey;
 
-  public static final String JSON_PROPERTY_HISTORY_TIME_TO_LIVE = "historyTimeToLive";
-  private JsonNullable<Integer> historyTimeToLive = JsonNullable.<Integer>undefined();
+  public static final String SERIALIZED_NAME_HISTORY_TIME_TO_LIVE = "historyTimeToLive";
+  @SerializedName(SERIALIZED_NAME_HISTORY_TIME_TO_LIVE)
+  private Integer historyTimeToLive;
 
-  public static final String JSON_PROPERTY_VERSION_TAG = "versionTag";
+  public static final String SERIALIZED_NAME_VERSION_TAG = "versionTag";
+  @SerializedName(SERIALIZED_NAME_VERSION_TAG)
   private String versionTag;
 
 
   public DecisionDefinitionDto id(String id) {
+    
     this.id = id;
     return this;
   }
@@ -98,8 +90,6 @@ public class DecisionDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the decision definition")
-  @JsonProperty(JSON_PROPERTY_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getId() {
     return id;
@@ -112,6 +102,7 @@ public class DecisionDefinitionDto {
 
 
   public DecisionDefinitionDto key(String key) {
+    
     this.key = key;
     return this;
   }
@@ -122,8 +113,6 @@ public class DecisionDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The key of the decision definition, i.e., the id of the DMN 1.0 XML decision definition.")
-  @JsonProperty(JSON_PROPERTY_KEY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getKey() {
     return key;
@@ -136,6 +125,7 @@ public class DecisionDefinitionDto {
 
 
   public DecisionDefinitionDto category(String category) {
+    
     this.category = category;
     return this;
   }
@@ -146,8 +136,6 @@ public class DecisionDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The category of the decision definition.")
-  @JsonProperty(JSON_PROPERTY_CATEGORY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getCategory() {
     return category;
@@ -160,6 +148,7 @@ public class DecisionDefinitionDto {
 
 
   public DecisionDefinitionDto name(String name) {
+    
     this.name = name;
     return this;
   }
@@ -170,8 +159,6 @@ public class DecisionDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The name of the decision definition.")
-  @JsonProperty(JSON_PROPERTY_NAME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getName() {
     return name;
@@ -184,6 +171,7 @@ public class DecisionDefinitionDto {
 
 
   public DecisionDefinitionDto version(Integer version) {
+    
     this.version = version;
     return this;
   }
@@ -194,8 +182,6 @@ public class DecisionDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The version of the decision definition that the engine assigned to it.")
-  @JsonProperty(JSON_PROPERTY_VERSION)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getVersion() {
     return version;
@@ -208,6 +194,7 @@ public class DecisionDefinitionDto {
 
 
   public DecisionDefinitionDto resource(String resource) {
+    
     this.resource = resource;
     return this;
   }
@@ -218,8 +205,6 @@ public class DecisionDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The file name of the decision definition.")
-  @JsonProperty(JSON_PROPERTY_RESOURCE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getResource() {
     return resource;
@@ -232,6 +217,7 @@ public class DecisionDefinitionDto {
 
 
   public DecisionDefinitionDto deploymentId(String deploymentId) {
+    
     this.deploymentId = deploymentId;
     return this;
   }
@@ -242,8 +228,6 @@ public class DecisionDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The deployment id of the decision definition.")
-  @JsonProperty(JSON_PROPERTY_DEPLOYMENT_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getDeploymentId() {
     return deploymentId;
@@ -256,6 +240,7 @@ public class DecisionDefinitionDto {
 
 
   public DecisionDefinitionDto tenantId(String tenantId) {
+    
     this.tenantId = tenantId;
     return this;
   }
@@ -266,8 +251,6 @@ public class DecisionDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The tenant id of the decision definition.")
-  @JsonProperty(JSON_PROPERTY_TENANT_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getTenantId() {
     return tenantId;
@@ -280,6 +263,7 @@ public class DecisionDefinitionDto {
 
 
   public DecisionDefinitionDto decisionRequirementsDefinitionId(String decisionRequirementsDefinitionId) {
+    
     this.decisionRequirementsDefinitionId = decisionRequirementsDefinitionId;
     return this;
   }
@@ -290,8 +274,6 @@ public class DecisionDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the decision requirements definition this decision definition belongs to.")
-  @JsonProperty(JSON_PROPERTY_DECISION_REQUIREMENTS_DEFINITION_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getDecisionRequirementsDefinitionId() {
     return decisionRequirementsDefinitionId;
@@ -304,6 +286,7 @@ public class DecisionDefinitionDto {
 
 
   public DecisionDefinitionDto decisionRequirementsDefinitionKey(String decisionRequirementsDefinitionKey) {
+    
     this.decisionRequirementsDefinitionKey = decisionRequirementsDefinitionKey;
     return this;
   }
@@ -314,8 +297,6 @@ public class DecisionDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The key of the decision requirements definition this decision definition belongs to.")
-  @JsonProperty(JSON_PROPERTY_DECISION_REQUIREMENTS_DEFINITION_KEY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getDecisionRequirementsDefinitionKey() {
     return decisionRequirementsDefinitionKey;
@@ -328,7 +309,8 @@ public class DecisionDefinitionDto {
 
 
   public DecisionDefinitionDto historyTimeToLive(Integer historyTimeToLive) {
-    this.historyTimeToLive = JsonNullable.<Integer>of(historyTimeToLive);
+    
+    this.historyTimeToLive = historyTimeToLive;
     return this;
   }
 
@@ -339,30 +321,19 @@ public class DecisionDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "History time to live value of the decision definition. Is used within [History cleanup](https://docs.camunda.org/manual/7.14/user-guide/process-engine/history/#history-cleanup).")
-  @JsonIgnore
 
   public Integer getHistoryTimeToLive() {
-        return historyTimeToLive.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_HISTORY_TIME_TO_LIVE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Integer> getHistoryTimeToLive_JsonNullable() {
     return historyTimeToLive;
   }
-  
-  @JsonProperty(JSON_PROPERTY_HISTORY_TIME_TO_LIVE)
-  public void setHistoryTimeToLive_JsonNullable(JsonNullable<Integer> historyTimeToLive) {
-    this.historyTimeToLive = historyTimeToLive;
-  }
+
 
   public void setHistoryTimeToLive(Integer historyTimeToLive) {
-    this.historyTimeToLive = JsonNullable.<Integer>of(historyTimeToLive);
+    this.historyTimeToLive = historyTimeToLive;
   }
 
 
   public DecisionDefinitionDto versionTag(String versionTag) {
+    
     this.versionTag = versionTag;
     return this;
   }
@@ -373,8 +344,6 @@ public class DecisionDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The version tag of the decision definition.")
-  @JsonProperty(JSON_PROPERTY_VERSION_TAG)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getVersionTag() {
     return versionTag;
@@ -386,9 +355,6 @@ public class DecisionDefinitionDto {
   }
 
 
-  /**
-   * Return true if this DecisionDefinitionDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

@@ -15,41 +15,36 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
+import java.io.IOException;
 
 /**
  * A JSON object corresponding to the &#x60;Resource&#x60; interface in the engine. Its properties are as follows:
  */
 @ApiModel(description = "A JSON object corresponding to the `Resource` interface in the engine. Its properties are as follows:")
-@JsonPropertyOrder({
-  DeploymentResourceDto.JSON_PROPERTY_ID,
-  DeploymentResourceDto.JSON_PROPERTY_NAME,
-  DeploymentResourceDto.JSON_PROPERTY_DEPLOYMENT_ID
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class DeploymentResourceDto {
-  public static final String JSON_PROPERTY_ID = "id";
+  public static final String SERIALIZED_NAME_ID = "id";
+  @SerializedName(SERIALIZED_NAME_ID)
   private String id;
 
-  public static final String JSON_PROPERTY_NAME = "name";
+  public static final String SERIALIZED_NAME_NAME = "name";
+  @SerializedName(SERIALIZED_NAME_NAME)
   private String name;
 
-  public static final String JSON_PROPERTY_DEPLOYMENT_ID = "deploymentId";
+  public static final String SERIALIZED_NAME_DEPLOYMENT_ID = "deploymentId";
+  @SerializedName(SERIALIZED_NAME_DEPLOYMENT_ID)
   private String deploymentId;
 
 
   public DeploymentResourceDto id(String id) {
+    
     this.id = id;
     return this;
   }
@@ -60,8 +55,6 @@ public class DeploymentResourceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the deployment resource.")
-  @JsonProperty(JSON_PROPERTY_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getId() {
     return id;
@@ -74,6 +67,7 @@ public class DeploymentResourceDto {
 
 
   public DeploymentResourceDto name(String name) {
+    
     this.name = name;
     return this;
   }
@@ -84,8 +78,6 @@ public class DeploymentResourceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The name of the deployment resource")
-  @JsonProperty(JSON_PROPERTY_NAME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getName() {
     return name;
@@ -98,6 +90,7 @@ public class DeploymentResourceDto {
 
 
   public DeploymentResourceDto deploymentId(String deploymentId) {
+    
     this.deploymentId = deploymentId;
     return this;
   }
@@ -108,8 +101,6 @@ public class DeploymentResourceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the deployment.")
-  @JsonProperty(JSON_PROPERTY_DEPLOYMENT_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getDeploymentId() {
     return deploymentId;
@@ -121,9 +112,6 @@ public class DeploymentResourceDto {
   }
 
 
-  /**
-   * Return true if this DeploymentResourceDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

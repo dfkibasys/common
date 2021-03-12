@@ -15,124 +15,116 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import de.dfki.cos.basys.common.rest.camunda.dto.ExternalTaskQueryDtoSorting;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.threeten.bp.OffsetDateTime;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
 
 /**
  * A JSON object with the following properties:
  */
 @ApiModel(description = "A JSON object with the following properties:")
-@JsonPropertyOrder({
-  ExternalTaskQueryDto.JSON_PROPERTY_EXTERNAL_TASK_ID,
-  ExternalTaskQueryDto.JSON_PROPERTY_EXTERNAL_TASK_ID_IN,
-  ExternalTaskQueryDto.JSON_PROPERTY_TOPIC_NAME,
-  ExternalTaskQueryDto.JSON_PROPERTY_WORKER_ID,
-  ExternalTaskQueryDto.JSON_PROPERTY_LOCKED,
-  ExternalTaskQueryDto.JSON_PROPERTY_NOT_LOCKED,
-  ExternalTaskQueryDto.JSON_PROPERTY_WITH_RETRIES_LEFT,
-  ExternalTaskQueryDto.JSON_PROPERTY_NO_RETRIES_LEFT,
-  ExternalTaskQueryDto.JSON_PROPERTY_LOCK_EXPIRATION_AFTER,
-  ExternalTaskQueryDto.JSON_PROPERTY_LOCK_EXPIRATION_BEFORE,
-  ExternalTaskQueryDto.JSON_PROPERTY_ACTIVITY_ID,
-  ExternalTaskQueryDto.JSON_PROPERTY_ACTIVITY_ID_IN,
-  ExternalTaskQueryDto.JSON_PROPERTY_EXECUTION_ID,
-  ExternalTaskQueryDto.JSON_PROPERTY_PROCESS_INSTANCE_ID,
-  ExternalTaskQueryDto.JSON_PROPERTY_PROCESS_INSTANCE_ID_IN,
-  ExternalTaskQueryDto.JSON_PROPERTY_PROCESS_DEFINITION_ID,
-  ExternalTaskQueryDto.JSON_PROPERTY_TENANT_ID_IN,
-  ExternalTaskQueryDto.JSON_PROPERTY_ACTIVE,
-  ExternalTaskQueryDto.JSON_PROPERTY_SUSPENDED,
-  ExternalTaskQueryDto.JSON_PROPERTY_PRIORITY_HIGHER_THAN_OR_EQUALS,
-  ExternalTaskQueryDto.JSON_PROPERTY_PRIORITY_LOWER_THAN_OR_EQUALS,
-  ExternalTaskQueryDto.JSON_PROPERTY_SORTING
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class ExternalTaskQueryDto {
-  public static final String JSON_PROPERTY_EXTERNAL_TASK_ID = "externalTaskId";
+  public static final String SERIALIZED_NAME_EXTERNAL_TASK_ID = "externalTaskId";
+  @SerializedName(SERIALIZED_NAME_EXTERNAL_TASK_ID)
   private String externalTaskId;
 
-  public static final String JSON_PROPERTY_EXTERNAL_TASK_ID_IN = "externalTaskIdIn";
+  public static final String SERIALIZED_NAME_EXTERNAL_TASK_ID_IN = "externalTaskIdIn";
+  @SerializedName(SERIALIZED_NAME_EXTERNAL_TASK_ID_IN)
   private List<String> externalTaskIdIn = null;
 
-  public static final String JSON_PROPERTY_TOPIC_NAME = "topicName";
+  public static final String SERIALIZED_NAME_TOPIC_NAME = "topicName";
+  @SerializedName(SERIALIZED_NAME_TOPIC_NAME)
   private String topicName;
 
-  public static final String JSON_PROPERTY_WORKER_ID = "workerId";
+  public static final String SERIALIZED_NAME_WORKER_ID = "workerId";
+  @SerializedName(SERIALIZED_NAME_WORKER_ID)
   private String workerId;
 
-  public static final String JSON_PROPERTY_LOCKED = "locked";
-  private JsonNullable<Boolean> locked = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_LOCKED = "locked";
+  @SerializedName(SERIALIZED_NAME_LOCKED)
+  private Boolean locked;
 
-  public static final String JSON_PROPERTY_NOT_LOCKED = "notLocked";
-  private JsonNullable<Boolean> notLocked = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_NOT_LOCKED = "notLocked";
+  @SerializedName(SERIALIZED_NAME_NOT_LOCKED)
+  private Boolean notLocked;
 
-  public static final String JSON_PROPERTY_WITH_RETRIES_LEFT = "withRetriesLeft";
-  private JsonNullable<Boolean> withRetriesLeft = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_WITH_RETRIES_LEFT = "withRetriesLeft";
+  @SerializedName(SERIALIZED_NAME_WITH_RETRIES_LEFT)
+  private Boolean withRetriesLeft;
 
-  public static final String JSON_PROPERTY_NO_RETRIES_LEFT = "noRetriesLeft";
-  private JsonNullable<Boolean> noRetriesLeft = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_NO_RETRIES_LEFT = "noRetriesLeft";
+  @SerializedName(SERIALIZED_NAME_NO_RETRIES_LEFT)
+  private Boolean noRetriesLeft;
 
-  public static final String JSON_PROPERTY_LOCK_EXPIRATION_AFTER = "lockExpirationAfter";
-  private JsonNullable<OffsetDateTime> lockExpirationAfter = JsonNullable.<OffsetDateTime>undefined();
+  public static final String SERIALIZED_NAME_LOCK_EXPIRATION_AFTER = "lockExpirationAfter";
+  @SerializedName(SERIALIZED_NAME_LOCK_EXPIRATION_AFTER)
+  private OffsetDateTime lockExpirationAfter;
 
-  public static final String JSON_PROPERTY_LOCK_EXPIRATION_BEFORE = "lockExpirationBefore";
-  private JsonNullable<OffsetDateTime> lockExpirationBefore = JsonNullable.<OffsetDateTime>undefined();
+  public static final String SERIALIZED_NAME_LOCK_EXPIRATION_BEFORE = "lockExpirationBefore";
+  @SerializedName(SERIALIZED_NAME_LOCK_EXPIRATION_BEFORE)
+  private OffsetDateTime lockExpirationBefore;
 
-  public static final String JSON_PROPERTY_ACTIVITY_ID = "activityId";
+  public static final String SERIALIZED_NAME_ACTIVITY_ID = "activityId";
+  @SerializedName(SERIALIZED_NAME_ACTIVITY_ID)
   private String activityId;
 
-  public static final String JSON_PROPERTY_ACTIVITY_ID_IN = "activityIdIn";
+  public static final String SERIALIZED_NAME_ACTIVITY_ID_IN = "activityIdIn";
+  @SerializedName(SERIALIZED_NAME_ACTIVITY_ID_IN)
   private List<String> activityIdIn = null;
 
-  public static final String JSON_PROPERTY_EXECUTION_ID = "executionId";
+  public static final String SERIALIZED_NAME_EXECUTION_ID = "executionId";
+  @SerializedName(SERIALIZED_NAME_EXECUTION_ID)
   private String executionId;
 
-  public static final String JSON_PROPERTY_PROCESS_INSTANCE_ID = "processInstanceId";
+  public static final String SERIALIZED_NAME_PROCESS_INSTANCE_ID = "processInstanceId";
+  @SerializedName(SERIALIZED_NAME_PROCESS_INSTANCE_ID)
   private String processInstanceId;
 
-  public static final String JSON_PROPERTY_PROCESS_INSTANCE_ID_IN = "processInstanceIdIn";
+  public static final String SERIALIZED_NAME_PROCESS_INSTANCE_ID_IN = "processInstanceIdIn";
+  @SerializedName(SERIALIZED_NAME_PROCESS_INSTANCE_ID_IN)
   private List<String> processInstanceIdIn = null;
 
-  public static final String JSON_PROPERTY_PROCESS_DEFINITION_ID = "processDefinitionId";
+  public static final String SERIALIZED_NAME_PROCESS_DEFINITION_ID = "processDefinitionId";
+  @SerializedName(SERIALIZED_NAME_PROCESS_DEFINITION_ID)
   private String processDefinitionId;
 
-  public static final String JSON_PROPERTY_TENANT_ID_IN = "tenantIdIn";
+  public static final String SERIALIZED_NAME_TENANT_ID_IN = "tenantIdIn";
+  @SerializedName(SERIALIZED_NAME_TENANT_ID_IN)
   private List<String> tenantIdIn = null;
 
-  public static final String JSON_PROPERTY_ACTIVE = "active";
-  private JsonNullable<Boolean> active = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_ACTIVE = "active";
+  @SerializedName(SERIALIZED_NAME_ACTIVE)
+  private Boolean active;
 
-  public static final String JSON_PROPERTY_SUSPENDED = "suspended";
-  private JsonNullable<Boolean> suspended = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_SUSPENDED = "suspended";
+  @SerializedName(SERIALIZED_NAME_SUSPENDED)
+  private Boolean suspended;
 
-  public static final String JSON_PROPERTY_PRIORITY_HIGHER_THAN_OR_EQUALS = "priorityHigherThanOrEquals";
-  private JsonNullable<Long> priorityHigherThanOrEquals = JsonNullable.<Long>undefined();
+  public static final String SERIALIZED_NAME_PRIORITY_HIGHER_THAN_OR_EQUALS = "priorityHigherThanOrEquals";
+  @SerializedName(SERIALIZED_NAME_PRIORITY_HIGHER_THAN_OR_EQUALS)
+  private Long priorityHigherThanOrEquals;
 
-  public static final String JSON_PROPERTY_PRIORITY_LOWER_THAN_OR_EQUALS = "priorityLowerThanOrEquals";
-  private JsonNullable<Long> priorityLowerThanOrEquals = JsonNullable.<Long>undefined();
+  public static final String SERIALIZED_NAME_PRIORITY_LOWER_THAN_OR_EQUALS = "priorityLowerThanOrEquals";
+  @SerializedName(SERIALIZED_NAME_PRIORITY_LOWER_THAN_OR_EQUALS)
+  private Long priorityLowerThanOrEquals;
 
-  public static final String JSON_PROPERTY_SORTING = "sorting";
+  public static final String SERIALIZED_NAME_SORTING = "sorting";
+  @SerializedName(SERIALIZED_NAME_SORTING)
   private List<ExternalTaskQueryDtoSorting> sorting = null;
 
 
   public ExternalTaskQueryDto externalTaskId(String externalTaskId) {
+    
     this.externalTaskId = externalTaskId;
     return this;
   }
@@ -143,8 +135,6 @@ public class ExternalTaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by an external task's id.")
-  @JsonProperty(JSON_PROPERTY_EXTERNAL_TASK_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getExternalTaskId() {
     return externalTaskId;
@@ -157,6 +147,7 @@ public class ExternalTaskQueryDto {
 
 
   public ExternalTaskQueryDto externalTaskIdIn(List<String> externalTaskIdIn) {
+    
     this.externalTaskIdIn = externalTaskIdIn;
     return this;
   }
@@ -175,8 +166,6 @@ public class ExternalTaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the comma-separated list of external task ids.")
-  @JsonProperty(JSON_PROPERTY_EXTERNAL_TASK_ID_IN)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<String> getExternalTaskIdIn() {
     return externalTaskIdIn;
@@ -189,6 +178,7 @@ public class ExternalTaskQueryDto {
 
 
   public ExternalTaskQueryDto topicName(String topicName) {
+    
     this.topicName = topicName;
     return this;
   }
@@ -199,8 +189,6 @@ public class ExternalTaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by an external task topic.")
-  @JsonProperty(JSON_PROPERTY_TOPIC_NAME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getTopicName() {
     return topicName;
@@ -213,6 +201,7 @@ public class ExternalTaskQueryDto {
 
 
   public ExternalTaskQueryDto workerId(String workerId) {
+    
     this.workerId = workerId;
     return this;
   }
@@ -223,8 +212,6 @@ public class ExternalTaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the id of the worker that the task was most recently locked by.")
-  @JsonProperty(JSON_PROPERTY_WORKER_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getWorkerId() {
     return workerId;
@@ -237,7 +224,8 @@ public class ExternalTaskQueryDto {
 
 
   public ExternalTaskQueryDto locked(Boolean locked) {
-    this.locked = JsonNullable.<Boolean>of(locked);
+    
+    this.locked = locked;
     return this;
   }
 
@@ -247,31 +235,20 @@ public class ExternalTaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include external tasks that are currently locked (i.e., they have a lock time and it has not expired). Value may only be `true`, as `false` matches any external task.")
-  @JsonIgnore
 
   public Boolean getLocked() {
-        return locked.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_LOCKED)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getLocked_JsonNullable() {
     return locked;
   }
-  
-  @JsonProperty(JSON_PROPERTY_LOCKED)
-  public void setLocked_JsonNullable(JsonNullable<Boolean> locked) {
-    this.locked = locked;
-  }
+
 
   public void setLocked(Boolean locked) {
-    this.locked = JsonNullable.<Boolean>of(locked);
+    this.locked = locked;
   }
 
 
   public ExternalTaskQueryDto notLocked(Boolean notLocked) {
-    this.notLocked = JsonNullable.<Boolean>of(notLocked);
+    
+    this.notLocked = notLocked;
     return this;
   }
 
@@ -281,31 +258,20 @@ public class ExternalTaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include external tasks that are currently not locked (i.e., they have no lock or it has expired). Value may only be `true`, as `false` matches any external task.")
-  @JsonIgnore
 
   public Boolean getNotLocked() {
-        return notLocked.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_NOT_LOCKED)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getNotLocked_JsonNullable() {
     return notLocked;
   }
-  
-  @JsonProperty(JSON_PROPERTY_NOT_LOCKED)
-  public void setNotLocked_JsonNullable(JsonNullable<Boolean> notLocked) {
-    this.notLocked = notLocked;
-  }
+
 
   public void setNotLocked(Boolean notLocked) {
-    this.notLocked = JsonNullable.<Boolean>of(notLocked);
+    this.notLocked = notLocked;
   }
 
 
   public ExternalTaskQueryDto withRetriesLeft(Boolean withRetriesLeft) {
-    this.withRetriesLeft = JsonNullable.<Boolean>of(withRetriesLeft);
+    
+    this.withRetriesLeft = withRetriesLeft;
     return this;
   }
 
@@ -315,31 +281,20 @@ public class ExternalTaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include external tasks that have a positive (&gt; 0) number of retries (or `null`). Value may only be `true`, as `false` matches any external task.")
-  @JsonIgnore
 
   public Boolean getWithRetriesLeft() {
-        return withRetriesLeft.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_WITH_RETRIES_LEFT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getWithRetriesLeft_JsonNullable() {
     return withRetriesLeft;
   }
-  
-  @JsonProperty(JSON_PROPERTY_WITH_RETRIES_LEFT)
-  public void setWithRetriesLeft_JsonNullable(JsonNullable<Boolean> withRetriesLeft) {
-    this.withRetriesLeft = withRetriesLeft;
-  }
+
 
   public void setWithRetriesLeft(Boolean withRetriesLeft) {
-    this.withRetriesLeft = JsonNullable.<Boolean>of(withRetriesLeft);
+    this.withRetriesLeft = withRetriesLeft;
   }
 
 
   public ExternalTaskQueryDto noRetriesLeft(Boolean noRetriesLeft) {
-    this.noRetriesLeft = JsonNullable.<Boolean>of(noRetriesLeft);
+    
+    this.noRetriesLeft = noRetriesLeft;
     return this;
   }
 
@@ -349,31 +304,20 @@ public class ExternalTaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include external tasks that have 0 retries. Value may only be `true`, as `false` matches any external task.")
-  @JsonIgnore
 
   public Boolean getNoRetriesLeft() {
-        return noRetriesLeft.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_NO_RETRIES_LEFT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getNoRetriesLeft_JsonNullable() {
     return noRetriesLeft;
   }
-  
-  @JsonProperty(JSON_PROPERTY_NO_RETRIES_LEFT)
-  public void setNoRetriesLeft_JsonNullable(JsonNullable<Boolean> noRetriesLeft) {
-    this.noRetriesLeft = noRetriesLeft;
-  }
+
 
   public void setNoRetriesLeft(Boolean noRetriesLeft) {
-    this.noRetriesLeft = JsonNullable.<Boolean>of(noRetriesLeft);
+    this.noRetriesLeft = noRetriesLeft;
   }
 
 
   public ExternalTaskQueryDto lockExpirationAfter(OffsetDateTime lockExpirationAfter) {
-    this.lockExpirationAfter = JsonNullable.<OffsetDateTime>of(lockExpirationAfter);
+    
+    this.lockExpirationAfter = lockExpirationAfter;
     return this;
   }
 
@@ -383,31 +327,20 @@ public class ExternalTaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to external tasks that have a lock that expires after a given date. By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.")
-  @JsonIgnore
 
   public OffsetDateTime getLockExpirationAfter() {
-        return lockExpirationAfter.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_LOCK_EXPIRATION_AFTER)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<OffsetDateTime> getLockExpirationAfter_JsonNullable() {
     return lockExpirationAfter;
   }
-  
-  @JsonProperty(JSON_PROPERTY_LOCK_EXPIRATION_AFTER)
-  public void setLockExpirationAfter_JsonNullable(JsonNullable<OffsetDateTime> lockExpirationAfter) {
-    this.lockExpirationAfter = lockExpirationAfter;
-  }
+
 
   public void setLockExpirationAfter(OffsetDateTime lockExpirationAfter) {
-    this.lockExpirationAfter = JsonNullable.<OffsetDateTime>of(lockExpirationAfter);
+    this.lockExpirationAfter = lockExpirationAfter;
   }
 
 
   public ExternalTaskQueryDto lockExpirationBefore(OffsetDateTime lockExpirationBefore) {
-    this.lockExpirationBefore = JsonNullable.<OffsetDateTime>of(lockExpirationBefore);
+    
+    this.lockExpirationBefore = lockExpirationBefore;
     return this;
   }
 
@@ -417,30 +350,19 @@ public class ExternalTaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to external tasks that have a lock that expires before a given date. By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.")
-  @JsonIgnore
 
   public OffsetDateTime getLockExpirationBefore() {
-        return lockExpirationBefore.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_LOCK_EXPIRATION_BEFORE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<OffsetDateTime> getLockExpirationBefore_JsonNullable() {
     return lockExpirationBefore;
   }
-  
-  @JsonProperty(JSON_PROPERTY_LOCK_EXPIRATION_BEFORE)
-  public void setLockExpirationBefore_JsonNullable(JsonNullable<OffsetDateTime> lockExpirationBefore) {
-    this.lockExpirationBefore = lockExpirationBefore;
-  }
+
 
   public void setLockExpirationBefore(OffsetDateTime lockExpirationBefore) {
-    this.lockExpirationBefore = JsonNullable.<OffsetDateTime>of(lockExpirationBefore);
+    this.lockExpirationBefore = lockExpirationBefore;
   }
 
 
   public ExternalTaskQueryDto activityId(String activityId) {
+    
     this.activityId = activityId;
     return this;
   }
@@ -451,8 +373,6 @@ public class ExternalTaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the id of the activity that an external task is created for.")
-  @JsonProperty(JSON_PROPERTY_ACTIVITY_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getActivityId() {
     return activityId;
@@ -465,6 +385,7 @@ public class ExternalTaskQueryDto {
 
 
   public ExternalTaskQueryDto activityIdIn(List<String> activityIdIn) {
+    
     this.activityIdIn = activityIdIn;
     return this;
   }
@@ -483,8 +404,6 @@ public class ExternalTaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the comma-separated list of ids of the activities that an external task is created for.")
-  @JsonProperty(JSON_PROPERTY_ACTIVITY_ID_IN)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<String> getActivityIdIn() {
     return activityIdIn;
@@ -497,6 +416,7 @@ public class ExternalTaskQueryDto {
 
 
   public ExternalTaskQueryDto executionId(String executionId) {
+    
     this.executionId = executionId;
     return this;
   }
@@ -507,8 +427,6 @@ public class ExternalTaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the id of the execution that an external task belongs to.")
-  @JsonProperty(JSON_PROPERTY_EXECUTION_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getExecutionId() {
     return executionId;
@@ -521,6 +439,7 @@ public class ExternalTaskQueryDto {
 
 
   public ExternalTaskQueryDto processInstanceId(String processInstanceId) {
+    
     this.processInstanceId = processInstanceId;
     return this;
   }
@@ -531,8 +450,6 @@ public class ExternalTaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the id of the process instance that an external task belongs to.")
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getProcessInstanceId() {
     return processInstanceId;
@@ -545,6 +462,7 @@ public class ExternalTaskQueryDto {
 
 
   public ExternalTaskQueryDto processInstanceIdIn(List<String> processInstanceIdIn) {
+    
     this.processInstanceIdIn = processInstanceIdIn;
     return this;
   }
@@ -563,8 +481,6 @@ public class ExternalTaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by a comma-separated list of process instance ids that an external task may belong to.")
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID_IN)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<String> getProcessInstanceIdIn() {
     return processInstanceIdIn;
@@ -577,6 +493,7 @@ public class ExternalTaskQueryDto {
 
 
   public ExternalTaskQueryDto processDefinitionId(String processDefinitionId) {
+    
     this.processDefinitionId = processDefinitionId;
     return this;
   }
@@ -587,8 +504,6 @@ public class ExternalTaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the id of the process definition that an external task belongs to.")
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getProcessDefinitionId() {
     return processDefinitionId;
@@ -601,6 +516,7 @@ public class ExternalTaskQueryDto {
 
 
   public ExternalTaskQueryDto tenantIdIn(List<String> tenantIdIn) {
+    
     this.tenantIdIn = tenantIdIn;
     return this;
   }
@@ -619,8 +535,6 @@ public class ExternalTaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by a comma-separated list of tenant ids. An external task must have one of the given tenant ids.")
-  @JsonProperty(JSON_PROPERTY_TENANT_ID_IN)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<String> getTenantIdIn() {
     return tenantIdIn;
@@ -633,7 +547,8 @@ public class ExternalTaskQueryDto {
 
 
   public ExternalTaskQueryDto active(Boolean active) {
-    this.active = JsonNullable.<Boolean>of(active);
+    
+    this.active = active;
     return this;
   }
 
@@ -643,31 +558,20 @@ public class ExternalTaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include active tasks. Value may only be `true`, as `false` matches any external task.")
-  @JsonIgnore
 
   public Boolean getActive() {
-        return active.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_ACTIVE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getActive_JsonNullable() {
     return active;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ACTIVE)
-  public void setActive_JsonNullable(JsonNullable<Boolean> active) {
-    this.active = active;
-  }
+
 
   public void setActive(Boolean active) {
-    this.active = JsonNullable.<Boolean>of(active);
+    this.active = active;
   }
 
 
   public ExternalTaskQueryDto suspended(Boolean suspended) {
-    this.suspended = JsonNullable.<Boolean>of(suspended);
+    
+    this.suspended = suspended;
     return this;
   }
 
@@ -677,31 +581,20 @@ public class ExternalTaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include suspended tasks. Value may only be `true`, as `false` matches any external task.")
-  @JsonIgnore
 
   public Boolean getSuspended() {
-        return suspended.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_SUSPENDED)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getSuspended_JsonNullable() {
     return suspended;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SUSPENDED)
-  public void setSuspended_JsonNullable(JsonNullable<Boolean> suspended) {
-    this.suspended = suspended;
-  }
+
 
   public void setSuspended(Boolean suspended) {
-    this.suspended = JsonNullable.<Boolean>of(suspended);
+    this.suspended = suspended;
   }
 
 
   public ExternalTaskQueryDto priorityHigherThanOrEquals(Long priorityHigherThanOrEquals) {
-    this.priorityHigherThanOrEquals = JsonNullable.<Long>of(priorityHigherThanOrEquals);
+    
+    this.priorityHigherThanOrEquals = priorityHigherThanOrEquals;
     return this;
   }
 
@@ -711,31 +604,20 @@ public class ExternalTaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include jobs with a priority higher than or equal to the given value. Value must be a valid `long` value.")
-  @JsonIgnore
 
   public Long getPriorityHigherThanOrEquals() {
-        return priorityHigherThanOrEquals.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_PRIORITY_HIGHER_THAN_OR_EQUALS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Long> getPriorityHigherThanOrEquals_JsonNullable() {
     return priorityHigherThanOrEquals;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PRIORITY_HIGHER_THAN_OR_EQUALS)
-  public void setPriorityHigherThanOrEquals_JsonNullable(JsonNullable<Long> priorityHigherThanOrEquals) {
-    this.priorityHigherThanOrEquals = priorityHigherThanOrEquals;
-  }
+
 
   public void setPriorityHigherThanOrEquals(Long priorityHigherThanOrEquals) {
-    this.priorityHigherThanOrEquals = JsonNullable.<Long>of(priorityHigherThanOrEquals);
+    this.priorityHigherThanOrEquals = priorityHigherThanOrEquals;
   }
 
 
   public ExternalTaskQueryDto priorityLowerThanOrEquals(Long priorityLowerThanOrEquals) {
-    this.priorityLowerThanOrEquals = JsonNullable.<Long>of(priorityLowerThanOrEquals);
+    
+    this.priorityLowerThanOrEquals = priorityLowerThanOrEquals;
     return this;
   }
 
@@ -745,30 +627,19 @@ public class ExternalTaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include jobs with a priority lower than or equal to the given value. Value must be a valid `long` value.")
-  @JsonIgnore
 
   public Long getPriorityLowerThanOrEquals() {
-        return priorityLowerThanOrEquals.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_PRIORITY_LOWER_THAN_OR_EQUALS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Long> getPriorityLowerThanOrEquals_JsonNullable() {
     return priorityLowerThanOrEquals;
   }
-  
-  @JsonProperty(JSON_PROPERTY_PRIORITY_LOWER_THAN_OR_EQUALS)
-  public void setPriorityLowerThanOrEquals_JsonNullable(JsonNullable<Long> priorityLowerThanOrEquals) {
-    this.priorityLowerThanOrEquals = priorityLowerThanOrEquals;
-  }
+
 
   public void setPriorityLowerThanOrEquals(Long priorityLowerThanOrEquals) {
-    this.priorityLowerThanOrEquals = JsonNullable.<Long>of(priorityLowerThanOrEquals);
+    this.priorityLowerThanOrEquals = priorityLowerThanOrEquals;
   }
 
 
   public ExternalTaskQueryDto sorting(List<ExternalTaskQueryDtoSorting> sorting) {
+    
     this.sorting = sorting;
     return this;
   }
@@ -787,8 +658,6 @@ public class ExternalTaskQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON array of criteria to sort the result by. Each element of the array is a JSON object that                     specifies one ordering. The position in the array identifies the rank of an ordering, i.e., whether                     it is primary, secondary, etc. The ordering objects have the following properties:                      **Note:** The `sorting` properties will not be applied to the External Task count query.")
-  @JsonProperty(JSON_PROPERTY_SORTING)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<ExternalTaskQueryDtoSorting> getSorting() {
     return sorting;
@@ -800,9 +669,6 @@ public class ExternalTaskQueryDto {
   }
 
 
-  /**
-   * Return true if this ExternalTaskQueryDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

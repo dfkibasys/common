@@ -15,39 +15,34 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import de.dfki.cos.basys.common.rest.camunda.dto.ProblemDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
 
 /**
  * ResourceReportDto
  */
-@JsonPropertyOrder({
-  ResourceReportDto.JSON_PROPERTY_ERRORS,
-  ResourceReportDto.JSON_PROPERTY_WARNINGS
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class ResourceReportDto {
-  public static final String JSON_PROPERTY_ERRORS = "errors";
+  public static final String SERIALIZED_NAME_ERRORS = "errors";
+  @SerializedName(SERIALIZED_NAME_ERRORS)
   private List<ProblemDto> errors = null;
 
-  public static final String JSON_PROPERTY_WARNINGS = "warnings";
+  public static final String SERIALIZED_NAME_WARNINGS = "warnings";
+  @SerializedName(SERIALIZED_NAME_WARNINGS)
   private List<ProblemDto> warnings = null;
 
 
   public ResourceReportDto errors(List<ProblemDto> errors) {
+    
     this.errors = errors;
     return this;
   }
@@ -66,8 +61,6 @@ public class ResourceReportDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A list of errors occurred during parsing.")
-  @JsonProperty(JSON_PROPERTY_ERRORS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<ProblemDto> getErrors() {
     return errors;
@@ -80,6 +73,7 @@ public class ResourceReportDto {
 
 
   public ResourceReportDto warnings(List<ProblemDto> warnings) {
+    
     this.warnings = warnings;
     return this;
   }
@@ -98,8 +92,6 @@ public class ResourceReportDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A list of warnings occurred during parsing.")
-  @JsonProperty(JSON_PROPERTY_WARNINGS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<ProblemDto> getWarnings() {
     return warnings;
@@ -111,9 +103,6 @@ public class ResourceReportDto {
   }
 
 
-  /**
-   * Return true if this ResourceReportDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

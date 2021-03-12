@@ -15,52 +15,47 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import de.dfki.cos.basys.common.rest.camunda.dto.IncidentStatisticsResultDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.ProcessDefinitionDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
 
 /**
  * ProcessDefinitionStatisticsResultDto
  */
-@JsonPropertyOrder({
-  ProcessDefinitionStatisticsResultDto.JSON_PROPERTY_ID,
-  ProcessDefinitionStatisticsResultDto.JSON_PROPERTY_INSTANCES,
-  ProcessDefinitionStatisticsResultDto.JSON_PROPERTY_FAILED_JOBS,
-  ProcessDefinitionStatisticsResultDto.JSON_PROPERTY_INCIDENTS,
-  ProcessDefinitionStatisticsResultDto.JSON_PROPERTY_DEFINITION
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class ProcessDefinitionStatisticsResultDto {
-  public static final String JSON_PROPERTY_ID = "id";
+  public static final String SERIALIZED_NAME_ID = "id";
+  @SerializedName(SERIALIZED_NAME_ID)
   private String id;
 
-  public static final String JSON_PROPERTY_INSTANCES = "instances";
+  public static final String SERIALIZED_NAME_INSTANCES = "instances";
+  @SerializedName(SERIALIZED_NAME_INSTANCES)
   private Integer instances;
 
-  public static final String JSON_PROPERTY_FAILED_JOBS = "failedJobs";
+  public static final String SERIALIZED_NAME_FAILED_JOBS = "failedJobs";
+  @SerializedName(SERIALIZED_NAME_FAILED_JOBS)
   private Integer failedJobs;
 
-  public static final String JSON_PROPERTY_INCIDENTS = "incidents";
+  public static final String SERIALIZED_NAME_INCIDENTS = "incidents";
+  @SerializedName(SERIALIZED_NAME_INCIDENTS)
   private List<IncidentStatisticsResultDto> incidents = null;
 
-  public static final String JSON_PROPERTY_DEFINITION = "definition";
+  public static final String SERIALIZED_NAME_DEFINITION = "definition";
+  @SerializedName(SERIALIZED_NAME_DEFINITION)
   private ProcessDefinitionDto definition;
 
 
   public ProcessDefinitionStatisticsResultDto id(String id) {
+    
     this.id = id;
     return this;
   }
@@ -71,8 +66,6 @@ public class ProcessDefinitionStatisticsResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the process definition the results are aggregated for.")
-  @JsonProperty(JSON_PROPERTY_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getId() {
     return id;
@@ -85,6 +78,7 @@ public class ProcessDefinitionStatisticsResultDto {
 
 
   public ProcessDefinitionStatisticsResultDto instances(Integer instances) {
+    
     this.instances = instances;
     return this;
   }
@@ -95,8 +89,6 @@ public class ProcessDefinitionStatisticsResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The total number of running process instances of this process definition.")
-  @JsonProperty(JSON_PROPERTY_INSTANCES)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getInstances() {
     return instances;
@@ -109,6 +101,7 @@ public class ProcessDefinitionStatisticsResultDto {
 
 
   public ProcessDefinitionStatisticsResultDto failedJobs(Integer failedJobs) {
+    
     this.failedJobs = failedJobs;
     return this;
   }
@@ -119,8 +112,6 @@ public class ProcessDefinitionStatisticsResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The total number of failed jobs for the running instances. **Note**: Will be `0` (not `null`), if failed jobs were excluded.")
-  @JsonProperty(JSON_PROPERTY_FAILED_JOBS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getFailedJobs() {
     return failedJobs;
@@ -133,6 +124,7 @@ public class ProcessDefinitionStatisticsResultDto {
 
 
   public ProcessDefinitionStatisticsResultDto incidents(List<IncidentStatisticsResultDto> incidents) {
+    
     this.incidents = incidents;
     return this;
   }
@@ -151,8 +143,6 @@ public class ProcessDefinitionStatisticsResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Each item in the resulting array is an object which contains `incidentType` and `incidentCount`. **Note**: Will be an empty array, if `incidents` or `incidentsForType` were excluded. Furthermore, the array will be also empty if no incidents were found.")
-  @JsonProperty(JSON_PROPERTY_INCIDENTS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<IncidentStatisticsResultDto> getIncidents() {
     return incidents;
@@ -165,6 +155,7 @@ public class ProcessDefinitionStatisticsResultDto {
 
 
   public ProcessDefinitionStatisticsResultDto definition(ProcessDefinitionDto definition) {
+    
     this.definition = definition;
     return this;
   }
@@ -175,8 +166,6 @@ public class ProcessDefinitionStatisticsResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
-  @JsonProperty(JSON_PROPERTY_DEFINITION)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public ProcessDefinitionDto getDefinition() {
     return definition;
@@ -188,9 +177,6 @@ public class ProcessDefinitionStatisticsResultDto {
   }
 
 
-  /**
-   * Return true if this ProcessDefinitionStatisticsResultDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

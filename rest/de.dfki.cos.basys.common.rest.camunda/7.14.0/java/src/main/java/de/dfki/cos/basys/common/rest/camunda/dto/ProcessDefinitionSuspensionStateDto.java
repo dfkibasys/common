@@ -15,53 +15,45 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import org.threeten.bp.OffsetDateTime;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
 
 /**
  * ProcessDefinitionSuspensionStateDto
  */
-@JsonPropertyOrder({
-  ProcessDefinitionSuspensionStateDto.JSON_PROPERTY_SUSPENDED,
-  ProcessDefinitionSuspensionStateDto.JSON_PROPERTY_PROCESS_DEFINITION_ID,
-  ProcessDefinitionSuspensionStateDto.JSON_PROPERTY_PROCESS_DEFINITION_KEY,
-  ProcessDefinitionSuspensionStateDto.JSON_PROPERTY_INCLUDE_PROCESS_INSTANCES,
-  ProcessDefinitionSuspensionStateDto.JSON_PROPERTY_EXECUTION_DATE
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class ProcessDefinitionSuspensionStateDto {
-  public static final String JSON_PROPERTY_SUSPENDED = "suspended";
-  private JsonNullable<Boolean> suspended = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_SUSPENDED = "suspended";
+  @SerializedName(SERIALIZED_NAME_SUSPENDED)
+  private Boolean suspended;
 
-  public static final String JSON_PROPERTY_PROCESS_DEFINITION_ID = "processDefinitionId";
+  public static final String SERIALIZED_NAME_PROCESS_DEFINITION_ID = "processDefinitionId";
+  @SerializedName(SERIALIZED_NAME_PROCESS_DEFINITION_ID)
   private String processDefinitionId;
 
-  public static final String JSON_PROPERTY_PROCESS_DEFINITION_KEY = "processDefinitionKey";
+  public static final String SERIALIZED_NAME_PROCESS_DEFINITION_KEY = "processDefinitionKey";
+  @SerializedName(SERIALIZED_NAME_PROCESS_DEFINITION_KEY)
   private String processDefinitionKey;
 
-  public static final String JSON_PROPERTY_INCLUDE_PROCESS_INSTANCES = "includeProcessInstances";
-  private JsonNullable<Boolean> includeProcessInstances = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_INCLUDE_PROCESS_INSTANCES = "includeProcessInstances";
+  @SerializedName(SERIALIZED_NAME_INCLUDE_PROCESS_INSTANCES)
+  private Boolean includeProcessInstances;
 
-  public static final String JSON_PROPERTY_EXECUTION_DATE = "executionDate";
-  private JsonNullable<OffsetDateTime> executionDate = JsonNullable.<OffsetDateTime>undefined();
+  public static final String SERIALIZED_NAME_EXECUTION_DATE = "executionDate";
+  @SerializedName(SERIALIZED_NAME_EXECUTION_DATE)
+  private OffsetDateTime executionDate;
 
 
   public ProcessDefinitionSuspensionStateDto suspended(Boolean suspended) {
-    this.suspended = JsonNullable.<Boolean>of(suspended);
+    
+    this.suspended = suspended;
     return this;
   }
 
@@ -71,30 +63,19 @@ public class ProcessDefinitionSuspensionStateDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A `Boolean` value which indicates whether to activate or suspend all process definitions with the given key. When the value is set to `true`, all process definitions with the given key will be suspended and when the value is set to `false`, all process definitions with the given key will be activated.")
-  @JsonIgnore
 
   public Boolean getSuspended() {
-        return suspended.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_SUSPENDED)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getSuspended_JsonNullable() {
     return suspended;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SUSPENDED)
-  public void setSuspended_JsonNullable(JsonNullable<Boolean> suspended) {
-    this.suspended = suspended;
-  }
+
 
   public void setSuspended(Boolean suspended) {
-    this.suspended = JsonNullable.<Boolean>of(suspended);
+    this.suspended = suspended;
   }
 
 
   public ProcessDefinitionSuspensionStateDto processDefinitionId(String processDefinitionId) {
+    
     this.processDefinitionId = processDefinitionId;
     return this;
   }
@@ -105,8 +86,6 @@ public class ProcessDefinitionSuspensionStateDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the process definitions to activate or suspend.")
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getProcessDefinitionId() {
     return processDefinitionId;
@@ -119,6 +98,7 @@ public class ProcessDefinitionSuspensionStateDto {
 
 
   public ProcessDefinitionSuspensionStateDto processDefinitionKey(String processDefinitionKey) {
+    
     this.processDefinitionKey = processDefinitionKey;
     return this;
   }
@@ -129,8 +109,6 @@ public class ProcessDefinitionSuspensionStateDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = " The key of the process definitions to activate or suspend.")
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getProcessDefinitionKey() {
     return processDefinitionKey;
@@ -143,7 +121,8 @@ public class ProcessDefinitionSuspensionStateDto {
 
 
   public ProcessDefinitionSuspensionStateDto includeProcessInstances(Boolean includeProcessInstances) {
-    this.includeProcessInstances = JsonNullable.<Boolean>of(includeProcessInstances);
+    
+    this.includeProcessInstances = includeProcessInstances;
     return this;
   }
 
@@ -153,31 +132,20 @@ public class ProcessDefinitionSuspensionStateDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A `Boolean` value which indicates whether to activate or suspend also all process instances of  the process definitions with the given key. When the value is set to `true`, all process instances of the process definitions with the given key will be activated or suspended and when the value is set to `false`, the suspension state of  all process instances of the process definitions with the given key will not be updated.")
-  @JsonIgnore
 
   public Boolean getIncludeProcessInstances() {
-        return includeProcessInstances.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_INCLUDE_PROCESS_INSTANCES)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getIncludeProcessInstances_JsonNullable() {
     return includeProcessInstances;
   }
-  
-  @JsonProperty(JSON_PROPERTY_INCLUDE_PROCESS_INSTANCES)
-  public void setIncludeProcessInstances_JsonNullable(JsonNullable<Boolean> includeProcessInstances) {
-    this.includeProcessInstances = includeProcessInstances;
-  }
+
 
   public void setIncludeProcessInstances(Boolean includeProcessInstances) {
-    this.includeProcessInstances = JsonNullable.<Boolean>of(includeProcessInstances);
+    this.includeProcessInstances = includeProcessInstances;
   }
 
 
   public ProcessDefinitionSuspensionStateDto executionDate(OffsetDateTime executionDate) {
-    this.executionDate = JsonNullable.<OffsetDateTime>of(executionDate);
+    
+    this.executionDate = executionDate;
     return this;
   }
 
@@ -187,32 +155,17 @@ public class ProcessDefinitionSuspensionStateDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The date on which all process definitions with the given key will be activated or suspended. If `null`, the suspension state of all process definitions with the given key is updated immediately. By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.")
-  @JsonIgnore
 
   public OffsetDateTime getExecutionDate() {
-        return executionDate.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_EXECUTION_DATE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<OffsetDateTime> getExecutionDate_JsonNullable() {
     return executionDate;
   }
-  
-  @JsonProperty(JSON_PROPERTY_EXECUTION_DATE)
-  public void setExecutionDate_JsonNullable(JsonNullable<OffsetDateTime> executionDate) {
+
+
+  public void setExecutionDate(OffsetDateTime executionDate) {
     this.executionDate = executionDate;
   }
 
-  public void setExecutionDate(OffsetDateTime executionDate) {
-    this.executionDate = JsonNullable.<OffsetDateTime>of(executionDate);
-  }
 
-
-  /**
-   * Return true if this ProcessDefinitionSuspensionStateDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

@@ -15,64 +15,56 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import org.threeten.bp.OffsetDateTime;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
 
 /**
  * EventSubscriptionDto
  */
-@JsonPropertyOrder({
-  EventSubscriptionDto.JSON_PROPERTY_ID,
-  EventSubscriptionDto.JSON_PROPERTY_EVENT_TYPE,
-  EventSubscriptionDto.JSON_PROPERTY_EVENT_NAME,
-  EventSubscriptionDto.JSON_PROPERTY_EXECUTION_ID,
-  EventSubscriptionDto.JSON_PROPERTY_PROCESS_INSTANCE_ID,
-  EventSubscriptionDto.JSON_PROPERTY_ACTIVITY_ID,
-  EventSubscriptionDto.JSON_PROPERTY_CREATED_DATE,
-  EventSubscriptionDto.JSON_PROPERTY_TENANT_ID
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class EventSubscriptionDto {
-  public static final String JSON_PROPERTY_ID = "id";
+  public static final String SERIALIZED_NAME_ID = "id";
+  @SerializedName(SERIALIZED_NAME_ID)
   private String id;
 
-  public static final String JSON_PROPERTY_EVENT_TYPE = "eventType";
+  public static final String SERIALIZED_NAME_EVENT_TYPE = "eventType";
+  @SerializedName(SERIALIZED_NAME_EVENT_TYPE)
   private String eventType;
 
-  public static final String JSON_PROPERTY_EVENT_NAME = "eventName";
+  public static final String SERIALIZED_NAME_EVENT_NAME = "eventName";
+  @SerializedName(SERIALIZED_NAME_EVENT_NAME)
   private String eventName;
 
-  public static final String JSON_PROPERTY_EXECUTION_ID = "executionId";
+  public static final String SERIALIZED_NAME_EXECUTION_ID = "executionId";
+  @SerializedName(SERIALIZED_NAME_EXECUTION_ID)
   private String executionId;
 
-  public static final String JSON_PROPERTY_PROCESS_INSTANCE_ID = "processInstanceId";
+  public static final String SERIALIZED_NAME_PROCESS_INSTANCE_ID = "processInstanceId";
+  @SerializedName(SERIALIZED_NAME_PROCESS_INSTANCE_ID)
   private String processInstanceId;
 
-  public static final String JSON_PROPERTY_ACTIVITY_ID = "activityId";
+  public static final String SERIALIZED_NAME_ACTIVITY_ID = "activityId";
+  @SerializedName(SERIALIZED_NAME_ACTIVITY_ID)
   private String activityId;
 
-  public static final String JSON_PROPERTY_CREATED_DATE = "createdDate";
-  private JsonNullable<OffsetDateTime> createdDate = JsonNullable.<OffsetDateTime>undefined();
+  public static final String SERIALIZED_NAME_CREATED_DATE = "createdDate";
+  @SerializedName(SERIALIZED_NAME_CREATED_DATE)
+  private OffsetDateTime createdDate;
 
-  public static final String JSON_PROPERTY_TENANT_ID = "tenantId";
+  public static final String SERIALIZED_NAME_TENANT_ID = "tenantId";
+  @SerializedName(SERIALIZED_NAME_TENANT_ID)
   private String tenantId;
 
 
   public EventSubscriptionDto id(String id) {
+    
     this.id = id;
     return this;
   }
@@ -83,8 +75,6 @@ public class EventSubscriptionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the event subscription.")
-  @JsonProperty(JSON_PROPERTY_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getId() {
     return id;
@@ -97,6 +87,7 @@ public class EventSubscriptionDto {
 
 
   public EventSubscriptionDto eventType(String eventType) {
+    
     this.eventType = eventType;
     return this;
   }
@@ -107,8 +98,6 @@ public class EventSubscriptionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The type of the event subscription.")
-  @JsonProperty(JSON_PROPERTY_EVENT_TYPE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getEventType() {
     return eventType;
@@ -121,6 +110,7 @@ public class EventSubscriptionDto {
 
 
   public EventSubscriptionDto eventName(String eventName) {
+    
     this.eventName = eventName;
     return this;
   }
@@ -131,8 +121,6 @@ public class EventSubscriptionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The name of the event this subscription belongs to as defined in the process model.")
-  @JsonProperty(JSON_PROPERTY_EVENT_NAME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getEventName() {
     return eventName;
@@ -145,6 +133,7 @@ public class EventSubscriptionDto {
 
 
   public EventSubscriptionDto executionId(String executionId) {
+    
     this.executionId = executionId;
     return this;
   }
@@ -155,8 +144,6 @@ public class EventSubscriptionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The execution that is subscribed on the referenced event.")
-  @JsonProperty(JSON_PROPERTY_EXECUTION_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getExecutionId() {
     return executionId;
@@ -169,6 +156,7 @@ public class EventSubscriptionDto {
 
 
   public EventSubscriptionDto processInstanceId(String processInstanceId) {
+    
     this.processInstanceId = processInstanceId;
     return this;
   }
@@ -179,8 +167,6 @@ public class EventSubscriptionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The process instance this subscription belongs to.")
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getProcessInstanceId() {
     return processInstanceId;
@@ -193,6 +179,7 @@ public class EventSubscriptionDto {
 
 
   public EventSubscriptionDto activityId(String activityId) {
+    
     this.activityId = activityId;
     return this;
   }
@@ -203,8 +190,6 @@ public class EventSubscriptionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The identifier of the activity that this event subscription belongs to. This could for example be the id of a receive task.")
-  @JsonProperty(JSON_PROPERTY_ACTIVITY_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getActivityId() {
     return activityId;
@@ -217,7 +202,8 @@ public class EventSubscriptionDto {
 
 
   public EventSubscriptionDto createdDate(OffsetDateTime createdDate) {
-    this.createdDate = JsonNullable.<OffsetDateTime>of(createdDate);
+    
+    this.createdDate = createdDate;
     return this;
   }
 
@@ -227,30 +213,19 @@ public class EventSubscriptionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The time this event subscription was created.")
-  @JsonIgnore
 
   public OffsetDateTime getCreatedDate() {
-        return createdDate.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_CREATED_DATE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<OffsetDateTime> getCreatedDate_JsonNullable() {
     return createdDate;
   }
-  
-  @JsonProperty(JSON_PROPERTY_CREATED_DATE)
-  public void setCreatedDate_JsonNullable(JsonNullable<OffsetDateTime> createdDate) {
-    this.createdDate = createdDate;
-  }
+
 
   public void setCreatedDate(OffsetDateTime createdDate) {
-    this.createdDate = JsonNullable.<OffsetDateTime>of(createdDate);
+    this.createdDate = createdDate;
   }
 
 
   public EventSubscriptionDto tenantId(String tenantId) {
+    
     this.tenantId = tenantId;
     return this;
   }
@@ -261,8 +236,6 @@ public class EventSubscriptionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the tenant this event subscription belongs to. Can be `null` if the subscription belongs to no single tenant.")
-  @JsonProperty(JSON_PROPERTY_TENANT_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getTenantId() {
     return tenantId;
@@ -274,9 +247,6 @@ public class EventSubscriptionDto {
   }
 
 
-  /**
-   * Return true if this EventSubscriptionDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

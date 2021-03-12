@@ -13,16 +13,13 @@
 
 package de.dfki.cos.basys.common.rest.camunda.api;
 
-import de.dfki.cos.basys.common.rest.camunda.*;
-import de.dfki.cos.basys.common.rest.camunda.auth.*;
+import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.dto.CountResultDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.ExceptionDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.IncidentDto;
 import org.threeten.bp.OffsetDateTime;
-import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
-
+import org.junit.Ignore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,10 +29,12 @@ import java.util.Map;
 /**
  * API tests for IncidentApi
  */
+@Ignore
 public class IncidentApiTest {
 
     private final IncidentApi api = new IncidentApi();
 
+    
     /**
      * Get Incident
      *
@@ -46,11 +45,12 @@ public class IncidentApiTest {
      */
     @Test
     public void getIncidentTest() throws ApiException {
-        //String id = null;
-        //IncidentDto response = api.getIncident(id);
+        String id = null;
+        IncidentDto response = api.getIncident(id);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get List
      *
@@ -61,29 +61,30 @@ public class IncidentApiTest {
      */
     @Test
     public void getIncidentsTest() throws ApiException {
-        //String incidentId = null;
-        //String incidentType = null;
-        //String incidentMessage = null;
-        //String incidentMessageLike = null;
-        //String processDefinitionId = null;
-        //String processDefinitionKeyIn = null;
-        //String processInstanceId = null;
-        //String executionId = null;
-        //OffsetDateTime incidentTimestampBefore = null;
-        //OffsetDateTime incidentTimestampAfter = null;
-        //String activityId = null;
-        //String failedActivityId = null;
-        //String causeIncidentId = null;
-        //String rootCauseIncidentId = null;
-        //String _configuration = null;
-        //String tenantIdIn = null;
-        //String jobDefinitionIdIn = null;
-        //String sortBy = null;
-        //String sortOrder = null;
-        //List<IncidentDto> response = api.getIncidents(incidentId, incidentType, incidentMessage, incidentMessageLike, processDefinitionId, processDefinitionKeyIn, processInstanceId, executionId, incidentTimestampBefore, incidentTimestampAfter, activityId, failedActivityId, causeIncidentId, rootCauseIncidentId, _configuration, tenantIdIn, jobDefinitionIdIn, sortBy, sortOrder);
+        String incidentId = null;
+        String incidentType = null;
+        String incidentMessage = null;
+        String incidentMessageLike = null;
+        String processDefinitionId = null;
+        String processDefinitionKeyIn = null;
+        String processInstanceId = null;
+        String executionId = null;
+        OffsetDateTime incidentTimestampBefore = null;
+        OffsetDateTime incidentTimestampAfter = null;
+        String activityId = null;
+        String failedActivityId = null;
+        String causeIncidentId = null;
+        String rootCauseIncidentId = null;
+        String _configuration = null;
+        String tenantIdIn = null;
+        String jobDefinitionIdIn = null;
+        String sortBy = null;
+        String sortOrder = null;
+        List<IncidentDto> response = api.getIncidents(incidentId, incidentType, incidentMessage, incidentMessageLike, processDefinitionId, processDefinitionKeyIn, processInstanceId, executionId, incidentTimestampBefore, incidentTimestampAfter, activityId, failedActivityId, causeIncidentId, rootCauseIncidentId, _configuration, tenantIdIn, jobDefinitionIdIn, sortBy, sortOrder);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get List Count
      *
@@ -94,27 +95,28 @@ public class IncidentApiTest {
      */
     @Test
     public void getIncidentsCountTest() throws ApiException {
-        //String incidentId = null;
-        //String incidentType = null;
-        //String incidentMessage = null;
-        //String incidentMessageLike = null;
-        //String processDefinitionId = null;
-        //String processDefinitionKeyIn = null;
-        //String processInstanceId = null;
-        //String executionId = null;
-        //OffsetDateTime incidentTimestampBefore = null;
-        //OffsetDateTime incidentTimestampAfter = null;
-        //String activityId = null;
-        //String failedActivityId = null;
-        //String causeIncidentId = null;
-        //String rootCauseIncidentId = null;
-        //String _configuration = null;
-        //String tenantIdIn = null;
-        //String jobDefinitionIdIn = null;
-        //List<CountResultDto> response = api.getIncidentsCount(incidentId, incidentType, incidentMessage, incidentMessageLike, processDefinitionId, processDefinitionKeyIn, processInstanceId, executionId, incidentTimestampBefore, incidentTimestampAfter, activityId, failedActivityId, causeIncidentId, rootCauseIncidentId, _configuration, tenantIdIn, jobDefinitionIdIn);
+        String incidentId = null;
+        String incidentType = null;
+        String incidentMessage = null;
+        String incidentMessageLike = null;
+        String processDefinitionId = null;
+        String processDefinitionKeyIn = null;
+        String processInstanceId = null;
+        String executionId = null;
+        OffsetDateTime incidentTimestampBefore = null;
+        OffsetDateTime incidentTimestampAfter = null;
+        String activityId = null;
+        String failedActivityId = null;
+        String causeIncidentId = null;
+        String rootCauseIncidentId = null;
+        String _configuration = null;
+        String tenantIdIn = null;
+        String jobDefinitionIdIn = null;
+        List<CountResultDto> response = api.getIncidentsCount(incidentId, incidentType, incidentMessage, incidentMessageLike, processDefinitionId, processDefinitionKeyIn, processInstanceId, executionId, incidentTimestampBefore, incidentTimestampAfter, activityId, failedActivityId, causeIncidentId, rootCauseIncidentId, _configuration, tenantIdIn, jobDefinitionIdIn);
+
         // TODO: test validations
     }
-
+    
     /**
      * Resolve Incident
      *
@@ -125,9 +127,10 @@ public class IncidentApiTest {
      */
     @Test
     public void resolveIncidentTest() throws ApiException {
-        //String id = null;
-        //api.resolveIncident(id);
+        String id = null;
+        api.resolveIncident(id);
+
         // TODO: test validations
     }
-
+    
 }

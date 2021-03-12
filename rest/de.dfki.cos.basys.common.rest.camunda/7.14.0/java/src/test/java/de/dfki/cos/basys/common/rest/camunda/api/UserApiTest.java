@@ -13,18 +13,15 @@
 
 package de.dfki.cos.basys.common.rest.camunda.api;
 
-import de.dfki.cos.basys.common.rest.camunda.*;
-import de.dfki.cos.basys.common.rest.camunda.auth.*;
+import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.dto.CountResultDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.ExceptionDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.ResourceOptionsDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.UserCredentialsDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.UserDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.UserProfileDto;
-import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
-
+import org.junit.Ignore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,10 +31,12 @@ import java.util.Map;
 /**
  * API tests for UserApi
  */
+@Ignore
 public class UserApiTest {
 
     private final UserApi api = new UserApi();
 
+    
     /**
      * Options
      *
@@ -48,10 +47,11 @@ public class UserApiTest {
      */
     @Test
     public void availableOperationsTest() throws ApiException {
-        //ResourceOptionsDto response = api.availableOperations();
+        ResourceOptionsDto response = api.availableOperations();
+
         // TODO: test validations
     }
-
+    
     /**
      * Options
      *
@@ -62,11 +62,12 @@ public class UserApiTest {
      */
     @Test
     public void availableUserOperationsTest() throws ApiException {
-        //String id = null;
-        //ResourceOptionsDto response = api.availableUserOperations(id);
+        String id = null;
+        ResourceOptionsDto response = api.availableUserOperations(id);
+
         // TODO: test validations
     }
-
+    
     /**
      * Create
      *
@@ -77,11 +78,12 @@ public class UserApiTest {
      */
     @Test
     public void createUserTest() throws ApiException {
-        //UserDto userDto = null;
-        //api.createUser(userDto);
+        UserDto userDto = null;
+        api.createUser(userDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * Delete
      *
@@ -92,11 +94,12 @@ public class UserApiTest {
      */
     @Test
     public void deleteUserTest() throws ApiException {
-        //String id = null;
-        //api.deleteUser(id);
+        String id = null;
+        api.deleteUser(id);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get List Count
      *
@@ -107,21 +110,22 @@ public class UserApiTest {
      */
     @Test
     public void getUserCountTest() throws ApiException {
-        //String id = null;
-        //String idIn = null;
-        //String firstName = null;
-        //String firstNameLike = null;
-        //String lastName = null;
-        //String lastNameLike = null;
-        //String email = null;
-        //String emailLike = null;
-        //String memberOfGroup = null;
-        //String memberOfTenant = null;
-        //String potentialStarter = null;
-        //CountResultDto response = api.getUserCount(id, idIn, firstName, firstNameLike, lastName, lastNameLike, email, emailLike, memberOfGroup, memberOfTenant, potentialStarter);
+        String id = null;
+        String idIn = null;
+        String firstName = null;
+        String firstNameLike = null;
+        String lastName = null;
+        String lastNameLike = null;
+        String email = null;
+        String emailLike = null;
+        String memberOfGroup = null;
+        String memberOfTenant = null;
+        String potentialStarter = null;
+        CountResultDto response = api.getUserCount(id, idIn, firstName, firstNameLike, lastName, lastNameLike, email, emailLike, memberOfGroup, memberOfTenant, potentialStarter);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get Profile
      *
@@ -132,11 +136,12 @@ public class UserApiTest {
      */
     @Test
     public void getUserProfileTest() throws ApiException {
-        //String id = null;
-        //List<UserProfileDto> response = api.getUserProfile(id);
+        String id = null;
+        List<UserProfileDto> response = api.getUserProfile(id);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get List
      *
@@ -147,25 +152,26 @@ public class UserApiTest {
      */
     @Test
     public void getUsersTest() throws ApiException {
-        //String id = null;
-        //String idIn = null;
-        //String firstName = null;
-        //String firstNameLike = null;
-        //String lastName = null;
-        //String lastNameLike = null;
-        //String email = null;
-        //String emailLike = null;
-        //String memberOfGroup = null;
-        //String memberOfTenant = null;
-        //String potentialStarter = null;
-        //String sortBy = null;
-        //String sortOrder = null;
-        //Integer firstResult = null;
-        //Integer maxResults = null;
-        //List<UserProfileDto> response = api.getUsers(id, idIn, firstName, firstNameLike, lastName, lastNameLike, email, emailLike, memberOfGroup, memberOfTenant, potentialStarter, sortBy, sortOrder, firstResult, maxResults);
+        String id = null;
+        String idIn = null;
+        String firstName = null;
+        String firstNameLike = null;
+        String lastName = null;
+        String lastNameLike = null;
+        String email = null;
+        String emailLike = null;
+        String memberOfGroup = null;
+        String memberOfTenant = null;
+        String potentialStarter = null;
+        String sortBy = null;
+        String sortOrder = null;
+        Integer firstResult = null;
+        Integer maxResults = null;
+        List<UserProfileDto> response = api.getUsers(id, idIn, firstName, firstNameLike, lastName, lastNameLike, email, emailLike, memberOfGroup, memberOfTenant, potentialStarter, sortBy, sortOrder, firstResult, maxResults);
+
         // TODO: test validations
     }
-
+    
     /**
      * Unlock User
      *
@@ -176,11 +182,12 @@ public class UserApiTest {
      */
     @Test
     public void unlockUserTest() throws ApiException {
-        //String id = null;
-        //api.unlockUser(id);
+        String id = null;
+        api.unlockUser(id);
+
         // TODO: test validations
     }
-
+    
     /**
      * Update Credentials
      *
@@ -191,12 +198,13 @@ public class UserApiTest {
      */
     @Test
     public void updateCredentialsTest() throws ApiException {
-        //String id = null;
-        //String password = null;
-        //String authenticatedUserPassword = null;
-        //UserCredentialsDto userCredentialsDto = null;
-        //Object response = api.updateCredentials(id, password, authenticatedUserPassword, userCredentialsDto);
+        String id = null;
+        String password = null;
+        String authenticatedUserPassword = null;
+        UserCredentialsDto userCredentialsDto = null;
+        Object response = api.updateCredentials(id, password, authenticatedUserPassword, userCredentialsDto);
+
         // TODO: test validations
     }
-
+    
 }

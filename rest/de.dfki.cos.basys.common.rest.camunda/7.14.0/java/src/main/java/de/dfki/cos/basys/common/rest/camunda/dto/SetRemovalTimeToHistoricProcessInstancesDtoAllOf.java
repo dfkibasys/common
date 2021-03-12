@@ -15,46 +15,38 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import de.dfki.cos.basys.common.rest.camunda.dto.HistoricProcessInstanceQueryDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
 
 /**
  * SetRemovalTimeToHistoricProcessInstancesDtoAllOf
  */
-@JsonPropertyOrder({
-  SetRemovalTimeToHistoricProcessInstancesDtoAllOf.JSON_PROPERTY_HISTORIC_PROCESS_INSTANCE_IDS,
-  SetRemovalTimeToHistoricProcessInstancesDtoAllOf.JSON_PROPERTY_HISTORIC_PROCESS_INSTANCE_QUERY,
-  SetRemovalTimeToHistoricProcessInstancesDtoAllOf.JSON_PROPERTY_HIERARCHICAL
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class SetRemovalTimeToHistoricProcessInstancesDtoAllOf {
-  public static final String JSON_PROPERTY_HISTORIC_PROCESS_INSTANCE_IDS = "historicProcessInstanceIds";
+  public static final String SERIALIZED_NAME_HISTORIC_PROCESS_INSTANCE_IDS = "historicProcessInstanceIds";
+  @SerializedName(SERIALIZED_NAME_HISTORIC_PROCESS_INSTANCE_IDS)
   private List<String> historicProcessInstanceIds = null;
 
-  public static final String JSON_PROPERTY_HISTORIC_PROCESS_INSTANCE_QUERY = "historicProcessInstanceQuery";
+  public static final String SERIALIZED_NAME_HISTORIC_PROCESS_INSTANCE_QUERY = "historicProcessInstanceQuery";
+  @SerializedName(SERIALIZED_NAME_HISTORIC_PROCESS_INSTANCE_QUERY)
   private HistoricProcessInstanceQueryDto historicProcessInstanceQuery;
 
-  public static final String JSON_PROPERTY_HIERARCHICAL = "hierarchical";
-  private JsonNullable<Boolean> hierarchical = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_HIERARCHICAL = "hierarchical";
+  @SerializedName(SERIALIZED_NAME_HIERARCHICAL)
+  private Boolean hierarchical;
 
 
   public SetRemovalTimeToHistoricProcessInstancesDtoAllOf historicProcessInstanceIds(List<String> historicProcessInstanceIds) {
+    
     this.historicProcessInstanceIds = historicProcessInstanceIds;
     return this;
   }
@@ -73,8 +65,6 @@ public class SetRemovalTimeToHistoricProcessInstancesDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the process instance.")
-  @JsonProperty(JSON_PROPERTY_HISTORIC_PROCESS_INSTANCE_IDS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<String> getHistoricProcessInstanceIds() {
     return historicProcessInstanceIds;
@@ -87,6 +77,7 @@ public class SetRemovalTimeToHistoricProcessInstancesDtoAllOf {
 
 
   public SetRemovalTimeToHistoricProcessInstancesDtoAllOf historicProcessInstanceQuery(HistoricProcessInstanceQueryDto historicProcessInstanceQuery) {
+    
     this.historicProcessInstanceQuery = historicProcessInstanceQuery;
     return this;
   }
@@ -97,8 +88,6 @@ public class SetRemovalTimeToHistoricProcessInstancesDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
-  @JsonProperty(JSON_PROPERTY_HISTORIC_PROCESS_INSTANCE_QUERY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public HistoricProcessInstanceQueryDto getHistoricProcessInstanceQuery() {
     return historicProcessInstanceQuery;
@@ -111,7 +100,8 @@ public class SetRemovalTimeToHistoricProcessInstancesDtoAllOf {
 
 
   public SetRemovalTimeToHistoricProcessInstancesDtoAllOf hierarchical(Boolean hierarchical) {
-    this.hierarchical = JsonNullable.<Boolean>of(hierarchical);
+    
+    this.hierarchical = hierarchical;
     return this;
   }
 
@@ -121,32 +111,17 @@ public class SetRemovalTimeToHistoricProcessInstancesDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Sets the removal time to all historic process instances in the hierarchy. Value may only be `true`, as `false` is the default behavior.")
-  @JsonIgnore
 
   public Boolean getHierarchical() {
-        return hierarchical.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_HIERARCHICAL)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getHierarchical_JsonNullable() {
     return hierarchical;
   }
-  
-  @JsonProperty(JSON_PROPERTY_HIERARCHICAL)
-  public void setHierarchical_JsonNullable(JsonNullable<Boolean> hierarchical) {
+
+
+  public void setHierarchical(Boolean hierarchical) {
     this.hierarchical = hierarchical;
   }
 
-  public void setHierarchical(Boolean hierarchical) {
-    this.hierarchical = JsonNullable.<Boolean>of(hierarchical);
-  }
 
-
-  /**
-   * Return true if this SetRemovalTimeToHistoricProcessInstancesDto_allOf object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

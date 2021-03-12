@@ -13,15 +13,12 @@
 
 package de.dfki.cos.basys.common.rest.camunda.api;
 
-import de.dfki.cos.basys.common.rest.camunda.*;
-import de.dfki.cos.basys.common.rest.camunda.auth.*;
+import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.dto.CountResultDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.EventSubscriptionDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.ExceptionDto;
-import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
-
+import org.junit.Ignore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,10 +28,12 @@ import java.util.Map;
 /**
  * API tests for EventSubscriptionApi
  */
+@Ignore
 public class EventSubscriptionApiTest {
 
     private final EventSubscriptionApi api = new EventSubscriptionApi();
 
+    
     /**
      * 
      *
@@ -45,23 +44,24 @@ public class EventSubscriptionApiTest {
      */
     @Test
     public void getEventSubscriptionsTest() throws ApiException {
-        //String eventSubscriptionId = null;
-        //String eventName = null;
-        //String eventType = null;
-        //String executionId = null;
-        //String processInstanceId = null;
-        //String activityId = null;
-        //String tenantIdIn = null;
-        //Boolean withoutTenantId = null;
-        //Boolean includeEventSubscriptionsWithoutTenantId = null;
-        //String sortBy = null;
-        //String sortOrder = null;
-        //Integer firstResult = null;
-        //Integer maxResults = null;
-        //List<EventSubscriptionDto> response = api.getEventSubscriptions(eventSubscriptionId, eventName, eventType, executionId, processInstanceId, activityId, tenantIdIn, withoutTenantId, includeEventSubscriptionsWithoutTenantId, sortBy, sortOrder, firstResult, maxResults);
+        String eventSubscriptionId = null;
+        String eventName = null;
+        String eventType = null;
+        String executionId = null;
+        String processInstanceId = null;
+        String activityId = null;
+        String tenantIdIn = null;
+        Boolean withoutTenantId = null;
+        Boolean includeEventSubscriptionsWithoutTenantId = null;
+        String sortBy = null;
+        String sortOrder = null;
+        Integer firstResult = null;
+        Integer maxResults = null;
+        List<EventSubscriptionDto> response = api.getEventSubscriptions(eventSubscriptionId, eventName, eventType, executionId, processInstanceId, activityId, tenantIdIn, withoutTenantId, includeEventSubscriptionsWithoutTenantId, sortBy, sortOrder, firstResult, maxResults);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -72,17 +72,18 @@ public class EventSubscriptionApiTest {
      */
     @Test
     public void getEventSubscriptionsCountTest() throws ApiException {
-        //String eventSubscriptionId = null;
-        //String eventName = null;
-        //String eventType = null;
-        //String executionId = null;
-        //String processInstanceId = null;
-        //String activityId = null;
-        //String tenantIdIn = null;
-        //Boolean withoutTenantId = null;
-        //Boolean includeEventSubscriptionsWithoutTenantId = null;
-        //CountResultDto response = api.getEventSubscriptionsCount(eventSubscriptionId, eventName, eventType, executionId, processInstanceId, activityId, tenantIdIn, withoutTenantId, includeEventSubscriptionsWithoutTenantId);
+        String eventSubscriptionId = null;
+        String eventName = null;
+        String eventType = null;
+        String executionId = null;
+        String processInstanceId = null;
+        String activityId = null;
+        String tenantIdIn = null;
+        Boolean withoutTenantId = null;
+        Boolean includeEventSubscriptionsWithoutTenantId = null;
+        CountResultDto response = api.getEventSubscriptionsCount(eventSubscriptionId, eventName, eventType, executionId, processInstanceId, activityId, tenantIdIn, withoutTenantId, includeEventSubscriptionsWithoutTenantId);
+
         // TODO: test validations
     }
-
+    
 }

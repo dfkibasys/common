@@ -13,17 +13,14 @@
 
 package de.dfki.cos.basys.common.rest.camunda.api;
 
-import de.dfki.cos.basys.common.rest.camunda.*;
-import de.dfki.cos.basys.common.rest.camunda.auth.*;
+import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.dto.CountResultDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.ExceptionDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.HistoricActivityInstanceDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.HistoricActivityInstanceQueryDto;
 import org.threeten.bp.OffsetDateTime;
-import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
-
+import org.junit.Ignore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,10 +30,12 @@ import java.util.Map;
 /**
  * API tests for HistoricActivityInstanceApi
  */
+@Ignore
 public class HistoricActivityInstanceApiTest {
 
     private final HistoricActivityInstanceApi api = new HistoricActivityInstanceApi();
 
+    
     /**
      * Get
      *
@@ -47,11 +46,12 @@ public class HistoricActivityInstanceApiTest {
      */
     @Test
     public void getHistoricActivityInstanceTest() throws ApiException {
-        //String id = null;
-        //HistoricActivityInstanceDto response = api.getHistoricActivityInstance(id);
+        String id = null;
+        HistoricActivityInstanceDto response = api.getHistoricActivityInstance(id);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get List
      *
@@ -62,32 +62,33 @@ public class HistoricActivityInstanceApiTest {
      */
     @Test
     public void getHistoricActivityInstancesTest() throws ApiException {
-        //String sortBy = null;
-        //String sortOrder = null;
-        //Integer firstResult = null;
-        //Integer maxResults = null;
-        //String activityInstanceId = null;
-        //String processInstanceId = null;
-        //String processDefinitionId = null;
-        //String executionId = null;
-        //String activityId = null;
-        //String activityName = null;
-        //String activityType = null;
-        //String taskAssignee = null;
-        //Boolean finished = null;
-        //Boolean unfinished = null;
-        //Boolean canceled = null;
-        //Boolean completeScope = null;
-        //OffsetDateTime startedBefore = null;
-        //OffsetDateTime startedAfter = null;
-        //OffsetDateTime finishedBefore = null;
-        //OffsetDateTime finishedAfter = null;
-        //String tenantIdIn = null;
-        //Boolean withoutTenantId = null;
-        //List<HistoricActivityInstanceDto> response = api.getHistoricActivityInstances(sortBy, sortOrder, firstResult, maxResults, activityInstanceId, processInstanceId, processDefinitionId, executionId, activityId, activityName, activityType, taskAssignee, finished, unfinished, canceled, completeScope, startedBefore, startedAfter, finishedBefore, finishedAfter, tenantIdIn, withoutTenantId);
+        String sortBy = null;
+        String sortOrder = null;
+        Integer firstResult = null;
+        Integer maxResults = null;
+        String activityInstanceId = null;
+        String processInstanceId = null;
+        String processDefinitionId = null;
+        String executionId = null;
+        String activityId = null;
+        String activityName = null;
+        String activityType = null;
+        String taskAssignee = null;
+        Boolean finished = null;
+        Boolean unfinished = null;
+        Boolean canceled = null;
+        Boolean completeScope = null;
+        OffsetDateTime startedBefore = null;
+        OffsetDateTime startedAfter = null;
+        OffsetDateTime finishedBefore = null;
+        OffsetDateTime finishedAfter = null;
+        String tenantIdIn = null;
+        Boolean withoutTenantId = null;
+        List<HistoricActivityInstanceDto> response = api.getHistoricActivityInstances(sortBy, sortOrder, firstResult, maxResults, activityInstanceId, processInstanceId, processDefinitionId, executionId, activityId, activityName, activityType, taskAssignee, finished, unfinished, canceled, completeScope, startedBefore, startedAfter, finishedBefore, finishedAfter, tenantIdIn, withoutTenantId);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get List Count
      *
@@ -98,28 +99,29 @@ public class HistoricActivityInstanceApiTest {
      */
     @Test
     public void getHistoricActivityInstancesCountTest() throws ApiException {
-        //String activityInstanceId = null;
-        //String processInstanceId = null;
-        //String processDefinitionId = null;
-        //String executionId = null;
-        //String activityId = null;
-        //String activityName = null;
-        //String activityType = null;
-        //String taskAssignee = null;
-        //Boolean finished = null;
-        //Boolean unfinished = null;
-        //Boolean canceled = null;
-        //Boolean completeScope = null;
-        //OffsetDateTime startedBefore = null;
-        //OffsetDateTime startedAfter = null;
-        //OffsetDateTime finishedBefore = null;
-        //OffsetDateTime finishedAfter = null;
-        //String tenantIdIn = null;
-        //Boolean withoutTenantId = null;
-        //CountResultDto response = api.getHistoricActivityInstancesCount(activityInstanceId, processInstanceId, processDefinitionId, executionId, activityId, activityName, activityType, taskAssignee, finished, unfinished, canceled, completeScope, startedBefore, startedAfter, finishedBefore, finishedAfter, tenantIdIn, withoutTenantId);
+        String activityInstanceId = null;
+        String processInstanceId = null;
+        String processDefinitionId = null;
+        String executionId = null;
+        String activityId = null;
+        String activityName = null;
+        String activityType = null;
+        String taskAssignee = null;
+        Boolean finished = null;
+        Boolean unfinished = null;
+        Boolean canceled = null;
+        Boolean completeScope = null;
+        OffsetDateTime startedBefore = null;
+        OffsetDateTime startedAfter = null;
+        OffsetDateTime finishedBefore = null;
+        OffsetDateTime finishedAfter = null;
+        String tenantIdIn = null;
+        Boolean withoutTenantId = null;
+        CountResultDto response = api.getHistoricActivityInstancesCount(activityInstanceId, processInstanceId, processDefinitionId, executionId, activityId, activityName, activityType, taskAssignee, finished, unfinished, canceled, completeScope, startedBefore, startedAfter, finishedBefore, finishedAfter, tenantIdIn, withoutTenantId);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get List (POST)
      *
@@ -130,13 +132,14 @@ public class HistoricActivityInstanceApiTest {
      */
     @Test
     public void queryHistoricActivityInstancesTest() throws ApiException {
-        //Integer firstResult = null;
-        //Integer maxResults = null;
-        //HistoricActivityInstanceQueryDto historicActivityInstanceQueryDto = null;
-        //List<HistoricActivityInstanceDto> response = api.queryHistoricActivityInstances(firstResult, maxResults, historicActivityInstanceQueryDto);
+        Integer firstResult = null;
+        Integer maxResults = null;
+        HistoricActivityInstanceQueryDto historicActivityInstanceQueryDto = null;
+        List<HistoricActivityInstanceDto> response = api.queryHistoricActivityInstances(firstResult, maxResults, historicActivityInstanceQueryDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get List Count (POST)
      *
@@ -147,9 +150,10 @@ public class HistoricActivityInstanceApiTest {
      */
     @Test
     public void queryHistoricActivityInstancesCountTest() throws ApiException {
-        //HistoricActivityInstanceQueryDto historicActivityInstanceQueryDto = null;
-        //CountResultDto response = api.queryHistoricActivityInstancesCount(historicActivityInstanceQueryDto);
+        HistoricActivityInstanceQueryDto historicActivityInstanceQueryDto = null;
+        CountResultDto response = api.queryHistoricActivityInstancesCount(historicActivityInstanceQueryDto);
+
         // TODO: test validations
     }
-
+    
 }

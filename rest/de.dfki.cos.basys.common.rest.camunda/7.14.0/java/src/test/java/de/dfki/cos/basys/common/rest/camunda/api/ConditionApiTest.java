@@ -13,16 +13,13 @@
 
 package de.dfki.cos.basys.common.rest.camunda.api;
 
-import de.dfki.cos.basys.common.rest.camunda.*;
-import de.dfki.cos.basys.common.rest.camunda.auth.*;
+import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.dto.AuthorizationExceptionDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.EvaluationConditionDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.ExceptionDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.ProcessInstanceDto;
-import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
-
+import org.junit.Ignore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,10 +29,12 @@ import java.util.Map;
 /**
  * API tests for ConditionApi
  */
+@Ignore
 public class ConditionApiTest {
 
     private final ConditionApi api = new ConditionApi();
 
+    
     /**
      * 
      *
@@ -46,9 +45,10 @@ public class ConditionApiTest {
      */
     @Test
     public void evaluateConditionTest() throws ApiException {
-        //EvaluationConditionDto evaluationConditionDto = null;
-        //List<ProcessInstanceDto> response = api.evaluateCondition(evaluationConditionDto);
+        EvaluationConditionDto evaluationConditionDto = null;
+        List<ProcessInstanceDto> response = api.evaluateCondition(evaluationConditionDto);
+
         // TODO: test validations
     }
-
+    
 }

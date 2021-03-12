@@ -15,76 +15,71 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
+import java.io.IOException;
 
 /**
  * BatchDto
  */
-@JsonPropertyOrder({
-  BatchDto.JSON_PROPERTY_ID,
-  BatchDto.JSON_PROPERTY_TYPE,
-  BatchDto.JSON_PROPERTY_TOTAL_JOBS,
-  BatchDto.JSON_PROPERTY_JOBS_CREATED,
-  BatchDto.JSON_PROPERTY_BATCH_JOBS_PER_SEED,
-  BatchDto.JSON_PROPERTY_INVOCATIONS_PER_BATCH_JOB,
-  BatchDto.JSON_PROPERTY_SEED_JOB_DEFINITION_ID,
-  BatchDto.JSON_PROPERTY_MONITOR_JOB_DEFINITION_ID,
-  BatchDto.JSON_PROPERTY_BATCH_JOB_DEFINITION_ID,
-  BatchDto.JSON_PROPERTY_SUSPENDED,
-  BatchDto.JSON_PROPERTY_TENANT_ID,
-  BatchDto.JSON_PROPERTY_CREATE_USER_ID
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class BatchDto {
-  public static final String JSON_PROPERTY_ID = "id";
+  public static final String SERIALIZED_NAME_ID = "id";
+  @SerializedName(SERIALIZED_NAME_ID)
   private String id;
 
-  public static final String JSON_PROPERTY_TYPE = "type";
+  public static final String SERIALIZED_NAME_TYPE = "type";
+  @SerializedName(SERIALIZED_NAME_TYPE)
   private String type;
 
-  public static final String JSON_PROPERTY_TOTAL_JOBS = "totalJobs";
+  public static final String SERIALIZED_NAME_TOTAL_JOBS = "totalJobs";
+  @SerializedName(SERIALIZED_NAME_TOTAL_JOBS)
   private Integer totalJobs;
 
-  public static final String JSON_PROPERTY_JOBS_CREATED = "jobsCreated";
+  public static final String SERIALIZED_NAME_JOBS_CREATED = "jobsCreated";
+  @SerializedName(SERIALIZED_NAME_JOBS_CREATED)
   private Integer jobsCreated;
 
-  public static final String JSON_PROPERTY_BATCH_JOBS_PER_SEED = "batchJobsPerSeed";
+  public static final String SERIALIZED_NAME_BATCH_JOBS_PER_SEED = "batchJobsPerSeed";
+  @SerializedName(SERIALIZED_NAME_BATCH_JOBS_PER_SEED)
   private Integer batchJobsPerSeed;
 
-  public static final String JSON_PROPERTY_INVOCATIONS_PER_BATCH_JOB = "invocationsPerBatchJob";
+  public static final String SERIALIZED_NAME_INVOCATIONS_PER_BATCH_JOB = "invocationsPerBatchJob";
+  @SerializedName(SERIALIZED_NAME_INVOCATIONS_PER_BATCH_JOB)
   private Integer invocationsPerBatchJob;
 
-  public static final String JSON_PROPERTY_SEED_JOB_DEFINITION_ID = "seedJobDefinitionId";
+  public static final String SERIALIZED_NAME_SEED_JOB_DEFINITION_ID = "seedJobDefinitionId";
+  @SerializedName(SERIALIZED_NAME_SEED_JOB_DEFINITION_ID)
   private String seedJobDefinitionId;
 
-  public static final String JSON_PROPERTY_MONITOR_JOB_DEFINITION_ID = "monitorJobDefinitionId";
+  public static final String SERIALIZED_NAME_MONITOR_JOB_DEFINITION_ID = "monitorJobDefinitionId";
+  @SerializedName(SERIALIZED_NAME_MONITOR_JOB_DEFINITION_ID)
   private String monitorJobDefinitionId;
 
-  public static final String JSON_PROPERTY_BATCH_JOB_DEFINITION_ID = "batchJobDefinitionId";
+  public static final String SERIALIZED_NAME_BATCH_JOB_DEFINITION_ID = "batchJobDefinitionId";
+  @SerializedName(SERIALIZED_NAME_BATCH_JOB_DEFINITION_ID)
   private String batchJobDefinitionId;
 
-  public static final String JSON_PROPERTY_SUSPENDED = "suspended";
+  public static final String SERIALIZED_NAME_SUSPENDED = "suspended";
+  @SerializedName(SERIALIZED_NAME_SUSPENDED)
   private Boolean suspended;
 
-  public static final String JSON_PROPERTY_TENANT_ID = "tenantId";
+  public static final String SERIALIZED_NAME_TENANT_ID = "tenantId";
+  @SerializedName(SERIALIZED_NAME_TENANT_ID)
   private String tenantId;
 
-  public static final String JSON_PROPERTY_CREATE_USER_ID = "createUserId";
+  public static final String SERIALIZED_NAME_CREATE_USER_ID = "createUserId";
+  @SerializedName(SERIALIZED_NAME_CREATE_USER_ID)
   private String createUserId;
 
 
   public BatchDto id(String id) {
+    
     this.id = id;
     return this;
   }
@@ -95,8 +90,6 @@ public class BatchDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the batch.")
-  @JsonProperty(JSON_PROPERTY_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getId() {
     return id;
@@ -109,6 +102,7 @@ public class BatchDto {
 
 
   public BatchDto type(String type) {
+    
     this.type = type;
     return this;
   }
@@ -119,8 +113,6 @@ public class BatchDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The type of the batch.")
-  @JsonProperty(JSON_PROPERTY_TYPE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getType() {
     return type;
@@ -133,6 +125,7 @@ public class BatchDto {
 
 
   public BatchDto totalJobs(Integer totalJobs) {
+    
     this.totalJobs = totalJobs;
     return this;
   }
@@ -143,8 +136,6 @@ public class BatchDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The total jobs of a batch is the number of batch execution jobs required to complete the batch.")
-  @JsonProperty(JSON_PROPERTY_TOTAL_JOBS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getTotalJobs() {
     return totalJobs;
@@ -157,6 +148,7 @@ public class BatchDto {
 
 
   public BatchDto jobsCreated(Integer jobsCreated) {
+    
     this.jobsCreated = jobsCreated;
     return this;
   }
@@ -167,8 +159,6 @@ public class BatchDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The number of batch execution jobs already created by the seed job.")
-  @JsonProperty(JSON_PROPERTY_JOBS_CREATED)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getJobsCreated() {
     return jobsCreated;
@@ -181,6 +171,7 @@ public class BatchDto {
 
 
   public BatchDto batchJobsPerSeed(Integer batchJobsPerSeed) {
+    
     this.batchJobsPerSeed = batchJobsPerSeed;
     return this;
   }
@@ -191,8 +182,6 @@ public class BatchDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The number of batch execution jobs created per seed job invocation. The batch seed job is invoked until it has created all batch execution jobs required by the batch (see totalJobs property).")
-  @JsonProperty(JSON_PROPERTY_BATCH_JOBS_PER_SEED)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getBatchJobsPerSeed() {
     return batchJobsPerSeed;
@@ -205,6 +194,7 @@ public class BatchDto {
 
 
   public BatchDto invocationsPerBatchJob(Integer invocationsPerBatchJob) {
+    
     this.invocationsPerBatchJob = invocationsPerBatchJob;
     return this;
   }
@@ -215,8 +205,6 @@ public class BatchDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Every batch execution job invokes the command executed by the batch invocationsPerBatchJob times. E.g., for a process instance migration batch this specifies the number of process instances which are migrated per batch execution job.")
-  @JsonProperty(JSON_PROPERTY_INVOCATIONS_PER_BATCH_JOB)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getInvocationsPerBatchJob() {
     return invocationsPerBatchJob;
@@ -229,6 +217,7 @@ public class BatchDto {
 
 
   public BatchDto seedJobDefinitionId(String seedJobDefinitionId) {
+    
     this.seedJobDefinitionId = seedJobDefinitionId;
     return this;
   }
@@ -239,8 +228,6 @@ public class BatchDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The job definition id for the seed jobs of this batch.")
-  @JsonProperty(JSON_PROPERTY_SEED_JOB_DEFINITION_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getSeedJobDefinitionId() {
     return seedJobDefinitionId;
@@ -253,6 +240,7 @@ public class BatchDto {
 
 
   public BatchDto monitorJobDefinitionId(String monitorJobDefinitionId) {
+    
     this.monitorJobDefinitionId = monitorJobDefinitionId;
     return this;
   }
@@ -263,8 +251,6 @@ public class BatchDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The job definition id for the monitor jobs of this batch.")
-  @JsonProperty(JSON_PROPERTY_MONITOR_JOB_DEFINITION_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getMonitorJobDefinitionId() {
     return monitorJobDefinitionId;
@@ -277,6 +263,7 @@ public class BatchDto {
 
 
   public BatchDto batchJobDefinitionId(String batchJobDefinitionId) {
+    
     this.batchJobDefinitionId = batchJobDefinitionId;
     return this;
   }
@@ -287,8 +274,6 @@ public class BatchDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The job definition id for the batch execution jobs of this batch.")
-  @JsonProperty(JSON_PROPERTY_BATCH_JOB_DEFINITION_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getBatchJobDefinitionId() {
     return batchJobDefinitionId;
@@ -301,6 +286,7 @@ public class BatchDto {
 
 
   public BatchDto suspended(Boolean suspended) {
+    
     this.suspended = suspended;
     return this;
   }
@@ -311,8 +297,6 @@ public class BatchDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Indicates whether this batch is suspended or not.")
-  @JsonProperty(JSON_PROPERTY_SUSPENDED)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Boolean getSuspended() {
     return suspended;
@@ -325,6 +309,7 @@ public class BatchDto {
 
 
   public BatchDto tenantId(String tenantId) {
+    
     this.tenantId = tenantId;
     return this;
   }
@@ -335,8 +320,6 @@ public class BatchDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The tenant id of the batch.")
-  @JsonProperty(JSON_PROPERTY_TENANT_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getTenantId() {
     return tenantId;
@@ -349,6 +332,7 @@ public class BatchDto {
 
 
   public BatchDto createUserId(String createUserId) {
+    
     this.createUserId = createUserId;
     return this;
   }
@@ -359,8 +343,6 @@ public class BatchDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the user that created the batch.")
-  @JsonProperty(JSON_PROPERTY_CREATE_USER_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getCreateUserId() {
     return createUserId;
@@ -372,9 +354,6 @@ public class BatchDto {
   }
 
 
-  /**
-   * Return true if this BatchDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

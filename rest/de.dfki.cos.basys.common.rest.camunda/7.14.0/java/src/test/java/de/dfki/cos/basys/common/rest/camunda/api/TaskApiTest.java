@@ -13,8 +13,7 @@
 
 package de.dfki.cos.basys.common.rest.camunda.api;
 
-import de.dfki.cos.basys.common.rest.camunda.*;
-import de.dfki.cos.basys.common.rest.camunda.auth.*;
+import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.dto.AuthorizationExceptionDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.CompleteTaskDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.CountResultDto;
@@ -27,10 +26,8 @@ import de.dfki.cos.basys.common.rest.camunda.dto.TaskEscalationDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.TaskQueryDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.UserIdDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.VariableValueDto;
-import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
-
+import org.junit.Ignore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,10 +37,12 @@ import java.util.Map;
 /**
  * API tests for TaskApi
  */
+@Ignore
 public class TaskApiTest {
 
     private final TaskApi api = new TaskApi();
 
+    
     /**
      * 
      *
@@ -54,12 +53,13 @@ public class TaskApiTest {
      */
     @Test
     public void claimTest() throws ApiException {
-        //String id = null;
-        //UserIdDto userIdDto = null;
-        //api.claim(id, userIdDto);
+        String id = null;
+        UserIdDto userIdDto = null;
+        api.claim(id, userIdDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -70,12 +70,13 @@ public class TaskApiTest {
      */
     @Test
     public void completeTest() throws ApiException {
-        //String id = null;
-        //CompleteTaskDto completeTaskDto = null;
-        //Map<String, VariableValueDto> response = api.complete(id, completeTaskDto);
+        String id = null;
+        CompleteTaskDto completeTaskDto = null;
+        Map<String, VariableValueDto> response = api.complete(id, completeTaskDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -86,11 +87,12 @@ public class TaskApiTest {
      */
     @Test
     public void createTaskTest() throws ApiException {
-        //TaskDto taskDto = null;
-        //api.createTask(taskDto);
+        TaskDto taskDto = null;
+        api.createTask(taskDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -101,12 +103,13 @@ public class TaskApiTest {
      */
     @Test
     public void delegateTaskTest() throws ApiException {
-        //String id = null;
-        //UserIdDto userIdDto = null;
-        //api.delegateTask(id, userIdDto);
+        String id = null;
+        UserIdDto userIdDto = null;
+        api.delegateTask(id, userIdDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -117,11 +120,12 @@ public class TaskApiTest {
      */
     @Test
     public void deleteTaskTest() throws ApiException {
-        //String id = null;
-        //api.deleteTask(id);
+        String id = null;
+        api.deleteTask(id);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -132,11 +136,12 @@ public class TaskApiTest {
      */
     @Test
     public void getDeployedFormTest() throws ApiException {
-        //String id = null;
-        //File response = api.getDeployedForm(id);
+        String id = null;
+        File response = api.getDeployedForm(id);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -147,11 +152,12 @@ public class TaskApiTest {
      */
     @Test
     public void getFormTest() throws ApiException {
-        //String id = null;
-        //FormDto response = api.getForm(id);
+        String id = null;
+        FormDto response = api.getForm(id);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -162,13 +168,14 @@ public class TaskApiTest {
      */
     @Test
     public void getFormVariablesTest() throws ApiException {
-        //String id = null;
-        //String variableNames = null;
-        //Boolean deserializeValues = null;
-        //Map<String, VariableValueDto> response = api.getFormVariables(id, variableNames, deserializeValues);
+        String id = null;
+        String variableNames = null;
+        Boolean deserializeValues = null;
+        Map<String, VariableValueDto> response = api.getFormVariables(id, variableNames, deserializeValues);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -179,11 +186,12 @@ public class TaskApiTest {
      */
     @Test
     public void getRenderedFormTest() throws ApiException {
-        //String id = null;
-        //File response = api.getRenderedForm(id);
+        String id = null;
+        File response = api.getRenderedForm(id);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -194,11 +202,12 @@ public class TaskApiTest {
      */
     @Test
     public void getTaskTest() throws ApiException {
-        //String id = null;
-        //TaskDto response = api.getTask(id);
+        String id = null;
+        TaskDto response = api.getTask(id);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -209,101 +218,102 @@ public class TaskApiTest {
      */
     @Test
     public void getTasksTest() throws ApiException {
-        //String processInstanceId = null;
-        //String processInstanceIdIn = null;
-        //String processInstanceBusinessKey = null;
-        //String processInstanceBusinessKeyExpression = null;
-        //String processInstanceBusinessKeyIn = null;
-        //String processInstanceBusinessKeyLike = null;
-        //String processInstanceBusinessKeyLikeExpression = null;
-        //String processDefinitionId = null;
-        //String processDefinitionKey = null;
-        //String processDefinitionKeyIn = null;
-        //String processDefinitionName = null;
-        //String processDefinitionNameLike = null;
-        //String executionId = null;
-        //String caseInstanceId = null;
-        //String caseInstanceBusinessKey = null;
-        //String caseInstanceBusinessKeyLike = null;
-        //String caseDefinitionId = null;
-        //String caseDefinitionKey = null;
-        //String caseDefinitionName = null;
-        //String caseDefinitionNameLike = null;
-        //String caseExecutionId = null;
-        //String activityInstanceIdIn = null;
-        //String tenantIdIn = null;
-        //Boolean withoutTenantId = null;
-        //String assignee = null;
-        //String assigneeExpression = null;
-        //String assigneeLike = null;
-        //String assigneeLikeExpression = null;
-        //String assigneeIn = null;
-        //String owner = null;
-        //String ownerExpression = null;
-        //String candidateGroup = null;
-        //String candidateGroupExpression = null;
-        //String candidateUser = null;
-        //String candidateUserExpression = null;
-        //Boolean includeAssignedTasks = null;
-        //String involvedUser = null;
-        //String involvedUserExpression = null;
-        //Boolean assigned = null;
-        //Boolean unassigned = null;
-        //String taskDefinitionKey = null;
-        //String taskDefinitionKeyIn = null;
-        //String taskDefinitionKeyLike = null;
-        //String name = null;
-        //String nameNotEqual = null;
-        //String nameLike = null;
-        //String nameNotLike = null;
-        //String description = null;
-        //String descriptionLike = null;
-        //Integer priority = null;
-        //Integer maxPriority = null;
-        //Integer minPriority = null;
-        //String dueDate = null;
-        //String dueDateExpression = null;
-        //String dueAfter = null;
-        //String dueAfterExpression = null;
-        //String dueBefore = null;
-        //String dueBeforeExpression = null;
-        //String followUpDate = null;
-        //String followUpDateExpression = null;
-        //String followUpAfter = null;
-        //String followUpAfterExpression = null;
-        //String followUpBefore = null;
-        //String followUpBeforeExpression = null;
-        //String followUpBeforeOrNotExistent = null;
-        //String followUpBeforeOrNotExistentExpression = null;
-        //String createdOn = null;
-        //String createdOnExpression = null;
-        //String createdAfter = null;
-        //String createdAfterExpression = null;
-        //String createdBefore = null;
-        //String createdBeforeExpression = null;
-        //String delegationState = null;
-        //String candidateGroups = null;
-        //String candidateGroupsExpression = null;
-        //Boolean withCandidateGroups = null;
-        //Boolean withoutCandidateGroups = null;
-        //Boolean withCandidateUsers = null;
-        //Boolean withoutCandidateUsers = null;
-        //Boolean active = null;
-        //Boolean suspended = null;
-        //String taskVariables = null;
-        //String processVariables = null;
-        //String caseInstanceVariables = null;
-        //Boolean variableNamesIgnoreCase = null;
-        //Boolean variableValuesIgnoreCase = null;
-        //String parentTaskId = null;
-        //String sortBy = null;
-        //String sortOrder = null;
-        //Integer firstResult = null;
-        //Integer maxResults = null;
-        //List<TaskDto> response = api.getTasks(processInstanceId, processInstanceIdIn, processInstanceBusinessKey, processInstanceBusinessKeyExpression, processInstanceBusinessKeyIn, processInstanceBusinessKeyLike, processInstanceBusinessKeyLikeExpression, processDefinitionId, processDefinitionKey, processDefinitionKeyIn, processDefinitionName, processDefinitionNameLike, executionId, caseInstanceId, caseInstanceBusinessKey, caseInstanceBusinessKeyLike, caseDefinitionId, caseDefinitionKey, caseDefinitionName, caseDefinitionNameLike, caseExecutionId, activityInstanceIdIn, tenantIdIn, withoutTenantId, assignee, assigneeExpression, assigneeLike, assigneeLikeExpression, assigneeIn, owner, ownerExpression, candidateGroup, candidateGroupExpression, candidateUser, candidateUserExpression, includeAssignedTasks, involvedUser, involvedUserExpression, assigned, unassigned, taskDefinitionKey, taskDefinitionKeyIn, taskDefinitionKeyLike, name, nameNotEqual, nameLike, nameNotLike, description, descriptionLike, priority, maxPriority, minPriority, dueDate, dueDateExpression, dueAfter, dueAfterExpression, dueBefore, dueBeforeExpression, followUpDate, followUpDateExpression, followUpAfter, followUpAfterExpression, followUpBefore, followUpBeforeExpression, followUpBeforeOrNotExistent, followUpBeforeOrNotExistentExpression, createdOn, createdOnExpression, createdAfter, createdAfterExpression, createdBefore, createdBeforeExpression, delegationState, candidateGroups, candidateGroupsExpression, withCandidateGroups, withoutCandidateGroups, withCandidateUsers, withoutCandidateUsers, active, suspended, taskVariables, processVariables, caseInstanceVariables, variableNamesIgnoreCase, variableValuesIgnoreCase, parentTaskId, sortBy, sortOrder, firstResult, maxResults);
+        String processInstanceId = null;
+        String processInstanceIdIn = null;
+        String processInstanceBusinessKey = null;
+        String processInstanceBusinessKeyExpression = null;
+        String processInstanceBusinessKeyIn = null;
+        String processInstanceBusinessKeyLike = null;
+        String processInstanceBusinessKeyLikeExpression = null;
+        String processDefinitionId = null;
+        String processDefinitionKey = null;
+        String processDefinitionKeyIn = null;
+        String processDefinitionName = null;
+        String processDefinitionNameLike = null;
+        String executionId = null;
+        String caseInstanceId = null;
+        String caseInstanceBusinessKey = null;
+        String caseInstanceBusinessKeyLike = null;
+        String caseDefinitionId = null;
+        String caseDefinitionKey = null;
+        String caseDefinitionName = null;
+        String caseDefinitionNameLike = null;
+        String caseExecutionId = null;
+        String activityInstanceIdIn = null;
+        String tenantIdIn = null;
+        Boolean withoutTenantId = null;
+        String assignee = null;
+        String assigneeExpression = null;
+        String assigneeLike = null;
+        String assigneeLikeExpression = null;
+        String assigneeIn = null;
+        String owner = null;
+        String ownerExpression = null;
+        String candidateGroup = null;
+        String candidateGroupExpression = null;
+        String candidateUser = null;
+        String candidateUserExpression = null;
+        Boolean includeAssignedTasks = null;
+        String involvedUser = null;
+        String involvedUserExpression = null;
+        Boolean assigned = null;
+        Boolean unassigned = null;
+        String taskDefinitionKey = null;
+        String taskDefinitionKeyIn = null;
+        String taskDefinitionKeyLike = null;
+        String name = null;
+        String nameNotEqual = null;
+        String nameLike = null;
+        String nameNotLike = null;
+        String description = null;
+        String descriptionLike = null;
+        Integer priority = null;
+        Integer maxPriority = null;
+        Integer minPriority = null;
+        String dueDate = null;
+        String dueDateExpression = null;
+        String dueAfter = null;
+        String dueAfterExpression = null;
+        String dueBefore = null;
+        String dueBeforeExpression = null;
+        String followUpDate = null;
+        String followUpDateExpression = null;
+        String followUpAfter = null;
+        String followUpAfterExpression = null;
+        String followUpBefore = null;
+        String followUpBeforeExpression = null;
+        String followUpBeforeOrNotExistent = null;
+        String followUpBeforeOrNotExistentExpression = null;
+        String createdOn = null;
+        String createdOnExpression = null;
+        String createdAfter = null;
+        String createdAfterExpression = null;
+        String createdBefore = null;
+        String createdBeforeExpression = null;
+        String delegationState = null;
+        String candidateGroups = null;
+        String candidateGroupsExpression = null;
+        Boolean withCandidateGroups = null;
+        Boolean withoutCandidateGroups = null;
+        Boolean withCandidateUsers = null;
+        Boolean withoutCandidateUsers = null;
+        Boolean active = null;
+        Boolean suspended = null;
+        String taskVariables = null;
+        String processVariables = null;
+        String caseInstanceVariables = null;
+        Boolean variableNamesIgnoreCase = null;
+        Boolean variableValuesIgnoreCase = null;
+        String parentTaskId = null;
+        String sortBy = null;
+        String sortOrder = null;
+        Integer firstResult = null;
+        Integer maxResults = null;
+        List<TaskDto> response = api.getTasks(processInstanceId, processInstanceIdIn, processInstanceBusinessKey, processInstanceBusinessKeyExpression, processInstanceBusinessKeyIn, processInstanceBusinessKeyLike, processInstanceBusinessKeyLikeExpression, processDefinitionId, processDefinitionKey, processDefinitionKeyIn, processDefinitionName, processDefinitionNameLike, executionId, caseInstanceId, caseInstanceBusinessKey, caseInstanceBusinessKeyLike, caseDefinitionId, caseDefinitionKey, caseDefinitionName, caseDefinitionNameLike, caseExecutionId, activityInstanceIdIn, tenantIdIn, withoutTenantId, assignee, assigneeExpression, assigneeLike, assigneeLikeExpression, assigneeIn, owner, ownerExpression, candidateGroup, candidateGroupExpression, candidateUser, candidateUserExpression, includeAssignedTasks, involvedUser, involvedUserExpression, assigned, unassigned, taskDefinitionKey, taskDefinitionKeyIn, taskDefinitionKeyLike, name, nameNotEqual, nameLike, nameNotLike, description, descriptionLike, priority, maxPriority, minPriority, dueDate, dueDateExpression, dueAfter, dueAfterExpression, dueBefore, dueBeforeExpression, followUpDate, followUpDateExpression, followUpAfter, followUpAfterExpression, followUpBefore, followUpBeforeExpression, followUpBeforeOrNotExistent, followUpBeforeOrNotExistentExpression, createdOn, createdOnExpression, createdAfter, createdAfterExpression, createdBefore, createdBeforeExpression, delegationState, candidateGroups, candidateGroupsExpression, withCandidateGroups, withoutCandidateGroups, withCandidateUsers, withoutCandidateUsers, active, suspended, taskVariables, processVariables, caseInstanceVariables, variableNamesIgnoreCase, variableValuesIgnoreCase, parentTaskId, sortBy, sortOrder, firstResult, maxResults);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -314,97 +324,98 @@ public class TaskApiTest {
      */
     @Test
     public void getTasksCountTest() throws ApiException {
-        //String processInstanceId = null;
-        //String processInstanceIdIn = null;
-        //String processInstanceBusinessKey = null;
-        //String processInstanceBusinessKeyExpression = null;
-        //String processInstanceBusinessKeyIn = null;
-        //String processInstanceBusinessKeyLike = null;
-        //String processInstanceBusinessKeyLikeExpression = null;
-        //String processDefinitionId = null;
-        //String processDefinitionKey = null;
-        //String processDefinitionKeyIn = null;
-        //String processDefinitionName = null;
-        //String processDefinitionNameLike = null;
-        //String executionId = null;
-        //String caseInstanceId = null;
-        //String caseInstanceBusinessKey = null;
-        //String caseInstanceBusinessKeyLike = null;
-        //String caseDefinitionId = null;
-        //String caseDefinitionKey = null;
-        //String caseDefinitionName = null;
-        //String caseDefinitionNameLike = null;
-        //String caseExecutionId = null;
-        //String activityInstanceIdIn = null;
-        //String tenantIdIn = null;
-        //Boolean withoutTenantId = null;
-        //String assignee = null;
-        //String assigneeExpression = null;
-        //String assigneeLike = null;
-        //String assigneeLikeExpression = null;
-        //String assigneeIn = null;
-        //String owner = null;
-        //String ownerExpression = null;
-        //String candidateGroup = null;
-        //String candidateGroupExpression = null;
-        //String candidateUser = null;
-        //String candidateUserExpression = null;
-        //Boolean includeAssignedTasks = null;
-        //String involvedUser = null;
-        //String involvedUserExpression = null;
-        //Boolean assigned = null;
-        //Boolean unassigned = null;
-        //String taskDefinitionKey = null;
-        //String taskDefinitionKeyIn = null;
-        //String taskDefinitionKeyLike = null;
-        //String name = null;
-        //String nameNotEqual = null;
-        //String nameLike = null;
-        //String nameNotLike = null;
-        //String description = null;
-        //String descriptionLike = null;
-        //Integer priority = null;
-        //Integer maxPriority = null;
-        //Integer minPriority = null;
-        //String dueDate = null;
-        //String dueDateExpression = null;
-        //String dueAfter = null;
-        //String dueAfterExpression = null;
-        //String dueBefore = null;
-        //String dueBeforeExpression = null;
-        //String followUpDate = null;
-        //String followUpDateExpression = null;
-        //String followUpAfter = null;
-        //String followUpAfterExpression = null;
-        //String followUpBefore = null;
-        //String followUpBeforeExpression = null;
-        //String followUpBeforeOrNotExistent = null;
-        //String followUpBeforeOrNotExistentExpression = null;
-        //String createdOn = null;
-        //String createdOnExpression = null;
-        //String createdAfter = null;
-        //String createdAfterExpression = null;
-        //String createdBefore = null;
-        //String createdBeforeExpression = null;
-        //String delegationState = null;
-        //String candidateGroups = null;
-        //String candidateGroupsExpression = null;
-        //Boolean withCandidateGroups = null;
-        //Boolean withoutCandidateGroups = null;
-        //Boolean withCandidateUsers = null;
-        //Boolean withoutCandidateUsers = null;
-        //Boolean active = null;
-        //Boolean suspended = null;
-        //String taskVariables = null;
-        //String processVariables = null;
-        //String caseInstanceVariables = null;
-        //Boolean variableNamesIgnoreCase = null;
-        //Boolean variableValuesIgnoreCase = null;
-        //String parentTaskId = null;
-        //CountResultDto response = api.getTasksCount(processInstanceId, processInstanceIdIn, processInstanceBusinessKey, processInstanceBusinessKeyExpression, processInstanceBusinessKeyIn, processInstanceBusinessKeyLike, processInstanceBusinessKeyLikeExpression, processDefinitionId, processDefinitionKey, processDefinitionKeyIn, processDefinitionName, processDefinitionNameLike, executionId, caseInstanceId, caseInstanceBusinessKey, caseInstanceBusinessKeyLike, caseDefinitionId, caseDefinitionKey, caseDefinitionName, caseDefinitionNameLike, caseExecutionId, activityInstanceIdIn, tenantIdIn, withoutTenantId, assignee, assigneeExpression, assigneeLike, assigneeLikeExpression, assigneeIn, owner, ownerExpression, candidateGroup, candidateGroupExpression, candidateUser, candidateUserExpression, includeAssignedTasks, involvedUser, involvedUserExpression, assigned, unassigned, taskDefinitionKey, taskDefinitionKeyIn, taskDefinitionKeyLike, name, nameNotEqual, nameLike, nameNotLike, description, descriptionLike, priority, maxPriority, minPriority, dueDate, dueDateExpression, dueAfter, dueAfterExpression, dueBefore, dueBeforeExpression, followUpDate, followUpDateExpression, followUpAfter, followUpAfterExpression, followUpBefore, followUpBeforeExpression, followUpBeforeOrNotExistent, followUpBeforeOrNotExistentExpression, createdOn, createdOnExpression, createdAfter, createdAfterExpression, createdBefore, createdBeforeExpression, delegationState, candidateGroups, candidateGroupsExpression, withCandidateGroups, withoutCandidateGroups, withCandidateUsers, withoutCandidateUsers, active, suspended, taskVariables, processVariables, caseInstanceVariables, variableNamesIgnoreCase, variableValuesIgnoreCase, parentTaskId);
+        String processInstanceId = null;
+        String processInstanceIdIn = null;
+        String processInstanceBusinessKey = null;
+        String processInstanceBusinessKeyExpression = null;
+        String processInstanceBusinessKeyIn = null;
+        String processInstanceBusinessKeyLike = null;
+        String processInstanceBusinessKeyLikeExpression = null;
+        String processDefinitionId = null;
+        String processDefinitionKey = null;
+        String processDefinitionKeyIn = null;
+        String processDefinitionName = null;
+        String processDefinitionNameLike = null;
+        String executionId = null;
+        String caseInstanceId = null;
+        String caseInstanceBusinessKey = null;
+        String caseInstanceBusinessKeyLike = null;
+        String caseDefinitionId = null;
+        String caseDefinitionKey = null;
+        String caseDefinitionName = null;
+        String caseDefinitionNameLike = null;
+        String caseExecutionId = null;
+        String activityInstanceIdIn = null;
+        String tenantIdIn = null;
+        Boolean withoutTenantId = null;
+        String assignee = null;
+        String assigneeExpression = null;
+        String assigneeLike = null;
+        String assigneeLikeExpression = null;
+        String assigneeIn = null;
+        String owner = null;
+        String ownerExpression = null;
+        String candidateGroup = null;
+        String candidateGroupExpression = null;
+        String candidateUser = null;
+        String candidateUserExpression = null;
+        Boolean includeAssignedTasks = null;
+        String involvedUser = null;
+        String involvedUserExpression = null;
+        Boolean assigned = null;
+        Boolean unassigned = null;
+        String taskDefinitionKey = null;
+        String taskDefinitionKeyIn = null;
+        String taskDefinitionKeyLike = null;
+        String name = null;
+        String nameNotEqual = null;
+        String nameLike = null;
+        String nameNotLike = null;
+        String description = null;
+        String descriptionLike = null;
+        Integer priority = null;
+        Integer maxPriority = null;
+        Integer minPriority = null;
+        String dueDate = null;
+        String dueDateExpression = null;
+        String dueAfter = null;
+        String dueAfterExpression = null;
+        String dueBefore = null;
+        String dueBeforeExpression = null;
+        String followUpDate = null;
+        String followUpDateExpression = null;
+        String followUpAfter = null;
+        String followUpAfterExpression = null;
+        String followUpBefore = null;
+        String followUpBeforeExpression = null;
+        String followUpBeforeOrNotExistent = null;
+        String followUpBeforeOrNotExistentExpression = null;
+        String createdOn = null;
+        String createdOnExpression = null;
+        String createdAfter = null;
+        String createdAfterExpression = null;
+        String createdBefore = null;
+        String createdBeforeExpression = null;
+        String delegationState = null;
+        String candidateGroups = null;
+        String candidateGroupsExpression = null;
+        Boolean withCandidateGroups = null;
+        Boolean withoutCandidateGroups = null;
+        Boolean withCandidateUsers = null;
+        Boolean withoutCandidateUsers = null;
+        Boolean active = null;
+        Boolean suspended = null;
+        String taskVariables = null;
+        String processVariables = null;
+        String caseInstanceVariables = null;
+        Boolean variableNamesIgnoreCase = null;
+        Boolean variableValuesIgnoreCase = null;
+        String parentTaskId = null;
+        CountResultDto response = api.getTasksCount(processInstanceId, processInstanceIdIn, processInstanceBusinessKey, processInstanceBusinessKeyExpression, processInstanceBusinessKeyIn, processInstanceBusinessKeyLike, processInstanceBusinessKeyLikeExpression, processDefinitionId, processDefinitionKey, processDefinitionKeyIn, processDefinitionName, processDefinitionNameLike, executionId, caseInstanceId, caseInstanceBusinessKey, caseInstanceBusinessKeyLike, caseDefinitionId, caseDefinitionKey, caseDefinitionName, caseDefinitionNameLike, caseExecutionId, activityInstanceIdIn, tenantIdIn, withoutTenantId, assignee, assigneeExpression, assigneeLike, assigneeLikeExpression, assigneeIn, owner, ownerExpression, candidateGroup, candidateGroupExpression, candidateUser, candidateUserExpression, includeAssignedTasks, involvedUser, involvedUserExpression, assigned, unassigned, taskDefinitionKey, taskDefinitionKeyIn, taskDefinitionKeyLike, name, nameNotEqual, nameLike, nameNotLike, description, descriptionLike, priority, maxPriority, minPriority, dueDate, dueDateExpression, dueAfter, dueAfterExpression, dueBefore, dueBeforeExpression, followUpDate, followUpDateExpression, followUpAfter, followUpAfterExpression, followUpBefore, followUpBeforeExpression, followUpBeforeOrNotExistent, followUpBeforeOrNotExistentExpression, createdOn, createdOnExpression, createdAfter, createdAfterExpression, createdBefore, createdBeforeExpression, delegationState, candidateGroups, candidateGroupsExpression, withCandidateGroups, withoutCandidateGroups, withCandidateUsers, withoutCandidateUsers, active, suspended, taskVariables, processVariables, caseInstanceVariables, variableNamesIgnoreCase, variableValuesIgnoreCase, parentTaskId);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -415,12 +426,13 @@ public class TaskApiTest {
      */
     @Test
     public void handleBpmnErrorTest() throws ApiException {
-        //String id = null;
-        //TaskBpmnErrorDto taskBpmnErrorDto = null;
-        //api.handleBpmnError(id, taskBpmnErrorDto);
+        String id = null;
+        TaskBpmnErrorDto taskBpmnErrorDto = null;
+        api.handleBpmnError(id, taskBpmnErrorDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -431,12 +443,13 @@ public class TaskApiTest {
      */
     @Test
     public void handleEscalationTest() throws ApiException {
-        //String id = null;
-        //TaskEscalationDto taskEscalationDto = null;
-        //api.handleEscalation(id, taskEscalationDto);
+        String id = null;
+        TaskEscalationDto taskEscalationDto = null;
+        api.handleEscalation(id, taskEscalationDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -447,13 +460,14 @@ public class TaskApiTest {
      */
     @Test
     public void queryTasksTest() throws ApiException {
-        //Integer firstResult = null;
-        //Integer maxResults = null;
-        //TaskQueryDto taskQueryDto = null;
-        //List<TaskDto> response = api.queryTasks(firstResult, maxResults, taskQueryDto);
+        Integer firstResult = null;
+        Integer maxResults = null;
+        TaskQueryDto taskQueryDto = null;
+        List<TaskDto> response = api.queryTasks(firstResult, maxResults, taskQueryDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -464,11 +478,12 @@ public class TaskApiTest {
      */
     @Test
     public void queryTasksCountTest() throws ApiException {
-        //TaskQueryDto taskQueryDto = null;
-        //CountResultDto response = api.queryTasksCount(taskQueryDto);
+        TaskQueryDto taskQueryDto = null;
+        CountResultDto response = api.queryTasksCount(taskQueryDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -479,12 +494,13 @@ public class TaskApiTest {
      */
     @Test
     public void resolveTest() throws ApiException {
-        //String id = null;
-        //CompleteTaskDto completeTaskDto = null;
-        //api.resolve(id, completeTaskDto);
+        String id = null;
+        CompleteTaskDto completeTaskDto = null;
+        api.resolve(id, completeTaskDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -495,12 +511,13 @@ public class TaskApiTest {
      */
     @Test
     public void setAssigneeTest() throws ApiException {
-        //String id = null;
-        //UserIdDto userIdDto = null;
-        //api.setAssignee(id, userIdDto);
+        String id = null;
+        UserIdDto userIdDto = null;
+        api.setAssignee(id, userIdDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -511,12 +528,13 @@ public class TaskApiTest {
      */
     @Test
     public void submitTest() throws ApiException {
-        //String id = null;
-        //CompleteTaskDto completeTaskDto = null;
-        //Map<String, VariableValueDto> response = api.submit(id, completeTaskDto);
+        String id = null;
+        CompleteTaskDto completeTaskDto = null;
+        Map<String, VariableValueDto> response = api.submit(id, completeTaskDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -527,11 +545,12 @@ public class TaskApiTest {
      */
     @Test
     public void unclaimTest() throws ApiException {
-        //String id = null;
-        //api.unclaim(id);
+        String id = null;
+        api.unclaim(id);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -542,10 +561,11 @@ public class TaskApiTest {
      */
     @Test
     public void updateTaskTest() throws ApiException {
-        //String id = null;
-        //TaskDto taskDto = null;
-        //api.updateTask(id, taskDto);
+        String id = null;
+        TaskDto taskDto = null;
+        api.updateTask(id, taskDto);
+
         // TODO: test validations
     }
-
+    
 }

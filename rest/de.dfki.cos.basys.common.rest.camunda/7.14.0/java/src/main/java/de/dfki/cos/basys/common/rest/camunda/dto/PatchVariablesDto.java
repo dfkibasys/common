@@ -15,41 +15,36 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import de.dfki.cos.basys.common.rest.camunda.dto.VariableValueDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
 
 /**
  * PatchVariablesDto
  */
-@JsonPropertyOrder({
-  PatchVariablesDto.JSON_PROPERTY_MODIFICATIONS,
-  PatchVariablesDto.JSON_PROPERTY_DELETIONS
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class PatchVariablesDto {
-  public static final String JSON_PROPERTY_MODIFICATIONS = "modifications";
+  public static final String SERIALIZED_NAME_MODIFICATIONS = "modifications";
+  @SerializedName(SERIALIZED_NAME_MODIFICATIONS)
   private Map<String, VariableValueDto> modifications = null;
 
-  public static final String JSON_PROPERTY_DELETIONS = "deletions";
+  public static final String SERIALIZED_NAME_DELETIONS = "deletions";
+  @SerializedName(SERIALIZED_NAME_DELETIONS)
   private List<String> deletions = null;
 
 
   public PatchVariablesDto modifications(Map<String, VariableValueDto> modifications) {
+    
     this.modifications = modifications;
     return this;
   }
@@ -68,8 +63,6 @@ public class PatchVariablesDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON object containing variable key-value pairs.")
-  @JsonProperty(JSON_PROPERTY_MODIFICATIONS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Map<String, VariableValueDto> getModifications() {
     return modifications;
@@ -82,6 +75,7 @@ public class PatchVariablesDto {
 
 
   public PatchVariablesDto deletions(List<String> deletions) {
+    
     this.deletions = deletions;
     return this;
   }
@@ -100,8 +94,6 @@ public class PatchVariablesDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "An array of String keys of variables to be deleted.")
-  @JsonProperty(JSON_PROPERTY_DELETIONS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<String> getDeletions() {
     return deletions;
@@ -113,9 +105,6 @@ public class PatchVariablesDto {
   }
 
 
-  /**
-   * Return true if this PatchVariablesDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

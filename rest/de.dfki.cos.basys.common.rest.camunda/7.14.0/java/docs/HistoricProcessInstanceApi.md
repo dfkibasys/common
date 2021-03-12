@@ -16,9 +16,8 @@ Method | HTTP request | Description
 [**setRemovalTimeAsync**](HistoricProcessInstanceApi.md#setRemovalTimeAsync) | **POST** /history/process-instance/set-removal-time | Set Removal Time Async (POST)
 
 
-
-## deleteHistoricProcessInstance
-
+<a name="deleteHistoricProcessInstance"></a>
+# **deleteHistoricProcessInstance**
 > deleteHistoricProcessInstance(id, failIfNotExists)
 
 Delete
@@ -26,38 +25,36 @@ Delete
 Deletes a process instance from the history by id.
 
 ### Example
-
 ```java
 // Import classes:
 import de.dfki.cos.basys.common.rest.camunda.ApiClient;
 import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.Configuration;
-import de.dfki.cos.basys.common.rest.camunda.model.*;
+import de.dfki.cos.basys.common.rest.camunda.models.*;
 import de.dfki.cos.basys.common.rest.camunda.api.HistoricProcessInstanceApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("http://localhost:8080/engine-rest");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost:8080/engine-rest");
 
-        HistoricProcessInstanceApi apiInstance = new HistoricProcessInstanceApi(defaultClient);
-        String id = "id_example"; // String | The id of the historic process instance to be deleted.
-        Boolean failIfNotExists = true; // Boolean | If set to `false`, the request will still be successful if the process id is not found.
-        try {
-            apiInstance.deleteHistoricProcessInstance(id, failIfNotExists);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling HistoricProcessInstanceApi#deleteHistoricProcessInstance");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    HistoricProcessInstanceApi apiInstance = new HistoricProcessInstanceApi(defaultClient);
+    String id = "id_example"; // String | The id of the historic process instance to be deleted.
+    Boolean failIfNotExists = true; // Boolean | If set to `false`, the request will still be successful if the process id is not found.
+    try {
+      apiInstance.deleteHistoricProcessInstance(id, failIfNotExists);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling HistoricProcessInstanceApi#deleteHistoricProcessInstance");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -74,59 +71,54 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **204** | Request successful. |  -  |
-| **404** | Not found Historic process instance with given id does not exist. |  -  |
+**204** | Request successful. |  -  |
+**404** | Not found Historic process instance with given id does not exist. |  -  |
 
-
-## deleteHistoricProcessInstancesAsync
-
+<a name="deleteHistoricProcessInstancesAsync"></a>
+# **deleteHistoricProcessInstancesAsync**
 > BatchDto deleteHistoricProcessInstancesAsync(deleteHistoricProcessInstancesDto)
 
 Delete Async (POST)
 
-Delete multiple historic process instances asynchronously (batch).
-At least `historicProcessInstanceIds` or `historicProcessInstanceQuery` has to be provided.
-If both are provided then all instances matching query criterion and instances from the list will be deleted.
+Delete multiple historic process instances asynchronously (batch). At least &#x60;historicProcessInstanceIds&#x60; or &#x60;historicProcessInstanceQuery&#x60; has to be provided. If both are provided then all instances matching query criterion and instances from the list will be deleted.
 
 ### Example
-
 ```java
 // Import classes:
 import de.dfki.cos.basys.common.rest.camunda.ApiClient;
 import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.Configuration;
-import de.dfki.cos.basys.common.rest.camunda.model.*;
+import de.dfki.cos.basys.common.rest.camunda.models.*;
 import de.dfki.cos.basys.common.rest.camunda.api.HistoricProcessInstanceApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("http://localhost:8080/engine-rest");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost:8080/engine-rest");
 
-        HistoricProcessInstanceApi apiInstance = new HistoricProcessInstanceApi(defaultClient);
-        DeleteHistoricProcessInstancesDto deleteHistoricProcessInstancesDto = {"deleteReason":"aReason","historicProcessInstanceIds":["aProcess","secondProcess"],"historicProcessInstanceQuery":{"startedAfter":"2016-10-11T11:44:13.000+0200","finishedBefore":"2016-10-13T11:44:17.000+0200"}}; // DeleteHistoricProcessInstancesDto | 
-        try {
-            BatchDto result = apiInstance.deleteHistoricProcessInstancesAsync(deleteHistoricProcessInstancesDto);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling HistoricProcessInstanceApi#deleteHistoricProcessInstancesAsync");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    HistoricProcessInstanceApi apiInstance = new HistoricProcessInstanceApi(defaultClient);
+    DeleteHistoricProcessInstancesDto deleteHistoricProcessInstancesDto = {"deleteReason":"aReason","historicProcessInstanceIds":["aProcess","secondProcess"],"historicProcessInstanceQuery":{"startedAfter":"2016-10-11T11:44:13.000+0200","finishedBefore":"2016-10-13T11:44:17.000+0200"}}; // DeleteHistoricProcessInstancesDto | 
+    try {
+      BatchDto result = apiInstance.deleteHistoricProcessInstancesAsync(deleteHistoricProcessInstancesDto);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling HistoricProcessInstanceApi#deleteHistoricProcessInstancesAsync");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -142,18 +134,17 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Request successful. |  -  |
-| **400** | Returned if some of the query parameters are invalid, i.e. neither historicProcessInstanceIds, nor historicProcessInstanceQuery is present. See the [Introduction](https://docs.camunda.org/manual/7.14/reference/rest/overview/#error-handling) for the error response format. |  -  |
+**200** | Request successful. |  -  |
+**400** | Returned if some of the query parameters are invalid, i.e. neither historicProcessInstanceIds, nor historicProcessInstanceQuery is present. See the [Introduction](https://docs.camunda.org/manual/7.14/reference/rest/overview/#error-handling) for the error response format. |  -  |
 
-
-## deleteHistoricVariableInstancesOfHistoricProcessInstance
-
+<a name="deleteHistoricVariableInstancesOfHistoricProcessInstance"></a>
+# **deleteHistoricVariableInstancesOfHistoricProcessInstance**
 > deleteHistoricVariableInstancesOfHistoricProcessInstance(id)
 
 Delete Variable Instances
@@ -161,37 +152,35 @@ Delete Variable Instances
 Deletes all variables of a process instance from the history by id.
 
 ### Example
-
 ```java
 // Import classes:
 import de.dfki.cos.basys.common.rest.camunda.ApiClient;
 import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.Configuration;
-import de.dfki.cos.basys.common.rest.camunda.model.*;
+import de.dfki.cos.basys.common.rest.camunda.models.*;
 import de.dfki.cos.basys.common.rest.camunda.api.HistoricProcessInstanceApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("http://localhost:8080/engine-rest");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost:8080/engine-rest");
 
-        HistoricProcessInstanceApi apiInstance = new HistoricProcessInstanceApi(defaultClient);
-        String id = "id_example"; // String | The id of the process instance for which all historic variables are to be deleted.
-        try {
-            apiInstance.deleteHistoricVariableInstancesOfHistoricProcessInstance(id);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling HistoricProcessInstanceApi#deleteHistoricVariableInstancesOfHistoricProcessInstance");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    HistoricProcessInstanceApi apiInstance = new HistoricProcessInstanceApi(defaultClient);
+    String id = "id_example"; // String | The id of the process instance for which all historic variables are to be deleted.
+    try {
+      apiInstance.deleteHistoricVariableInstancesOfHistoricProcessInstance(id);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling HistoricProcessInstanceApi#deleteHistoricVariableInstancesOfHistoricProcessInstance");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -207,57 +196,54 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **204** | Request successful. |  -  |
-| **404** | Not found Historic process instance with given id does not exist. See the [Introduction](https://docs.camunda.org/manual/7.14/reference/rest/overview/#parse-exceptions) for the error response format. |  -  |
+**204** | Request successful. |  -  |
+**404** | Not found Historic process instance with given id does not exist. See the [Introduction](https://docs.camunda.org/manual/7.14/reference/rest/overview/#parse-exceptions) for the error response format. |  -  |
 
-
-## getHistoricProcessInstance
-
+<a name="getHistoricProcessInstance"></a>
+# **getHistoricProcessInstance**
 > HistoricProcessInstanceDto getHistoricProcessInstance(id)
 
 Get
 
-Retrieves a historic process instance by id, according to the `HistoricProcessInstance` interface in the engine.
+Retrieves a historic process instance by id, according to the &#x60;HistoricProcessInstance&#x60; interface in the engine.
 
 ### Example
-
 ```java
 // Import classes:
 import de.dfki.cos.basys.common.rest.camunda.ApiClient;
 import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.Configuration;
-import de.dfki.cos.basys.common.rest.camunda.model.*;
+import de.dfki.cos.basys.common.rest.camunda.models.*;
 import de.dfki.cos.basys.common.rest.camunda.api.HistoricProcessInstanceApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("http://localhost:8080/engine-rest");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost:8080/engine-rest");
 
-        HistoricProcessInstanceApi apiInstance = new HistoricProcessInstanceApi(defaultClient);
-        String id = "id_example"; // String | The id of the historic process instance to be retrieved.
-        try {
-            HistoricProcessInstanceDto result = apiInstance.getHistoricProcessInstance(id);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling HistoricProcessInstanceApi#getHistoricProcessInstance");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    HistoricProcessInstanceApi apiInstance = new HistoricProcessInstanceApi(defaultClient);
+    String id = "id_example"; // String | The id of the historic process instance to be retrieved.
+    try {
+      HistoricProcessInstanceDto result = apiInstance.getHistoricProcessInstance(id);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling HistoricProcessInstanceApi#getHistoricProcessInstance");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -273,66 +259,59 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Request successful. |  -  |
-| **404** | Not Found Historic process instance with given id does not exist. See the [Introduction](https://docs.camunda.org/manual/7.14/reference/rest/overview/#error-handling) for the error response format. |  -  |
+**200** | Request successful. |  -  |
+**404** | Not Found Historic process instance with given id does not exist. See the [Introduction](https://docs.camunda.org/manual/7.14/reference/rest/overview/#error-handling) for the error response format. |  -  |
 
-
-## getHistoricProcessInstanceDurationReport
-
+<a name="getHistoricProcessInstanceDurationReport"></a>
+# **getHistoricProcessInstanceDurationReport**
 > Object getHistoricProcessInstanceDurationReport(reportType, periodUnit, processDefinitionIdIn, processDefinitionKeyIn, startedBefore, startedAfter)
 
 Get Duration Report
 
-Retrieves a report about the duration of completed process instances, grouped by a period.
-These reports include the maximum, minimum and average duration of all completed process instances which were started in a given period.
-
-**Note:** This only includes historic data.
+Retrieves a report about the duration of completed process instances, grouped by a period. These reports include the maximum, minimum and average duration of all completed process instances which were started in a given period.  **Note:** This only includes historic data.
 
 ### Example
-
 ```java
-import org.threeten.bp.OffsetDateTime;
 // Import classes:
 import de.dfki.cos.basys.common.rest.camunda.ApiClient;
 import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.Configuration;
-import de.dfki.cos.basys.common.rest.camunda.model.*;
+import de.dfki.cos.basys.common.rest.camunda.models.*;
 import de.dfki.cos.basys.common.rest.camunda.api.HistoricProcessInstanceApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("http://localhost:8080/engine-rest");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost:8080/engine-rest");
 
-        HistoricProcessInstanceApi apiInstance = new HistoricProcessInstanceApi(defaultClient);
-        String reportType = "reportType_example"; // String | **Mandatory.** Specifies the type of the report to retrieve. To retrieve a report about the duration of process instances, the value must be set to `duration`.
-        String periodUnit = "periodUnit_example"; // String | **Mandatory.** Specifies the granularity of the report. Valid values are `month` and `quarter`.
-        String processDefinitionIdIn = "processDefinitionIdIn_example"; // String | Filter by process definition ids. Must be a comma-separated list of process definition ids.
-        String processDefinitionKeyIn = "processDefinitionKeyIn_example"; // String | Filter by process definition keys. Must be a comma-separated list of process definition keys.
-        OffsetDateTime startedBefore = OffsetDateTime.now(); // OffsetDateTime | Restrict to instances that were started before the given date. By [default](), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2016-01-23T14:42:45.000+0200`.
-        OffsetDateTime startedAfter = OffsetDateTime.now(); // OffsetDateTime | Restrict to instances that were started after the given date. By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2016-01-23T14:42:45.000+0200`.
-        try {
-            Object result = apiInstance.getHistoricProcessInstanceDurationReport(reportType, periodUnit, processDefinitionIdIn, processDefinitionKeyIn, startedBefore, startedAfter);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling HistoricProcessInstanceApi#getHistoricProcessInstanceDurationReport");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    HistoricProcessInstanceApi apiInstance = new HistoricProcessInstanceApi(defaultClient);
+    String reportType = "reportType_example"; // String | **Mandatory.** Specifies the type of the report to retrieve. To retrieve a report about the duration of process instances, the value must be set to `duration`.
+    String periodUnit = "periodUnit_example"; // String | **Mandatory.** Specifies the granularity of the report. Valid values are `month` and `quarter`.
+    String processDefinitionIdIn = "processDefinitionIdIn_example"; // String | Filter by process definition ids. Must be a comma-separated list of process definition ids.
+    String processDefinitionKeyIn = "processDefinitionKeyIn_example"; // String | Filter by process definition keys. Must be a comma-separated list of process definition keys.
+    OffsetDateTime startedBefore = OffsetDateTime.now(); // OffsetDateTime | Restrict to instances that were started before the given date. By [default](), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2016-01-23T14:42:45.000+0200`.
+    OffsetDateTime startedAfter = OffsetDateTime.now(); // OffsetDateTime | Restrict to instances that were started after the given date. By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2016-01-23T14:42:45.000+0200`.
+    try {
+      Object result = apiInstance.getHistoricProcessInstanceDurationReport(reportType, periodUnit, processDefinitionIdIn, processDefinitionKeyIn, startedBefore, startedAfter);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling HistoricProcessInstanceApi#getHistoricProcessInstanceDurationReport");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -353,109 +332,103 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: text/csv, application/json
+ - **Content-Type**: Not defined
+ - **Accept**: text/csv, application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Request successful. In case of an expected text/csv response to retrieve the result as a csv file. |  -  |
-| **400** | Returned if some of the query parameters are invalid or mandatory parameters are not supplied. See the [Introduction](https://docs.camunda.org/manual/7.14/reference/rest/overview/#error-handling) for the error response format. |  -  |
-| **403** | If the authenticated user is unauthorized to read the history. See the [Introduction](https://docs.camunda.org/manual/7.14/reference/rest/overview/#error-handling) for the error response format. |  -  |
+**200** | Request successful. In case of an expected text/csv response to retrieve the result as a csv file. |  -  |
+**400** | Returned if some of the query parameters are invalid or mandatory parameters are not supplied. See the [Introduction](https://docs.camunda.org/manual/7.14/reference/rest/overview/#error-handling) for the error response format. |  -  |
+**403** | If the authenticated user is unauthorized to read the history. See the [Introduction](https://docs.camunda.org/manual/7.14/reference/rest/overview/#error-handling) for the error response format. |  -  |
 
-
-## getHistoricProcessInstances
-
+<a name="getHistoricProcessInstances"></a>
+# **getHistoricProcessInstances**
 > List&lt;HistoricProcessInstanceDto&gt; getHistoricProcessInstances(sortBy, sortOrder, firstResult, maxResults, processInstanceId, processInstanceIds, processDefinitionId, processDefinitionKey, processDefinitionKeyIn, processDefinitionName, processDefinitionNameLike, processDefinitionKeyNotIn, processInstanceBusinessKey, processInstanceBusinessKeyLike, rootProcessInstances, finished, unfinished, withIncidents, withRootIncidents, incidentType, incidentStatus, incidentMessage, incidentMessageLike, startedBefore, startedAfter, finishedBefore, finishedAfter, executedActivityAfter, executedActivityBefore, executedJobAfter, executedJobBefore, startedBy, superProcessInstanceId, subProcessInstanceId, superCaseInstanceId, subCaseInstanceId, caseInstanceId, tenantIdIn, withoutTenantId, executedActivityIdIn, activeActivityIdIn, active, suspended, completed, externallyTerminated, internallyTerminated, variables, variableNamesIgnoreCase, variableValuesIgnoreCase)
 
 Get List
 
-Queries for historic process instances that fulfill the given parameters.
-The size of the result set can be retrieved by using the
-[Get Process Instance Count](https://docs.camunda.org/manual/7.14/reference/rest/history/process-instance/get-process-instance-query-count/) method.
+Queries for historic process instances that fulfill the given parameters. The size of the result set can be retrieved by using the [Get Process Instance Count](https://docs.camunda.org/manual/7.14/reference/rest/history/process-instance/get-process-instance-query-count/) method.
 
 ### Example
-
 ```java
-import org.threeten.bp.OffsetDateTime;
 // Import classes:
 import de.dfki.cos.basys.common.rest.camunda.ApiClient;
 import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.Configuration;
-import de.dfki.cos.basys.common.rest.camunda.model.*;
+import de.dfki.cos.basys.common.rest.camunda.models.*;
 import de.dfki.cos.basys.common.rest.camunda.api.HistoricProcessInstanceApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("http://localhost:8080/engine-rest");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost:8080/engine-rest");
 
-        HistoricProcessInstanceApi apiInstance = new HistoricProcessInstanceApi(defaultClient);
-        String sortBy = "sortBy_example"; // String | Sort the results lexicographically by a given criterion. Must be used in conjunction with the sortOrder parameter.
-        String sortOrder = "sortOrder_example"; // String | Sort the results in a given order. Values may be asc for ascending order or desc for descending order. Must be used in conjunction with the sortBy parameter.
-        Integer firstResult = 56; // Integer | Pagination of results. Specifies the index of the first result to return.
-        Integer maxResults = 56; // Integer | Pagination of results. Specifies the maximum number of results to return. Will return less results if there are no more results left.
-        String processInstanceId = "processInstanceId_example"; // String | Filter by process instance id.
-        String processInstanceIds = "processInstanceIds_example"; // String | Filter by process instance ids. Filter by a comma-separated list of `Strings`.
-        String processDefinitionId = "processDefinitionId_example"; // String | Filter by the process definition the instances run on.
-        String processDefinitionKey = "processDefinitionKey_example"; // String | Filter by the key of the process definition the instances run on.
-        String processDefinitionKeyIn = "processDefinitionKeyIn_example"; // String | Filter by a list of process definition keys. A process instance must have one of the given process definition keys. Filter by a comma-separated list of `Strings`.
-        String processDefinitionName = "processDefinitionName_example"; // String | Filter by the name of the process definition the instances run on.
-        String processDefinitionNameLike = "processDefinitionNameLike_example"; // String | Filter by process definition names that the parameter is a substring of.
-        String processDefinitionKeyNotIn = "processDefinitionKeyNotIn_example"; // String | Exclude instances that belong to a set of process definitions. Filter by a comma-separated list of `Strings`.
-        String processInstanceBusinessKey = "processInstanceBusinessKey_example"; // String | Filter by process instance business key.
-        String processInstanceBusinessKeyLike = "processInstanceBusinessKeyLike_example"; // String | Filter by process instance business key that the parameter is a substring of.
-        Boolean rootProcessInstances = true; // Boolean | Restrict the query to all process instances that are top level process instances.
-        Boolean finished = true; // Boolean | Only include finished process instances. Value may only be `true`, as `false` is the default behavior.
-        Boolean unfinished = true; // Boolean | Only include unfinished process instances. Value may only be `true`, as `false` is the default behavior.
-        Boolean withIncidents = true; // Boolean | Only include process instances which have an incident. Value may only be `true`, as `false` is the default behavior.
-        Boolean withRootIncidents = true; // Boolean | Only include process instances which have a root incident. Value may only be `true`, as `false` is the default behavior.
-        String incidentType = "incidentType_example"; // String | Filter by the incident type. See the [User Guide](https://docs.camunda.org/manual/7.14/user-guide/process-engine/incidents/#incident-types) for a list of incident types.
-        String incidentStatus = "incidentStatus_example"; // String | Only include process instances which have an incident in status either open or resolved. To get all process instances, use the query parameter withIncidents.
-        String incidentMessage = "incidentMessage_example"; // String | Filter by the incident message. Exact match.
-        String incidentMessageLike = "incidentMessageLike_example"; // String | Filter by the incident message that the parameter is a substring of.
-        OffsetDateTime startedBefore = OffsetDateTime.now(); // OffsetDateTime | Restrict to instances that were started before the given date. By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.
-        OffsetDateTime startedAfter = OffsetDateTime.now(); // OffsetDateTime | Restrict to instances that were started after the given date. By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.
-        OffsetDateTime finishedBefore = OffsetDateTime.now(); // OffsetDateTime | Restrict to instances that were finished before the given date. By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.
-        OffsetDateTime finishedAfter = OffsetDateTime.now(); // OffsetDateTime | Restrict to instances that were finished after the given date. By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.
-        OffsetDateTime executedActivityAfter = OffsetDateTime.now(); // OffsetDateTime | Restrict to instances that executed an activity after the given date (inclusive). By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.
-        OffsetDateTime executedActivityBefore = OffsetDateTime.now(); // OffsetDateTime | Restrict to instances that executed an activity before the given date (inclusive). By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.
-        OffsetDateTime executedJobAfter = OffsetDateTime.now(); // OffsetDateTime | Restrict to instances that executed an job after the given date (inclusive). By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.
-        OffsetDateTime executedJobBefore = OffsetDateTime.now(); // OffsetDateTime | Restrict to instances that executed an job before the given date (inclusive). By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.
-        String startedBy = "startedBy_example"; // String | Only include process instances that were started by the given user.
-        String superProcessInstanceId = "superProcessInstanceId_example"; // String | Restrict query to all process instances that are sub process instances of the given process instance. Takes a process instance id.
-        String subProcessInstanceId = "subProcessInstanceId_example"; // String | Restrict query to one process instance that has a sub process instance with the given id.
-        String superCaseInstanceId = "superCaseInstanceId_example"; // String | Restrict query to all process instances that are sub process instances of the given case instance. Takes a case instance id.
-        String subCaseInstanceId = "subCaseInstanceId_example"; // String | Restrict query to one process instance that has a sub case instance with the given id.
-        String caseInstanceId = "caseInstanceId_example"; // String | Restrict query to all process instances that are sub process instances of the given case instance. Takes a case instance id.
-        String tenantIdIn = "tenantIdIn_example"; // String | Filter by a list of tenant ids. A process instance must have one of the given tenant ids. Filter by a comma-separated list of `Strings`
-        Boolean withoutTenantId = true; // Boolean | Only include historic process instances which belong to no tenant. Value may only be `true`, as `false` is the default behavior.
-        String executedActivityIdIn = "executedActivityIdIn_example"; // String | Restrict to instances that executed an activity with one of given ids. Filter by a comma-separated list of `Strings`
-        String activeActivityIdIn = "activeActivityIdIn_example"; // String | Restrict to instances that have an active activity with one of given ids. Filter by a comma-separated list of `Strings`
-        Boolean active = true; // Boolean | Restrict to instances that are active.
-        Boolean suspended = true; // Boolean | Restrict to instances that are suspended.
-        Boolean completed = true; // Boolean | Restrict to instances that are completed.
-        Boolean externallyTerminated = true; // Boolean | Restrict to instances that are externallyTerminated.
-        Boolean internallyTerminated = true; // Boolean | Restrict to instances that are internallyTerminated.
-        String variables = "variables_example"; // String | Only include process instances that have/had variables with certain values. Variable filtering expressions are comma-separated and are structured as follows: A valid parameter value has the form `key_operator_value`. `key` is the variable name, `operator` is the comparison operator to be used and `value` the variable value.  **Note:** Values are always treated as String objects on server side.  Valid operator values are: `eq` - equal to; `neq` - not equal to; `gt` - greater than; `gteq` - greater than or equal to; `lt` - lower than; `lteq` - lower than or equal to; `like`.  Key and value may not contain underscore or comma characters. 
-        Boolean variableNamesIgnoreCase = true; // Boolean | Match all variable names provided in variables case-insensitively. If set to `true` variableName and variablename are treated as equal.
-        Boolean variableValuesIgnoreCase = true; // Boolean | Match all variable values provided in variables case-insensitively. If set to `true` variableValue and variablevalue are treated as equal.
-        try {
-            List<HistoricProcessInstanceDto> result = apiInstance.getHistoricProcessInstances(sortBy, sortOrder, firstResult, maxResults, processInstanceId, processInstanceIds, processDefinitionId, processDefinitionKey, processDefinitionKeyIn, processDefinitionName, processDefinitionNameLike, processDefinitionKeyNotIn, processInstanceBusinessKey, processInstanceBusinessKeyLike, rootProcessInstances, finished, unfinished, withIncidents, withRootIncidents, incidentType, incidentStatus, incidentMessage, incidentMessageLike, startedBefore, startedAfter, finishedBefore, finishedAfter, executedActivityAfter, executedActivityBefore, executedJobAfter, executedJobBefore, startedBy, superProcessInstanceId, subProcessInstanceId, superCaseInstanceId, subCaseInstanceId, caseInstanceId, tenantIdIn, withoutTenantId, executedActivityIdIn, activeActivityIdIn, active, suspended, completed, externallyTerminated, internallyTerminated, variables, variableNamesIgnoreCase, variableValuesIgnoreCase);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling HistoricProcessInstanceApi#getHistoricProcessInstances");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    HistoricProcessInstanceApi apiInstance = new HistoricProcessInstanceApi(defaultClient);
+    String sortBy = "sortBy_example"; // String | Sort the results lexicographically by a given criterion. Must be used in conjunction with the sortOrder parameter.
+    String sortOrder = "sortOrder_example"; // String | Sort the results in a given order. Values may be asc for ascending order or desc for descending order. Must be used in conjunction with the sortBy parameter.
+    Integer firstResult = 56; // Integer | Pagination of results. Specifies the index of the first result to return.
+    Integer maxResults = 56; // Integer | Pagination of results. Specifies the maximum number of results to return. Will return less results if there are no more results left.
+    String processInstanceId = "processInstanceId_example"; // String | Filter by process instance id.
+    String processInstanceIds = "processInstanceIds_example"; // String | Filter by process instance ids. Filter by a comma-separated list of `Strings`.
+    String processDefinitionId = "processDefinitionId_example"; // String | Filter by the process definition the instances run on.
+    String processDefinitionKey = "processDefinitionKey_example"; // String | Filter by the key of the process definition the instances run on.
+    String processDefinitionKeyIn = "processDefinitionKeyIn_example"; // String | Filter by a list of process definition keys. A process instance must have one of the given process definition keys. Filter by a comma-separated list of `Strings`.
+    String processDefinitionName = "processDefinitionName_example"; // String | Filter by the name of the process definition the instances run on.
+    String processDefinitionNameLike = "processDefinitionNameLike_example"; // String | Filter by process definition names that the parameter is a substring of.
+    String processDefinitionKeyNotIn = "processDefinitionKeyNotIn_example"; // String | Exclude instances that belong to a set of process definitions. Filter by a comma-separated list of `Strings`.
+    String processInstanceBusinessKey = "processInstanceBusinessKey_example"; // String | Filter by process instance business key.
+    String processInstanceBusinessKeyLike = "processInstanceBusinessKeyLike_example"; // String | Filter by process instance business key that the parameter is a substring of.
+    Boolean rootProcessInstances = true; // Boolean | Restrict the query to all process instances that are top level process instances.
+    Boolean finished = true; // Boolean | Only include finished process instances. Value may only be `true`, as `false` is the default behavior.
+    Boolean unfinished = true; // Boolean | Only include unfinished process instances. Value may only be `true`, as `false` is the default behavior.
+    Boolean withIncidents = true; // Boolean | Only include process instances which have an incident. Value may only be `true`, as `false` is the default behavior.
+    Boolean withRootIncidents = true; // Boolean | Only include process instances which have a root incident. Value may only be `true`, as `false` is the default behavior.
+    String incidentType = "incidentType_example"; // String | Filter by the incident type. See the [User Guide](https://docs.camunda.org/manual/7.14/user-guide/process-engine/incidents/#incident-types) for a list of incident types.
+    String incidentStatus = "incidentStatus_example"; // String | Only include process instances which have an incident in status either open or resolved. To get all process instances, use the query parameter withIncidents.
+    String incidentMessage = "incidentMessage_example"; // String | Filter by the incident message. Exact match.
+    String incidentMessageLike = "incidentMessageLike_example"; // String | Filter by the incident message that the parameter is a substring of.
+    OffsetDateTime startedBefore = OffsetDateTime.now(); // OffsetDateTime | Restrict to instances that were started before the given date. By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.
+    OffsetDateTime startedAfter = OffsetDateTime.now(); // OffsetDateTime | Restrict to instances that were started after the given date. By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.
+    OffsetDateTime finishedBefore = OffsetDateTime.now(); // OffsetDateTime | Restrict to instances that were finished before the given date. By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.
+    OffsetDateTime finishedAfter = OffsetDateTime.now(); // OffsetDateTime | Restrict to instances that were finished after the given date. By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.
+    OffsetDateTime executedActivityAfter = OffsetDateTime.now(); // OffsetDateTime | Restrict to instances that executed an activity after the given date (inclusive). By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.
+    OffsetDateTime executedActivityBefore = OffsetDateTime.now(); // OffsetDateTime | Restrict to instances that executed an activity before the given date (inclusive). By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.
+    OffsetDateTime executedJobAfter = OffsetDateTime.now(); // OffsetDateTime | Restrict to instances that executed an job after the given date (inclusive). By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.
+    OffsetDateTime executedJobBefore = OffsetDateTime.now(); // OffsetDateTime | Restrict to instances that executed an job before the given date (inclusive). By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.
+    String startedBy = "startedBy_example"; // String | Only include process instances that were started by the given user.
+    String superProcessInstanceId = "superProcessInstanceId_example"; // String | Restrict query to all process instances that are sub process instances of the given process instance. Takes a process instance id.
+    String subProcessInstanceId = "subProcessInstanceId_example"; // String | Restrict query to one process instance that has a sub process instance with the given id.
+    String superCaseInstanceId = "superCaseInstanceId_example"; // String | Restrict query to all process instances that are sub process instances of the given case instance. Takes a case instance id.
+    String subCaseInstanceId = "subCaseInstanceId_example"; // String | Restrict query to one process instance that has a sub case instance with the given id.
+    String caseInstanceId = "caseInstanceId_example"; // String | Restrict query to all process instances that are sub process instances of the given case instance. Takes a case instance id.
+    String tenantIdIn = "tenantIdIn_example"; // String | Filter by a list of tenant ids. A process instance must have one of the given tenant ids. Filter by a comma-separated list of `Strings`
+    Boolean withoutTenantId = true; // Boolean | Only include historic process instances which belong to no tenant. Value may only be `true`, as `false` is the default behavior.
+    String executedActivityIdIn = "executedActivityIdIn_example"; // String | Restrict to instances that executed an activity with one of given ids. Filter by a comma-separated list of `Strings`
+    String activeActivityIdIn = "activeActivityIdIn_example"; // String | Restrict to instances that have an active activity with one of given ids. Filter by a comma-separated list of `Strings`
+    Boolean active = true; // Boolean | Restrict to instances that are active.
+    Boolean suspended = true; // Boolean | Restrict to instances that are suspended.
+    Boolean completed = true; // Boolean | Restrict to instances that are completed.
+    Boolean externallyTerminated = true; // Boolean | Restrict to instances that are externallyTerminated.
+    Boolean internallyTerminated = true; // Boolean | Restrict to instances that are internallyTerminated.
+    String variables = "variables_example"; // String | Only include process instances that have/had variables with certain values. Variable filtering expressions are comma-separated and are structured as follows: A valid parameter value has the form `key_operator_value`. `key` is the variable name, `operator` is the comparison operator to be used and `value` the variable value.  **Note:** Values are always treated as String objects on server side.  Valid operator values are: `eq` - equal to; `neq` - not equal to; `gt` - greater than; `gteq` - greater than or equal to; `lt` - lower than; `lteq` - lower than or equal to; `like`.  Key and value may not contain underscore or comma characters. 
+    Boolean variableNamesIgnoreCase = true; // Boolean | Match all variable names provided in variables case-insensitively. If set to `true` variableName and variablename are treated as equal.
+    Boolean variableValuesIgnoreCase = true; // Boolean | Match all variable values provided in variables case-insensitively. If set to `true` variableValue and variablevalue are treated as equal.
+    try {
+      List<HistoricProcessInstanceDto> result = apiInstance.getHistoricProcessInstances(sortBy, sortOrder, firstResult, maxResults, processInstanceId, processInstanceIds, processDefinitionId, processDefinitionKey, processDefinitionKeyIn, processDefinitionName, processDefinitionNameLike, processDefinitionKeyNotIn, processInstanceBusinessKey, processInstanceBusinessKeyLike, rootProcessInstances, finished, unfinished, withIncidents, withRootIncidents, incidentType, incidentStatus, incidentMessage, incidentMessageLike, startedBefore, startedAfter, finishedBefore, finishedAfter, executedActivityAfter, executedActivityBefore, executedJobAfter, executedJobBefore, startedBy, superProcessInstanceId, subProcessInstanceId, superCaseInstanceId, subCaseInstanceId, caseInstanceId, tenantIdIn, withoutTenantId, executedActivityIdIn, activeActivityIdIn, active, suspended, completed, externallyTerminated, internallyTerminated, variables, variableNamesIgnoreCase, variableValuesIgnoreCase);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling HistoricProcessInstanceApi#getHistoricProcessInstances");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -519,103 +492,98 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Request successful. |  -  |
-| **400** | Bad Request Returned if some of the query parameters are invalid, for example if a sortOrder parameter is supplied, but no sortBy. See the [Introduction](https://docs.camunda.org/manual/7.14/reference/rest/overview/#error-handling) for the error response format. |  -  |
+**200** | Request successful. |  -  |
+**400** | Bad Request Returned if some of the query parameters are invalid, for example if a sortOrder parameter is supplied, but no sortBy. See the [Introduction](https://docs.camunda.org/manual/7.14/reference/rest/overview/#error-handling) for the error response format. |  -  |
 
-
-## getHistoricProcessInstancesCount
-
+<a name="getHistoricProcessInstancesCount"></a>
+# **getHistoricProcessInstancesCount**
 > CountResultDto getHistoricProcessInstancesCount(processInstanceId, processInstanceIds, processDefinitionId, processDefinitionKey, processDefinitionKeyIn, processDefinitionName, processDefinitionNameLike, processDefinitionKeyNotIn, processInstanceBusinessKey, processInstanceBusinessKeyLike, rootProcessInstances, finished, unfinished, withIncidents, withRootIncidents, incidentType, incidentStatus, incidentMessage, incidentMessageLike, startedBefore, startedAfter, finishedBefore, finishedAfter, executedActivityAfter, executedActivityBefore, executedJobAfter, executedJobBefore, startedBy, superProcessInstanceId, subProcessInstanceId, superCaseInstanceId, subCaseInstanceId, caseInstanceId, tenantIdIn, withoutTenantId, executedActivityIdIn, activeActivityIdIn, active, suspended, completed, externallyTerminated, internallyTerminated, variables, variableNamesIgnoreCase, variableValuesIgnoreCase)
 
 Get List Count
 
-Queries for the number of historic process instances that fulfill the given parameters.
-Takes the same parameters as the [Get Process Instances](https://docs.camunda.org/manual/7.14/reference/rest/history/process-instance/get-process-instance-query/) method.
+Queries for the number of historic process instances that fulfill the given parameters. Takes the same parameters as the [Get Process Instances](https://docs.camunda.org/manual/7.14/reference/rest/history/process-instance/get-process-instance-query/) method.
 
 ### Example
-
 ```java
-import org.threeten.bp.OffsetDateTime;
 // Import classes:
 import de.dfki.cos.basys.common.rest.camunda.ApiClient;
 import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.Configuration;
-import de.dfki.cos.basys.common.rest.camunda.model.*;
+import de.dfki.cos.basys.common.rest.camunda.models.*;
 import de.dfki.cos.basys.common.rest.camunda.api.HistoricProcessInstanceApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("http://localhost:8080/engine-rest");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost:8080/engine-rest");
 
-        HistoricProcessInstanceApi apiInstance = new HistoricProcessInstanceApi(defaultClient);
-        String processInstanceId = "processInstanceId_example"; // String | Filter by process instance id.
-        String processInstanceIds = "processInstanceIds_example"; // String | Filter by process instance ids. Filter by a comma-separated list of `Strings`.
-        String processDefinitionId = "processDefinitionId_example"; // String | Filter by the process definition the instances run on.
-        String processDefinitionKey = "processDefinitionKey_example"; // String | Filter by the key of the process definition the instances run on.
-        String processDefinitionKeyIn = "processDefinitionKeyIn_example"; // String | Filter by a list of process definition keys. A process instance must have one of the given process definition keys. Filter by a comma-separated list of `Strings`.
-        String processDefinitionName = "processDefinitionName_example"; // String | Filter by the name of the process definition the instances run on.
-        String processDefinitionNameLike = "processDefinitionNameLike_example"; // String | Filter by process definition names that the parameter is a substring of.
-        String processDefinitionKeyNotIn = "processDefinitionKeyNotIn_example"; // String | Exclude instances that belong to a set of process definitions. Filter by a comma-separated list of `Strings`.
-        String processInstanceBusinessKey = "processInstanceBusinessKey_example"; // String | Filter by process instance business key.
-        String processInstanceBusinessKeyLike = "processInstanceBusinessKeyLike_example"; // String | Filter by process instance business key that the parameter is a substring of.
-        Boolean rootProcessInstances = true; // Boolean | Restrict the query to all process instances that are top level process instances.
-        Boolean finished = true; // Boolean | Only include finished process instances. Value may only be `true`, as `false` is the default behavior.
-        Boolean unfinished = true; // Boolean | Only include unfinished process instances. Value may only be `true`, as `false` is the default behavior.
-        Boolean withIncidents = true; // Boolean | Only include process instances which have an incident. Value may only be `true`, as `false` is the default behavior.
-        Boolean withRootIncidents = true; // Boolean | Only include process instances which have a root incident. Value may only be `true`, as `false` is the default behavior.
-        String incidentType = "incidentType_example"; // String | Filter by the incident type. See the [User Guide](https://docs.camunda.org/manual/7.14/user-guide/process-engine/incidents/#incident-types) for a list of incident types.
-        String incidentStatus = "incidentStatus_example"; // String | Only include process instances which have an incident in status either open or resolved. To get all process instances, use the query parameter withIncidents.
-        String incidentMessage = "incidentMessage_example"; // String | Filter by the incident message. Exact match.
-        String incidentMessageLike = "incidentMessageLike_example"; // String | Filter by the incident message that the parameter is a substring of.
-        OffsetDateTime startedBefore = OffsetDateTime.now(); // OffsetDateTime | Restrict to instances that were started before the given date. By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.
-        OffsetDateTime startedAfter = OffsetDateTime.now(); // OffsetDateTime | Restrict to instances that were started after the given date. By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.
-        OffsetDateTime finishedBefore = OffsetDateTime.now(); // OffsetDateTime | Restrict to instances that were finished before the given date. By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.
-        OffsetDateTime finishedAfter = OffsetDateTime.now(); // OffsetDateTime | Restrict to instances that were finished after the given date. By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.
-        OffsetDateTime executedActivityAfter = OffsetDateTime.now(); // OffsetDateTime | Restrict to instances that executed an activity after the given date (inclusive). By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.
-        OffsetDateTime executedActivityBefore = OffsetDateTime.now(); // OffsetDateTime | Restrict to instances that executed an activity before the given date (inclusive). By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.
-        OffsetDateTime executedJobAfter = OffsetDateTime.now(); // OffsetDateTime | Restrict to instances that executed an job after the given date (inclusive). By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.
-        OffsetDateTime executedJobBefore = OffsetDateTime.now(); // OffsetDateTime | Restrict to instances that executed an job before the given date (inclusive). By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.
-        String startedBy = "startedBy_example"; // String | Only include process instances that were started by the given user.
-        String superProcessInstanceId = "superProcessInstanceId_example"; // String | Restrict query to all process instances that are sub process instances of the given process instance. Takes a process instance id.
-        String subProcessInstanceId = "subProcessInstanceId_example"; // String | Restrict query to one process instance that has a sub process instance with the given id.
-        String superCaseInstanceId = "superCaseInstanceId_example"; // String | Restrict query to all process instances that are sub process instances of the given case instance. Takes a case instance id.
-        String subCaseInstanceId = "subCaseInstanceId_example"; // String | Restrict query to one process instance that has a sub case instance with the given id.
-        String caseInstanceId = "caseInstanceId_example"; // String | Restrict query to all process instances that are sub process instances of the given case instance. Takes a case instance id.
-        String tenantIdIn = "tenantIdIn_example"; // String | Filter by a list of tenant ids. A process instance must have one of the given tenant ids. Filter by a comma-separated list of `Strings`
-        Boolean withoutTenantId = true; // Boolean | Only include historic process instances which belong to no tenant. Value may only be `true`, as `false` is the default behavior.
-        String executedActivityIdIn = "executedActivityIdIn_example"; // String | Restrict to instances that executed an activity with one of given ids. Filter by a comma-separated list of `Strings`
-        String activeActivityIdIn = "activeActivityIdIn_example"; // String | Restrict to instances that have an active activity with one of given ids. Filter by a comma-separated list of `Strings`
-        Boolean active = true; // Boolean | Restrict to instances that are active.
-        Boolean suspended = true; // Boolean | Restrict to instances that are suspended.
-        Boolean completed = true; // Boolean | Restrict to instances that are completed.
-        Boolean externallyTerminated = true; // Boolean | Restrict to instances that are externallyTerminated.
-        Boolean internallyTerminated = true; // Boolean | Restrict to instances that are internallyTerminated.
-        String variables = "variables_example"; // String | Only include process instances that have/had variables with certain values. Variable filtering expressions are comma-separated and are structured as follows: A valid parameter value has the form `key_operator_value`. `key` is the variable name, `operator` is the comparison operator to be used and `value` the variable value.  **Note:** Values are always treated as String objects on server side.  Valid operator values are: `eq` - equal to; `neq` - not equal to; `gt` - greater than; `gteq` - greater than or equal to; `lt` - lower than; `lteq` - lower than or equal to; `like`.  Key and value may not contain underscore or comma characters. 
-        Boolean variableNamesIgnoreCase = true; // Boolean | Match all variable names provided in variables case-insensitively. If set to `true` variableName and variablename are treated as equal.
-        Boolean variableValuesIgnoreCase = true; // Boolean | Match all variable values provided in variables case-insensitively. If set to `true` variableValue and variablevalue are treated as equal.
-        try {
-            CountResultDto result = apiInstance.getHistoricProcessInstancesCount(processInstanceId, processInstanceIds, processDefinitionId, processDefinitionKey, processDefinitionKeyIn, processDefinitionName, processDefinitionNameLike, processDefinitionKeyNotIn, processInstanceBusinessKey, processInstanceBusinessKeyLike, rootProcessInstances, finished, unfinished, withIncidents, withRootIncidents, incidentType, incidentStatus, incidentMessage, incidentMessageLike, startedBefore, startedAfter, finishedBefore, finishedAfter, executedActivityAfter, executedActivityBefore, executedJobAfter, executedJobBefore, startedBy, superProcessInstanceId, subProcessInstanceId, superCaseInstanceId, subCaseInstanceId, caseInstanceId, tenantIdIn, withoutTenantId, executedActivityIdIn, activeActivityIdIn, active, suspended, completed, externallyTerminated, internallyTerminated, variables, variableNamesIgnoreCase, variableValuesIgnoreCase);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling HistoricProcessInstanceApi#getHistoricProcessInstancesCount");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    HistoricProcessInstanceApi apiInstance = new HistoricProcessInstanceApi(defaultClient);
+    String processInstanceId = "processInstanceId_example"; // String | Filter by process instance id.
+    String processInstanceIds = "processInstanceIds_example"; // String | Filter by process instance ids. Filter by a comma-separated list of `Strings`.
+    String processDefinitionId = "processDefinitionId_example"; // String | Filter by the process definition the instances run on.
+    String processDefinitionKey = "processDefinitionKey_example"; // String | Filter by the key of the process definition the instances run on.
+    String processDefinitionKeyIn = "processDefinitionKeyIn_example"; // String | Filter by a list of process definition keys. A process instance must have one of the given process definition keys. Filter by a comma-separated list of `Strings`.
+    String processDefinitionName = "processDefinitionName_example"; // String | Filter by the name of the process definition the instances run on.
+    String processDefinitionNameLike = "processDefinitionNameLike_example"; // String | Filter by process definition names that the parameter is a substring of.
+    String processDefinitionKeyNotIn = "processDefinitionKeyNotIn_example"; // String | Exclude instances that belong to a set of process definitions. Filter by a comma-separated list of `Strings`.
+    String processInstanceBusinessKey = "processInstanceBusinessKey_example"; // String | Filter by process instance business key.
+    String processInstanceBusinessKeyLike = "processInstanceBusinessKeyLike_example"; // String | Filter by process instance business key that the parameter is a substring of.
+    Boolean rootProcessInstances = true; // Boolean | Restrict the query to all process instances that are top level process instances.
+    Boolean finished = true; // Boolean | Only include finished process instances. Value may only be `true`, as `false` is the default behavior.
+    Boolean unfinished = true; // Boolean | Only include unfinished process instances. Value may only be `true`, as `false` is the default behavior.
+    Boolean withIncidents = true; // Boolean | Only include process instances which have an incident. Value may only be `true`, as `false` is the default behavior.
+    Boolean withRootIncidents = true; // Boolean | Only include process instances which have a root incident. Value may only be `true`, as `false` is the default behavior.
+    String incidentType = "incidentType_example"; // String | Filter by the incident type. See the [User Guide](https://docs.camunda.org/manual/7.14/user-guide/process-engine/incidents/#incident-types) for a list of incident types.
+    String incidentStatus = "incidentStatus_example"; // String | Only include process instances which have an incident in status either open or resolved. To get all process instances, use the query parameter withIncidents.
+    String incidentMessage = "incidentMessage_example"; // String | Filter by the incident message. Exact match.
+    String incidentMessageLike = "incidentMessageLike_example"; // String | Filter by the incident message that the parameter is a substring of.
+    OffsetDateTime startedBefore = OffsetDateTime.now(); // OffsetDateTime | Restrict to instances that were started before the given date. By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.
+    OffsetDateTime startedAfter = OffsetDateTime.now(); // OffsetDateTime | Restrict to instances that were started after the given date. By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.
+    OffsetDateTime finishedBefore = OffsetDateTime.now(); // OffsetDateTime | Restrict to instances that were finished before the given date. By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.
+    OffsetDateTime finishedAfter = OffsetDateTime.now(); // OffsetDateTime | Restrict to instances that were finished after the given date. By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.
+    OffsetDateTime executedActivityAfter = OffsetDateTime.now(); // OffsetDateTime | Restrict to instances that executed an activity after the given date (inclusive). By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.
+    OffsetDateTime executedActivityBefore = OffsetDateTime.now(); // OffsetDateTime | Restrict to instances that executed an activity before the given date (inclusive). By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.
+    OffsetDateTime executedJobAfter = OffsetDateTime.now(); // OffsetDateTime | Restrict to instances that executed an job after the given date (inclusive). By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.
+    OffsetDateTime executedJobBefore = OffsetDateTime.now(); // OffsetDateTime | Restrict to instances that executed an job before the given date (inclusive). By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.
+    String startedBy = "startedBy_example"; // String | Only include process instances that were started by the given user.
+    String superProcessInstanceId = "superProcessInstanceId_example"; // String | Restrict query to all process instances that are sub process instances of the given process instance. Takes a process instance id.
+    String subProcessInstanceId = "subProcessInstanceId_example"; // String | Restrict query to one process instance that has a sub process instance with the given id.
+    String superCaseInstanceId = "superCaseInstanceId_example"; // String | Restrict query to all process instances that are sub process instances of the given case instance. Takes a case instance id.
+    String subCaseInstanceId = "subCaseInstanceId_example"; // String | Restrict query to one process instance that has a sub case instance with the given id.
+    String caseInstanceId = "caseInstanceId_example"; // String | Restrict query to all process instances that are sub process instances of the given case instance. Takes a case instance id.
+    String tenantIdIn = "tenantIdIn_example"; // String | Filter by a list of tenant ids. A process instance must have one of the given tenant ids. Filter by a comma-separated list of `Strings`
+    Boolean withoutTenantId = true; // Boolean | Only include historic process instances which belong to no tenant. Value may only be `true`, as `false` is the default behavior.
+    String executedActivityIdIn = "executedActivityIdIn_example"; // String | Restrict to instances that executed an activity with one of given ids. Filter by a comma-separated list of `Strings`
+    String activeActivityIdIn = "activeActivityIdIn_example"; // String | Restrict to instances that have an active activity with one of given ids. Filter by a comma-separated list of `Strings`
+    Boolean active = true; // Boolean | Restrict to instances that are active.
+    Boolean suspended = true; // Boolean | Restrict to instances that are suspended.
+    Boolean completed = true; // Boolean | Restrict to instances that are completed.
+    Boolean externallyTerminated = true; // Boolean | Restrict to instances that are externallyTerminated.
+    Boolean internallyTerminated = true; // Boolean | Restrict to instances that are internallyTerminated.
+    String variables = "variables_example"; // String | Only include process instances that have/had variables with certain values. Variable filtering expressions are comma-separated and are structured as follows: A valid parameter value has the form `key_operator_value`. `key` is the variable name, `operator` is the comparison operator to be used and `value` the variable value.  **Note:** Values are always treated as String objects on server side.  Valid operator values are: `eq` - equal to; `neq` - not equal to; `gt` - greater than; `gteq` - greater than or equal to; `lt` - lower than; `lteq` - lower than or equal to; `like`.  Key and value may not contain underscore or comma characters. 
+    Boolean variableNamesIgnoreCase = true; // Boolean | Match all variable names provided in variables case-insensitively. If set to `true` variableName and variablename are treated as equal.
+    Boolean variableValuesIgnoreCase = true; // Boolean | Match all variable values provided in variables case-insensitively. If set to `true` variableValue and variablevalue are treated as equal.
+    try {
+      CountResultDto result = apiInstance.getHistoricProcessInstancesCount(processInstanceId, processInstanceIds, processDefinitionId, processDefinitionKey, processDefinitionKeyIn, processDefinitionName, processDefinitionNameLike, processDefinitionKeyNotIn, processInstanceBusinessKey, processInstanceBusinessKeyLike, rootProcessInstances, finished, unfinished, withIncidents, withRootIncidents, incidentType, incidentStatus, incidentMessage, incidentMessageLike, startedBefore, startedAfter, finishedBefore, finishedAfter, executedActivityAfter, executedActivityBefore, executedJobAfter, executedJobBefore, startedBy, superProcessInstanceId, subProcessInstanceId, superCaseInstanceId, subCaseInstanceId, caseInstanceId, tenantIdIn, withoutTenantId, executedActivityIdIn, activeActivityIdIn, active, suspended, completed, externallyTerminated, internallyTerminated, variables, variableNamesIgnoreCase, variableValuesIgnoreCase);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling HistoricProcessInstanceApi#getHistoricProcessInstancesCount");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -675,62 +643,56 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Request successful. |  -  |
-| **400** | Bad Request Returned if some of the query parameters are invalid. See the [Introduction](https://docs.camunda.org/manual/7.14/reference/rest/overview/#error-handling) for the error response format. |  -  |
+**200** | Request successful. |  -  |
+**400** | Bad Request Returned if some of the query parameters are invalid. See the [Introduction](https://docs.camunda.org/manual/7.14/reference/rest/overview/#error-handling) for the error response format. |  -  |
 
-
-## queryHistoricProcessInstances
-
+<a name="queryHistoricProcessInstances"></a>
+# **queryHistoricProcessInstances**
 > List&lt;HistoricProcessInstanceDto&gt; queryHistoricProcessInstances(firstResult, maxResults, historicProcessInstanceQueryDto)
 
 Get List (POST)
 
-Queries for historic process instances that fulfill the given parameters.
-This method is slightly more powerful than the
-[Get Process Instance](https://docs.camunda.org/manual/7.14/reference/rest/history/process-instance/get-process-instance-query/)
-because it allows filtering by multiple process variables of types `String`, `Number` or `Boolean`.
+Queries for historic process instances that fulfill the given parameters. This method is slightly more powerful than the [Get Process Instance](https://docs.camunda.org/manual/7.14/reference/rest/history/process-instance/get-process-instance-query/) because it allows filtering by multiple process variables of types &#x60;String&#x60;, &#x60;Number&#x60; or &#x60;Boolean&#x60;.
 
 ### Example
-
 ```java
 // Import classes:
 import de.dfki.cos.basys.common.rest.camunda.ApiClient;
 import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.Configuration;
-import de.dfki.cos.basys.common.rest.camunda.model.*;
+import de.dfki.cos.basys.common.rest.camunda.models.*;
 import de.dfki.cos.basys.common.rest.camunda.api.HistoricProcessInstanceApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("http://localhost:8080/engine-rest");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost:8080/engine-rest");
 
-        HistoricProcessInstanceApi apiInstance = new HistoricProcessInstanceApi(defaultClient);
-        Integer firstResult = 56; // Integer | Pagination of results. Specifies the index of the first result to return.
-        Integer maxResults = 56; // Integer | Pagination of results. Specifies the maximum number of results to return. Will return less results if there are no more results left.
-        HistoricProcessInstanceQueryDto historicProcessInstanceQueryDto = {"finishedAfter":"2013-01-01T00:00:00.000+0200","finishedBefore":"2013-04-01T23:59:59.000+0200","executedActivityAfter":"2013-03-23T13:42:44.000+0200","variables":[{"name":"myVariable","operator":"eq","value":"camunda"},{"name":"mySecondVariable","operator":"neq","value":124}],"sorting":[{"sortBy":"businessKey","sortOrder":"asc"},{"sortBy":"startTime","sortOrder":"desc"}]}; // HistoricProcessInstanceQueryDto | 
-        try {
-            List<HistoricProcessInstanceDto> result = apiInstance.queryHistoricProcessInstances(firstResult, maxResults, historicProcessInstanceQueryDto);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling HistoricProcessInstanceApi#queryHistoricProcessInstances");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    HistoricProcessInstanceApi apiInstance = new HistoricProcessInstanceApi(defaultClient);
+    Integer firstResult = 56; // Integer | Pagination of results. Specifies the index of the first result to return.
+    Integer maxResults = 56; // Integer | Pagination of results. Specifies the maximum number of results to return. Will return less results if there are no more results left.
+    HistoricProcessInstanceQueryDto historicProcessInstanceQueryDto = {"finishedAfter":"2013-01-01T00:00:00.000+0200","finishedBefore":"2013-04-01T23:59:59.000+0200","executedActivityAfter":"2013-03-23T13:42:44.000+0200","variables":[{"name":"myVariable","operator":"eq","value":"camunda"},{"name":"mySecondVariable","operator":"neq","value":124}],"sorting":[{"sortBy":"businessKey","sortOrder":"asc"},{"sortBy":"startTime","sortOrder":"desc"}]}; // HistoricProcessInstanceQueryDto | 
+    try {
+      List<HistoricProcessInstanceDto> result = apiInstance.queryHistoricProcessInstances(firstResult, maxResults, historicProcessInstanceQueryDto);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling HistoricProcessInstanceApi#queryHistoricProcessInstances");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -748,59 +710,54 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Request successful. |  -  |
-| **400** | Bad Request Returned if some of the query parameters are invalid, for example if a sortOrder parameter is supplied, but no sortBy. See the [Introduction](https://docs.camunda.org/manual/7.14/reference/rest/overview/#error-handling) for the error response format. |  -  |
+**200** | Request successful. |  -  |
+**400** | Bad Request Returned if some of the query parameters are invalid, for example if a sortOrder parameter is supplied, but no sortBy. See the [Introduction](https://docs.camunda.org/manual/7.14/reference/rest/overview/#error-handling) for the error response format. |  -  |
 
-
-## queryHistoricProcessInstancesCount
-
+<a name="queryHistoricProcessInstancesCount"></a>
+# **queryHistoricProcessInstancesCount**
 > CountResultDto queryHistoricProcessInstancesCount(historicProcessInstanceQueryDto)
 
 Get List Count (POST)
 
-Queries for the number of historic process instances that fulfill the given parameters.
-This method takes the same message body as the [Get Process Instances (POST)](https://docs.camunda.org/manual/7.14/reference/rest/history/process-instance/get-process-instance-query/) method and
-therefore it is slightly more powerful than the [Get Process Instance Count](https://docs.camunda.org/manual/7.14/reference/rest/history/process-instance/post-process-instance-query-count/) method.
+Queries for the number of historic process instances that fulfill the given parameters. This method takes the same message body as the [Get Process Instances (POST)](https://docs.camunda.org/manual/7.14/reference/rest/history/process-instance/get-process-instance-query/) method and therefore it is slightly more powerful than the [Get Process Instance Count](https://docs.camunda.org/manual/7.14/reference/rest/history/process-instance/post-process-instance-query-count/) method.
 
 ### Example
-
 ```java
 // Import classes:
 import de.dfki.cos.basys.common.rest.camunda.ApiClient;
 import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.Configuration;
-import de.dfki.cos.basys.common.rest.camunda.model.*;
+import de.dfki.cos.basys.common.rest.camunda.models.*;
 import de.dfki.cos.basys.common.rest.camunda.api.HistoricProcessInstanceApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("http://localhost:8080/engine-rest");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost:8080/engine-rest");
 
-        HistoricProcessInstanceApi apiInstance = new HistoricProcessInstanceApi(defaultClient);
-        HistoricProcessInstanceQueryDto historicProcessInstanceQueryDto = {"finishedAfter":"2013-01-01T00:00:00.000+0200","finishedBefore":"2013-04-01T23:59:59.000+0200","executedActivityAfter":"2013-03-23T13:42:44.000+0200","variables":[{"name":"myVariable","operator":"eq","value":"camunda"},{"name":"mySecondVariable","operator":"neq","value":124}]}; // HistoricProcessInstanceQueryDto | 
-        try {
-            CountResultDto result = apiInstance.queryHistoricProcessInstancesCount(historicProcessInstanceQueryDto);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling HistoricProcessInstanceApi#queryHistoricProcessInstancesCount");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    HistoricProcessInstanceApi apiInstance = new HistoricProcessInstanceApi(defaultClient);
+    HistoricProcessInstanceQueryDto historicProcessInstanceQueryDto = {"finishedAfter":"2013-01-01T00:00:00.000+0200","finishedBefore":"2013-04-01T23:59:59.000+0200","executedActivityAfter":"2013-03-23T13:42:44.000+0200","variables":[{"name":"myVariable","operator":"eq","value":"camunda"},{"name":"mySecondVariable","operator":"neq","value":124}]}; // HistoricProcessInstanceQueryDto | 
+    try {
+      CountResultDto result = apiInstance.queryHistoricProcessInstancesCount(historicProcessInstanceQueryDto);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling HistoricProcessInstanceApi#queryHistoricProcessInstancesCount");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -816,60 +773,54 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Request successful. |  -  |
-| **400** | Bad Request Returned if some of the query parameters are invalid. See the [Introduction](https://docs.camunda.org/manual/7.14/reference/rest/overview/#error-handling) for the error response format. |  -  |
+**200** | Request successful. |  -  |
+**400** | Bad Request Returned if some of the query parameters are invalid. See the [Introduction](https://docs.camunda.org/manual/7.14/reference/rest/overview/#error-handling) for the error response format. |  -  |
 
-
-## setRemovalTimeAsync
-
+<a name="setRemovalTimeAsync"></a>
+# **setRemovalTimeAsync**
 > BatchDto setRemovalTimeAsync(setRemovalTimeToHistoricProcessInstancesDto)
 
 Set Removal Time Async (POST)
 
-Sets the removal time to multiple historic process instances asynchronously (batch).
-
-At least `historicProcessInstanceIds` or `historicProcessInstanceQuery` has to be provided.
-If both are provided, all instances matching query criterion and instances from the list will be updated with a removal time.
+Sets the removal time to multiple historic process instances asynchronously (batch).  At least &#x60;historicProcessInstanceIds&#x60; or &#x60;historicProcessInstanceQuery&#x60; has to be provided. If both are provided, all instances matching query criterion and instances from the list will be updated with a removal time.
 
 ### Example
-
 ```java
 // Import classes:
 import de.dfki.cos.basys.common.rest.camunda.ApiClient;
 import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.Configuration;
-import de.dfki.cos.basys.common.rest.camunda.model.*;
+import de.dfki.cos.basys.common.rest.camunda.models.*;
 import de.dfki.cos.basys.common.rest.camunda.api.HistoricProcessInstanceApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("http://localhost:8080/engine-rest");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost:8080/engine-rest");
 
-        HistoricProcessInstanceApi apiInstance = new HistoricProcessInstanceApi(defaultClient);
-        SetRemovalTimeToHistoricProcessInstancesDto setRemovalTimeToHistoricProcessInstancesDto = {"absoluteRemovalTime":"2019-05-05T11:56:24.725+0200","hierarchical":true,"historicProcessInstanceQuery":{"unfinished":true},"historicProcessInstanceIds":["b4d2ad98-7240-11e9-98b7-be5e0f7575b7","b4d2ad94-7240-11e9-98b7-be5e0f7575b7"]}; // SetRemovalTimeToHistoricProcessInstancesDto | 
-        try {
-            BatchDto result = apiInstance.setRemovalTimeAsync(setRemovalTimeToHistoricProcessInstancesDto);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling HistoricProcessInstanceApi#setRemovalTimeAsync");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    HistoricProcessInstanceApi apiInstance = new HistoricProcessInstanceApi(defaultClient);
+    SetRemovalTimeToHistoricProcessInstancesDto setRemovalTimeToHistoricProcessInstancesDto = {"absoluteRemovalTime":"2019-05-05T11:56:24.725+0200","hierarchical":true,"historicProcessInstanceQuery":{"unfinished":true},"historicProcessInstanceIds":["b4d2ad98-7240-11e9-98b7-be5e0f7575b7","b4d2ad94-7240-11e9-98b7-be5e0f7575b7"]}; // SetRemovalTimeToHistoricProcessInstancesDto | 
+    try {
+      BatchDto result = apiInstance.setRemovalTimeAsync(setRemovalTimeToHistoricProcessInstancesDto);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling HistoricProcessInstanceApi#setRemovalTimeAsync");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -885,12 +836,12 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Request successful. |  -  |
-| **400** | Bad Request Request was unsuccessfull due to a bad user request. This occurs if some of the query parameters are invalid, e. g. if neither &#x60;historicProcessInstances&#x60; nor &#x60;historicProcessInstanceQuery&#x60; is present or if no mode is specified.  See the [Introduction](https://docs.camunda.org/manual/7.14/reference/rest/overview/#error-handling) for the error response format. |  -  |
+**200** | Request successful. |  -  |
+**400** | Bad Request Request was unsuccessfull due to a bad user request. This occurs if some of the query parameters are invalid, e. g. if neither &#x60;historicProcessInstances&#x60; nor &#x60;historicProcessInstanceQuery&#x60; is present or if no mode is specified.  See the [Introduction](https://docs.camunda.org/manual/7.14/reference/rest/overview/#error-handling) for the error response format. |  -  |
 

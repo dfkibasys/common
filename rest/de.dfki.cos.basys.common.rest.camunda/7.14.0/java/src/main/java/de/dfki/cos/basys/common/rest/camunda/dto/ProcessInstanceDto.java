@@ -15,65 +15,60 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import de.dfki.cos.basys.common.rest.camunda.dto.AtomLink;
 import de.dfki.cos.basys.common.rest.camunda.dto.LinkableDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.ProcessInstanceDtoAllOf;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
 
 /**
  * ProcessInstanceDto
  */
-@JsonPropertyOrder({
-  ProcessInstanceDto.JSON_PROPERTY_ID,
-  ProcessInstanceDto.JSON_PROPERTY_DEFINITION_ID,
-  ProcessInstanceDto.JSON_PROPERTY_BUSINESS_KEY,
-  ProcessInstanceDto.JSON_PROPERTY_CASE_INSTANCE_ID,
-  ProcessInstanceDto.JSON_PROPERTY_ENDED,
-  ProcessInstanceDto.JSON_PROPERTY_SUSPENDED,
-  ProcessInstanceDto.JSON_PROPERTY_TENANT_ID,
-  ProcessInstanceDto.JSON_PROPERTY_LINKS
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class ProcessInstanceDto {
-  public static final String JSON_PROPERTY_ID = "id";
+  public static final String SERIALIZED_NAME_ID = "id";
+  @SerializedName(SERIALIZED_NAME_ID)
   private String id;
 
-  public static final String JSON_PROPERTY_DEFINITION_ID = "definitionId";
+  public static final String SERIALIZED_NAME_DEFINITION_ID = "definitionId";
+  @SerializedName(SERIALIZED_NAME_DEFINITION_ID)
   private String definitionId;
 
-  public static final String JSON_PROPERTY_BUSINESS_KEY = "businessKey";
+  public static final String SERIALIZED_NAME_BUSINESS_KEY = "businessKey";
+  @SerializedName(SERIALIZED_NAME_BUSINESS_KEY)
   private String businessKey;
 
-  public static final String JSON_PROPERTY_CASE_INSTANCE_ID = "caseInstanceId";
+  public static final String SERIALIZED_NAME_CASE_INSTANCE_ID = "caseInstanceId";
+  @SerializedName(SERIALIZED_NAME_CASE_INSTANCE_ID)
   private String caseInstanceId;
 
-  public static final String JSON_PROPERTY_ENDED = "ended";
+  public static final String SERIALIZED_NAME_ENDED = "ended";
+  @SerializedName(SERIALIZED_NAME_ENDED)
   private Boolean ended;
 
-  public static final String JSON_PROPERTY_SUSPENDED = "suspended";
+  public static final String SERIALIZED_NAME_SUSPENDED = "suspended";
+  @SerializedName(SERIALIZED_NAME_SUSPENDED)
   private Boolean suspended;
 
-  public static final String JSON_PROPERTY_TENANT_ID = "tenantId";
+  public static final String SERIALIZED_NAME_TENANT_ID = "tenantId";
+  @SerializedName(SERIALIZED_NAME_TENANT_ID)
   private String tenantId;
 
-  public static final String JSON_PROPERTY_LINKS = "links";
+  public static final String SERIALIZED_NAME_LINKS = "links";
+  @SerializedName(SERIALIZED_NAME_LINKS)
   private List<AtomLink> links = null;
 
 
   public ProcessInstanceDto id(String id) {
+    
     this.id = id;
     return this;
   }
@@ -84,8 +79,6 @@ public class ProcessInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the process instance.")
-  @JsonProperty(JSON_PROPERTY_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getId() {
     return id;
@@ -98,6 +91,7 @@ public class ProcessInstanceDto {
 
 
   public ProcessInstanceDto definitionId(String definitionId) {
+    
     this.definitionId = definitionId;
     return this;
   }
@@ -108,8 +102,6 @@ public class ProcessInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the process definition that this process instance belongs to.")
-  @JsonProperty(JSON_PROPERTY_DEFINITION_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getDefinitionId() {
     return definitionId;
@@ -122,6 +114,7 @@ public class ProcessInstanceDto {
 
 
   public ProcessInstanceDto businessKey(String businessKey) {
+    
     this.businessKey = businessKey;
     return this;
   }
@@ -132,8 +125,6 @@ public class ProcessInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The business key of the process instance.")
-  @JsonProperty(JSON_PROPERTY_BUSINESS_KEY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getBusinessKey() {
     return businessKey;
@@ -146,6 +137,7 @@ public class ProcessInstanceDto {
 
 
   public ProcessInstanceDto caseInstanceId(String caseInstanceId) {
+    
     this.caseInstanceId = caseInstanceId;
     return this;
   }
@@ -156,8 +148,6 @@ public class ProcessInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the case instance associated with the process instance.")
-  @JsonProperty(JSON_PROPERTY_CASE_INSTANCE_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getCaseInstanceId() {
     return caseInstanceId;
@@ -170,6 +160,7 @@ public class ProcessInstanceDto {
 
 
   public ProcessInstanceDto ended(Boolean ended) {
+    
     this.ended = ended;
     return this;
   }
@@ -180,8 +171,6 @@ public class ProcessInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A flag indicating whether the process instance has ended or not. Deprecated: will always be false!")
-  @JsonProperty(JSON_PROPERTY_ENDED)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Boolean getEnded() {
     return ended;
@@ -194,6 +183,7 @@ public class ProcessInstanceDto {
 
 
   public ProcessInstanceDto suspended(Boolean suspended) {
+    
     this.suspended = suspended;
     return this;
   }
@@ -204,8 +194,6 @@ public class ProcessInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A flag indicating whether the process instance is suspended or not.")
-  @JsonProperty(JSON_PROPERTY_SUSPENDED)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Boolean getSuspended() {
     return suspended;
@@ -218,6 +206,7 @@ public class ProcessInstanceDto {
 
 
   public ProcessInstanceDto tenantId(String tenantId) {
+    
     this.tenantId = tenantId;
     return this;
   }
@@ -228,8 +217,6 @@ public class ProcessInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The tenant id of the process instance.")
-  @JsonProperty(JSON_PROPERTY_TENANT_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getTenantId() {
     return tenantId;
@@ -242,6 +229,7 @@ public class ProcessInstanceDto {
 
 
   public ProcessInstanceDto links(List<AtomLink> links) {
+    
     this.links = links;
     return this;
   }
@@ -260,8 +248,6 @@ public class ProcessInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The links associated to this resource, with `method`, `href` and `rel`.")
-  @JsonProperty(JSON_PROPERTY_LINKS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<AtomLink> getLinks() {
     return links;
@@ -273,9 +259,6 @@ public class ProcessInstanceDto {
   }
 
 
-  /**
-   * Return true if this ProcessInstanceDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

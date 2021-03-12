@@ -15,81 +15,76 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import de.dfki.cos.basys.common.rest.camunda.dto.ActivityInstanceIncidentDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.TransitionInstanceDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
 
 /**
  * A JSON object corresponding to the Activity Instance tree of the given process instance.
  */
 @ApiModel(description = "A JSON object corresponding to the Activity Instance tree of the given process instance.")
-@JsonPropertyOrder({
-  ActivityInstanceDto.JSON_PROPERTY_ID,
-  ActivityInstanceDto.JSON_PROPERTY_PARENT_ACTIVITY_INSTANCE_ID,
-  ActivityInstanceDto.JSON_PROPERTY_ACTIVITY_ID,
-  ActivityInstanceDto.JSON_PROPERTY_ACTIVITY_NAME,
-  ActivityInstanceDto.JSON_PROPERTY_ACTIVITY_TYPE,
-  ActivityInstanceDto.JSON_PROPERTY_PROCESS_INSTANCE_ID,
-  ActivityInstanceDto.JSON_PROPERTY_PROCESS_DEFINITION_ID,
-  ActivityInstanceDto.JSON_PROPERTY_CHILD_ACTIVITY_INSTANCES,
-  ActivityInstanceDto.JSON_PROPERTY_CHILD_TRANSITION_INSTANCES,
-  ActivityInstanceDto.JSON_PROPERTY_EXECUTION_IDS,
-  ActivityInstanceDto.JSON_PROPERTY_INCIDENT_IDS,
-  ActivityInstanceDto.JSON_PROPERTY_INCIDENTS
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class ActivityInstanceDto {
-  public static final String JSON_PROPERTY_ID = "id";
+  public static final String SERIALIZED_NAME_ID = "id";
+  @SerializedName(SERIALIZED_NAME_ID)
   private String id;
 
-  public static final String JSON_PROPERTY_PARENT_ACTIVITY_INSTANCE_ID = "parentActivityInstanceId";
+  public static final String SERIALIZED_NAME_PARENT_ACTIVITY_INSTANCE_ID = "parentActivityInstanceId";
+  @SerializedName(SERIALIZED_NAME_PARENT_ACTIVITY_INSTANCE_ID)
   private String parentActivityInstanceId;
 
-  public static final String JSON_PROPERTY_ACTIVITY_ID = "activityId";
+  public static final String SERIALIZED_NAME_ACTIVITY_ID = "activityId";
+  @SerializedName(SERIALIZED_NAME_ACTIVITY_ID)
   private String activityId;
 
-  public static final String JSON_PROPERTY_ACTIVITY_NAME = "activityName";
+  public static final String SERIALIZED_NAME_ACTIVITY_NAME = "activityName";
+  @SerializedName(SERIALIZED_NAME_ACTIVITY_NAME)
   private String activityName;
 
-  public static final String JSON_PROPERTY_ACTIVITY_TYPE = "activityType";
+  public static final String SERIALIZED_NAME_ACTIVITY_TYPE = "activityType";
+  @SerializedName(SERIALIZED_NAME_ACTIVITY_TYPE)
   private String activityType;
 
-  public static final String JSON_PROPERTY_PROCESS_INSTANCE_ID = "processInstanceId";
+  public static final String SERIALIZED_NAME_PROCESS_INSTANCE_ID = "processInstanceId";
+  @SerializedName(SERIALIZED_NAME_PROCESS_INSTANCE_ID)
   private String processInstanceId;
 
-  public static final String JSON_PROPERTY_PROCESS_DEFINITION_ID = "processDefinitionId";
+  public static final String SERIALIZED_NAME_PROCESS_DEFINITION_ID = "processDefinitionId";
+  @SerializedName(SERIALIZED_NAME_PROCESS_DEFINITION_ID)
   private String processDefinitionId;
 
-  public static final String JSON_PROPERTY_CHILD_ACTIVITY_INSTANCES = "childActivityInstances";
+  public static final String SERIALIZED_NAME_CHILD_ACTIVITY_INSTANCES = "childActivityInstances";
+  @SerializedName(SERIALIZED_NAME_CHILD_ACTIVITY_INSTANCES)
   private List<ActivityInstanceDto> childActivityInstances = null;
 
-  public static final String JSON_PROPERTY_CHILD_TRANSITION_INSTANCES = "childTransitionInstances";
+  public static final String SERIALIZED_NAME_CHILD_TRANSITION_INSTANCES = "childTransitionInstances";
+  @SerializedName(SERIALIZED_NAME_CHILD_TRANSITION_INSTANCES)
   private List<TransitionInstanceDto> childTransitionInstances = null;
 
-  public static final String JSON_PROPERTY_EXECUTION_IDS = "executionIds";
+  public static final String SERIALIZED_NAME_EXECUTION_IDS = "executionIds";
+  @SerializedName(SERIALIZED_NAME_EXECUTION_IDS)
   private List<String> executionIds = null;
 
-  public static final String JSON_PROPERTY_INCIDENT_IDS = "incidentIds";
+  public static final String SERIALIZED_NAME_INCIDENT_IDS = "incidentIds";
+  @SerializedName(SERIALIZED_NAME_INCIDENT_IDS)
   private List<String> incidentIds = null;
 
-  public static final String JSON_PROPERTY_INCIDENTS = "incidents";
+  public static final String SERIALIZED_NAME_INCIDENTS = "incidents";
+  @SerializedName(SERIALIZED_NAME_INCIDENTS)
   private List<ActivityInstanceIncidentDto> incidents = null;
 
 
   public ActivityInstanceDto id(String id) {
+    
     this.id = id;
     return this;
   }
@@ -100,8 +95,6 @@ public class ActivityInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the activity instance.")
-  @JsonProperty(JSON_PROPERTY_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getId() {
     return id;
@@ -114,6 +107,7 @@ public class ActivityInstanceDto {
 
 
   public ActivityInstanceDto parentActivityInstanceId(String parentActivityInstanceId) {
+    
     this.parentActivityInstanceId = parentActivityInstanceId;
     return this;
   }
@@ -124,8 +118,6 @@ public class ActivityInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the parent activity instance, for example a sub process instance.")
-  @JsonProperty(JSON_PROPERTY_PARENT_ACTIVITY_INSTANCE_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getParentActivityInstanceId() {
     return parentActivityInstanceId;
@@ -138,6 +130,7 @@ public class ActivityInstanceDto {
 
 
   public ActivityInstanceDto activityId(String activityId) {
+    
     this.activityId = activityId;
     return this;
   }
@@ -148,8 +141,6 @@ public class ActivityInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the activity.")
-  @JsonProperty(JSON_PROPERTY_ACTIVITY_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getActivityId() {
     return activityId;
@@ -162,6 +153,7 @@ public class ActivityInstanceDto {
 
 
   public ActivityInstanceDto activityName(String activityName) {
+    
     this.activityName = activityName;
     return this;
   }
@@ -172,8 +164,6 @@ public class ActivityInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The name of the activity")
-  @JsonProperty(JSON_PROPERTY_ACTIVITY_NAME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getActivityName() {
     return activityName;
@@ -186,6 +176,7 @@ public class ActivityInstanceDto {
 
 
   public ActivityInstanceDto activityType(String activityType) {
+    
     this.activityType = activityType;
     return this;
   }
@@ -196,8 +187,6 @@ public class ActivityInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The type of activity (corresponds to the XML element name in the BPMN 2.0, e.g., 'userTask')")
-  @JsonProperty(JSON_PROPERTY_ACTIVITY_TYPE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getActivityType() {
     return activityType;
@@ -210,6 +199,7 @@ public class ActivityInstanceDto {
 
 
   public ActivityInstanceDto processInstanceId(String processInstanceId) {
+    
     this.processInstanceId = processInstanceId;
     return this;
   }
@@ -220,8 +210,6 @@ public class ActivityInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the process instance this activity instance is part of.")
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getProcessInstanceId() {
     return processInstanceId;
@@ -234,6 +222,7 @@ public class ActivityInstanceDto {
 
 
   public ActivityInstanceDto processDefinitionId(String processDefinitionId) {
+    
     this.processDefinitionId = processDefinitionId;
     return this;
   }
@@ -244,8 +233,6 @@ public class ActivityInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the process definition.")
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getProcessDefinitionId() {
     return processDefinitionId;
@@ -258,6 +245,7 @@ public class ActivityInstanceDto {
 
 
   public ActivityInstanceDto childActivityInstances(List<ActivityInstanceDto> childActivityInstances) {
+    
     this.childActivityInstances = childActivityInstances;
     return this;
   }
@@ -276,8 +264,6 @@ public class ActivityInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A list of child activity instances.")
-  @JsonProperty(JSON_PROPERTY_CHILD_ACTIVITY_INSTANCES)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<ActivityInstanceDto> getChildActivityInstances() {
     return childActivityInstances;
@@ -290,6 +276,7 @@ public class ActivityInstanceDto {
 
 
   public ActivityInstanceDto childTransitionInstances(List<TransitionInstanceDto> childTransitionInstances) {
+    
     this.childTransitionInstances = childTransitionInstances;
     return this;
   }
@@ -308,8 +295,6 @@ public class ActivityInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A list of child transition instances. A transition instance represents an execution waiting in an asynchronous continuation.")
-  @JsonProperty(JSON_PROPERTY_CHILD_TRANSITION_INSTANCES)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<TransitionInstanceDto> getChildTransitionInstances() {
     return childTransitionInstances;
@@ -322,6 +307,7 @@ public class ActivityInstanceDto {
 
 
   public ActivityInstanceDto executionIds(List<String> executionIds) {
+    
     this.executionIds = executionIds;
     return this;
   }
@@ -340,8 +326,6 @@ public class ActivityInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A list of execution ids.")
-  @JsonProperty(JSON_PROPERTY_EXECUTION_IDS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<String> getExecutionIds() {
     return executionIds;
@@ -354,6 +338,7 @@ public class ActivityInstanceDto {
 
 
   public ActivityInstanceDto incidentIds(List<String> incidentIds) {
+    
     this.incidentIds = incidentIds;
     return this;
   }
@@ -372,8 +357,6 @@ public class ActivityInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A list of incident ids.")
-  @JsonProperty(JSON_PROPERTY_INCIDENT_IDS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<String> getIncidentIds() {
     return incidentIds;
@@ -386,6 +369,7 @@ public class ActivityInstanceDto {
 
 
   public ActivityInstanceDto incidents(List<ActivityInstanceIncidentDto> incidents) {
+    
     this.incidents = incidents;
     return this;
   }
@@ -404,8 +388,6 @@ public class ActivityInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A list of JSON objects containing incident specific properties: * `id`: the id of the incident * `activityId`: the activity id in which the incident occurred")
-  @JsonProperty(JSON_PROPERTY_INCIDENTS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<ActivityInstanceIncidentDto> getIncidents() {
     return incidents;
@@ -417,9 +399,6 @@ public class ActivityInstanceDto {
   }
 
 
-  /**
-   * Return true if this ActivityInstanceDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

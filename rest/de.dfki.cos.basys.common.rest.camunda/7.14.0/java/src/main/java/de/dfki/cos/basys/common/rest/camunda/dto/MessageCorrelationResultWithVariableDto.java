@@ -15,40 +15,31 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import de.dfki.cos.basys.common.rest.camunda.dto.ExecutionDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.ProcessInstanceDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.VariableValueDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
 
 /**
  * The &#x60;processInstance&#x60; property only has a value if the resultType is set to &#x60;ProcessDefinition&#x60;. The processInstance with the properties as described in the [get single instance](https://docs.camunda.org/manual/7.14/reference/rest/process-instance/get/) method.  The &#x60;execution&#x60; property only has a value if the resultType is set to &#x60;Execution&#x60;. The execution with the properties as described in the [get single execution](https://docs.camunda.org/manual/7.14/reference/rest/execution/get/) method.
  */
 @ApiModel(description = "The `processInstance` property only has a value if the resultType is set to `ProcessDefinition`. The processInstance with the properties as described in the [get single instance](https://docs.camunda.org/manual/7.14/reference/rest/process-instance/get/) method.  The `execution` property only has a value if the resultType is set to `Execution`. The execution with the properties as described in the [get single execution](https://docs.camunda.org/manual/7.14/reference/rest/execution/get/) method.")
-@JsonPropertyOrder({
-  MessageCorrelationResultWithVariableDto.JSON_PROPERTY_RESULT_TYPE,
-  MessageCorrelationResultWithVariableDto.JSON_PROPERTY_PROCESS_INSTANCE,
-  MessageCorrelationResultWithVariableDto.JSON_PROPERTY_EXECUTION,
-  MessageCorrelationResultWithVariableDto.JSON_PROPERTY_VARIABLES
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class MessageCorrelationResultWithVariableDto {
   /**
    * Indicates if the message was correlated to a message start event or an  intermediate message catching event. In the first case, the resultType is  &#x60;ProcessDefinition&#x60; and otherwise &#x60;Execution&#x60;.
    */
+  @JsonAdapter(ResultTypeEnum.Adapter.class)
   public enum ResultTypeEnum {
     EXECUTION("Execution"),
     
@@ -60,7 +51,6 @@ public class MessageCorrelationResultWithVariableDto {
       this.value = value;
     }
 
-    @JsonValue
     public String getValue() {
       return value;
     }
@@ -70,7 +60,6 @@ public class MessageCorrelationResultWithVariableDto {
       return String.valueOf(value);
     }
 
-    @JsonCreator
     public static ResultTypeEnum fromValue(String value) {
       for (ResultTypeEnum b : ResultTypeEnum.values()) {
         if (b.value.equals(value)) {
@@ -79,22 +68,40 @@ public class MessageCorrelationResultWithVariableDto {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
+
+    public static class Adapter extends TypeAdapter<ResultTypeEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final ResultTypeEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public ResultTypeEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return ResultTypeEnum.fromValue(value);
+      }
+    }
   }
 
-  public static final String JSON_PROPERTY_RESULT_TYPE = "resultType";
+  public static final String SERIALIZED_NAME_RESULT_TYPE = "resultType";
+  @SerializedName(SERIALIZED_NAME_RESULT_TYPE)
   private ResultTypeEnum resultType;
 
-  public static final String JSON_PROPERTY_PROCESS_INSTANCE = "processInstance";
+  public static final String SERIALIZED_NAME_PROCESS_INSTANCE = "processInstance";
+  @SerializedName(SERIALIZED_NAME_PROCESS_INSTANCE)
   private ProcessInstanceDto processInstance = null;
 
-  public static final String JSON_PROPERTY_EXECUTION = "execution";
+  public static final String SERIALIZED_NAME_EXECUTION = "execution";
+  @SerializedName(SERIALIZED_NAME_EXECUTION)
   private ExecutionDto execution;
 
-  public static final String JSON_PROPERTY_VARIABLES = "variables";
+  public static final String SERIALIZED_NAME_VARIABLES = "variables";
+  @SerializedName(SERIALIZED_NAME_VARIABLES)
   private Map<String, VariableValueDto> variables = null;
 
 
   public MessageCorrelationResultWithVariableDto resultType(ResultTypeEnum resultType) {
+    
     this.resultType = resultType;
     return this;
   }
@@ -105,8 +112,6 @@ public class MessageCorrelationResultWithVariableDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Indicates if the message was correlated to a message start event or an  intermediate message catching event. In the first case, the resultType is  `ProcessDefinition` and otherwise `Execution`.")
-  @JsonProperty(JSON_PROPERTY_RESULT_TYPE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public ResultTypeEnum getResultType() {
     return resultType;
@@ -119,6 +124,7 @@ public class MessageCorrelationResultWithVariableDto {
 
 
   public MessageCorrelationResultWithVariableDto processInstance(ProcessInstanceDto processInstance) {
+    
     this.processInstance = processInstance;
     return this;
   }
@@ -129,8 +135,6 @@ public class MessageCorrelationResultWithVariableDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public ProcessInstanceDto getProcessInstance() {
     return processInstance;
@@ -143,6 +147,7 @@ public class MessageCorrelationResultWithVariableDto {
 
 
   public MessageCorrelationResultWithVariableDto execution(ExecutionDto execution) {
+    
     this.execution = execution;
     return this;
   }
@@ -153,8 +158,6 @@ public class MessageCorrelationResultWithVariableDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
-  @JsonProperty(JSON_PROPERTY_EXECUTION)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public ExecutionDto getExecution() {
     return execution;
@@ -167,6 +170,7 @@ public class MessageCorrelationResultWithVariableDto {
 
 
   public MessageCorrelationResultWithVariableDto variables(Map<String, VariableValueDto> variables) {
+    
     this.variables = variables;
     return this;
   }
@@ -185,8 +189,6 @@ public class MessageCorrelationResultWithVariableDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "This property is returned if the `variablesInResultEnabled` is set to `true`. Contains a list of the process variables. ")
-  @JsonProperty(JSON_PROPERTY_VARIABLES)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Map<String, VariableValueDto> getVariables() {
     return variables;
@@ -198,9 +200,6 @@ public class MessageCorrelationResultWithVariableDto {
   }
 
 
-  /**
-   * Return true if this MessageCorrelationResultWithVariableDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

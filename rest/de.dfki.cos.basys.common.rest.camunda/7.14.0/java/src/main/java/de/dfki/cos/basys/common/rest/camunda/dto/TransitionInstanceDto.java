@@ -15,72 +15,67 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import de.dfki.cos.basys.common.rest.camunda.dto.ActivityInstanceIncidentDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
 
 /**
  * A JSON object corresponding to the Activity Instance tree of the given process instance.
  */
 @ApiModel(description = "A JSON object corresponding to the Activity Instance tree of the given process instance.")
-@JsonPropertyOrder({
-  TransitionInstanceDto.JSON_PROPERTY_ID,
-  TransitionInstanceDto.JSON_PROPERTY_PARENT_ACTIVITY_INSTANCE_ID,
-  TransitionInstanceDto.JSON_PROPERTY_ACTIVITY_ID,
-  TransitionInstanceDto.JSON_PROPERTY_ACTIVITY_NAME,
-  TransitionInstanceDto.JSON_PROPERTY_ACTIVITY_TYPE,
-  TransitionInstanceDto.JSON_PROPERTY_PROCESS_INSTANCE_ID,
-  TransitionInstanceDto.JSON_PROPERTY_PROCESS_DEFINITION_ID,
-  TransitionInstanceDto.JSON_PROPERTY_EXECUTION_ID,
-  TransitionInstanceDto.JSON_PROPERTY_INCIDENT_IDS,
-  TransitionInstanceDto.JSON_PROPERTY_INCIDENTS
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class TransitionInstanceDto {
-  public static final String JSON_PROPERTY_ID = "id";
+  public static final String SERIALIZED_NAME_ID = "id";
+  @SerializedName(SERIALIZED_NAME_ID)
   private String id;
 
-  public static final String JSON_PROPERTY_PARENT_ACTIVITY_INSTANCE_ID = "parentActivityInstanceId";
+  public static final String SERIALIZED_NAME_PARENT_ACTIVITY_INSTANCE_ID = "parentActivityInstanceId";
+  @SerializedName(SERIALIZED_NAME_PARENT_ACTIVITY_INSTANCE_ID)
   private String parentActivityInstanceId;
 
-  public static final String JSON_PROPERTY_ACTIVITY_ID = "activityId";
+  public static final String SERIALIZED_NAME_ACTIVITY_ID = "activityId";
+  @SerializedName(SERIALIZED_NAME_ACTIVITY_ID)
   private String activityId;
 
-  public static final String JSON_PROPERTY_ACTIVITY_NAME = "activityName";
+  public static final String SERIALIZED_NAME_ACTIVITY_NAME = "activityName";
+  @SerializedName(SERIALIZED_NAME_ACTIVITY_NAME)
   private String activityName;
 
-  public static final String JSON_PROPERTY_ACTIVITY_TYPE = "activityType";
+  public static final String SERIALIZED_NAME_ACTIVITY_TYPE = "activityType";
+  @SerializedName(SERIALIZED_NAME_ACTIVITY_TYPE)
   private String activityType;
 
-  public static final String JSON_PROPERTY_PROCESS_INSTANCE_ID = "processInstanceId";
+  public static final String SERIALIZED_NAME_PROCESS_INSTANCE_ID = "processInstanceId";
+  @SerializedName(SERIALIZED_NAME_PROCESS_INSTANCE_ID)
   private String processInstanceId;
 
-  public static final String JSON_PROPERTY_PROCESS_DEFINITION_ID = "processDefinitionId";
+  public static final String SERIALIZED_NAME_PROCESS_DEFINITION_ID = "processDefinitionId";
+  @SerializedName(SERIALIZED_NAME_PROCESS_DEFINITION_ID)
   private String processDefinitionId;
 
-  public static final String JSON_PROPERTY_EXECUTION_ID = "executionId";
+  public static final String SERIALIZED_NAME_EXECUTION_ID = "executionId";
+  @SerializedName(SERIALIZED_NAME_EXECUTION_ID)
   private String executionId;
 
-  public static final String JSON_PROPERTY_INCIDENT_IDS = "incidentIds";
+  public static final String SERIALIZED_NAME_INCIDENT_IDS = "incidentIds";
+  @SerializedName(SERIALIZED_NAME_INCIDENT_IDS)
   private List<String> incidentIds = null;
 
-  public static final String JSON_PROPERTY_INCIDENTS = "incidents";
+  public static final String SERIALIZED_NAME_INCIDENTS = "incidents";
+  @SerializedName(SERIALIZED_NAME_INCIDENTS)
   private List<ActivityInstanceIncidentDto> incidents = null;
 
 
   public TransitionInstanceDto id(String id) {
+    
     this.id = id;
     return this;
   }
@@ -91,8 +86,6 @@ public class TransitionInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the transition instance.")
-  @JsonProperty(JSON_PROPERTY_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getId() {
     return id;
@@ -105,6 +98,7 @@ public class TransitionInstanceDto {
 
 
   public TransitionInstanceDto parentActivityInstanceId(String parentActivityInstanceId) {
+    
     this.parentActivityInstanceId = parentActivityInstanceId;
     return this;
   }
@@ -115,8 +109,6 @@ public class TransitionInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the parent activity instance, for example a sub process instance.")
-  @JsonProperty(JSON_PROPERTY_PARENT_ACTIVITY_INSTANCE_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getParentActivityInstanceId() {
     return parentActivityInstanceId;
@@ -129,6 +121,7 @@ public class TransitionInstanceDto {
 
 
   public TransitionInstanceDto activityId(String activityId) {
+    
     this.activityId = activityId;
     return this;
   }
@@ -139,8 +132,6 @@ public class TransitionInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the activity that this instance enters (asyncBefore job) or leaves (asyncAfter job)")
-  @JsonProperty(JSON_PROPERTY_ACTIVITY_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getActivityId() {
     return activityId;
@@ -153,6 +144,7 @@ public class TransitionInstanceDto {
 
 
   public TransitionInstanceDto activityName(String activityName) {
+    
     this.activityName = activityName;
     return this;
   }
@@ -163,8 +155,6 @@ public class TransitionInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The name of the activity that this instance enters (asyncBefore job) or leaves (asyncAfter job)")
-  @JsonProperty(JSON_PROPERTY_ACTIVITY_NAME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getActivityName() {
     return activityName;
@@ -177,6 +167,7 @@ public class TransitionInstanceDto {
 
 
   public TransitionInstanceDto activityType(String activityType) {
+    
     this.activityType = activityType;
     return this;
   }
@@ -187,8 +178,6 @@ public class TransitionInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The type of the activity that this instance enters (asyncBefore job) or leaves (asyncAfter job)")
-  @JsonProperty(JSON_PROPERTY_ACTIVITY_TYPE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getActivityType() {
     return activityType;
@@ -201,6 +190,7 @@ public class TransitionInstanceDto {
 
 
   public TransitionInstanceDto processInstanceId(String processInstanceId) {
+    
     this.processInstanceId = processInstanceId;
     return this;
   }
@@ -211,8 +201,6 @@ public class TransitionInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the process instance this instance is part of.")
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getProcessInstanceId() {
     return processInstanceId;
@@ -225,6 +213,7 @@ public class TransitionInstanceDto {
 
 
   public TransitionInstanceDto processDefinitionId(String processDefinitionId) {
+    
     this.processDefinitionId = processDefinitionId;
     return this;
   }
@@ -235,8 +224,6 @@ public class TransitionInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the process definition.")
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getProcessDefinitionId() {
     return processDefinitionId;
@@ -249,6 +236,7 @@ public class TransitionInstanceDto {
 
 
   public TransitionInstanceDto executionId(String executionId) {
+    
     this.executionId = executionId;
     return this;
   }
@@ -259,8 +247,6 @@ public class TransitionInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The execution id.")
-  @JsonProperty(JSON_PROPERTY_EXECUTION_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getExecutionId() {
     return executionId;
@@ -273,6 +259,7 @@ public class TransitionInstanceDto {
 
 
   public TransitionInstanceDto incidentIds(List<String> incidentIds) {
+    
     this.incidentIds = incidentIds;
     return this;
   }
@@ -291,8 +278,6 @@ public class TransitionInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A list of incident ids.")
-  @JsonProperty(JSON_PROPERTY_INCIDENT_IDS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<String> getIncidentIds() {
     return incidentIds;
@@ -305,6 +290,7 @@ public class TransitionInstanceDto {
 
 
   public TransitionInstanceDto incidents(List<ActivityInstanceIncidentDto> incidents) {
+    
     this.incidents = incidents;
     return this;
   }
@@ -323,8 +309,6 @@ public class TransitionInstanceDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A list of JSON objects containing incident specific properties: * `id`: the id of the incident * `activityId`: the activity id in which the incident occurred")
-  @JsonProperty(JSON_PROPERTY_INCIDENTS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<ActivityInstanceIncidentDto> getIncidents() {
     return incidents;
@@ -336,9 +320,6 @@ public class TransitionInstanceDto {
   }
 
 
-  /**
-   * Return true if this TransitionInstanceDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

@@ -15,36 +15,28 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
+import java.io.IOException;
 
 /**
  * HistoryTimeToLiveDto
  */
-@JsonPropertyOrder({
-  HistoryTimeToLiveDto.JSON_PROPERTY_HISTORY_TIME_TO_LIVE
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class HistoryTimeToLiveDto {
-  public static final String JSON_PROPERTY_HISTORY_TIME_TO_LIVE = "historyTimeToLive";
-  private JsonNullable<Integer> historyTimeToLive = JsonNullable.<Integer>undefined();
+  public static final String SERIALIZED_NAME_HISTORY_TIME_TO_LIVE = "historyTimeToLive";
+  @SerializedName(SERIALIZED_NAME_HISTORY_TIME_TO_LIVE)
+  private Integer historyTimeToLive;
 
 
   public HistoryTimeToLiveDto historyTimeToLive(Integer historyTimeToLive) {
-    this.historyTimeToLive = JsonNullable.<Integer>of(historyTimeToLive);
+    
+    this.historyTimeToLive = historyTimeToLive;
     return this;
   }
 
@@ -55,32 +47,17 @@ public class HistoryTimeToLiveDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "New value for historyTimeToLive field of the definition. Can be `null`. Can not be negative.")
-  @JsonIgnore
 
   public Integer getHistoryTimeToLive() {
-        return historyTimeToLive.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_HISTORY_TIME_TO_LIVE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Integer> getHistoryTimeToLive_JsonNullable() {
     return historyTimeToLive;
   }
-  
-  @JsonProperty(JSON_PROPERTY_HISTORY_TIME_TO_LIVE)
-  public void setHistoryTimeToLive_JsonNullable(JsonNullable<Integer> historyTimeToLive) {
+
+
+  public void setHistoryTimeToLive(Integer historyTimeToLive) {
     this.historyTimeToLive = historyTimeToLive;
   }
 
-  public void setHistoryTimeToLive(Integer historyTimeToLive) {
-    this.historyTimeToLive = JsonNullable.<Integer>of(historyTimeToLive);
-  }
 
-
-  /**
-   * Return true if this HistoryTimeToLiveDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

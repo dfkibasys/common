@@ -13,16 +13,13 @@
 
 package de.dfki.cos.basys.common.rest.camunda.api;
 
-import de.dfki.cos.basys.common.rest.camunda.*;
-import de.dfki.cos.basys.common.rest.camunda.auth.*;
+import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.dto.ExceptionDto;
 import java.io.File;
 import de.dfki.cos.basys.common.rest.camunda.dto.PatchVariablesDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.VariableValueDto;
-import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
-
+import org.junit.Ignore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,10 +29,12 @@ import java.util.Map;
 /**
  * API tests for TaskLocalVariableApi
  */
+@Ignore
 public class TaskLocalVariableApiTest {
 
     private final TaskLocalVariableApi api = new TaskLocalVariableApi();
 
+    
     /**
      * 
      *
@@ -46,12 +45,13 @@ public class TaskLocalVariableApiTest {
      */
     @Test
     public void deleteTaskLocalVariableTest() throws ApiException {
-        //String id = null;
-        //String varName = null;
-        //api.deleteTaskLocalVariable(id, varName);
+        String id = null;
+        String varName = null;
+        api.deleteTaskLocalVariable(id, varName);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -62,13 +62,14 @@ public class TaskLocalVariableApiTest {
      */
     @Test
     public void getTaskLocalVariableTest() throws ApiException {
-        //String id = null;
-        //String varName = null;
-        //Boolean deserializeValue = null;
-        //VariableValueDto response = api.getTaskLocalVariable(id, varName, deserializeValue);
+        String id = null;
+        String varName = null;
+        Boolean deserializeValue = null;
+        VariableValueDto response = api.getTaskLocalVariable(id, varName, deserializeValue);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -79,12 +80,13 @@ public class TaskLocalVariableApiTest {
      */
     @Test
     public void getTaskLocalVariableBinaryTest() throws ApiException {
-        //String id = null;
-        //String varName = null;
-        //File response = api.getTaskLocalVariableBinary(id, varName);
+        String id = null;
+        String varName = null;
+        File response = api.getTaskLocalVariableBinary(id, varName);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -95,12 +97,13 @@ public class TaskLocalVariableApiTest {
      */
     @Test
     public void getTaskLocalVariablesTest() throws ApiException {
-        //String id = null;
-        //Boolean deserializeValues = null;
-        //Map<String, VariableValueDto> response = api.getTaskLocalVariables(id, deserializeValues);
+        String id = null;
+        Boolean deserializeValues = null;
+        Map<String, VariableValueDto> response = api.getTaskLocalVariables(id, deserializeValues);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -111,12 +114,13 @@ public class TaskLocalVariableApiTest {
      */
     @Test
     public void modifyTaskLocalVariablesTest() throws ApiException {
-        //String id = null;
-        //PatchVariablesDto patchVariablesDto = null;
-        //api.modifyTaskLocalVariables(id, patchVariablesDto);
+        String id = null;
+        PatchVariablesDto patchVariablesDto = null;
+        api.modifyTaskLocalVariables(id, patchVariablesDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -127,13 +131,14 @@ public class TaskLocalVariableApiTest {
      */
     @Test
     public void putTaskLocalVariableTest() throws ApiException {
-        //String id = null;
-        //String varName = null;
-        //VariableValueDto variableValueDto = null;
-        //api.putTaskLocalVariable(id, varName, variableValueDto);
+        String id = null;
+        String varName = null;
+        VariableValueDto variableValueDto = null;
+        api.putTaskLocalVariable(id, varName, variableValueDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -144,12 +149,13 @@ public class TaskLocalVariableApiTest {
      */
     @Test
     public void setBinaryTaskLocalVariableTest() throws ApiException {
-        //String id = null;
-        //String varName = null;
-        //File data = null;
-        //String valueType = null;
-        //api.setBinaryTaskLocalVariable(id, varName, data, valueType);
+        String id = null;
+        String varName = null;
+        File data = null;
+        String valueType = null;
+        api.setBinaryTaskLocalVariable(id, varName, data, valueType);
+
         // TODO: test validations
     }
-
+    
 }

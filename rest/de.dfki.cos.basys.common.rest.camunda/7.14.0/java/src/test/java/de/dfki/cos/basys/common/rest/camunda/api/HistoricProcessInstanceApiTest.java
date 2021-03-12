@@ -13,8 +13,7 @@
 
 package de.dfki.cos.basys.common.rest.camunda.api;
 
-import de.dfki.cos.basys.common.rest.camunda.*;
-import de.dfki.cos.basys.common.rest.camunda.auth.*;
+import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.dto.BatchDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.CountResultDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.DeleteHistoricProcessInstancesDto;
@@ -23,10 +22,8 @@ import de.dfki.cos.basys.common.rest.camunda.dto.HistoricProcessInstanceDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.HistoricProcessInstanceQueryDto;
 import org.threeten.bp.OffsetDateTime;
 import de.dfki.cos.basys.common.rest.camunda.dto.SetRemovalTimeToHistoricProcessInstancesDto;
-import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
-
+import org.junit.Ignore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,10 +33,12 @@ import java.util.Map;
 /**
  * API tests for HistoricProcessInstanceApi
  */
+@Ignore
 public class HistoricProcessInstanceApiTest {
 
     private final HistoricProcessInstanceApi api = new HistoricProcessInstanceApi();
 
+    
     /**
      * Delete
      *
@@ -50,12 +49,13 @@ public class HistoricProcessInstanceApiTest {
      */
     @Test
     public void deleteHistoricProcessInstanceTest() throws ApiException {
-        //String id = null;
-        //Boolean failIfNotExists = null;
-        //api.deleteHistoricProcessInstance(id, failIfNotExists);
+        String id = null;
+        Boolean failIfNotExists = null;
+        api.deleteHistoricProcessInstance(id, failIfNotExists);
+
         // TODO: test validations
     }
-
+    
     /**
      * Delete Async (POST)
      *
@@ -66,11 +66,12 @@ public class HistoricProcessInstanceApiTest {
      */
     @Test
     public void deleteHistoricProcessInstancesAsyncTest() throws ApiException {
-        //DeleteHistoricProcessInstancesDto deleteHistoricProcessInstancesDto = null;
-        //BatchDto response = api.deleteHistoricProcessInstancesAsync(deleteHistoricProcessInstancesDto);
+        DeleteHistoricProcessInstancesDto deleteHistoricProcessInstancesDto = null;
+        BatchDto response = api.deleteHistoricProcessInstancesAsync(deleteHistoricProcessInstancesDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * Delete Variable Instances
      *
@@ -81,11 +82,12 @@ public class HistoricProcessInstanceApiTest {
      */
     @Test
     public void deleteHistoricVariableInstancesOfHistoricProcessInstanceTest() throws ApiException {
-        //String id = null;
-        //api.deleteHistoricVariableInstancesOfHistoricProcessInstance(id);
+        String id = null;
+        api.deleteHistoricVariableInstancesOfHistoricProcessInstance(id);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get
      *
@@ -96,11 +98,12 @@ public class HistoricProcessInstanceApiTest {
      */
     @Test
     public void getHistoricProcessInstanceTest() throws ApiException {
-        //String id = null;
-        //HistoricProcessInstanceDto response = api.getHistoricProcessInstance(id);
+        String id = null;
+        HistoricProcessInstanceDto response = api.getHistoricProcessInstance(id);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get Duration Report
      *
@@ -111,16 +114,17 @@ public class HistoricProcessInstanceApiTest {
      */
     @Test
     public void getHistoricProcessInstanceDurationReportTest() throws ApiException {
-        //String reportType = null;
-        //String periodUnit = null;
-        //String processDefinitionIdIn = null;
-        //String processDefinitionKeyIn = null;
-        //OffsetDateTime startedBefore = null;
-        //OffsetDateTime startedAfter = null;
-        //Object response = api.getHistoricProcessInstanceDurationReport(reportType, periodUnit, processDefinitionIdIn, processDefinitionKeyIn, startedBefore, startedAfter);
+        String reportType = null;
+        String periodUnit = null;
+        String processDefinitionIdIn = null;
+        String processDefinitionKeyIn = null;
+        OffsetDateTime startedBefore = null;
+        OffsetDateTime startedAfter = null;
+        Object response = api.getHistoricProcessInstanceDurationReport(reportType, periodUnit, processDefinitionIdIn, processDefinitionKeyIn, startedBefore, startedAfter);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get List
      *
@@ -131,59 +135,60 @@ public class HistoricProcessInstanceApiTest {
      */
     @Test
     public void getHistoricProcessInstancesTest() throws ApiException {
-        //String sortBy = null;
-        //String sortOrder = null;
-        //Integer firstResult = null;
-        //Integer maxResults = null;
-        //String processInstanceId = null;
-        //String processInstanceIds = null;
-        //String processDefinitionId = null;
-        //String processDefinitionKey = null;
-        //String processDefinitionKeyIn = null;
-        //String processDefinitionName = null;
-        //String processDefinitionNameLike = null;
-        //String processDefinitionKeyNotIn = null;
-        //String processInstanceBusinessKey = null;
-        //String processInstanceBusinessKeyLike = null;
-        //Boolean rootProcessInstances = null;
-        //Boolean finished = null;
-        //Boolean unfinished = null;
-        //Boolean withIncidents = null;
-        //Boolean withRootIncidents = null;
-        //String incidentType = null;
-        //String incidentStatus = null;
-        //String incidentMessage = null;
-        //String incidentMessageLike = null;
-        //OffsetDateTime startedBefore = null;
-        //OffsetDateTime startedAfter = null;
-        //OffsetDateTime finishedBefore = null;
-        //OffsetDateTime finishedAfter = null;
-        //OffsetDateTime executedActivityAfter = null;
-        //OffsetDateTime executedActivityBefore = null;
-        //OffsetDateTime executedJobAfter = null;
-        //OffsetDateTime executedJobBefore = null;
-        //String startedBy = null;
-        //String superProcessInstanceId = null;
-        //String subProcessInstanceId = null;
-        //String superCaseInstanceId = null;
-        //String subCaseInstanceId = null;
-        //String caseInstanceId = null;
-        //String tenantIdIn = null;
-        //Boolean withoutTenantId = null;
-        //String executedActivityIdIn = null;
-        //String activeActivityIdIn = null;
-        //Boolean active = null;
-        //Boolean suspended = null;
-        //Boolean completed = null;
-        //Boolean externallyTerminated = null;
-        //Boolean internallyTerminated = null;
-        //String variables = null;
-        //Boolean variableNamesIgnoreCase = null;
-        //Boolean variableValuesIgnoreCase = null;
-        //List<HistoricProcessInstanceDto> response = api.getHistoricProcessInstances(sortBy, sortOrder, firstResult, maxResults, processInstanceId, processInstanceIds, processDefinitionId, processDefinitionKey, processDefinitionKeyIn, processDefinitionName, processDefinitionNameLike, processDefinitionKeyNotIn, processInstanceBusinessKey, processInstanceBusinessKeyLike, rootProcessInstances, finished, unfinished, withIncidents, withRootIncidents, incidentType, incidentStatus, incidentMessage, incidentMessageLike, startedBefore, startedAfter, finishedBefore, finishedAfter, executedActivityAfter, executedActivityBefore, executedJobAfter, executedJobBefore, startedBy, superProcessInstanceId, subProcessInstanceId, superCaseInstanceId, subCaseInstanceId, caseInstanceId, tenantIdIn, withoutTenantId, executedActivityIdIn, activeActivityIdIn, active, suspended, completed, externallyTerminated, internallyTerminated, variables, variableNamesIgnoreCase, variableValuesIgnoreCase);
+        String sortBy = null;
+        String sortOrder = null;
+        Integer firstResult = null;
+        Integer maxResults = null;
+        String processInstanceId = null;
+        String processInstanceIds = null;
+        String processDefinitionId = null;
+        String processDefinitionKey = null;
+        String processDefinitionKeyIn = null;
+        String processDefinitionName = null;
+        String processDefinitionNameLike = null;
+        String processDefinitionKeyNotIn = null;
+        String processInstanceBusinessKey = null;
+        String processInstanceBusinessKeyLike = null;
+        Boolean rootProcessInstances = null;
+        Boolean finished = null;
+        Boolean unfinished = null;
+        Boolean withIncidents = null;
+        Boolean withRootIncidents = null;
+        String incidentType = null;
+        String incidentStatus = null;
+        String incidentMessage = null;
+        String incidentMessageLike = null;
+        OffsetDateTime startedBefore = null;
+        OffsetDateTime startedAfter = null;
+        OffsetDateTime finishedBefore = null;
+        OffsetDateTime finishedAfter = null;
+        OffsetDateTime executedActivityAfter = null;
+        OffsetDateTime executedActivityBefore = null;
+        OffsetDateTime executedJobAfter = null;
+        OffsetDateTime executedJobBefore = null;
+        String startedBy = null;
+        String superProcessInstanceId = null;
+        String subProcessInstanceId = null;
+        String superCaseInstanceId = null;
+        String subCaseInstanceId = null;
+        String caseInstanceId = null;
+        String tenantIdIn = null;
+        Boolean withoutTenantId = null;
+        String executedActivityIdIn = null;
+        String activeActivityIdIn = null;
+        Boolean active = null;
+        Boolean suspended = null;
+        Boolean completed = null;
+        Boolean externallyTerminated = null;
+        Boolean internallyTerminated = null;
+        String variables = null;
+        Boolean variableNamesIgnoreCase = null;
+        Boolean variableValuesIgnoreCase = null;
+        List<HistoricProcessInstanceDto> response = api.getHistoricProcessInstances(sortBy, sortOrder, firstResult, maxResults, processInstanceId, processInstanceIds, processDefinitionId, processDefinitionKey, processDefinitionKeyIn, processDefinitionName, processDefinitionNameLike, processDefinitionKeyNotIn, processInstanceBusinessKey, processInstanceBusinessKeyLike, rootProcessInstances, finished, unfinished, withIncidents, withRootIncidents, incidentType, incidentStatus, incidentMessage, incidentMessageLike, startedBefore, startedAfter, finishedBefore, finishedAfter, executedActivityAfter, executedActivityBefore, executedJobAfter, executedJobBefore, startedBy, superProcessInstanceId, subProcessInstanceId, superCaseInstanceId, subCaseInstanceId, caseInstanceId, tenantIdIn, withoutTenantId, executedActivityIdIn, activeActivityIdIn, active, suspended, completed, externallyTerminated, internallyTerminated, variables, variableNamesIgnoreCase, variableValuesIgnoreCase);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get List Count
      *
@@ -194,55 +199,56 @@ public class HistoricProcessInstanceApiTest {
      */
     @Test
     public void getHistoricProcessInstancesCountTest() throws ApiException {
-        //String processInstanceId = null;
-        //String processInstanceIds = null;
-        //String processDefinitionId = null;
-        //String processDefinitionKey = null;
-        //String processDefinitionKeyIn = null;
-        //String processDefinitionName = null;
-        //String processDefinitionNameLike = null;
-        //String processDefinitionKeyNotIn = null;
-        //String processInstanceBusinessKey = null;
-        //String processInstanceBusinessKeyLike = null;
-        //Boolean rootProcessInstances = null;
-        //Boolean finished = null;
-        //Boolean unfinished = null;
-        //Boolean withIncidents = null;
-        //Boolean withRootIncidents = null;
-        //String incidentType = null;
-        //String incidentStatus = null;
-        //String incidentMessage = null;
-        //String incidentMessageLike = null;
-        //OffsetDateTime startedBefore = null;
-        //OffsetDateTime startedAfter = null;
-        //OffsetDateTime finishedBefore = null;
-        //OffsetDateTime finishedAfter = null;
-        //OffsetDateTime executedActivityAfter = null;
-        //OffsetDateTime executedActivityBefore = null;
-        //OffsetDateTime executedJobAfter = null;
-        //OffsetDateTime executedJobBefore = null;
-        //String startedBy = null;
-        //String superProcessInstanceId = null;
-        //String subProcessInstanceId = null;
-        //String superCaseInstanceId = null;
-        //String subCaseInstanceId = null;
-        //String caseInstanceId = null;
-        //String tenantIdIn = null;
-        //Boolean withoutTenantId = null;
-        //String executedActivityIdIn = null;
-        //String activeActivityIdIn = null;
-        //Boolean active = null;
-        //Boolean suspended = null;
-        //Boolean completed = null;
-        //Boolean externallyTerminated = null;
-        //Boolean internallyTerminated = null;
-        //String variables = null;
-        //Boolean variableNamesIgnoreCase = null;
-        //Boolean variableValuesIgnoreCase = null;
-        //CountResultDto response = api.getHistoricProcessInstancesCount(processInstanceId, processInstanceIds, processDefinitionId, processDefinitionKey, processDefinitionKeyIn, processDefinitionName, processDefinitionNameLike, processDefinitionKeyNotIn, processInstanceBusinessKey, processInstanceBusinessKeyLike, rootProcessInstances, finished, unfinished, withIncidents, withRootIncidents, incidentType, incidentStatus, incidentMessage, incidentMessageLike, startedBefore, startedAfter, finishedBefore, finishedAfter, executedActivityAfter, executedActivityBefore, executedJobAfter, executedJobBefore, startedBy, superProcessInstanceId, subProcessInstanceId, superCaseInstanceId, subCaseInstanceId, caseInstanceId, tenantIdIn, withoutTenantId, executedActivityIdIn, activeActivityIdIn, active, suspended, completed, externallyTerminated, internallyTerminated, variables, variableNamesIgnoreCase, variableValuesIgnoreCase);
+        String processInstanceId = null;
+        String processInstanceIds = null;
+        String processDefinitionId = null;
+        String processDefinitionKey = null;
+        String processDefinitionKeyIn = null;
+        String processDefinitionName = null;
+        String processDefinitionNameLike = null;
+        String processDefinitionKeyNotIn = null;
+        String processInstanceBusinessKey = null;
+        String processInstanceBusinessKeyLike = null;
+        Boolean rootProcessInstances = null;
+        Boolean finished = null;
+        Boolean unfinished = null;
+        Boolean withIncidents = null;
+        Boolean withRootIncidents = null;
+        String incidentType = null;
+        String incidentStatus = null;
+        String incidentMessage = null;
+        String incidentMessageLike = null;
+        OffsetDateTime startedBefore = null;
+        OffsetDateTime startedAfter = null;
+        OffsetDateTime finishedBefore = null;
+        OffsetDateTime finishedAfter = null;
+        OffsetDateTime executedActivityAfter = null;
+        OffsetDateTime executedActivityBefore = null;
+        OffsetDateTime executedJobAfter = null;
+        OffsetDateTime executedJobBefore = null;
+        String startedBy = null;
+        String superProcessInstanceId = null;
+        String subProcessInstanceId = null;
+        String superCaseInstanceId = null;
+        String subCaseInstanceId = null;
+        String caseInstanceId = null;
+        String tenantIdIn = null;
+        Boolean withoutTenantId = null;
+        String executedActivityIdIn = null;
+        String activeActivityIdIn = null;
+        Boolean active = null;
+        Boolean suspended = null;
+        Boolean completed = null;
+        Boolean externallyTerminated = null;
+        Boolean internallyTerminated = null;
+        String variables = null;
+        Boolean variableNamesIgnoreCase = null;
+        Boolean variableValuesIgnoreCase = null;
+        CountResultDto response = api.getHistoricProcessInstancesCount(processInstanceId, processInstanceIds, processDefinitionId, processDefinitionKey, processDefinitionKeyIn, processDefinitionName, processDefinitionNameLike, processDefinitionKeyNotIn, processInstanceBusinessKey, processInstanceBusinessKeyLike, rootProcessInstances, finished, unfinished, withIncidents, withRootIncidents, incidentType, incidentStatus, incidentMessage, incidentMessageLike, startedBefore, startedAfter, finishedBefore, finishedAfter, executedActivityAfter, executedActivityBefore, executedJobAfter, executedJobBefore, startedBy, superProcessInstanceId, subProcessInstanceId, superCaseInstanceId, subCaseInstanceId, caseInstanceId, tenantIdIn, withoutTenantId, executedActivityIdIn, activeActivityIdIn, active, suspended, completed, externallyTerminated, internallyTerminated, variables, variableNamesIgnoreCase, variableValuesIgnoreCase);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get List (POST)
      *
@@ -253,13 +259,14 @@ public class HistoricProcessInstanceApiTest {
      */
     @Test
     public void queryHistoricProcessInstancesTest() throws ApiException {
-        //Integer firstResult = null;
-        //Integer maxResults = null;
-        //HistoricProcessInstanceQueryDto historicProcessInstanceQueryDto = null;
-        //List<HistoricProcessInstanceDto> response = api.queryHistoricProcessInstances(firstResult, maxResults, historicProcessInstanceQueryDto);
+        Integer firstResult = null;
+        Integer maxResults = null;
+        HistoricProcessInstanceQueryDto historicProcessInstanceQueryDto = null;
+        List<HistoricProcessInstanceDto> response = api.queryHistoricProcessInstances(firstResult, maxResults, historicProcessInstanceQueryDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get List Count (POST)
      *
@@ -270,11 +277,12 @@ public class HistoricProcessInstanceApiTest {
      */
     @Test
     public void queryHistoricProcessInstancesCountTest() throws ApiException {
-        //HistoricProcessInstanceQueryDto historicProcessInstanceQueryDto = null;
-        //CountResultDto response = api.queryHistoricProcessInstancesCount(historicProcessInstanceQueryDto);
+        HistoricProcessInstanceQueryDto historicProcessInstanceQueryDto = null;
+        CountResultDto response = api.queryHistoricProcessInstancesCount(historicProcessInstanceQueryDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * Set Removal Time Async (POST)
      *
@@ -285,9 +293,10 @@ public class HistoricProcessInstanceApiTest {
      */
     @Test
     public void setRemovalTimeAsyncTest() throws ApiException {
-        //SetRemovalTimeToHistoricProcessInstancesDto setRemovalTimeToHistoricProcessInstancesDto = null;
-        //BatchDto response = api.setRemovalTimeAsync(setRemovalTimeToHistoricProcessInstancesDto);
+        SetRemovalTimeToHistoricProcessInstancesDto setRemovalTimeToHistoricProcessInstancesDto = null;
+        BatchDto response = api.setRemovalTimeAsync(setRemovalTimeToHistoricProcessInstancesDto);
+
         // TODO: test validations
     }
-
+    
 }

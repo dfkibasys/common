@@ -13,13 +13,10 @@
 
 package de.dfki.cos.basys.common.rest.camunda.api;
 
-import de.dfki.cos.basys.common.rest.camunda.*;
-import de.dfki.cos.basys.common.rest.camunda.auth.*;
+import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.dto.ProcessEngineDto;
-import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
-
+import org.junit.Ignore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,10 +26,12 @@ import java.util.Map;
 /**
  * API tests for EngineApi
  */
+@Ignore
 public class EngineApiTest {
 
     private final EngineApi api = new EngineApi();
 
+    
     /**
      * 
      *
@@ -43,8 +42,9 @@ public class EngineApiTest {
      */
     @Test
     public void getProcessEngineNamesTest() throws ApiException {
-        //List<ProcessEngineDto> response = api.getProcessEngineNames();
+        List<ProcessEngineDto> response = api.getProcessEngineNames();
+
         // TODO: test validations
     }
-
+    
 }

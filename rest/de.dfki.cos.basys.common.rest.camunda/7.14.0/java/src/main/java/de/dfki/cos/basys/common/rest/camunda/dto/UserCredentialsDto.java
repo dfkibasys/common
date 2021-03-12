@@ -15,36 +15,31 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
+import java.io.IOException;
 
 /**
  * UserCredentialsDto
  */
-@JsonPropertyOrder({
-  UserCredentialsDto.JSON_PROPERTY_PASSWORD,
-  UserCredentialsDto.JSON_PROPERTY_AUTHENTICATED_USER_PASSWORD
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class UserCredentialsDto {
-  public static final String JSON_PROPERTY_PASSWORD = "password";
+  public static final String SERIALIZED_NAME_PASSWORD = "password";
+  @SerializedName(SERIALIZED_NAME_PASSWORD)
   private String password;
 
-  public static final String JSON_PROPERTY_AUTHENTICATED_USER_PASSWORD = "authenticatedUserPassword";
+  public static final String SERIALIZED_NAME_AUTHENTICATED_USER_PASSWORD = "authenticatedUserPassword";
+  @SerializedName(SERIALIZED_NAME_AUTHENTICATED_USER_PASSWORD)
   private String authenticatedUserPassword;
 
 
   public UserCredentialsDto password(String password) {
+    
     this.password = password;
     return this;
   }
@@ -55,8 +50,6 @@ public class UserCredentialsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The users new password.")
-  @JsonProperty(JSON_PROPERTY_PASSWORD)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getPassword() {
     return password;
@@ -69,6 +62,7 @@ public class UserCredentialsDto {
 
 
   public UserCredentialsDto authenticatedUserPassword(String authenticatedUserPassword) {
+    
     this.authenticatedUserPassword = authenticatedUserPassword;
     return this;
   }
@@ -79,8 +73,6 @@ public class UserCredentialsDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The password of the authenticated user who changes the password of the user (i.e., the user with passed id as path parameter).")
-  @JsonProperty(JSON_PROPERTY_AUTHENTICATED_USER_PASSWORD)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getAuthenticatedUserPassword() {
     return authenticatedUserPassword;
@@ -92,9 +84,6 @@ public class UserCredentialsDto {
   }
 
 
-  /**
-   * Return true if this UserCredentialsDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

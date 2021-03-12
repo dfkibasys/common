@@ -13,8 +13,7 @@
 
 package de.dfki.cos.basys.common.rest.camunda.api;
 
-import de.dfki.cos.basys.common.rest.camunda.*;
-import de.dfki.cos.basys.common.rest.camunda.auth.*;
+import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.dto.ActivityStatisticsResultDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.AuthorizationExceptionDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.BatchDto;
@@ -34,10 +33,8 @@ import de.dfki.cos.basys.common.rest.camunda.dto.RestartProcessInstanceDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.StartProcessInstanceDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.StartProcessInstanceFormDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.VariableValueDto;
-import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
-
+import org.junit.Ignore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,10 +44,12 @@ import java.util.Map;
 /**
  * API tests for ProcessDefinitionApi
  */
+@Ignore
 public class ProcessDefinitionApiTest {
 
     private final ProcessDefinitionApi api = new ProcessDefinitionApi();
 
+    
     /**
      * Delete
      *
@@ -61,14 +60,15 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void deleteProcessDefinitionTest() throws ApiException {
-        //String id = null;
-        //Boolean cascade = null;
-        //Boolean skipCustomListeners = null;
-        //Boolean skipIoMappings = null;
-        //api.deleteProcessDefinition(id, cascade, skipCustomListeners, skipIoMappings);
+        String id = null;
+        Boolean cascade = null;
+        Boolean skipCustomListeners = null;
+        Boolean skipIoMappings = null;
+        api.deleteProcessDefinition(id, cascade, skipCustomListeners, skipIoMappings);
+
         // TODO: test validations
     }
-
+    
     /**
      * Delete By Key
      *
@@ -79,14 +79,15 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void deleteProcessDefinitionsByKeyTest() throws ApiException {
-        //String key = null;
-        //Boolean cascade = null;
-        //Boolean skipCustomListeners = null;
-        //Boolean skipIoMappings = null;
-        //api.deleteProcessDefinitionsByKey(key, cascade, skipCustomListeners, skipIoMappings);
+        String key = null;
+        Boolean cascade = null;
+        Boolean skipCustomListeners = null;
+        Boolean skipIoMappings = null;
+        api.deleteProcessDefinitionsByKey(key, cascade, skipCustomListeners, skipIoMappings);
+
         // TODO: test validations
     }
-
+    
     /**
      * Delete By Key
      *
@@ -97,15 +98,16 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void deleteProcessDefinitionsByKeyAndTenantIdTest() throws ApiException {
-        //String key = null;
-        //String tenantId = null;
-        //Boolean cascade = null;
-        //Boolean skipCustomListeners = null;
-        //Boolean skipIoMappings = null;
-        //api.deleteProcessDefinitionsByKeyAndTenantId(key, tenantId, cascade, skipCustomListeners, skipIoMappings);
+        String key = null;
+        String tenantId = null;
+        Boolean cascade = null;
+        Boolean skipCustomListeners = null;
+        Boolean skipIoMappings = null;
+        api.deleteProcessDefinitionsByKeyAndTenantId(key, tenantId, cascade, skipCustomListeners, skipIoMappings);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get Activity Instance Statistics
      *
@@ -116,14 +118,15 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void getActivityStatisticsTest() throws ApiException {
-        //String id = null;
-        //Boolean failedJobs = null;
-        //Boolean incidents = null;
-        //String incidentsForType = null;
-        //List<ActivityStatisticsResultDto> response = api.getActivityStatistics(id, failedJobs, incidents, incidentsForType);
+        String id = null;
+        Boolean failedJobs = null;
+        Boolean incidents = null;
+        String incidentsForType = null;
+        List<ActivityStatisticsResultDto> response = api.getActivityStatistics(id, failedJobs, incidents, incidentsForType);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get Activity Instance Statistics
      *
@@ -134,14 +137,15 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void getActivityStatisticsByProcessDefinitionKeyTest() throws ApiException {
-        //String key = null;
-        //Boolean failedJobs = null;
-        //Boolean incidents = null;
-        //String incidentsForType = null;
-        //List<ActivityStatisticsResultDto> response = api.getActivityStatisticsByProcessDefinitionKey(key, failedJobs, incidents, incidentsForType);
+        String key = null;
+        Boolean failedJobs = null;
+        Boolean incidents = null;
+        String incidentsForType = null;
+        List<ActivityStatisticsResultDto> response = api.getActivityStatisticsByProcessDefinitionKey(key, failedJobs, incidents, incidentsForType);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get Activity Instance Statistics
      *
@@ -152,15 +156,16 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void getActivityStatisticsByProcessDefinitionKeyAndTenantIdTest() throws ApiException {
-        //String key = null;
-        //String tenantId = null;
-        //Boolean failedJobs = null;
-        //Boolean incidents = null;
-        //String incidentsForType = null;
-        //List<ActivityStatisticsResultDto> response = api.getActivityStatisticsByProcessDefinitionKeyAndTenantId(key, tenantId, failedJobs, incidents, incidentsForType);
+        String key = null;
+        String tenantId = null;
+        Boolean failedJobs = null;
+        Boolean incidents = null;
+        String incidentsForType = null;
+        List<ActivityStatisticsResultDto> response = api.getActivityStatisticsByProcessDefinitionKeyAndTenantId(key, tenantId, failedJobs, incidents, incidentsForType);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get Deployed Start Form
      *
@@ -171,11 +176,12 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void getDeployedStartFormTest() throws ApiException {
-        //String id = null;
-        //File response = api.getDeployedStartForm(id);
+        String id = null;
+        File response = api.getDeployedStartForm(id);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get Deployed Start Form
      *
@@ -186,11 +192,12 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void getDeployedStartFormByKeyTest() throws ApiException {
-        //String key = null;
-        //File response = api.getDeployedStartFormByKey(key);
+        String key = null;
+        File response = api.getDeployedStartFormByKey(key);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get Deployed Start Form
      *
@@ -201,12 +208,13 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void getDeployedStartFormByKeyAndTenantIdTest() throws ApiException {
-        //String key = null;
-        //String tenantId = null;
-        //File response = api.getDeployedStartFormByKeyAndTenantId(key, tenantId);
+        String key = null;
+        String tenantId = null;
+        File response = api.getDeployedStartFormByKeyAndTenantId(key, tenantId);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get
      *
@@ -217,12 +225,13 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void getLatestProcessDefinitionByTenantIdTest() throws ApiException {
-        //String key = null;
-        //String tenantId = null;
-        //ProcessDefinitionDto response = api.getLatestProcessDefinitionByTenantId(key, tenantId);
+        String key = null;
+        String tenantId = null;
+        ProcessDefinitionDto response = api.getLatestProcessDefinitionByTenantId(key, tenantId);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get
      *
@@ -233,11 +242,12 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void getProcessDefinitionTest() throws ApiException {
-        //String id = null;
-        //ProcessDefinitionDto response = api.getProcessDefinition(id);
+        String id = null;
+        ProcessDefinitionDto response = api.getProcessDefinition(id);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get XML
      *
@@ -248,11 +258,12 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void getProcessDefinitionBpmn20XmlTest() throws ApiException {
-        //String id = null;
-        //ProcessDefinitionDiagramDto response = api.getProcessDefinitionBpmn20Xml(id);
+        String id = null;
+        ProcessDefinitionDiagramDto response = api.getProcessDefinitionBpmn20Xml(id);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get XML
      *
@@ -263,11 +274,12 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void getProcessDefinitionBpmn20XmlByKeyTest() throws ApiException {
-        //String key = null;
-        //ProcessDefinitionDiagramDto response = api.getProcessDefinitionBpmn20XmlByKey(key);
+        String key = null;
+        ProcessDefinitionDiagramDto response = api.getProcessDefinitionBpmn20XmlByKey(key);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get XML
      *
@@ -278,12 +290,13 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void getProcessDefinitionBpmn20XmlByKeyAndTenantIdTest() throws ApiException {
-        //String key = null;
-        //String tenantId = null;
-        //ProcessDefinitionDiagramDto response = api.getProcessDefinitionBpmn20XmlByKeyAndTenantId(key, tenantId);
+        String key = null;
+        String tenantId = null;
+        ProcessDefinitionDiagramDto response = api.getProcessDefinitionBpmn20XmlByKeyAndTenantId(key, tenantId);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get
      *
@@ -294,11 +307,12 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void getProcessDefinitionByKeyTest() throws ApiException {
-        //String key = null;
-        //ProcessDefinitionDto response = api.getProcessDefinitionByKey(key);
+        String key = null;
+        ProcessDefinitionDto response = api.getProcessDefinitionByKey(key);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get Diagram
      *
@@ -309,11 +323,12 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void getProcessDefinitionDiagramTest() throws ApiException {
-        //String id = null;
-        //File response = api.getProcessDefinitionDiagram(id);
+        String id = null;
+        File response = api.getProcessDefinitionDiagram(id);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get Diagram
      *
@@ -324,11 +339,12 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void getProcessDefinitionDiagramByKeyTest() throws ApiException {
-        //String key = null;
-        //File response = api.getProcessDefinitionDiagramByKey(key);
+        String key = null;
+        File response = api.getProcessDefinitionDiagramByKey(key);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get Diagram
      *
@@ -339,12 +355,13 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void getProcessDefinitionDiagramByKeyAndTenantIdTest() throws ApiException {
-        //String key = null;
-        //String tenantId = null;
-        //File response = api.getProcessDefinitionDiagramByKeyAndTenantId(key, tenantId);
+        String key = null;
+        String tenantId = null;
+        File response = api.getProcessDefinitionDiagramByKeyAndTenantId(key, tenantId);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get Process Instance Statistics
      *
@@ -355,14 +372,15 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void getProcessDefinitionStatisticsTest() throws ApiException {
-        //Boolean failedJobs = null;
-        //Boolean incidents = null;
-        //String incidentsForType = null;
-        //Boolean rootIncidents = null;
-        //List<ProcessDefinitionStatisticsResultDto> response = api.getProcessDefinitionStatistics(failedJobs, incidents, incidentsForType, rootIncidents);
+        Boolean failedJobs = null;
+        Boolean incidents = null;
+        String incidentsForType = null;
+        Boolean rootIncidents = null;
+        List<ProcessDefinitionStatisticsResultDto> response = api.getProcessDefinitionStatistics(failedJobs, incidents, incidentsForType, rootIncidents);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get List
      *
@@ -373,46 +391,47 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void getProcessDefinitionsTest() throws ApiException {
-        //String processDefinitionId = null;
-        //String processDefinitionIdIn = null;
-        //String name = null;
-        //String nameLike = null;
-        //String deploymentId = null;
-        //OffsetDateTime deployedAfter = null;
-        //OffsetDateTime deployedAt = null;
-        //String key = null;
-        //String keysIn = null;
-        //String keyLike = null;
-        //String category = null;
-        //String categoryLike = null;
-        //Integer version = null;
-        //Boolean latestVersion = null;
-        //String resourceName = null;
-        //String resourceNameLike = null;
-        //String startableBy = null;
-        //Boolean active = null;
-        //Boolean suspended = null;
-        //String incidentId = null;
-        //String incidentType = null;
-        //String incidentMessage = null;
-        //String incidentMessageLike = null;
-        //String tenantIdIn = null;
-        //Boolean withoutTenantId = null;
-        //Boolean includeProcessDefinitionsWithoutTenantId = null;
-        //String versionTag = null;
-        //String versionTagLike = null;
-        //Boolean withoutVersionTag = null;
-        //Boolean startableInTasklist = null;
-        //Boolean notStartableInTasklist = null;
-        //Boolean startablePermissionCheck = null;
-        //String sortBy = null;
-        //String sortOrder = null;
-        //Integer firstResult = null;
-        //Integer maxResults = null;
-        //List<ProcessDefinitionDto> response = api.getProcessDefinitions(processDefinitionId, processDefinitionIdIn, name, nameLike, deploymentId, deployedAfter, deployedAt, key, keysIn, keyLike, category, categoryLike, version, latestVersion, resourceName, resourceNameLike, startableBy, active, suspended, incidentId, incidentType, incidentMessage, incidentMessageLike, tenantIdIn, withoutTenantId, includeProcessDefinitionsWithoutTenantId, versionTag, versionTagLike, withoutVersionTag, startableInTasklist, notStartableInTasklist, startablePermissionCheck, sortBy, sortOrder, firstResult, maxResults);
+        String processDefinitionId = null;
+        String processDefinitionIdIn = null;
+        String name = null;
+        String nameLike = null;
+        String deploymentId = null;
+        OffsetDateTime deployedAfter = null;
+        OffsetDateTime deployedAt = null;
+        String key = null;
+        String keysIn = null;
+        String keyLike = null;
+        String category = null;
+        String categoryLike = null;
+        Integer version = null;
+        Boolean latestVersion = null;
+        String resourceName = null;
+        String resourceNameLike = null;
+        String startableBy = null;
+        Boolean active = null;
+        Boolean suspended = null;
+        String incidentId = null;
+        String incidentType = null;
+        String incidentMessage = null;
+        String incidentMessageLike = null;
+        String tenantIdIn = null;
+        Boolean withoutTenantId = null;
+        Boolean includeProcessDefinitionsWithoutTenantId = null;
+        String versionTag = null;
+        String versionTagLike = null;
+        Boolean withoutVersionTag = null;
+        Boolean startableInTasklist = null;
+        Boolean notStartableInTasklist = null;
+        Boolean startablePermissionCheck = null;
+        String sortBy = null;
+        String sortOrder = null;
+        Integer firstResult = null;
+        Integer maxResults = null;
+        List<ProcessDefinitionDto> response = api.getProcessDefinitions(processDefinitionId, processDefinitionIdIn, name, nameLike, deploymentId, deployedAfter, deployedAt, key, keysIn, keyLike, category, categoryLike, version, latestVersion, resourceName, resourceNameLike, startableBy, active, suspended, incidentId, incidentType, incidentMessage, incidentMessageLike, tenantIdIn, withoutTenantId, includeProcessDefinitionsWithoutTenantId, versionTag, versionTagLike, withoutVersionTag, startableInTasklist, notStartableInTasklist, startablePermissionCheck, sortBy, sortOrder, firstResult, maxResults);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get List Count
      *
@@ -423,42 +442,43 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void getProcessDefinitionsCountTest() throws ApiException {
-        //String processDefinitionId = null;
-        //String processDefinitionIdIn = null;
-        //String name = null;
-        //String nameLike = null;
-        //String deploymentId = null;
-        //OffsetDateTime deployedAfter = null;
-        //OffsetDateTime deployedAt = null;
-        //String key = null;
-        //String keysIn = null;
-        //String keyLike = null;
-        //String category = null;
-        //String categoryLike = null;
-        //Integer version = null;
-        //Boolean latestVersion = null;
-        //String resourceName = null;
-        //String resourceNameLike = null;
-        //String startableBy = null;
-        //Boolean active = null;
-        //Boolean suspended = null;
-        //String incidentId = null;
-        //String incidentType = null;
-        //String incidentMessage = null;
-        //String incidentMessageLike = null;
-        //String tenantIdIn = null;
-        //Boolean withoutTenantId = null;
-        //Boolean includeProcessDefinitionsWithoutTenantId = null;
-        //String versionTag = null;
-        //String versionTagLike = null;
-        //Boolean withoutVersionTag = null;
-        //Boolean startableInTasklist = null;
-        //Boolean notStartableInTasklist = null;
-        //Boolean startablePermissionCheck = null;
-        //CountResultDto response = api.getProcessDefinitionsCount(processDefinitionId, processDefinitionIdIn, name, nameLike, deploymentId, deployedAfter, deployedAt, key, keysIn, keyLike, category, categoryLike, version, latestVersion, resourceName, resourceNameLike, startableBy, active, suspended, incidentId, incidentType, incidentMessage, incidentMessageLike, tenantIdIn, withoutTenantId, includeProcessDefinitionsWithoutTenantId, versionTag, versionTagLike, withoutVersionTag, startableInTasklist, notStartableInTasklist, startablePermissionCheck);
+        String processDefinitionId = null;
+        String processDefinitionIdIn = null;
+        String name = null;
+        String nameLike = null;
+        String deploymentId = null;
+        OffsetDateTime deployedAfter = null;
+        OffsetDateTime deployedAt = null;
+        String key = null;
+        String keysIn = null;
+        String keyLike = null;
+        String category = null;
+        String categoryLike = null;
+        Integer version = null;
+        Boolean latestVersion = null;
+        String resourceName = null;
+        String resourceNameLike = null;
+        String startableBy = null;
+        Boolean active = null;
+        Boolean suspended = null;
+        String incidentId = null;
+        String incidentType = null;
+        String incidentMessage = null;
+        String incidentMessageLike = null;
+        String tenantIdIn = null;
+        Boolean withoutTenantId = null;
+        Boolean includeProcessDefinitionsWithoutTenantId = null;
+        String versionTag = null;
+        String versionTagLike = null;
+        Boolean withoutVersionTag = null;
+        Boolean startableInTasklist = null;
+        Boolean notStartableInTasklist = null;
+        Boolean startablePermissionCheck = null;
+        CountResultDto response = api.getProcessDefinitionsCount(processDefinitionId, processDefinitionIdIn, name, nameLike, deploymentId, deployedAfter, deployedAt, key, keysIn, keyLike, category, categoryLike, version, latestVersion, resourceName, resourceNameLike, startableBy, active, suspended, incidentId, incidentType, incidentMessage, incidentMessageLike, tenantIdIn, withoutTenantId, includeProcessDefinitionsWithoutTenantId, versionTag, versionTagLike, withoutVersionTag, startableInTasklist, notStartableInTasklist, startablePermissionCheck);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get Rendered Start Form
      *
@@ -469,11 +489,12 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void getRenderedStartFormTest() throws ApiException {
-        //String id = null;
-        //File response = api.getRenderedStartForm(id);
+        String id = null;
+        File response = api.getRenderedStartForm(id);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get Rendered Start Form
      *
@@ -484,11 +505,12 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void getRenderedStartFormByKeyTest() throws ApiException {
-        //String key = null;
-        //File response = api.getRenderedStartFormByKey(key);
+        String key = null;
+        File response = api.getRenderedStartFormByKey(key);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get Rendered Start Form
      *
@@ -499,12 +521,13 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void getRenderedStartFormByKeyAndTenantIdTest() throws ApiException {
-        //String key = null;
-        //String tenantId = null;
-        //File response = api.getRenderedStartFormByKeyAndTenantId(key, tenantId);
+        String key = null;
+        String tenantId = null;
+        File response = api.getRenderedStartFormByKeyAndTenantId(key, tenantId);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get Start Form Key
      *
@@ -515,11 +538,12 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void getStartFormTest() throws ApiException {
-        //String id = null;
-        //FormDto response = api.getStartForm(id);
+        String id = null;
+        FormDto response = api.getStartForm(id);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get Start Form Key
      *
@@ -530,11 +554,12 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void getStartFormByKeyTest() throws ApiException {
-        //String key = null;
-        //FormDto response = api.getStartFormByKey(key);
+        String key = null;
+        FormDto response = api.getStartFormByKey(key);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get Start Form Key
      *
@@ -545,12 +570,13 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void getStartFormByKeyAndTenantIdTest() throws ApiException {
-        //String key = null;
-        //String tenantId = null;
-        //FormDto response = api.getStartFormByKeyAndTenantId(key, tenantId);
+        String key = null;
+        String tenantId = null;
+        FormDto response = api.getStartFormByKeyAndTenantId(key, tenantId);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get Start Form Variables
      *
@@ -561,13 +587,14 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void getStartFormVariablesTest() throws ApiException {
-        //String id = null;
-        //String variableNames = null;
-        //Boolean deserializeValues = null;
-        //Map<String, VariableValueDto> response = api.getStartFormVariables(id, variableNames, deserializeValues);
+        String id = null;
+        String variableNames = null;
+        Boolean deserializeValues = null;
+        Map<String, VariableValueDto> response = api.getStartFormVariables(id, variableNames, deserializeValues);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get Start Form Variables
      *
@@ -578,13 +605,14 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void getStartFormVariablesByKeyTest() throws ApiException {
-        //String key = null;
-        //String variableNames = null;
-        //Boolean deserializeValues = null;
-        //Map<String, VariableValueDto> response = api.getStartFormVariablesByKey(key, variableNames, deserializeValues);
+        String key = null;
+        String variableNames = null;
+        Boolean deserializeValues = null;
+        Map<String, VariableValueDto> response = api.getStartFormVariablesByKey(key, variableNames, deserializeValues);
+
         // TODO: test validations
     }
-
+    
     /**
      * Get Start Form Variables
      *
@@ -595,14 +623,15 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void getStartFormVariablesByKeyAndTenantIdTest() throws ApiException {
-        //String key = null;
-        //String tenantId = null;
-        //String variableNames = null;
-        //Boolean deserializeValues = null;
-        //Map<String, VariableValueDto> response = api.getStartFormVariablesByKeyAndTenantId(key, tenantId, variableNames, deserializeValues);
+        String key = null;
+        String tenantId = null;
+        String variableNames = null;
+        Boolean deserializeValues = null;
+        Map<String, VariableValueDto> response = api.getStartFormVariablesByKeyAndTenantId(key, tenantId, variableNames, deserializeValues);
+
         // TODO: test validations
     }
-
+    
     /**
      * Restart Process Instance
      *
@@ -613,12 +642,13 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void restartProcessInstanceTest() throws ApiException {
-        //String id = null;
-        //RestartProcessInstanceDto restartProcessInstanceDto = null;
-        //api.restartProcessInstance(id, restartProcessInstanceDto);
+        String id = null;
+        RestartProcessInstanceDto restartProcessInstanceDto = null;
+        api.restartProcessInstance(id, restartProcessInstanceDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * Restart Process Instance Async
      *
@@ -629,12 +659,13 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void restartProcessInstanceAsyncOperationTest() throws ApiException {
-        //String id = null;
-        //RestartProcessInstanceDto restartProcessInstanceDto = null;
-        //BatchDto response = api.restartProcessInstanceAsyncOperation(id, restartProcessInstanceDto);
+        String id = null;
+        RestartProcessInstanceDto restartProcessInstanceDto = null;
+        BatchDto response = api.restartProcessInstanceAsyncOperation(id, restartProcessInstanceDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * Start Instance
      *
@@ -645,12 +676,13 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void startProcessInstanceTest() throws ApiException {
-        //String id = null;
-        //StartProcessInstanceDto startProcessInstanceDto = null;
-        //ProcessInstanceWithVariablesDto response = api.startProcessInstance(id, startProcessInstanceDto);
+        String id = null;
+        StartProcessInstanceDto startProcessInstanceDto = null;
+        ProcessInstanceWithVariablesDto response = api.startProcessInstance(id, startProcessInstanceDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * Start Instance
      *
@@ -661,12 +693,13 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void startProcessInstanceByKeyTest() throws ApiException {
-        //String key = null;
-        //StartProcessInstanceDto startProcessInstanceDto = null;
-        //ProcessInstanceWithVariablesDto response = api.startProcessInstanceByKey(key, startProcessInstanceDto);
+        String key = null;
+        StartProcessInstanceDto startProcessInstanceDto = null;
+        ProcessInstanceWithVariablesDto response = api.startProcessInstanceByKey(key, startProcessInstanceDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * Start Instance
      *
@@ -677,13 +710,14 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void startProcessInstanceByKeyAndTenantIdTest() throws ApiException {
-        //String key = null;
-        //String tenantId = null;
-        //StartProcessInstanceDto startProcessInstanceDto = null;
-        //ProcessInstanceWithVariablesDto response = api.startProcessInstanceByKeyAndTenantId(key, tenantId, startProcessInstanceDto);
+        String key = null;
+        String tenantId = null;
+        StartProcessInstanceDto startProcessInstanceDto = null;
+        ProcessInstanceWithVariablesDto response = api.startProcessInstanceByKeyAndTenantId(key, tenantId, startProcessInstanceDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * Submit Start Form
      *
@@ -694,12 +728,13 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void submitFormTest() throws ApiException {
-        //String id = null;
-        //StartProcessInstanceFormDto startProcessInstanceFormDto = null;
-        //ProcessInstanceDto response = api.submitForm(id, startProcessInstanceFormDto);
+        String id = null;
+        StartProcessInstanceFormDto startProcessInstanceFormDto = null;
+        ProcessInstanceDto response = api.submitForm(id, startProcessInstanceFormDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * Submit Start Form
      *
@@ -710,12 +745,13 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void submitFormByKeyTest() throws ApiException {
-        //String key = null;
-        //StartProcessInstanceFormDto startProcessInstanceFormDto = null;
-        //ProcessInstanceDto response = api.submitFormByKey(key, startProcessInstanceFormDto);
+        String key = null;
+        StartProcessInstanceFormDto startProcessInstanceFormDto = null;
+        ProcessInstanceDto response = api.submitFormByKey(key, startProcessInstanceFormDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * Submit Start Form
      *
@@ -726,13 +762,14 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void submitFormByKeyAndTenantIdTest() throws ApiException {
-        //String key = null;
-        //String tenantId = null;
-        //StartProcessInstanceFormDto startProcessInstanceFormDto = null;
-        //ProcessInstanceDto response = api.submitFormByKeyAndTenantId(key, tenantId, startProcessInstanceFormDto);
+        String key = null;
+        String tenantId = null;
+        StartProcessInstanceFormDto startProcessInstanceFormDto = null;
+        ProcessInstanceDto response = api.submitFormByKeyAndTenantId(key, tenantId, startProcessInstanceFormDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * Update History Time to Live
      *
@@ -743,12 +780,13 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void updateHistoryTimeToLiveByProcessDefinitionIdTest() throws ApiException {
-        //String id = null;
-        //HistoryTimeToLiveDto historyTimeToLiveDto = null;
-        //api.updateHistoryTimeToLiveByProcessDefinitionId(id, historyTimeToLiveDto);
+        String id = null;
+        HistoryTimeToLiveDto historyTimeToLiveDto = null;
+        api.updateHistoryTimeToLiveByProcessDefinitionId(id, historyTimeToLiveDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * Update History Time to Live
      *
@@ -759,12 +797,13 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void updateHistoryTimeToLiveByProcessDefinitionKeyTest() throws ApiException {
-        //String key = null;
-        //HistoryTimeToLiveDto historyTimeToLiveDto = null;
-        //api.updateHistoryTimeToLiveByProcessDefinitionKey(key, historyTimeToLiveDto);
+        String key = null;
+        HistoryTimeToLiveDto historyTimeToLiveDto = null;
+        api.updateHistoryTimeToLiveByProcessDefinitionKey(key, historyTimeToLiveDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * Update History Time to Live
      *
@@ -775,13 +814,14 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void updateHistoryTimeToLiveByProcessDefinitionKeyAndTenantIdTest() throws ApiException {
-        //String key = null;
-        //String tenantId = null;
-        //HistoryTimeToLiveDto historyTimeToLiveDto = null;
-        //api.updateHistoryTimeToLiveByProcessDefinitionKeyAndTenantId(key, tenantId, historyTimeToLiveDto);
+        String key = null;
+        String tenantId = null;
+        HistoryTimeToLiveDto historyTimeToLiveDto = null;
+        api.updateHistoryTimeToLiveByProcessDefinitionKeyAndTenantId(key, tenantId, historyTimeToLiveDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * Activate/Suspend By Key
      *
@@ -792,11 +832,12 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void updateProcessDefinitionSuspensionStateTest() throws ApiException {
-        //ProcessDefinitionSuspensionStateDto processDefinitionSuspensionStateDto = null;
-        //api.updateProcessDefinitionSuspensionState(processDefinitionSuspensionStateDto);
+        ProcessDefinitionSuspensionStateDto processDefinitionSuspensionStateDto = null;
+        api.updateProcessDefinitionSuspensionState(processDefinitionSuspensionStateDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * Activate/Suspend By Id
      *
@@ -807,12 +848,13 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void updateProcessDefinitionSuspensionStateByIdTest() throws ApiException {
-        //String id = null;
-        //ProcessDefinitionSuspensionStateDto processDefinitionSuspensionStateDto = null;
-        //api.updateProcessDefinitionSuspensionStateById(id, processDefinitionSuspensionStateDto);
+        String id = null;
+        ProcessDefinitionSuspensionStateDto processDefinitionSuspensionStateDto = null;
+        api.updateProcessDefinitionSuspensionStateById(id, processDefinitionSuspensionStateDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * Activate/Suspend by Id
      *
@@ -823,12 +865,13 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void updateProcessDefinitionSuspensionStateByKeyTest() throws ApiException {
-        //String key = null;
-        //ProcessDefinitionSuspensionStateDto processDefinitionSuspensionStateDto = null;
-        //api.updateProcessDefinitionSuspensionStateByKey(key, processDefinitionSuspensionStateDto);
+        String key = null;
+        ProcessDefinitionSuspensionStateDto processDefinitionSuspensionStateDto = null;
+        api.updateProcessDefinitionSuspensionStateByKey(key, processDefinitionSuspensionStateDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * Activate/Suspend by Id
      *
@@ -839,11 +882,12 @@ public class ProcessDefinitionApiTest {
      */
     @Test
     public void updateProcessDefinitionSuspensionStateByKeyAndTenantIdTest() throws ApiException {
-        //String key = null;
-        //String tenantId = null;
-        //ProcessDefinitionSuspensionStateDto processDefinitionSuspensionStateDto = null;
-        //api.updateProcessDefinitionSuspensionStateByKeyAndTenantId(key, tenantId, processDefinitionSuspensionStateDto);
+        String key = null;
+        String tenantId = null;
+        ProcessDefinitionSuspensionStateDto processDefinitionSuspensionStateDto = null;
+        api.updateProcessDefinitionSuspensionStateByKeyAndTenantId(key, tenantId, processDefinitionSuspensionStateDto);
+
         // TODO: test validations
     }
-
+    
 }

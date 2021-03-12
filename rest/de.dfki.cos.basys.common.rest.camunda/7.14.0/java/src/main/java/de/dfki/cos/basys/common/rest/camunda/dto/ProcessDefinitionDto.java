@@ -15,87 +15,79 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
+import java.io.IOException;
 
 /**
  * ProcessDefinitionDto
  */
-@JsonPropertyOrder({
-  ProcessDefinitionDto.JSON_PROPERTY_ID,
-  ProcessDefinitionDto.JSON_PROPERTY_KEY,
-  ProcessDefinitionDto.JSON_PROPERTY_CATEGORY,
-  ProcessDefinitionDto.JSON_PROPERTY_DESCRIPTION,
-  ProcessDefinitionDto.JSON_PROPERTY_NAME,
-  ProcessDefinitionDto.JSON_PROPERTY_VERSION,
-  ProcessDefinitionDto.JSON_PROPERTY_RESOURCE,
-  ProcessDefinitionDto.JSON_PROPERTY_DEPLOYMENT_ID,
-  ProcessDefinitionDto.JSON_PROPERTY_DIAGRAM,
-  ProcessDefinitionDto.JSON_PROPERTY_SUSPENDED,
-  ProcessDefinitionDto.JSON_PROPERTY_TENANT_ID,
-  ProcessDefinitionDto.JSON_PROPERTY_VERSION_TAG,
-  ProcessDefinitionDto.JSON_PROPERTY_HISTORY_TIME_TO_LIVE,
-  ProcessDefinitionDto.JSON_PROPERTY_STARTABLE_IN_TASKLIST
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class ProcessDefinitionDto {
-  public static final String JSON_PROPERTY_ID = "id";
+  public static final String SERIALIZED_NAME_ID = "id";
+  @SerializedName(SERIALIZED_NAME_ID)
   private String id;
 
-  public static final String JSON_PROPERTY_KEY = "key";
+  public static final String SERIALIZED_NAME_KEY = "key";
+  @SerializedName(SERIALIZED_NAME_KEY)
   private String key;
 
-  public static final String JSON_PROPERTY_CATEGORY = "category";
+  public static final String SERIALIZED_NAME_CATEGORY = "category";
+  @SerializedName(SERIALIZED_NAME_CATEGORY)
   private String category;
 
-  public static final String JSON_PROPERTY_DESCRIPTION = "description";
+  public static final String SERIALIZED_NAME_DESCRIPTION = "description";
+  @SerializedName(SERIALIZED_NAME_DESCRIPTION)
   private String description;
 
-  public static final String JSON_PROPERTY_NAME = "name";
+  public static final String SERIALIZED_NAME_NAME = "name";
+  @SerializedName(SERIALIZED_NAME_NAME)
   private String name;
 
-  public static final String JSON_PROPERTY_VERSION = "version";
+  public static final String SERIALIZED_NAME_VERSION = "version";
+  @SerializedName(SERIALIZED_NAME_VERSION)
   private Integer version;
 
-  public static final String JSON_PROPERTY_RESOURCE = "resource";
+  public static final String SERIALIZED_NAME_RESOURCE = "resource";
+  @SerializedName(SERIALIZED_NAME_RESOURCE)
   private String resource;
 
-  public static final String JSON_PROPERTY_DEPLOYMENT_ID = "deploymentId";
+  public static final String SERIALIZED_NAME_DEPLOYMENT_ID = "deploymentId";
+  @SerializedName(SERIALIZED_NAME_DEPLOYMENT_ID)
   private String deploymentId;
 
-  public static final String JSON_PROPERTY_DIAGRAM = "diagram";
+  public static final String SERIALIZED_NAME_DIAGRAM = "diagram";
+  @SerializedName(SERIALIZED_NAME_DIAGRAM)
   private String diagram;
 
-  public static final String JSON_PROPERTY_SUSPENDED = "suspended";
+  public static final String SERIALIZED_NAME_SUSPENDED = "suspended";
+  @SerializedName(SERIALIZED_NAME_SUSPENDED)
   private Boolean suspended;
 
-  public static final String JSON_PROPERTY_TENANT_ID = "tenantId";
+  public static final String SERIALIZED_NAME_TENANT_ID = "tenantId";
+  @SerializedName(SERIALIZED_NAME_TENANT_ID)
   private String tenantId;
 
-  public static final String JSON_PROPERTY_VERSION_TAG = "versionTag";
+  public static final String SERIALIZED_NAME_VERSION_TAG = "versionTag";
+  @SerializedName(SERIALIZED_NAME_VERSION_TAG)
   private String versionTag;
 
-  public static final String JSON_PROPERTY_HISTORY_TIME_TO_LIVE = "historyTimeToLive";
-  private JsonNullable<Integer> historyTimeToLive = JsonNullable.<Integer>undefined();
+  public static final String SERIALIZED_NAME_HISTORY_TIME_TO_LIVE = "historyTimeToLive";
+  @SerializedName(SERIALIZED_NAME_HISTORY_TIME_TO_LIVE)
+  private Integer historyTimeToLive;
 
-  public static final String JSON_PROPERTY_STARTABLE_IN_TASKLIST = "startableInTasklist";
+  public static final String SERIALIZED_NAME_STARTABLE_IN_TASKLIST = "startableInTasklist";
+  @SerializedName(SERIALIZED_NAME_STARTABLE_IN_TASKLIST)
   private Boolean startableInTasklist;
 
 
   public ProcessDefinitionDto id(String id) {
+    
     this.id = id;
     return this;
   }
@@ -106,8 +98,6 @@ public class ProcessDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the process definition")
-  @JsonProperty(JSON_PROPERTY_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getId() {
     return id;
@@ -120,6 +110,7 @@ public class ProcessDefinitionDto {
 
 
   public ProcessDefinitionDto key(String key) {
+    
     this.key = key;
     return this;
   }
@@ -130,8 +121,6 @@ public class ProcessDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The key of the process definition, i.e., the id of the BPMN 2.0 XML process definition.")
-  @JsonProperty(JSON_PROPERTY_KEY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getKey() {
     return key;
@@ -144,6 +133,7 @@ public class ProcessDefinitionDto {
 
 
   public ProcessDefinitionDto category(String category) {
+    
     this.category = category;
     return this;
   }
@@ -154,8 +144,6 @@ public class ProcessDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The category of the process definition.")
-  @JsonProperty(JSON_PROPERTY_CATEGORY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getCategory() {
     return category;
@@ -168,6 +156,7 @@ public class ProcessDefinitionDto {
 
 
   public ProcessDefinitionDto description(String description) {
+    
     this.description = description;
     return this;
   }
@@ -178,8 +167,6 @@ public class ProcessDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The description of the process definition.")
-  @JsonProperty(JSON_PROPERTY_DESCRIPTION)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getDescription() {
     return description;
@@ -192,6 +179,7 @@ public class ProcessDefinitionDto {
 
 
   public ProcessDefinitionDto name(String name) {
+    
     this.name = name;
     return this;
   }
@@ -202,8 +190,6 @@ public class ProcessDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The name of the process definition.")
-  @JsonProperty(JSON_PROPERTY_NAME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getName() {
     return name;
@@ -216,6 +202,7 @@ public class ProcessDefinitionDto {
 
 
   public ProcessDefinitionDto version(Integer version) {
+    
     this.version = version;
     return this;
   }
@@ -226,8 +213,6 @@ public class ProcessDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The version of the process definition that the engine assigned to it.")
-  @JsonProperty(JSON_PROPERTY_VERSION)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getVersion() {
     return version;
@@ -240,6 +225,7 @@ public class ProcessDefinitionDto {
 
 
   public ProcessDefinitionDto resource(String resource) {
+    
     this.resource = resource;
     return this;
   }
@@ -250,8 +236,6 @@ public class ProcessDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The file name of the process definition.")
-  @JsonProperty(JSON_PROPERTY_RESOURCE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getResource() {
     return resource;
@@ -264,6 +248,7 @@ public class ProcessDefinitionDto {
 
 
   public ProcessDefinitionDto deploymentId(String deploymentId) {
+    
     this.deploymentId = deploymentId;
     return this;
   }
@@ -274,8 +259,6 @@ public class ProcessDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The deployment id of the process definition.")
-  @JsonProperty(JSON_PROPERTY_DEPLOYMENT_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getDeploymentId() {
     return deploymentId;
@@ -288,6 +271,7 @@ public class ProcessDefinitionDto {
 
 
   public ProcessDefinitionDto diagram(String diagram) {
+    
     this.diagram = diagram;
     return this;
   }
@@ -298,8 +282,6 @@ public class ProcessDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The file name of the process definition diagram, if it exists.")
-  @JsonProperty(JSON_PROPERTY_DIAGRAM)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getDiagram() {
     return diagram;
@@ -312,6 +294,7 @@ public class ProcessDefinitionDto {
 
 
   public ProcessDefinitionDto suspended(Boolean suspended) {
+    
     this.suspended = suspended;
     return this;
   }
@@ -322,8 +305,6 @@ public class ProcessDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A flag indicating whether the definition is suspended or not.")
-  @JsonProperty(JSON_PROPERTY_SUSPENDED)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Boolean getSuspended() {
     return suspended;
@@ -336,6 +317,7 @@ public class ProcessDefinitionDto {
 
 
   public ProcessDefinitionDto tenantId(String tenantId) {
+    
     this.tenantId = tenantId;
     return this;
   }
@@ -346,8 +328,6 @@ public class ProcessDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The tenant id of the process definition.")
-  @JsonProperty(JSON_PROPERTY_TENANT_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getTenantId() {
     return tenantId;
@@ -360,6 +340,7 @@ public class ProcessDefinitionDto {
 
 
   public ProcessDefinitionDto versionTag(String versionTag) {
+    
     this.versionTag = versionTag;
     return this;
   }
@@ -370,8 +351,6 @@ public class ProcessDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The version tag of the process definition.")
-  @JsonProperty(JSON_PROPERTY_VERSION_TAG)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getVersionTag() {
     return versionTag;
@@ -384,7 +363,8 @@ public class ProcessDefinitionDto {
 
 
   public ProcessDefinitionDto historyTimeToLive(Integer historyTimeToLive) {
-    this.historyTimeToLive = JsonNullable.<Integer>of(historyTimeToLive);
+    
+    this.historyTimeToLive = historyTimeToLive;
     return this;
   }
 
@@ -395,30 +375,19 @@ public class ProcessDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "History time to live value of the process definition. Is used within [History cleanup](https://docs.camunda.org/manual/7.14/user-guide/process-engine/history/#history-cleanup).")
-  @JsonIgnore
 
   public Integer getHistoryTimeToLive() {
-        return historyTimeToLive.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_HISTORY_TIME_TO_LIVE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Integer> getHistoryTimeToLive_JsonNullable() {
     return historyTimeToLive;
   }
-  
-  @JsonProperty(JSON_PROPERTY_HISTORY_TIME_TO_LIVE)
-  public void setHistoryTimeToLive_JsonNullable(JsonNullable<Integer> historyTimeToLive) {
-    this.historyTimeToLive = historyTimeToLive;
-  }
+
 
   public void setHistoryTimeToLive(Integer historyTimeToLive) {
-    this.historyTimeToLive = JsonNullable.<Integer>of(historyTimeToLive);
+    this.historyTimeToLive = historyTimeToLive;
   }
 
 
   public ProcessDefinitionDto startableInTasklist(Boolean startableInTasklist) {
+    
     this.startableInTasklist = startableInTasklist;
     return this;
   }
@@ -429,8 +398,6 @@ public class ProcessDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A flag indicating whether the process definition is startable in Tasklist or not.")
-  @JsonProperty(JSON_PROPERTY_STARTABLE_IN_TASKLIST)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Boolean getStartableInTasklist() {
     return startableInTasklist;
@@ -442,9 +409,6 @@ public class ProcessDefinitionDto {
   }
 
 
-  /**
-   * Return true if this ProcessDefinitionDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

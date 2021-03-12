@@ -15,40 +15,35 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
+import java.io.IOException;
 
 /**
  * IdentityLinkDto
  */
-@JsonPropertyOrder({
-  IdentityLinkDto.JSON_PROPERTY_USER_ID,
-  IdentityLinkDto.JSON_PROPERTY_GROUP_ID,
-  IdentityLinkDto.JSON_PROPERTY_TYPE
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class IdentityLinkDto {
-  public static final String JSON_PROPERTY_USER_ID = "userId";
+  public static final String SERIALIZED_NAME_USER_ID = "userId";
+  @SerializedName(SERIALIZED_NAME_USER_ID)
   private String userId;
 
-  public static final String JSON_PROPERTY_GROUP_ID = "groupId";
+  public static final String SERIALIZED_NAME_GROUP_ID = "groupId";
+  @SerializedName(SERIALIZED_NAME_GROUP_ID)
   private String groupId;
 
-  public static final String JSON_PROPERTY_TYPE = "type";
+  public static final String SERIALIZED_NAME_TYPE = "type";
+  @SerializedName(SERIALIZED_NAME_TYPE)
   private String type;
 
 
   public IdentityLinkDto userId(String userId) {
+    
     this.userId = userId;
     return this;
   }
@@ -59,8 +54,6 @@ public class IdentityLinkDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the user participating in this link. Either `userId` or `groupId` is set.")
-  @JsonProperty(JSON_PROPERTY_USER_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getUserId() {
     return userId;
@@ -73,6 +66,7 @@ public class IdentityLinkDto {
 
 
   public IdentityLinkDto groupId(String groupId) {
+    
     this.groupId = groupId;
     return this;
   }
@@ -83,8 +77,6 @@ public class IdentityLinkDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the group participating in this link. Either `groupId` or `userId` is set.")
-  @JsonProperty(JSON_PROPERTY_GROUP_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getGroupId() {
     return groupId;
@@ -97,6 +89,7 @@ public class IdentityLinkDto {
 
 
   public IdentityLinkDto type(String type) {
+    
     this.type = type;
     return this;
   }
@@ -106,8 +99,6 @@ public class IdentityLinkDto {
    * @return type
   **/
   @ApiModelProperty(required = true, value = "The type of the identity link. The value of the this property can be user-defined. The Process Engine provides three pre-defined Identity Link `type`s:  * `candidate` * `assignee` - reserved for the task assignee * `owner` - reserved for the task owner  **Note**: When adding or removing an Identity Link, the `type` property must be defined.")
-  @JsonProperty(JSON_PROPERTY_TYPE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public String getType() {
     return type;
@@ -119,9 +110,6 @@ public class IdentityLinkDto {
   }
 
 
-  /**
-   * Return true if this IdentityLinkDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

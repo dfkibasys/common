@@ -15,52 +15,36 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import de.dfki.cos.basys.common.rest.camunda.dto.EventSubscriptionQueryDtoSorting;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
 
 /**
  * A event subscription query which retrieves a list of event subscriptions
  */
 @ApiModel(description = "A event subscription query which retrieves a list of event subscriptions")
-@JsonPropertyOrder({
-  EventSubscriptionQueryDto.JSON_PROPERTY_EVENT_SUBSCRIPTION_ID,
-  EventSubscriptionQueryDto.JSON_PROPERTY_EVENT_NAME,
-  EventSubscriptionQueryDto.JSON_PROPERTY_EVENT_TYPE,
-  EventSubscriptionQueryDto.JSON_PROPERTY_EXECUTION_ID,
-  EventSubscriptionQueryDto.JSON_PROPERTY_PROCESS_INSTANCE_ID,
-  EventSubscriptionQueryDto.JSON_PROPERTY_ACTIVITY_ID,
-  EventSubscriptionQueryDto.JSON_PROPERTY_TENANT_ID_IN,
-  EventSubscriptionQueryDto.JSON_PROPERTY_WITHOUT_TENANT_ID,
-  EventSubscriptionQueryDto.JSON_PROPERTY_INCLUDE_EVENT_SUBSCRIPTIONS_WITHOUT_TENANT_ID,
-  EventSubscriptionQueryDto.JSON_PROPERTY_SORTING
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class EventSubscriptionQueryDto {
-  public static final String JSON_PROPERTY_EVENT_SUBSCRIPTION_ID = "eventSubscriptionId";
+  public static final String SERIALIZED_NAME_EVENT_SUBSCRIPTION_ID = "eventSubscriptionId";
+  @SerializedName(SERIALIZED_NAME_EVENT_SUBSCRIPTION_ID)
   private String eventSubscriptionId;
 
-  public static final String JSON_PROPERTY_EVENT_NAME = "eventName";
+  public static final String SERIALIZED_NAME_EVENT_NAME = "eventName";
+  @SerializedName(SERIALIZED_NAME_EVENT_NAME)
   private String eventName;
 
   /**
    * The type of the event subscription.
    */
+  @JsonAdapter(EventTypeEnum.Adapter.class)
   public enum EventTypeEnum {
     MESSAGE("message"),
     
@@ -76,7 +60,6 @@ public class EventSubscriptionQueryDto {
       this.value = value;
     }
 
-    @JsonValue
     public String getValue() {
       return value;
     }
@@ -86,7 +69,6 @@ public class EventSubscriptionQueryDto {
       return String.valueOf(value);
     }
 
-    @JsonCreator
     public static EventTypeEnum fromValue(String value) {
       for (EventTypeEnum b : EventTypeEnum.values()) {
         if (b.value.equals(value)) {
@@ -95,34 +77,56 @@ public class EventSubscriptionQueryDto {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
+
+    public static class Adapter extends TypeAdapter<EventTypeEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final EventTypeEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public EventTypeEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return EventTypeEnum.fromValue(value);
+      }
+    }
   }
 
-  public static final String JSON_PROPERTY_EVENT_TYPE = "eventType";
+  public static final String SERIALIZED_NAME_EVENT_TYPE = "eventType";
+  @SerializedName(SERIALIZED_NAME_EVENT_TYPE)
   private EventTypeEnum eventType;
 
-  public static final String JSON_PROPERTY_EXECUTION_ID = "executionId";
+  public static final String SERIALIZED_NAME_EXECUTION_ID = "executionId";
+  @SerializedName(SERIALIZED_NAME_EXECUTION_ID)
   private String executionId;
 
-  public static final String JSON_PROPERTY_PROCESS_INSTANCE_ID = "processInstanceId";
+  public static final String SERIALIZED_NAME_PROCESS_INSTANCE_ID = "processInstanceId";
+  @SerializedName(SERIALIZED_NAME_PROCESS_INSTANCE_ID)
   private String processInstanceId;
 
-  public static final String JSON_PROPERTY_ACTIVITY_ID = "activityId";
+  public static final String SERIALIZED_NAME_ACTIVITY_ID = "activityId";
+  @SerializedName(SERIALIZED_NAME_ACTIVITY_ID)
   private String activityId;
 
-  public static final String JSON_PROPERTY_TENANT_ID_IN = "tenantIdIn";
+  public static final String SERIALIZED_NAME_TENANT_ID_IN = "tenantIdIn";
+  @SerializedName(SERIALIZED_NAME_TENANT_ID_IN)
   private List<String> tenantIdIn = null;
 
-  public static final String JSON_PROPERTY_WITHOUT_TENANT_ID = "withoutTenantId";
-  private JsonNullable<Boolean> withoutTenantId = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_WITHOUT_TENANT_ID = "withoutTenantId";
+  @SerializedName(SERIALIZED_NAME_WITHOUT_TENANT_ID)
+  private Boolean withoutTenantId;
 
-  public static final String JSON_PROPERTY_INCLUDE_EVENT_SUBSCRIPTIONS_WITHOUT_TENANT_ID = "includeEventSubscriptionsWithoutTenantId";
-  private JsonNullable<Boolean> includeEventSubscriptionsWithoutTenantId = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_INCLUDE_EVENT_SUBSCRIPTIONS_WITHOUT_TENANT_ID = "includeEventSubscriptionsWithoutTenantId";
+  @SerializedName(SERIALIZED_NAME_INCLUDE_EVENT_SUBSCRIPTIONS_WITHOUT_TENANT_ID)
+  private Boolean includeEventSubscriptionsWithoutTenantId;
 
-  public static final String JSON_PROPERTY_SORTING = "sorting";
+  public static final String SERIALIZED_NAME_SORTING = "sorting";
+  @SerializedName(SERIALIZED_NAME_SORTING)
   private List<EventSubscriptionQueryDtoSorting> sorting = null;
 
 
   public EventSubscriptionQueryDto eventSubscriptionId(String eventSubscriptionId) {
+    
     this.eventSubscriptionId = eventSubscriptionId;
     return this;
   }
@@ -133,8 +137,6 @@ public class EventSubscriptionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the event subscription.")
-  @JsonProperty(JSON_PROPERTY_EVENT_SUBSCRIPTION_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getEventSubscriptionId() {
     return eventSubscriptionId;
@@ -147,6 +149,7 @@ public class EventSubscriptionQueryDto {
 
 
   public EventSubscriptionQueryDto eventName(String eventName) {
+    
     this.eventName = eventName;
     return this;
   }
@@ -157,8 +160,6 @@ public class EventSubscriptionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The name of the event this subscription belongs to as defined in the process model.")
-  @JsonProperty(JSON_PROPERTY_EVENT_NAME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getEventName() {
     return eventName;
@@ -171,6 +172,7 @@ public class EventSubscriptionQueryDto {
 
 
   public EventSubscriptionQueryDto eventType(EventTypeEnum eventType) {
+    
     this.eventType = eventType;
     return this;
   }
@@ -181,8 +183,6 @@ public class EventSubscriptionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The type of the event subscription.")
-  @JsonProperty(JSON_PROPERTY_EVENT_TYPE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public EventTypeEnum getEventType() {
     return eventType;
@@ -195,6 +195,7 @@ public class EventSubscriptionQueryDto {
 
 
   public EventSubscriptionQueryDto executionId(String executionId) {
+    
     this.executionId = executionId;
     return this;
   }
@@ -205,8 +206,6 @@ public class EventSubscriptionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The execution that is subscribed on the referenced event.")
-  @JsonProperty(JSON_PROPERTY_EXECUTION_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getExecutionId() {
     return executionId;
@@ -219,6 +218,7 @@ public class EventSubscriptionQueryDto {
 
 
   public EventSubscriptionQueryDto processInstanceId(String processInstanceId) {
+    
     this.processInstanceId = processInstanceId;
     return this;
   }
@@ -229,8 +229,6 @@ public class EventSubscriptionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The process instance this subscription belongs to.")
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getProcessInstanceId() {
     return processInstanceId;
@@ -243,6 +241,7 @@ public class EventSubscriptionQueryDto {
 
 
   public EventSubscriptionQueryDto activityId(String activityId) {
+    
     this.activityId = activityId;
     return this;
   }
@@ -253,8 +252,6 @@ public class EventSubscriptionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The identifier of the activity that this event subscription belongs to. This could for example be the id of a receive task.")
-  @JsonProperty(JSON_PROPERTY_ACTIVITY_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getActivityId() {
     return activityId;
@@ -267,6 +264,7 @@ public class EventSubscriptionQueryDto {
 
 
   public EventSubscriptionQueryDto tenantIdIn(List<String> tenantIdIn) {
+    
     this.tenantIdIn = tenantIdIn;
     return this;
   }
@@ -285,8 +283,6 @@ public class EventSubscriptionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by a comma-separated list of tenant ids. Only select subscriptions that belong to one of the given tenant ids.")
-  @JsonProperty(JSON_PROPERTY_TENANT_ID_IN)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<String> getTenantIdIn() {
     return tenantIdIn;
@@ -299,7 +295,8 @@ public class EventSubscriptionQueryDto {
 
 
   public EventSubscriptionQueryDto withoutTenantId(Boolean withoutTenantId) {
-    this.withoutTenantId = JsonNullable.<Boolean>of(withoutTenantId);
+    
+    this.withoutTenantId = withoutTenantId;
     return this;
   }
 
@@ -309,31 +306,20 @@ public class EventSubscriptionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only select subscriptions which have no tenant id. Value may only be `true`, as `false` is the default behavior.")
-  @JsonIgnore
 
   public Boolean getWithoutTenantId() {
-        return withoutTenantId.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_WITHOUT_TENANT_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getWithoutTenantId_JsonNullable() {
     return withoutTenantId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_WITHOUT_TENANT_ID)
-  public void setWithoutTenantId_JsonNullable(JsonNullable<Boolean> withoutTenantId) {
-    this.withoutTenantId = withoutTenantId;
-  }
+
 
   public void setWithoutTenantId(Boolean withoutTenantId) {
-    this.withoutTenantId = JsonNullable.<Boolean>of(withoutTenantId);
+    this.withoutTenantId = withoutTenantId;
   }
 
 
   public EventSubscriptionQueryDto includeEventSubscriptionsWithoutTenantId(Boolean includeEventSubscriptionsWithoutTenantId) {
-    this.includeEventSubscriptionsWithoutTenantId = JsonNullable.<Boolean>of(includeEventSubscriptionsWithoutTenantId);
+    
+    this.includeEventSubscriptionsWithoutTenantId = includeEventSubscriptionsWithoutTenantId;
     return this;
   }
 
@@ -343,30 +329,19 @@ public class EventSubscriptionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Select event subscriptions which have no tenant id. Can be used in combination with tenantIdIn parameter. Value may only be `true`, as `false` is the default behavior.")
-  @JsonIgnore
 
   public Boolean getIncludeEventSubscriptionsWithoutTenantId() {
-        return includeEventSubscriptionsWithoutTenantId.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_INCLUDE_EVENT_SUBSCRIPTIONS_WITHOUT_TENANT_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getIncludeEventSubscriptionsWithoutTenantId_JsonNullable() {
     return includeEventSubscriptionsWithoutTenantId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_INCLUDE_EVENT_SUBSCRIPTIONS_WITHOUT_TENANT_ID)
-  public void setIncludeEventSubscriptionsWithoutTenantId_JsonNullable(JsonNullable<Boolean> includeEventSubscriptionsWithoutTenantId) {
-    this.includeEventSubscriptionsWithoutTenantId = includeEventSubscriptionsWithoutTenantId;
-  }
+
 
   public void setIncludeEventSubscriptionsWithoutTenantId(Boolean includeEventSubscriptionsWithoutTenantId) {
-    this.includeEventSubscriptionsWithoutTenantId = JsonNullable.<Boolean>of(includeEventSubscriptionsWithoutTenantId);
+    this.includeEventSubscriptionsWithoutTenantId = includeEventSubscriptionsWithoutTenantId;
   }
 
 
   public EventSubscriptionQueryDto sorting(List<EventSubscriptionQueryDtoSorting> sorting) {
+    
     this.sorting = sorting;
     return this;
   }
@@ -385,8 +360,6 @@ public class EventSubscriptionQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Apply sorting of the result")
-  @JsonProperty(JSON_PROPERTY_SORTING)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<EventSubscriptionQueryDtoSorting> getSorting() {
     return sorting;
@@ -398,9 +371,6 @@ public class EventSubscriptionQueryDto {
   }
 
 
-  /**
-   * Return true if this EventSubscriptionQueryDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

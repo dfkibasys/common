@@ -15,54 +15,46 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import de.dfki.cos.basys.common.rest.camunda.dto.FetchExternalTaskTopicDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
 
 /**
  * FetchExternalTasksDto
  */
-@JsonPropertyOrder({
-  FetchExternalTasksDto.JSON_PROPERTY_WORKER_ID,
-  FetchExternalTasksDto.JSON_PROPERTY_MAX_TASKS,
-  FetchExternalTasksDto.JSON_PROPERTY_USE_PRIORITY,
-  FetchExternalTasksDto.JSON_PROPERTY_ASYNC_RESPONSE_TIMEOUT,
-  FetchExternalTasksDto.JSON_PROPERTY_TOPICS
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class FetchExternalTasksDto {
-  public static final String JSON_PROPERTY_WORKER_ID = "workerId";
+  public static final String SERIALIZED_NAME_WORKER_ID = "workerId";
+  @SerializedName(SERIALIZED_NAME_WORKER_ID)
   private String workerId;
 
-  public static final String JSON_PROPERTY_MAX_TASKS = "maxTasks";
+  public static final String SERIALIZED_NAME_MAX_TASKS = "maxTasks";
+  @SerializedName(SERIALIZED_NAME_MAX_TASKS)
   private Integer maxTasks;
 
-  public static final String JSON_PROPERTY_USE_PRIORITY = "usePriority";
-  private JsonNullable<Boolean> usePriority = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_USE_PRIORITY = "usePriority";
+  @SerializedName(SERIALIZED_NAME_USE_PRIORITY)
+  private Boolean usePriority;
 
-  public static final String JSON_PROPERTY_ASYNC_RESPONSE_TIMEOUT = "asyncResponseTimeout";
-  private JsonNullable<Long> asyncResponseTimeout = JsonNullable.<Long>undefined();
+  public static final String SERIALIZED_NAME_ASYNC_RESPONSE_TIMEOUT = "asyncResponseTimeout";
+  @SerializedName(SERIALIZED_NAME_ASYNC_RESPONSE_TIMEOUT)
+  private Long asyncResponseTimeout;
 
-  public static final String JSON_PROPERTY_TOPICS = "topics";
+  public static final String SERIALIZED_NAME_TOPICS = "topics";
+  @SerializedName(SERIALIZED_NAME_TOPICS)
   private List<FetchExternalTaskTopicDto> topics = null;
 
 
   public FetchExternalTasksDto workerId(String workerId) {
+    
     this.workerId = workerId;
     return this;
   }
@@ -72,8 +64,6 @@ public class FetchExternalTasksDto {
    * @return workerId
   **/
   @ApiModelProperty(required = true, value = "**Mandatory.** The id of the worker on which behalf tasks are fetched. The returned tasks are locked for that worker and can only be completed when providing the same worker id.")
-  @JsonProperty(JSON_PROPERTY_WORKER_ID)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public String getWorkerId() {
     return workerId;
@@ -86,6 +76,7 @@ public class FetchExternalTasksDto {
 
 
   public FetchExternalTasksDto maxTasks(Integer maxTasks) {
+    
     this.maxTasks = maxTasks;
     return this;
   }
@@ -96,8 +87,6 @@ public class FetchExternalTasksDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(required = true, value = "**Mandatory.** The maximum number of tasks to return.")
-  @JsonProperty(JSON_PROPERTY_MAX_TASKS)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public Integer getMaxTasks() {
     return maxTasks;
@@ -110,7 +99,8 @@ public class FetchExternalTasksDto {
 
 
   public FetchExternalTasksDto usePriority(Boolean usePriority) {
-    this.usePriority = JsonNullable.<Boolean>of(usePriority);
+    
+    this.usePriority = usePriority;
     return this;
   }
 
@@ -120,31 +110,20 @@ public class FetchExternalTasksDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A `boolean` value, which indicates whether the task should be fetched based on its priority or arbitrarily.")
-  @JsonIgnore
 
   public Boolean getUsePriority() {
-        return usePriority.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_USE_PRIORITY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getUsePriority_JsonNullable() {
     return usePriority;
   }
-  
-  @JsonProperty(JSON_PROPERTY_USE_PRIORITY)
-  public void setUsePriority_JsonNullable(JsonNullable<Boolean> usePriority) {
-    this.usePriority = usePriority;
-  }
+
 
   public void setUsePriority(Boolean usePriority) {
-    this.usePriority = JsonNullable.<Boolean>of(usePriority);
+    this.usePriority = usePriority;
   }
 
 
   public FetchExternalTasksDto asyncResponseTimeout(Long asyncResponseTimeout) {
-    this.asyncResponseTimeout = JsonNullable.<Long>of(asyncResponseTimeout);
+    
+    this.asyncResponseTimeout = asyncResponseTimeout;
     return this;
   }
 
@@ -154,30 +133,19 @@ public class FetchExternalTasksDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The [Long Polling](https://docs.camunda.org/manual/7.14/user-guide/process-engine/external-tasks/#long-polling-to-fetch-and-lock-external-tasks) timeout in milliseconds.  **Note:** The value cannot be set larger than 1.800.000 milliseconds (corresponds to 30 minutes).")
-  @JsonIgnore
 
   public Long getAsyncResponseTimeout() {
-        return asyncResponseTimeout.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_ASYNC_RESPONSE_TIMEOUT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Long> getAsyncResponseTimeout_JsonNullable() {
     return asyncResponseTimeout;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ASYNC_RESPONSE_TIMEOUT)
-  public void setAsyncResponseTimeout_JsonNullable(JsonNullable<Long> asyncResponseTimeout) {
-    this.asyncResponseTimeout = asyncResponseTimeout;
-  }
+
 
   public void setAsyncResponseTimeout(Long asyncResponseTimeout) {
-    this.asyncResponseTimeout = JsonNullable.<Long>of(asyncResponseTimeout);
+    this.asyncResponseTimeout = asyncResponseTimeout;
   }
 
 
   public FetchExternalTasksDto topics(List<FetchExternalTaskTopicDto> topics) {
+    
     this.topics = topics;
     return this;
   }
@@ -196,8 +164,6 @@ public class FetchExternalTasksDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON array of topic objects for which external tasks should be fetched. The returned tasks may be arbitrarily distributed among these topics. Each topic object has the following properties:")
-  @JsonProperty(JSON_PROPERTY_TOPICS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<FetchExternalTaskTopicDto> getTopics() {
     return topics;
@@ -209,9 +175,6 @@ public class FetchExternalTasksDto {
   }
 
 
-  /**
-   * Return true if this FetchExternalTasksDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

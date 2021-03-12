@@ -15,77 +15,69 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import de.dfki.cos.basys.common.rest.camunda.dto.AtomLink;
 import de.dfki.cos.basys.common.rest.camunda.dto.AttachmentDtoAllOf;
 import de.dfki.cos.basys.common.rest.camunda.dto.LinkableDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.threeten.bp.OffsetDateTime;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
 
 /**
  * AttachmentDto
  */
-@JsonPropertyOrder({
-  AttachmentDto.JSON_PROPERTY_ID,
-  AttachmentDto.JSON_PROPERTY_NAME,
-  AttachmentDto.JSON_PROPERTY_DESCRIPTION,
-  AttachmentDto.JSON_PROPERTY_TASK_ID,
-  AttachmentDto.JSON_PROPERTY_TYPE,
-  AttachmentDto.JSON_PROPERTY_URL,
-  AttachmentDto.JSON_PROPERTY_CREATE_TIME,
-  AttachmentDto.JSON_PROPERTY_REMOVAL_TIME,
-  AttachmentDto.JSON_PROPERTY_ROOT_PROCESS_INSTANCE_ID,
-  AttachmentDto.JSON_PROPERTY_LINKS
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class AttachmentDto {
-  public static final String JSON_PROPERTY_ID = "id";
+  public static final String SERIALIZED_NAME_ID = "id";
+  @SerializedName(SERIALIZED_NAME_ID)
   private String id;
 
-  public static final String JSON_PROPERTY_NAME = "name";
+  public static final String SERIALIZED_NAME_NAME = "name";
+  @SerializedName(SERIALIZED_NAME_NAME)
   private String name;
 
-  public static final String JSON_PROPERTY_DESCRIPTION = "description";
+  public static final String SERIALIZED_NAME_DESCRIPTION = "description";
+  @SerializedName(SERIALIZED_NAME_DESCRIPTION)
   private String description;
 
-  public static final String JSON_PROPERTY_TASK_ID = "taskId";
+  public static final String SERIALIZED_NAME_TASK_ID = "taskId";
+  @SerializedName(SERIALIZED_NAME_TASK_ID)
   private String taskId;
 
-  public static final String JSON_PROPERTY_TYPE = "type";
+  public static final String SERIALIZED_NAME_TYPE = "type";
+  @SerializedName(SERIALIZED_NAME_TYPE)
   private String type;
 
-  public static final String JSON_PROPERTY_URL = "url";
+  public static final String SERIALIZED_NAME_URL = "url";
+  @SerializedName(SERIALIZED_NAME_URL)
   private String url;
 
-  public static final String JSON_PROPERTY_CREATE_TIME = "createTime";
+  public static final String SERIALIZED_NAME_CREATE_TIME = "createTime";
+  @SerializedName(SERIALIZED_NAME_CREATE_TIME)
   private OffsetDateTime createTime;
 
-  public static final String JSON_PROPERTY_REMOVAL_TIME = "removalTime";
-  private JsonNullable<OffsetDateTime> removalTime = JsonNullable.<OffsetDateTime>undefined();
+  public static final String SERIALIZED_NAME_REMOVAL_TIME = "removalTime";
+  @SerializedName(SERIALIZED_NAME_REMOVAL_TIME)
+  private OffsetDateTime removalTime;
 
-  public static final String JSON_PROPERTY_ROOT_PROCESS_INSTANCE_ID = "rootProcessInstanceId";
+  public static final String SERIALIZED_NAME_ROOT_PROCESS_INSTANCE_ID = "rootProcessInstanceId";
+  @SerializedName(SERIALIZED_NAME_ROOT_PROCESS_INSTANCE_ID)
   private String rootProcessInstanceId;
 
-  public static final String JSON_PROPERTY_LINKS = "links";
+  public static final String SERIALIZED_NAME_LINKS = "links";
+  @SerializedName(SERIALIZED_NAME_LINKS)
   private List<AtomLink> links = null;
 
 
   public AttachmentDto id(String id) {
+    
     this.id = id;
     return this;
   }
@@ -96,8 +88,6 @@ public class AttachmentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the task attachment.")
-  @JsonProperty(JSON_PROPERTY_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getId() {
     return id;
@@ -110,6 +100,7 @@ public class AttachmentDto {
 
 
   public AttachmentDto name(String name) {
+    
     this.name = name;
     return this;
   }
@@ -120,8 +111,6 @@ public class AttachmentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The name of the task attachment.")
-  @JsonProperty(JSON_PROPERTY_NAME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getName() {
     return name;
@@ -134,6 +123,7 @@ public class AttachmentDto {
 
 
   public AttachmentDto description(String description) {
+    
     this.description = description;
     return this;
   }
@@ -144,8 +134,6 @@ public class AttachmentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The description of the task attachment.")
-  @JsonProperty(JSON_PROPERTY_DESCRIPTION)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getDescription() {
     return description;
@@ -158,6 +146,7 @@ public class AttachmentDto {
 
 
   public AttachmentDto taskId(String taskId) {
+    
     this.taskId = taskId;
     return this;
   }
@@ -168,8 +157,6 @@ public class AttachmentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the task to which the attachment belongs.")
-  @JsonProperty(JSON_PROPERTY_TASK_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getTaskId() {
     return taskId;
@@ -182,6 +169,7 @@ public class AttachmentDto {
 
 
   public AttachmentDto type(String type) {
+    
     this.type = type;
     return this;
   }
@@ -192,8 +180,6 @@ public class AttachmentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Indication of the type of content that this attachment refers to. Can be MIME type or any other indication.")
-  @JsonProperty(JSON_PROPERTY_TYPE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getType() {
     return type;
@@ -206,6 +192,7 @@ public class AttachmentDto {
 
 
   public AttachmentDto url(String url) {
+    
     this.url = url;
     return this;
   }
@@ -216,8 +203,6 @@ public class AttachmentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The url to the remote content of the task attachment.")
-  @JsonProperty(JSON_PROPERTY_URL)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getUrl() {
     return url;
@@ -230,6 +215,7 @@ public class AttachmentDto {
 
 
   public AttachmentDto createTime(OffsetDateTime createTime) {
+    
     this.createTime = createTime;
     return this;
   }
@@ -240,8 +226,6 @@ public class AttachmentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The time the variable was inserted. [Default format](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/) `yyyy-MM-dd'T'HH:mm:ss.SSSZ`.")
-  @JsonProperty(JSON_PROPERTY_CREATE_TIME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public OffsetDateTime getCreateTime() {
     return createTime;
@@ -254,7 +238,8 @@ public class AttachmentDto {
 
 
   public AttachmentDto removalTime(OffsetDateTime removalTime) {
-    this.removalTime = JsonNullable.<OffsetDateTime>of(removalTime);
+    
+    this.removalTime = removalTime;
     return this;
   }
 
@@ -264,30 +249,19 @@ public class AttachmentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The time after which the attachment should be removed by the History Cleanup job. [Default format](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/) `yyyy-MM-dd'T'HH:mm:ss.SSSZ`.")
-  @JsonIgnore
 
   public OffsetDateTime getRemovalTime() {
-        return removalTime.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_REMOVAL_TIME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<OffsetDateTime> getRemovalTime_JsonNullable() {
     return removalTime;
   }
-  
-  @JsonProperty(JSON_PROPERTY_REMOVAL_TIME)
-  public void setRemovalTime_JsonNullable(JsonNullable<OffsetDateTime> removalTime) {
-    this.removalTime = removalTime;
-  }
+
 
   public void setRemovalTime(OffsetDateTime removalTime) {
-    this.removalTime = JsonNullable.<OffsetDateTime>of(removalTime);
+    this.removalTime = removalTime;
   }
 
 
   public AttachmentDto rootProcessInstanceId(String rootProcessInstanceId) {
+    
     this.rootProcessInstanceId = rootProcessInstanceId;
     return this;
   }
@@ -298,8 +272,6 @@ public class AttachmentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The process instance id of the root process instance that initiated the process containing the task.")
-  @JsonProperty(JSON_PROPERTY_ROOT_PROCESS_INSTANCE_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getRootProcessInstanceId() {
     return rootProcessInstanceId;
@@ -312,6 +284,7 @@ public class AttachmentDto {
 
 
   public AttachmentDto links(List<AtomLink> links) {
+    
     this.links = links;
     return this;
   }
@@ -330,8 +303,6 @@ public class AttachmentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The links associated to this resource, with `method`, `href` and `rel`.")
-  @JsonProperty(JSON_PROPERTY_LINKS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<AtomLink> getLinks() {
     return links;
@@ -343,9 +314,6 @@ public class AttachmentDto {
   }
 
 
-  /**
-   * Return true if this AttachmentDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

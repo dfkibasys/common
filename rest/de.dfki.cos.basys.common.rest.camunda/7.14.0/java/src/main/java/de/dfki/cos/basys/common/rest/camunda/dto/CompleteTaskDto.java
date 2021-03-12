@@ -15,43 +15,35 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import de.dfki.cos.basys.common.rest.camunda.dto.VariableValueDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
 
 /**
  * CompleteTaskDto
  */
-@JsonPropertyOrder({
-  CompleteTaskDto.JSON_PROPERTY_VARIABLES,
-  CompleteTaskDto.JSON_PROPERTY_WITH_VARIABLES_IN_RETURN
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class CompleteTaskDto {
-  public static final String JSON_PROPERTY_VARIABLES = "variables";
+  public static final String SERIALIZED_NAME_VARIABLES = "variables";
+  @SerializedName(SERIALIZED_NAME_VARIABLES)
   private Map<String, VariableValueDto> variables = null;
 
-  public static final String JSON_PROPERTY_WITH_VARIABLES_IN_RETURN = "withVariablesInReturn";
-  private JsonNullable<Boolean> withVariablesInReturn = JsonNullable.<Boolean>of(false);
+  public static final String SERIALIZED_NAME_WITH_VARIABLES_IN_RETURN = "withVariablesInReturn";
+  @SerializedName(SERIALIZED_NAME_WITH_VARIABLES_IN_RETURN)
+  private Boolean withVariablesInReturn = false;
 
 
   public CompleteTaskDto variables(Map<String, VariableValueDto> variables) {
+    
     this.variables = variables;
     return this;
   }
@@ -70,8 +62,6 @@ public class CompleteTaskDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON object containing variable key-value pairs.")
-  @JsonProperty(JSON_PROPERTY_VARIABLES)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Map<String, VariableValueDto> getVariables() {
     return variables;
@@ -84,7 +74,8 @@ public class CompleteTaskDto {
 
 
   public CompleteTaskDto withVariablesInReturn(Boolean withVariablesInReturn) {
-    this.withVariablesInReturn = JsonNullable.<Boolean>of(withVariablesInReturn);
+    
+    this.withVariablesInReturn = withVariablesInReturn;
     return this;
   }
 
@@ -94,32 +85,17 @@ public class CompleteTaskDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Indicates whether the response should contain the process variables or not. The default is `false` with a response code of `204`. If set to `true` the response contains the process variables and has a response code of `200`. If the task is not associated with a process instance (e.g. if it's part of a case instance) no variables will be returned.")
-  @JsonIgnore
 
   public Boolean getWithVariablesInReturn() {
-        return withVariablesInReturn.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_WITH_VARIABLES_IN_RETURN)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getWithVariablesInReturn_JsonNullable() {
     return withVariablesInReturn;
   }
-  
-  @JsonProperty(JSON_PROPERTY_WITH_VARIABLES_IN_RETURN)
-  public void setWithVariablesInReturn_JsonNullable(JsonNullable<Boolean> withVariablesInReturn) {
+
+
+  public void setWithVariablesInReturn(Boolean withVariablesInReturn) {
     this.withVariablesInReturn = withVariablesInReturn;
   }
 
-  public void setWithVariablesInReturn(Boolean withVariablesInReturn) {
-    this.withVariablesInReturn = JsonNullable.<Boolean>of(withVariablesInReturn);
-  }
 
-
-  /**
-   * Return true if this CompleteTaskDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

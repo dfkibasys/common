@@ -15,50 +15,45 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import de.dfki.cos.basys.common.rest.camunda.dto.ExternalTaskBpmnErrorAllOf;
 import de.dfki.cos.basys.common.rest.camunda.dto.TaskBpmnErrorDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.VariableValueDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
 
 /**
  * ExternalTaskBpmnError
  */
-@JsonPropertyOrder({
-  ExternalTaskBpmnError.JSON_PROPERTY_WORKER_ID,
-  ExternalTaskBpmnError.JSON_PROPERTY_ERROR_CODE,
-  ExternalTaskBpmnError.JSON_PROPERTY_ERROR_MESSAGE,
-  ExternalTaskBpmnError.JSON_PROPERTY_VARIABLES
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class ExternalTaskBpmnError {
-  public static final String JSON_PROPERTY_WORKER_ID = "workerId";
+  public static final String SERIALIZED_NAME_WORKER_ID = "workerId";
+  @SerializedName(SERIALIZED_NAME_WORKER_ID)
   private String workerId;
 
-  public static final String JSON_PROPERTY_ERROR_CODE = "errorCode";
+  public static final String SERIALIZED_NAME_ERROR_CODE = "errorCode";
+  @SerializedName(SERIALIZED_NAME_ERROR_CODE)
   private String errorCode;
 
-  public static final String JSON_PROPERTY_ERROR_MESSAGE = "errorMessage";
+  public static final String SERIALIZED_NAME_ERROR_MESSAGE = "errorMessage";
+  @SerializedName(SERIALIZED_NAME_ERROR_MESSAGE)
   private String errorMessage;
 
-  public static final String JSON_PROPERTY_VARIABLES = "variables";
+  public static final String SERIALIZED_NAME_VARIABLES = "variables";
+  @SerializedName(SERIALIZED_NAME_VARIABLES)
   private Map<String, VariableValueDto> variables = null;
 
 
   public ExternalTaskBpmnError workerId(String workerId) {
+    
     this.workerId = workerId;
     return this;
   }
@@ -69,8 +64,6 @@ public class ExternalTaskBpmnError {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the worker that reports the failure. Must match the id of the worker who has most recently locked the task.")
-  @JsonProperty(JSON_PROPERTY_WORKER_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getWorkerId() {
     return workerId;
@@ -83,6 +76,7 @@ public class ExternalTaskBpmnError {
 
 
   public ExternalTaskBpmnError errorCode(String errorCode) {
+    
     this.errorCode = errorCode;
     return this;
   }
@@ -93,8 +87,6 @@ public class ExternalTaskBpmnError {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "An error code that indicates the predefined error. It is used to identify the BPMN error handler.")
-  @JsonProperty(JSON_PROPERTY_ERROR_CODE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getErrorCode() {
     return errorCode;
@@ -107,6 +99,7 @@ public class ExternalTaskBpmnError {
 
 
   public ExternalTaskBpmnError errorMessage(String errorMessage) {
+    
     this.errorMessage = errorMessage;
     return this;
   }
@@ -117,8 +110,6 @@ public class ExternalTaskBpmnError {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "An error message that describes the error.")
-  @JsonProperty(JSON_PROPERTY_ERROR_MESSAGE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getErrorMessage() {
     return errorMessage;
@@ -131,6 +122,7 @@ public class ExternalTaskBpmnError {
 
 
   public ExternalTaskBpmnError variables(Map<String, VariableValueDto> variables) {
+    
     this.variables = variables;
     return this;
   }
@@ -149,8 +141,6 @@ public class ExternalTaskBpmnError {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON object containing variable key-value pairs.")
-  @JsonProperty(JSON_PROPERTY_VARIABLES)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Map<String, VariableValueDto> getVariables() {
     return variables;
@@ -162,9 +152,6 @@ public class ExternalTaskBpmnError {
   }
 
 
-  /**
-   * Return true if this ExternalTaskBpmnError object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

@@ -15,44 +15,39 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
+import java.io.IOException;
 
 /**
  * UserProfileDto
  */
-@JsonPropertyOrder({
-  UserProfileDto.JSON_PROPERTY_ID,
-  UserProfileDto.JSON_PROPERTY_FIRST_NAME,
-  UserProfileDto.JSON_PROPERTY_LAST_NAME,
-  UserProfileDto.JSON_PROPERTY_EMAIL
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class UserProfileDto {
-  public static final String JSON_PROPERTY_ID = "id";
+  public static final String SERIALIZED_NAME_ID = "id";
+  @SerializedName(SERIALIZED_NAME_ID)
   private String id;
 
-  public static final String JSON_PROPERTY_FIRST_NAME = "firstName";
+  public static final String SERIALIZED_NAME_FIRST_NAME = "firstName";
+  @SerializedName(SERIALIZED_NAME_FIRST_NAME)
   private String firstName;
 
-  public static final String JSON_PROPERTY_LAST_NAME = "lastName";
+  public static final String SERIALIZED_NAME_LAST_NAME = "lastName";
+  @SerializedName(SERIALIZED_NAME_LAST_NAME)
   private String lastName;
 
-  public static final String JSON_PROPERTY_EMAIL = "email";
+  public static final String SERIALIZED_NAME_EMAIL = "email";
+  @SerializedName(SERIALIZED_NAME_EMAIL)
   private String email;
 
 
   public UserProfileDto id(String id) {
+    
     this.id = id;
     return this;
   }
@@ -63,8 +58,6 @@ public class UserProfileDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the user.")
-  @JsonProperty(JSON_PROPERTY_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getId() {
     return id;
@@ -77,6 +70,7 @@ public class UserProfileDto {
 
 
   public UserProfileDto firstName(String firstName) {
+    
     this.firstName = firstName;
     return this;
   }
@@ -87,8 +81,6 @@ public class UserProfileDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The first name of the user.")
-  @JsonProperty(JSON_PROPERTY_FIRST_NAME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getFirstName() {
     return firstName;
@@ -101,6 +93,7 @@ public class UserProfileDto {
 
 
   public UserProfileDto lastName(String lastName) {
+    
     this.lastName = lastName;
     return this;
   }
@@ -111,8 +104,6 @@ public class UserProfileDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The first name of the user.")
-  @JsonProperty(JSON_PROPERTY_LAST_NAME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getLastName() {
     return lastName;
@@ -125,6 +116,7 @@ public class UserProfileDto {
 
 
   public UserProfileDto email(String email) {
+    
     this.email = email;
     return this;
   }
@@ -135,8 +127,6 @@ public class UserProfileDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The email of the user.")
-  @JsonProperty(JSON_PROPERTY_EMAIL)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getEmail() {
     return email;
@@ -148,9 +138,6 @@ public class UserProfileDto {
   }
 
 
-  /**
-   * Return true if this UserProfileDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

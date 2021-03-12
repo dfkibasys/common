@@ -15,43 +15,38 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
 
 /**
  * A JSON object with the following properties:
  */
 @ApiModel(description = "A JSON object with the following properties:")
-@JsonPropertyOrder({
-  RedeploymentDto.JSON_PROPERTY_RESOURCE_IDS,
-  RedeploymentDto.JSON_PROPERTY_RESOURCE_NAMES,
-  RedeploymentDto.JSON_PROPERTY_SOURCE
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class RedeploymentDto {
-  public static final String JSON_PROPERTY_RESOURCE_IDS = "resourceIds";
+  public static final String SERIALIZED_NAME_RESOURCE_IDS = "resourceIds";
+  @SerializedName(SERIALIZED_NAME_RESOURCE_IDS)
   private List<String> resourceIds = null;
 
-  public static final String JSON_PROPERTY_RESOURCE_NAMES = "resourceNames";
+  public static final String SERIALIZED_NAME_RESOURCE_NAMES = "resourceNames";
+  @SerializedName(SERIALIZED_NAME_RESOURCE_NAMES)
   private List<String> resourceNames = null;
 
-  public static final String JSON_PROPERTY_SOURCE = "source";
+  public static final String SERIALIZED_NAME_SOURCE = "source";
+  @SerializedName(SERIALIZED_NAME_SOURCE)
   private String source;
 
 
   public RedeploymentDto resourceIds(List<String> resourceIds) {
+    
     this.resourceIds = resourceIds;
     return this;
   }
@@ -70,8 +65,6 @@ public class RedeploymentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A list of deployment resource ids to re-deploy.")
-  @JsonProperty(JSON_PROPERTY_RESOURCE_IDS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<String> getResourceIds() {
     return resourceIds;
@@ -84,6 +77,7 @@ public class RedeploymentDto {
 
 
   public RedeploymentDto resourceNames(List<String> resourceNames) {
+    
     this.resourceNames = resourceNames;
     return this;
   }
@@ -102,8 +96,6 @@ public class RedeploymentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A list of deployment resource names to re-deploy.")
-  @JsonProperty(JSON_PROPERTY_RESOURCE_NAMES)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<String> getResourceNames() {
     return resourceNames;
@@ -116,6 +108,7 @@ public class RedeploymentDto {
 
 
   public RedeploymentDto source(String source) {
+    
     this.source = source;
     return this;
   }
@@ -126,8 +119,6 @@ public class RedeploymentDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Sets the source of the deployment.")
-  @JsonProperty(JSON_PROPERTY_SOURCE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getSource() {
     return source;
@@ -139,9 +130,6 @@ public class RedeploymentDto {
   }
 
 
-  /**
-   * Return true if this RedeploymentDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

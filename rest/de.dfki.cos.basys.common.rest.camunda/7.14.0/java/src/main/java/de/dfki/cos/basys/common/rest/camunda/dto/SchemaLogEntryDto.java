@@ -15,41 +15,36 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import org.threeten.bp.OffsetDateTime;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
 
 /**
  * SchemaLogEntryDto
  */
-@JsonPropertyOrder({
-  SchemaLogEntryDto.JSON_PROPERTY_ID,
-  SchemaLogEntryDto.JSON_PROPERTY_TIMESTAMP,
-  SchemaLogEntryDto.JSON_PROPERTY_VERSION
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class SchemaLogEntryDto {
-  public static final String JSON_PROPERTY_ID = "id";
+  public static final String SERIALIZED_NAME_ID = "id";
+  @SerializedName(SERIALIZED_NAME_ID)
   private String id;
 
-  public static final String JSON_PROPERTY_TIMESTAMP = "timestamp";
+  public static final String SERIALIZED_NAME_TIMESTAMP = "timestamp";
+  @SerializedName(SERIALIZED_NAME_TIMESTAMP)
   private OffsetDateTime timestamp;
 
-  public static final String JSON_PROPERTY_VERSION = "version";
+  public static final String SERIALIZED_NAME_VERSION = "version";
+  @SerializedName(SERIALIZED_NAME_VERSION)
   private String version;
 
 
   public SchemaLogEntryDto id(String id) {
+    
     this.id = id;
     return this;
   }
@@ -60,8 +55,6 @@ public class SchemaLogEntryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the schema log entry.")
-  @JsonProperty(JSON_PROPERTY_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getId() {
     return id;
@@ -74,6 +67,7 @@ public class SchemaLogEntryDto {
 
 
   public SchemaLogEntryDto timestamp(OffsetDateTime timestamp) {
+    
     this.timestamp = timestamp;
     return this;
   }
@@ -84,8 +78,6 @@ public class SchemaLogEntryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The date and time of the schema update.")
-  @JsonProperty(JSON_PROPERTY_TIMESTAMP)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public OffsetDateTime getTimestamp() {
     return timestamp;
@@ -98,6 +90,7 @@ public class SchemaLogEntryDto {
 
 
   public SchemaLogEntryDto version(String version) {
+    
     this.version = version;
     return this;
   }
@@ -108,8 +101,6 @@ public class SchemaLogEntryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The version of the schema.")
-  @JsonProperty(JSON_PROPERTY_VERSION)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getVersion() {
     return version;
@@ -121,9 +112,6 @@ public class SchemaLogEntryDto {
   }
 
 
-  /**
-   * Return true if this SchemaLogEntryDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

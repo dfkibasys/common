@@ -15,36 +15,31 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
+import java.io.IOException;
 
 /**
  * IncidentStatisticsResultDto
  */
-@JsonPropertyOrder({
-  IncidentStatisticsResultDto.JSON_PROPERTY_INCIDENT_TYPE,
-  IncidentStatisticsResultDto.JSON_PROPERTY_INCIDENT_COUNT
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class IncidentStatisticsResultDto {
-  public static final String JSON_PROPERTY_INCIDENT_TYPE = "incidentType";
+  public static final String SERIALIZED_NAME_INCIDENT_TYPE = "incidentType";
+  @SerializedName(SERIALIZED_NAME_INCIDENT_TYPE)
   private String incidentType;
 
-  public static final String JSON_PROPERTY_INCIDENT_COUNT = "incidentCount";
+  public static final String SERIALIZED_NAME_INCIDENT_COUNT = "incidentCount";
+  @SerializedName(SERIALIZED_NAME_INCIDENT_COUNT)
   private Integer incidentCount;
 
 
   public IncidentStatisticsResultDto incidentType(String incidentType) {
+    
     this.incidentType = incidentType;
     return this;
   }
@@ -55,8 +50,6 @@ public class IncidentStatisticsResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The type of the incident the number of incidents is aggregated for. See the [User Guide](https://docs.camunda.org/manual/7.14/user-guide/process-engine/incidents/#incident-types) for a list of incident types.")
-  @JsonProperty(JSON_PROPERTY_INCIDENT_TYPE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getIncidentType() {
     return incidentType;
@@ -69,6 +62,7 @@ public class IncidentStatisticsResultDto {
 
 
   public IncidentStatisticsResultDto incidentCount(Integer incidentCount) {
+    
     this.incidentCount = incidentCount;
     return this;
   }
@@ -79,8 +73,6 @@ public class IncidentStatisticsResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The total number of incidents for the corresponding incident type.")
-  @JsonProperty(JSON_PROPERTY_INCIDENT_COUNT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getIncidentCount() {
     return incidentCount;
@@ -92,9 +84,6 @@ public class IncidentStatisticsResultDto {
   }
 
 
-  /**
-   * Return true if this IncidentStatisticsResultDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

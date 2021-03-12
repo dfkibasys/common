@@ -15,45 +15,40 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import org.threeten.bp.OffsetDateTime;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
 
 /**
  * MetricsIntervalResultDto
  */
-@JsonPropertyOrder({
-  MetricsIntervalResultDto.JSON_PROPERTY_TIMESTAMP,
-  MetricsIntervalResultDto.JSON_PROPERTY_NAME,
-  MetricsIntervalResultDto.JSON_PROPERTY_REPORTER,
-  MetricsIntervalResultDto.JSON_PROPERTY_VALUE
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class MetricsIntervalResultDto {
-  public static final String JSON_PROPERTY_TIMESTAMP = "timestamp";
+  public static final String SERIALIZED_NAME_TIMESTAMP = "timestamp";
+  @SerializedName(SERIALIZED_NAME_TIMESTAMP)
   private OffsetDateTime timestamp;
 
-  public static final String JSON_PROPERTY_NAME = "name";
+  public static final String SERIALIZED_NAME_NAME = "name";
+  @SerializedName(SERIALIZED_NAME_NAME)
   private String name;
 
-  public static final String JSON_PROPERTY_REPORTER = "reporter";
+  public static final String SERIALIZED_NAME_REPORTER = "reporter";
+  @SerializedName(SERIALIZED_NAME_REPORTER)
   private String reporter;
 
-  public static final String JSON_PROPERTY_VALUE = "value";
+  public static final String SERIALIZED_NAME_VALUE = "value";
+  @SerializedName(SERIALIZED_NAME_VALUE)
   private Long value;
 
 
   public MetricsIntervalResultDto timestamp(OffsetDateTime timestamp) {
+    
     this.timestamp = timestamp;
     return this;
   }
@@ -64,8 +59,6 @@ public class MetricsIntervalResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The interval timestamp.")
-  @JsonProperty(JSON_PROPERTY_TIMESTAMP)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public OffsetDateTime getTimestamp() {
     return timestamp;
@@ -78,6 +71,7 @@ public class MetricsIntervalResultDto {
 
 
   public MetricsIntervalResultDto name(String name) {
+    
     this.name = name;
     return this;
   }
@@ -88,8 +82,6 @@ public class MetricsIntervalResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The name of the metric.")
-  @JsonProperty(JSON_PROPERTY_NAME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getName() {
     return name;
@@ -102,6 +94,7 @@ public class MetricsIntervalResultDto {
 
 
   public MetricsIntervalResultDto reporter(String reporter) {
+    
     this.reporter = reporter;
     return this;
   }
@@ -112,8 +105,6 @@ public class MetricsIntervalResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The reporter of the metric. `null` if the metrics are aggregated by reporter.")
-  @JsonProperty(JSON_PROPERTY_REPORTER)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getReporter() {
     return reporter;
@@ -126,6 +117,7 @@ public class MetricsIntervalResultDto {
 
 
   public MetricsIntervalResultDto value(Long value) {
+    
     this.value = value;
     return this;
   }
@@ -136,8 +128,6 @@ public class MetricsIntervalResultDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The value of the metric aggregated by the interval.")
-  @JsonProperty(JSON_PROPERTY_VALUE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Long getValue() {
     return value;
@@ -149,9 +139,6 @@ public class MetricsIntervalResultDto {
   }
 
 
-  /**
-   * Return true if this MetricsIntervalResultDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

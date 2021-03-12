@@ -13,16 +13,13 @@
 
 package de.dfki.cos.basys.common.rest.camunda.api;
 
-import de.dfki.cos.basys.common.rest.camunda.*;
-import de.dfki.cos.basys.common.rest.camunda.auth.*;
+import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.dto.ExceptionDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.MetricsIntervalResultDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.MetricsResultDto;
 import org.threeten.bp.OffsetDateTime;
-import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
-
+import org.junit.Ignore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,10 +29,12 @@ import java.util.Map;
 /**
  * API tests for MetricsApi
  */
+@Ignore
 public class MetricsApiTest {
 
     private final MetricsApi api = new MetricsApi();
 
+    
     /**
      * 
      *
@@ -46,13 +45,14 @@ public class MetricsApiTest {
      */
     @Test
     public void getMetricsTest() throws ApiException {
-        //String metricsName = null;
-        //OffsetDateTime startDate = null;
-        //OffsetDateTime endDate = null;
-        //MetricsResultDto response = api.getMetrics(metricsName, startDate, endDate);
+        String metricsName = null;
+        OffsetDateTime startDate = null;
+        OffsetDateTime endDate = null;
+        MetricsResultDto response = api.getMetrics(metricsName, startDate, endDate);
+
         // TODO: test validations
     }
-
+    
     /**
      * 
      *
@@ -63,16 +63,17 @@ public class MetricsApiTest {
      */
     @Test
     public void intervalTest() throws ApiException {
-        //String name = null;
-        //String reporter = null;
-        //OffsetDateTime startDate = null;
-        //OffsetDateTime endDate = null;
-        //Integer firstResult = null;
-        //Integer maxResults = null;
-        //String interval = null;
-        //String aggregateByReporter = null;
-        //List<MetricsIntervalResultDto> response = api.interval(name, reporter, startDate, endDate, firstResult, maxResults, interval, aggregateByReporter);
+        String name = null;
+        String reporter = null;
+        OffsetDateTime startDate = null;
+        OffsetDateTime endDate = null;
+        Integer firstResult = null;
+        Integer maxResults = null;
+        String interval = null;
+        String aggregateByReporter = null;
+        List<MetricsIntervalResultDto> response = api.interval(name, reporter, startDate, endDate, firstResult, maxResults, interval, aggregateByReporter);
+
         // TODO: test validations
     }
-
+    
 }

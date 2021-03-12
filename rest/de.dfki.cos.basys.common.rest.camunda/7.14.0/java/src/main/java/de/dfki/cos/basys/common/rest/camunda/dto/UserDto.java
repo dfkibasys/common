@@ -15,38 +15,33 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import de.dfki.cos.basys.common.rest.camunda.dto.UserCredentialsDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.UserProfileDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
+import java.io.IOException;
 
 /**
  * UserDto
  */
-@JsonPropertyOrder({
-  UserDto.JSON_PROPERTY_PROFILE,
-  UserDto.JSON_PROPERTY_CREDENTIALS
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class UserDto {
-  public static final String JSON_PROPERTY_PROFILE = "profile";
+  public static final String SERIALIZED_NAME_PROFILE = "profile";
+  @SerializedName(SERIALIZED_NAME_PROFILE)
   private UserProfileDto profile;
 
-  public static final String JSON_PROPERTY_CREDENTIALS = "credentials";
+  public static final String SERIALIZED_NAME_CREDENTIALS = "credentials";
+  @SerializedName(SERIALIZED_NAME_CREDENTIALS)
   private UserCredentialsDto credentials;
 
 
   public UserDto profile(UserProfileDto profile) {
+    
     this.profile = profile;
     return this;
   }
@@ -57,8 +52,6 @@ public class UserDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
-  @JsonProperty(JSON_PROPERTY_PROFILE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public UserProfileDto getProfile() {
     return profile;
@@ -71,6 +64,7 @@ public class UserDto {
 
 
   public UserDto credentials(UserCredentialsDto credentials) {
+    
     this.credentials = credentials;
     return this;
   }
@@ -81,8 +75,6 @@ public class UserDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
-  @JsonProperty(JSON_PROPERTY_CREDENTIALS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public UserCredentialsDto getCredentials() {
     return credentials;
@@ -94,9 +86,6 @@ public class UserDto {
   }
 
 
-  /**
-   * Return true if this UserDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

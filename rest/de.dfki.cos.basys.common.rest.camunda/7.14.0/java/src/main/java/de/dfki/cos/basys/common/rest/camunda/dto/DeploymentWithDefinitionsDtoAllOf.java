@@ -15,51 +15,46 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import de.dfki.cos.basys.common.rest.camunda.dto.CaseDefinitionDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.DecisionDefinitionDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.DecisionRequirementsDefinitionDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.ProcessDefinitionDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
 
 /**
  * DeploymentWithDefinitionsDtoAllOf
  */
-@JsonPropertyOrder({
-  DeploymentWithDefinitionsDtoAllOf.JSON_PROPERTY_DEPLOYED_PROCESS_DEFINITIONS,
-  DeploymentWithDefinitionsDtoAllOf.JSON_PROPERTY_DEPLOYED_DECISION_DEFINITIONS,
-  DeploymentWithDefinitionsDtoAllOf.JSON_PROPERTY_DEPLOYED_DECISION_REQUIREMENTS_DEFINITIONS,
-  DeploymentWithDefinitionsDtoAllOf.JSON_PROPERTY_DEPLOYED_CASE_DEFINITIONS
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class DeploymentWithDefinitionsDtoAllOf {
-  public static final String JSON_PROPERTY_DEPLOYED_PROCESS_DEFINITIONS = "deployedProcessDefinitions";
+  public static final String SERIALIZED_NAME_DEPLOYED_PROCESS_DEFINITIONS = "deployedProcessDefinitions";
+  @SerializedName(SERIALIZED_NAME_DEPLOYED_PROCESS_DEFINITIONS)
   private Map<String, ProcessDefinitionDto> deployedProcessDefinitions = null;
 
-  public static final String JSON_PROPERTY_DEPLOYED_DECISION_DEFINITIONS = "deployedDecisionDefinitions";
+  public static final String SERIALIZED_NAME_DEPLOYED_DECISION_DEFINITIONS = "deployedDecisionDefinitions";
+  @SerializedName(SERIALIZED_NAME_DEPLOYED_DECISION_DEFINITIONS)
   private Map<String, DecisionDefinitionDto> deployedDecisionDefinitions = null;
 
-  public static final String JSON_PROPERTY_DEPLOYED_DECISION_REQUIREMENTS_DEFINITIONS = "deployedDecisionRequirementsDefinitions";
+  public static final String SERIALIZED_NAME_DEPLOYED_DECISION_REQUIREMENTS_DEFINITIONS = "deployedDecisionRequirementsDefinitions";
+  @SerializedName(SERIALIZED_NAME_DEPLOYED_DECISION_REQUIREMENTS_DEFINITIONS)
   private Map<String, DecisionRequirementsDefinitionDto> deployedDecisionRequirementsDefinitions = null;
 
-  public static final String JSON_PROPERTY_DEPLOYED_CASE_DEFINITIONS = "deployedCaseDefinitions";
+  public static final String SERIALIZED_NAME_DEPLOYED_CASE_DEFINITIONS = "deployedCaseDefinitions";
+  @SerializedName(SERIALIZED_NAME_DEPLOYED_CASE_DEFINITIONS)
   private Map<String, CaseDefinitionDto> deployedCaseDefinitions = null;
 
 
   public DeploymentWithDefinitionsDtoAllOf deployedProcessDefinitions(Map<String, ProcessDefinitionDto> deployedProcessDefinitions) {
+    
     this.deployedProcessDefinitions = deployedProcessDefinitions;
     return this;
   }
@@ -78,8 +73,6 @@ public class DeploymentWithDefinitionsDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON Object containing a property for each of the process definitions, which are successfully deployed with that deployment. The key is the process definition id, the value is a JSON Object corresponding to the process definition.")
-  @JsonProperty(JSON_PROPERTY_DEPLOYED_PROCESS_DEFINITIONS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Map<String, ProcessDefinitionDto> getDeployedProcessDefinitions() {
     return deployedProcessDefinitions;
@@ -92,6 +85,7 @@ public class DeploymentWithDefinitionsDtoAllOf {
 
 
   public DeploymentWithDefinitionsDtoAllOf deployedDecisionDefinitions(Map<String, DecisionDefinitionDto> deployedDecisionDefinitions) {
+    
     this.deployedDecisionDefinitions = deployedDecisionDefinitions;
     return this;
   }
@@ -110,8 +104,6 @@ public class DeploymentWithDefinitionsDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON Object containing a property for each of the decision definitions, which are successfully deployed with that deployment. The key is the decision definition id, the value is a JSON Object corresponding to the decision definition.")
-  @JsonProperty(JSON_PROPERTY_DEPLOYED_DECISION_DEFINITIONS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Map<String, DecisionDefinitionDto> getDeployedDecisionDefinitions() {
     return deployedDecisionDefinitions;
@@ -124,6 +116,7 @@ public class DeploymentWithDefinitionsDtoAllOf {
 
 
   public DeploymentWithDefinitionsDtoAllOf deployedDecisionRequirementsDefinitions(Map<String, DecisionRequirementsDefinitionDto> deployedDecisionRequirementsDefinitions) {
+    
     this.deployedDecisionRequirementsDefinitions = deployedDecisionRequirementsDefinitions;
     return this;
   }
@@ -142,8 +135,6 @@ public class DeploymentWithDefinitionsDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON Object containing a property for each of the decision requirements definitions, which are successfully deployed with that deployment. The key is the decision requirements definition id, the value is a JSON Object corresponding to the decision requirements definition.")
-  @JsonProperty(JSON_PROPERTY_DEPLOYED_DECISION_REQUIREMENTS_DEFINITIONS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Map<String, DecisionRequirementsDefinitionDto> getDeployedDecisionRequirementsDefinitions() {
     return deployedDecisionRequirementsDefinitions;
@@ -156,6 +147,7 @@ public class DeploymentWithDefinitionsDtoAllOf {
 
 
   public DeploymentWithDefinitionsDtoAllOf deployedCaseDefinitions(Map<String, CaseDefinitionDto> deployedCaseDefinitions) {
+    
     this.deployedCaseDefinitions = deployedCaseDefinitions;
     return this;
   }
@@ -174,8 +166,6 @@ public class DeploymentWithDefinitionsDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON Object containing a property for each of the case definitions, which are successfully deployed with that deployment. The key is the case definition id, the value is a JSON Object corresponding to the case definition.")
-  @JsonProperty(JSON_PROPERTY_DEPLOYED_CASE_DEFINITIONS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Map<String, CaseDefinitionDto> getDeployedCaseDefinitions() {
     return deployedCaseDefinitions;
@@ -187,9 +177,6 @@ public class DeploymentWithDefinitionsDtoAllOf {
   }
 
 
-  /**
-   * Return true if this DeploymentWithDefinitionsDto_allOf object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

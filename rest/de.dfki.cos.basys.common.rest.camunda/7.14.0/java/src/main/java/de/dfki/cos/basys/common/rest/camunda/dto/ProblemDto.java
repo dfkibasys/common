@@ -15,53 +15,45 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
 
 /**
  * ProblemDto
  */
-@JsonPropertyOrder({
-  ProblemDto.JSON_PROPERTY_MESSAGE,
-  ProblemDto.JSON_PROPERTY_LINE,
-  ProblemDto.JSON_PROPERTY_COLUMN,
-  ProblemDto.JSON_PROPERTY_MAIN_ELEMENT_ID,
-  ProblemDto.JSON_PROPERTY_ELEMENT_IDS
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class ProblemDto {
-  public static final String JSON_PROPERTY_MESSAGE = "message";
+  public static final String SERIALIZED_NAME_MESSAGE = "message";
+  @SerializedName(SERIALIZED_NAME_MESSAGE)
   private String message;
 
-  public static final String JSON_PROPERTY_LINE = "line";
-  private JsonNullable<Integer> line = JsonNullable.<Integer>undefined();
+  public static final String SERIALIZED_NAME_LINE = "line";
+  @SerializedName(SERIALIZED_NAME_LINE)
+  private Integer line;
 
-  public static final String JSON_PROPERTY_COLUMN = "column";
-  private JsonNullable<Integer> column = JsonNullable.<Integer>undefined();
+  public static final String SERIALIZED_NAME_COLUMN = "column";
+  @SerializedName(SERIALIZED_NAME_COLUMN)
+  private Integer column;
 
-  public static final String JSON_PROPERTY_MAIN_ELEMENT_ID = "mainElementId";
+  public static final String SERIALIZED_NAME_MAIN_ELEMENT_ID = "mainElementId";
+  @SerializedName(SERIALIZED_NAME_MAIN_ELEMENT_ID)
   private String mainElementId;
 
-  public static final String JSON_PROPERTY_ELEMENT_IDS = "elementIds";
+  public static final String SERIALIZED_NAME_ELEMENT_IDS = "elementIds";
+  @SerializedName(SERIALIZED_NAME_ELEMENT_IDS)
   private List<String> elementIds = null;
 
 
   public ProblemDto message(String message) {
+    
     this.message = message;
     return this;
   }
@@ -72,8 +64,6 @@ public class ProblemDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The message of the problem.")
-  @JsonProperty(JSON_PROPERTY_MESSAGE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getMessage() {
     return message;
@@ -86,7 +76,8 @@ public class ProblemDto {
 
 
   public ProblemDto line(Integer line) {
-    this.line = JsonNullable.<Integer>of(line);
+    
+    this.line = line;
     return this;
   }
 
@@ -96,31 +87,20 @@ public class ProblemDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The line where the problem occurred.")
-  @JsonIgnore
 
   public Integer getLine() {
-        return line.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_LINE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Integer> getLine_JsonNullable() {
     return line;
   }
-  
-  @JsonProperty(JSON_PROPERTY_LINE)
-  public void setLine_JsonNullable(JsonNullable<Integer> line) {
-    this.line = line;
-  }
+
 
   public void setLine(Integer line) {
-    this.line = JsonNullable.<Integer>of(line);
+    this.line = line;
   }
 
 
   public ProblemDto column(Integer column) {
-    this.column = JsonNullable.<Integer>of(column);
+    
+    this.column = column;
     return this;
   }
 
@@ -130,30 +110,19 @@ public class ProblemDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The column where the problem occurred.")
-  @JsonIgnore
 
   public Integer getColumn() {
-        return column.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_COLUMN)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Integer> getColumn_JsonNullable() {
     return column;
   }
-  
-  @JsonProperty(JSON_PROPERTY_COLUMN)
-  public void setColumn_JsonNullable(JsonNullable<Integer> column) {
-    this.column = column;
-  }
+
 
   public void setColumn(Integer column) {
-    this.column = JsonNullable.<Integer>of(column);
+    this.column = column;
   }
 
 
   public ProblemDto mainElementId(String mainElementId) {
+    
     this.mainElementId = mainElementId;
     return this;
   }
@@ -164,8 +133,6 @@ public class ProblemDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The main element id where the problem occurred.")
-  @JsonProperty(JSON_PROPERTY_MAIN_ELEMENT_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getMainElementId() {
     return mainElementId;
@@ -178,6 +145,7 @@ public class ProblemDto {
 
 
   public ProblemDto elementIds(List<String> elementIds) {
+    
     this.elementIds = elementIds;
     return this;
   }
@@ -196,8 +164,6 @@ public class ProblemDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A list of element id affected by the problem.")
-  @JsonProperty(JSON_PROPERTY_ELEMENT_IDS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<String> getElementIds() {
     return elementIds;
@@ -209,9 +175,6 @@ public class ProblemDto {
   }
 
 
-  /**
-   * Return true if this ProblemDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

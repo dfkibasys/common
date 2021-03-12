@@ -15,83 +15,75 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import de.dfki.cos.basys.common.rest.camunda.dto.VariableValueDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
 
 /**
  * CorrelationMessageDto
  */
-@JsonPropertyOrder({
-  CorrelationMessageDto.JSON_PROPERTY_MESSAGE_NAME,
-  CorrelationMessageDto.JSON_PROPERTY_BUSINESS_KEY,
-  CorrelationMessageDto.JSON_PROPERTY_TENANT_ID,
-  CorrelationMessageDto.JSON_PROPERTY_WITHOUT_TENANT_ID,
-  CorrelationMessageDto.JSON_PROPERTY_PROCESS_INSTANCE_ID,
-  CorrelationMessageDto.JSON_PROPERTY_CORRELATION_KEYS,
-  CorrelationMessageDto.JSON_PROPERTY_LOCAL_CORRELATION_KEYS,
-  CorrelationMessageDto.JSON_PROPERTY_PROCESS_VARIABLES,
-  CorrelationMessageDto.JSON_PROPERTY_PROCESS_VARIABLES_LOCAL,
-  CorrelationMessageDto.JSON_PROPERTY_ALL,
-  CorrelationMessageDto.JSON_PROPERTY_RESULT_ENABLED,
-  CorrelationMessageDto.JSON_PROPERTY_VARIABLES_IN_RESULT_ENABLED
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class CorrelationMessageDto {
-  public static final String JSON_PROPERTY_MESSAGE_NAME = "messageName";
+  public static final String SERIALIZED_NAME_MESSAGE_NAME = "messageName";
+  @SerializedName(SERIALIZED_NAME_MESSAGE_NAME)
   private String messageName;
 
-  public static final String JSON_PROPERTY_BUSINESS_KEY = "businessKey";
+  public static final String SERIALIZED_NAME_BUSINESS_KEY = "businessKey";
+  @SerializedName(SERIALIZED_NAME_BUSINESS_KEY)
   private String businessKey;
 
-  public static final String JSON_PROPERTY_TENANT_ID = "tenantId";
+  public static final String SERIALIZED_NAME_TENANT_ID = "tenantId";
+  @SerializedName(SERIALIZED_NAME_TENANT_ID)
   private String tenantId;
 
-  public static final String JSON_PROPERTY_WITHOUT_TENANT_ID = "withoutTenantId";
-  private JsonNullable<Boolean> withoutTenantId = JsonNullable.<Boolean>of(false);
+  public static final String SERIALIZED_NAME_WITHOUT_TENANT_ID = "withoutTenantId";
+  @SerializedName(SERIALIZED_NAME_WITHOUT_TENANT_ID)
+  private Boolean withoutTenantId = false;
 
-  public static final String JSON_PROPERTY_PROCESS_INSTANCE_ID = "processInstanceId";
+  public static final String SERIALIZED_NAME_PROCESS_INSTANCE_ID = "processInstanceId";
+  @SerializedName(SERIALIZED_NAME_PROCESS_INSTANCE_ID)
   private String processInstanceId;
 
-  public static final String JSON_PROPERTY_CORRELATION_KEYS = "correlationKeys";
+  public static final String SERIALIZED_NAME_CORRELATION_KEYS = "correlationKeys";
+  @SerializedName(SERIALIZED_NAME_CORRELATION_KEYS)
   private Map<String, VariableValueDto> correlationKeys = null;
 
-  public static final String JSON_PROPERTY_LOCAL_CORRELATION_KEYS = "localCorrelationKeys";
+  public static final String SERIALIZED_NAME_LOCAL_CORRELATION_KEYS = "localCorrelationKeys";
+  @SerializedName(SERIALIZED_NAME_LOCAL_CORRELATION_KEYS)
   private Map<String, VariableValueDto> localCorrelationKeys = null;
 
-  public static final String JSON_PROPERTY_PROCESS_VARIABLES = "processVariables";
+  public static final String SERIALIZED_NAME_PROCESS_VARIABLES = "processVariables";
+  @SerializedName(SERIALIZED_NAME_PROCESS_VARIABLES)
   private Map<String, VariableValueDto> processVariables = null;
 
-  public static final String JSON_PROPERTY_PROCESS_VARIABLES_LOCAL = "processVariablesLocal";
+  public static final String SERIALIZED_NAME_PROCESS_VARIABLES_LOCAL = "processVariablesLocal";
+  @SerializedName(SERIALIZED_NAME_PROCESS_VARIABLES_LOCAL)
   private Map<String, VariableValueDto> processVariablesLocal = null;
 
-  public static final String JSON_PROPERTY_ALL = "all";
-  private JsonNullable<Boolean> all = JsonNullable.<Boolean>of(false);
+  public static final String SERIALIZED_NAME_ALL = "all";
+  @SerializedName(SERIALIZED_NAME_ALL)
+  private Boolean all = false;
 
-  public static final String JSON_PROPERTY_RESULT_ENABLED = "resultEnabled";
-  private JsonNullable<Boolean> resultEnabled = JsonNullable.<Boolean>of(false);
+  public static final String SERIALIZED_NAME_RESULT_ENABLED = "resultEnabled";
+  @SerializedName(SERIALIZED_NAME_RESULT_ENABLED)
+  private Boolean resultEnabled = false;
 
-  public static final String JSON_PROPERTY_VARIABLES_IN_RESULT_ENABLED = "variablesInResultEnabled";
-  private JsonNullable<Boolean> variablesInResultEnabled = JsonNullable.<Boolean>of(false);
+  public static final String SERIALIZED_NAME_VARIABLES_IN_RESULT_ENABLED = "variablesInResultEnabled";
+  @SerializedName(SERIALIZED_NAME_VARIABLES_IN_RESULT_ENABLED)
+  private Boolean variablesInResultEnabled = false;
 
 
   public CorrelationMessageDto messageName(String messageName) {
+    
     this.messageName = messageName;
     return this;
   }
@@ -102,8 +94,6 @@ public class CorrelationMessageDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The name of the message to deliver.")
-  @JsonProperty(JSON_PROPERTY_MESSAGE_NAME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getMessageName() {
     return messageName;
@@ -116,6 +106,7 @@ public class CorrelationMessageDto {
 
 
   public CorrelationMessageDto businessKey(String businessKey) {
+    
     this.businessKey = businessKey;
     return this;
   }
@@ -126,8 +117,6 @@ public class CorrelationMessageDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Used for correlation of process instances that wait for incoming messages. Will only correlate to executions that belong to a process instance with the provided business key.")
-  @JsonProperty(JSON_PROPERTY_BUSINESS_KEY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getBusinessKey() {
     return businessKey;
@@ -140,6 +129,7 @@ public class CorrelationMessageDto {
 
 
   public CorrelationMessageDto tenantId(String tenantId) {
+    
     this.tenantId = tenantId;
     return this;
   }
@@ -150,8 +140,6 @@ public class CorrelationMessageDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Used to correlate the message for a tenant with the given id. Will only correlate to executions and process definitions which belong to the tenant. Must not be supplied in conjunction with a `withoutTenantId`.")
-  @JsonProperty(JSON_PROPERTY_TENANT_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getTenantId() {
     return tenantId;
@@ -164,7 +152,8 @@ public class CorrelationMessageDto {
 
 
   public CorrelationMessageDto withoutTenantId(Boolean withoutTenantId) {
-    this.withoutTenantId = JsonNullable.<Boolean>of(withoutTenantId);
+    
+    this.withoutTenantId = withoutTenantId;
     return this;
   }
 
@@ -174,30 +163,19 @@ public class CorrelationMessageDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A Boolean value that indicates whether the message should only be correlated to executions and process definitions which belong to no tenant or not. Value may only be `true`, as `false` is the default behavior. Must not be supplied in conjunction with a `tenantId`.")
-  @JsonIgnore
 
   public Boolean getWithoutTenantId() {
-        return withoutTenantId.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_WITHOUT_TENANT_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getWithoutTenantId_JsonNullable() {
     return withoutTenantId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_WITHOUT_TENANT_ID)
-  public void setWithoutTenantId_JsonNullable(JsonNullable<Boolean> withoutTenantId) {
-    this.withoutTenantId = withoutTenantId;
-  }
+
 
   public void setWithoutTenantId(Boolean withoutTenantId) {
-    this.withoutTenantId = JsonNullable.<Boolean>of(withoutTenantId);
+    this.withoutTenantId = withoutTenantId;
   }
 
 
   public CorrelationMessageDto processInstanceId(String processInstanceId) {
+    
     this.processInstanceId = processInstanceId;
     return this;
   }
@@ -208,8 +186,6 @@ public class CorrelationMessageDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Used to correlate the message to the process instance with the given id.")
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getProcessInstanceId() {
     return processInstanceId;
@@ -222,6 +198,7 @@ public class CorrelationMessageDto {
 
 
   public CorrelationMessageDto correlationKeys(Map<String, VariableValueDto> correlationKeys) {
+    
     this.correlationKeys = correlationKeys;
     return this;
   }
@@ -240,8 +217,6 @@ public class CorrelationMessageDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Used for correlation of process instances that wait for incoming messages. Has to be a JSON object containing key-value pairs that are matched against process instance variables during correlation. Each key is a variable name and each value a JSON variable value object with the following properties.")
-  @JsonProperty(JSON_PROPERTY_CORRELATION_KEYS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Map<String, VariableValueDto> getCorrelationKeys() {
     return correlationKeys;
@@ -254,6 +229,7 @@ public class CorrelationMessageDto {
 
 
   public CorrelationMessageDto localCorrelationKeys(Map<String, VariableValueDto> localCorrelationKeys) {
+    
     this.localCorrelationKeys = localCorrelationKeys;
     return this;
   }
@@ -272,8 +248,6 @@ public class CorrelationMessageDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Local variables used for correlation of executions (process instances) that wait for incoming messages. Has to be a JSON object containing key-value pairs that are matched against local variables during correlation. Each key is a variable name and each value a JSON variable value object with the following properties.")
-  @JsonProperty(JSON_PROPERTY_LOCAL_CORRELATION_KEYS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Map<String, VariableValueDto> getLocalCorrelationKeys() {
     return localCorrelationKeys;
@@ -286,6 +260,7 @@ public class CorrelationMessageDto {
 
 
   public CorrelationMessageDto processVariables(Map<String, VariableValueDto> processVariables) {
+    
     this.processVariables = processVariables;
     return this;
   }
@@ -304,8 +279,6 @@ public class CorrelationMessageDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A map of variables that is injected into the triggered execution or process instance after the message has been delivered. Each key is a variable name and each value a JSON variable value object with the following properties.")
-  @JsonProperty(JSON_PROPERTY_PROCESS_VARIABLES)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Map<String, VariableValueDto> getProcessVariables() {
     return processVariables;
@@ -318,6 +291,7 @@ public class CorrelationMessageDto {
 
 
   public CorrelationMessageDto processVariablesLocal(Map<String, VariableValueDto> processVariablesLocal) {
+    
     this.processVariablesLocal = processVariablesLocal;
     return this;
   }
@@ -336,8 +310,6 @@ public class CorrelationMessageDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A map of local variables that is injected into the triggered execution or process instance after the message has been delivered. Each key is a variable name and each value a JSON variable value object with the following properties.")
-  @JsonProperty(JSON_PROPERTY_PROCESS_VARIABLES_LOCAL)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Map<String, VariableValueDto> getProcessVariablesLocal() {
     return processVariablesLocal;
@@ -350,7 +322,8 @@ public class CorrelationMessageDto {
 
 
   public CorrelationMessageDto all(Boolean all) {
-    this.all = JsonNullable.<Boolean>of(all);
+    
+    this.all = all;
     return this;
   }
 
@@ -360,31 +333,20 @@ public class CorrelationMessageDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A Boolean value that indicates whether the message should be correlated to exactly one entity or multiple entities. If the value is set to `false`, the message will be correlated to exactly one entity (execution or process definition). If the value is set to `true`, the message will be correlated to multiple executions and a process definition that can be instantiated by this message in one go.")
-  @JsonIgnore
 
   public Boolean getAll() {
-        return all.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_ALL)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getAll_JsonNullable() {
     return all;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ALL)
-  public void setAll_JsonNullable(JsonNullable<Boolean> all) {
-    this.all = all;
-  }
+
 
   public void setAll(Boolean all) {
-    this.all = JsonNullable.<Boolean>of(all);
+    this.all = all;
   }
 
 
   public CorrelationMessageDto resultEnabled(Boolean resultEnabled) {
-    this.resultEnabled = JsonNullable.<Boolean>of(resultEnabled);
+    
+    this.resultEnabled = resultEnabled;
     return this;
   }
 
@@ -394,31 +356,20 @@ public class CorrelationMessageDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A Boolean value that indicates whether the result of the correlation should be returned or not. If this property is set to `true`, there will be returned a list of message correlation result objects. Depending on the all property, there will be either one ore more returned results in the list.  The default value is `false`, which means no result will be returned.")
-  @JsonIgnore
 
   public Boolean getResultEnabled() {
-        return resultEnabled.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_RESULT_ENABLED)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getResultEnabled_JsonNullable() {
     return resultEnabled;
   }
-  
-  @JsonProperty(JSON_PROPERTY_RESULT_ENABLED)
-  public void setResultEnabled_JsonNullable(JsonNullable<Boolean> resultEnabled) {
-    this.resultEnabled = resultEnabled;
-  }
+
 
   public void setResultEnabled(Boolean resultEnabled) {
-    this.resultEnabled = JsonNullable.<Boolean>of(resultEnabled);
+    this.resultEnabled = resultEnabled;
   }
 
 
   public CorrelationMessageDto variablesInResultEnabled(Boolean variablesInResultEnabled) {
-    this.variablesInResultEnabled = JsonNullable.<Boolean>of(variablesInResultEnabled);
+    
+    this.variablesInResultEnabled = variablesInResultEnabled;
     return this;
   }
 
@@ -428,32 +379,17 @@ public class CorrelationMessageDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A Boolean value that indicates whether the result of the correlation should contain process variables or not. The parameter resultEnabled should be set to `true` in order to use this it.  The default value is `false`, which means the variables will not be returned.")
-  @JsonIgnore
 
   public Boolean getVariablesInResultEnabled() {
-        return variablesInResultEnabled.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_VARIABLES_IN_RESULT_ENABLED)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getVariablesInResultEnabled_JsonNullable() {
     return variablesInResultEnabled;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VARIABLES_IN_RESULT_ENABLED)
-  public void setVariablesInResultEnabled_JsonNullable(JsonNullable<Boolean> variablesInResultEnabled) {
+
+
+  public void setVariablesInResultEnabled(Boolean variablesInResultEnabled) {
     this.variablesInResultEnabled = variablesInResultEnabled;
   }
 
-  public void setVariablesInResultEnabled(Boolean variablesInResultEnabled) {
-    this.variablesInResultEnabled = JsonNullable.<Boolean>of(variablesInResultEnabled);
-  }
 
-
-  /**
-   * Return true if this CorrelationMessageDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

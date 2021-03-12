@@ -2,7 +2,6 @@
   "groupId":"de.dfki.cos.basys.common.rest.camunda",
   "artifactId":"client",
   "artifactVersion":"7.14.0",
-  "library":"jersey2",
   "apiPackage":"de.dfki.cos.basys.common.rest.camunda.api",
   "modelPackage":"de.dfki.cos.basys.common.rest.camunda.dto"
 }

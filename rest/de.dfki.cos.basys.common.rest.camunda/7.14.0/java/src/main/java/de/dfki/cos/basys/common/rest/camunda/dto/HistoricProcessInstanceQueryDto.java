@@ -15,133 +15,94 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import de.dfki.cos.basys.common.rest.camunda.dto.HistoricProcessInstanceQueryDtoSorting;
 import de.dfki.cos.basys.common.rest.camunda.dto.VariableQueryParameterDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.threeten.bp.OffsetDateTime;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
 
 /**
  * A historic process instance query which defines a group of historic process instances
  */
 @ApiModel(description = "A historic process instance query which defines a group of historic process instances")
-@JsonPropertyOrder({
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_PROCESS_INSTANCE_ID,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_PROCESS_INSTANCE_IDS,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_PROCESS_DEFINITION_ID,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_PROCESS_DEFINITION_KEY,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_PROCESS_DEFINITION_KEY_IN,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_PROCESS_DEFINITION_NAME,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_PROCESS_DEFINITION_NAME_LIKE,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_PROCESS_DEFINITION_KEY_NOT_IN,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_PROCESS_INSTANCE_BUSINESS_KEY,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_PROCESS_INSTANCE_BUSINESS_KEY_LIKE,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_ROOT_PROCESS_INSTANCES,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_FINISHED,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_UNFINISHED,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_WITH_INCIDENTS,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_WITH_ROOT_INCIDENTS,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_INCIDENT_TYPE,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_INCIDENT_STATUS,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_INCIDENT_MESSAGE,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_INCIDENT_MESSAGE_LIKE,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_STARTED_BEFORE,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_STARTED_AFTER,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_FINISHED_BEFORE,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_FINISHED_AFTER,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_EXECUTED_ACTIVITY_AFTER,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_EXECUTED_ACTIVITY_BEFORE,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_EXECUTED_JOB_AFTER,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_EXECUTED_JOB_BEFORE,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_STARTED_BY,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_SUPER_PROCESS_INSTANCE_ID,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_SUB_PROCESS_INSTANCE_ID,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_SUPER_CASE_INSTANCE_ID,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_SUB_CASE_INSTANCE_ID,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_CASE_INSTANCE_ID,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_TENANT_ID_IN,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_WITHOUT_TENANT_ID,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_EXECUTED_ACTIVITY_ID_IN,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_ACTIVE_ACTIVITY_ID_IN,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_ACTIVE,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_SUSPENDED,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_COMPLETED,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_EXTERNALLY_TERMINATED,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_INTERNALLY_TERMINATED,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_VARIABLES,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_VARIABLE_NAMES_IGNORE_CASE,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_VARIABLE_VALUES_IGNORE_CASE,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_OR_QUERIES,
-  HistoricProcessInstanceQueryDto.JSON_PROPERTY_SORTING
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class HistoricProcessInstanceQueryDto {
-  public static final String JSON_PROPERTY_PROCESS_INSTANCE_ID = "processInstanceId";
+  public static final String SERIALIZED_NAME_PROCESS_INSTANCE_ID = "processInstanceId";
+  @SerializedName(SERIALIZED_NAME_PROCESS_INSTANCE_ID)
   private String processInstanceId;
 
-  public static final String JSON_PROPERTY_PROCESS_INSTANCE_IDS = "processInstanceIds";
+  public static final String SERIALIZED_NAME_PROCESS_INSTANCE_IDS = "processInstanceIds";
+  @SerializedName(SERIALIZED_NAME_PROCESS_INSTANCE_IDS)
   private List<String> processInstanceIds = null;
 
-  public static final String JSON_PROPERTY_PROCESS_DEFINITION_ID = "processDefinitionId";
+  public static final String SERIALIZED_NAME_PROCESS_DEFINITION_ID = "processDefinitionId";
+  @SerializedName(SERIALIZED_NAME_PROCESS_DEFINITION_ID)
   private String processDefinitionId;
 
-  public static final String JSON_PROPERTY_PROCESS_DEFINITION_KEY = "processDefinitionKey";
+  public static final String SERIALIZED_NAME_PROCESS_DEFINITION_KEY = "processDefinitionKey";
+  @SerializedName(SERIALIZED_NAME_PROCESS_DEFINITION_KEY)
   private String processDefinitionKey;
 
-  public static final String JSON_PROPERTY_PROCESS_DEFINITION_KEY_IN = "processDefinitionKeyIn";
+  public static final String SERIALIZED_NAME_PROCESS_DEFINITION_KEY_IN = "processDefinitionKeyIn";
+  @SerializedName(SERIALIZED_NAME_PROCESS_DEFINITION_KEY_IN)
   private List<String> processDefinitionKeyIn = null;
 
-  public static final String JSON_PROPERTY_PROCESS_DEFINITION_NAME = "processDefinitionName";
+  public static final String SERIALIZED_NAME_PROCESS_DEFINITION_NAME = "processDefinitionName";
+  @SerializedName(SERIALIZED_NAME_PROCESS_DEFINITION_NAME)
   private String processDefinitionName;
 
-  public static final String JSON_PROPERTY_PROCESS_DEFINITION_NAME_LIKE = "processDefinitionNameLike";
+  public static final String SERIALIZED_NAME_PROCESS_DEFINITION_NAME_LIKE = "processDefinitionNameLike";
+  @SerializedName(SERIALIZED_NAME_PROCESS_DEFINITION_NAME_LIKE)
   private String processDefinitionNameLike;
 
-  public static final String JSON_PROPERTY_PROCESS_DEFINITION_KEY_NOT_IN = "processDefinitionKeyNotIn";
+  public static final String SERIALIZED_NAME_PROCESS_DEFINITION_KEY_NOT_IN = "processDefinitionKeyNotIn";
+  @SerializedName(SERIALIZED_NAME_PROCESS_DEFINITION_KEY_NOT_IN)
   private List<String> processDefinitionKeyNotIn = null;
 
-  public static final String JSON_PROPERTY_PROCESS_INSTANCE_BUSINESS_KEY = "processInstanceBusinessKey";
+  public static final String SERIALIZED_NAME_PROCESS_INSTANCE_BUSINESS_KEY = "processInstanceBusinessKey";
+  @SerializedName(SERIALIZED_NAME_PROCESS_INSTANCE_BUSINESS_KEY)
   private String processInstanceBusinessKey;
 
-  public static final String JSON_PROPERTY_PROCESS_INSTANCE_BUSINESS_KEY_LIKE = "processInstanceBusinessKeyLike";
+  public static final String SERIALIZED_NAME_PROCESS_INSTANCE_BUSINESS_KEY_LIKE = "processInstanceBusinessKeyLike";
+  @SerializedName(SERIALIZED_NAME_PROCESS_INSTANCE_BUSINESS_KEY_LIKE)
   private String processInstanceBusinessKeyLike;
 
-  public static final String JSON_PROPERTY_ROOT_PROCESS_INSTANCES = "rootProcessInstances";
-  private JsonNullable<Boolean> rootProcessInstances = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_ROOT_PROCESS_INSTANCES = "rootProcessInstances";
+  @SerializedName(SERIALIZED_NAME_ROOT_PROCESS_INSTANCES)
+  private Boolean rootProcessInstances;
 
-  public static final String JSON_PROPERTY_FINISHED = "finished";
-  private JsonNullable<Boolean> finished = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_FINISHED = "finished";
+  @SerializedName(SERIALIZED_NAME_FINISHED)
+  private Boolean finished;
 
-  public static final String JSON_PROPERTY_UNFINISHED = "unfinished";
-  private JsonNullable<Boolean> unfinished = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_UNFINISHED = "unfinished";
+  @SerializedName(SERIALIZED_NAME_UNFINISHED)
+  private Boolean unfinished;
 
-  public static final String JSON_PROPERTY_WITH_INCIDENTS = "withIncidents";
-  private JsonNullable<Boolean> withIncidents = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_WITH_INCIDENTS = "withIncidents";
+  @SerializedName(SERIALIZED_NAME_WITH_INCIDENTS)
+  private Boolean withIncidents;
 
-  public static final String JSON_PROPERTY_WITH_ROOT_INCIDENTS = "withRootIncidents";
-  private JsonNullable<Boolean> withRootIncidents = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_WITH_ROOT_INCIDENTS = "withRootIncidents";
+  @SerializedName(SERIALIZED_NAME_WITH_ROOT_INCIDENTS)
+  private Boolean withRootIncidents;
 
-  public static final String JSON_PROPERTY_INCIDENT_TYPE = "incidentType";
+  public static final String SERIALIZED_NAME_INCIDENT_TYPE = "incidentType";
+  @SerializedName(SERIALIZED_NAME_INCIDENT_TYPE)
   private String incidentType;
 
   /**
    * Only include process instances which have an incident in status either open or resolved. To get all process instances, use the query parameter withIncidents.
    */
+  @JsonAdapter(IncidentStatusEnum.Adapter.class)
   public enum IncidentStatusEnum {
     OPEN("open"),
     
@@ -153,7 +114,6 @@ public class HistoricProcessInstanceQueryDto {
       this.value = value;
     }
 
-    @JsonValue
     public String getValue() {
       return value;
     }
@@ -163,7 +123,6 @@ public class HistoricProcessInstanceQueryDto {
       return String.valueOf(value);
     }
 
-    @JsonCreator
     public static IncidentStatusEnum fromValue(String value) {
       for (IncidentStatusEnum b : IncidentStatusEnum.values()) {
         if (b.value.equals(value)) {
@@ -172,103 +131,148 @@ public class HistoricProcessInstanceQueryDto {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
+
+    public static class Adapter extends TypeAdapter<IncidentStatusEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final IncidentStatusEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public IncidentStatusEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return IncidentStatusEnum.fromValue(value);
+      }
+    }
   }
 
-  public static final String JSON_PROPERTY_INCIDENT_STATUS = "incidentStatus";
+  public static final String SERIALIZED_NAME_INCIDENT_STATUS = "incidentStatus";
+  @SerializedName(SERIALIZED_NAME_INCIDENT_STATUS)
   private IncidentStatusEnum incidentStatus;
 
-  public static final String JSON_PROPERTY_INCIDENT_MESSAGE = "incidentMessage";
+  public static final String SERIALIZED_NAME_INCIDENT_MESSAGE = "incidentMessage";
+  @SerializedName(SERIALIZED_NAME_INCIDENT_MESSAGE)
   private String incidentMessage;
 
-  public static final String JSON_PROPERTY_INCIDENT_MESSAGE_LIKE = "incidentMessageLike";
+  public static final String SERIALIZED_NAME_INCIDENT_MESSAGE_LIKE = "incidentMessageLike";
+  @SerializedName(SERIALIZED_NAME_INCIDENT_MESSAGE_LIKE)
   private String incidentMessageLike;
 
-  public static final String JSON_PROPERTY_STARTED_BEFORE = "startedBefore";
-  private JsonNullable<OffsetDateTime> startedBefore = JsonNullable.<OffsetDateTime>undefined();
+  public static final String SERIALIZED_NAME_STARTED_BEFORE = "startedBefore";
+  @SerializedName(SERIALIZED_NAME_STARTED_BEFORE)
+  private OffsetDateTime startedBefore;
 
-  public static final String JSON_PROPERTY_STARTED_AFTER = "startedAfter";
-  private JsonNullable<OffsetDateTime> startedAfter = JsonNullable.<OffsetDateTime>undefined();
+  public static final String SERIALIZED_NAME_STARTED_AFTER = "startedAfter";
+  @SerializedName(SERIALIZED_NAME_STARTED_AFTER)
+  private OffsetDateTime startedAfter;
 
-  public static final String JSON_PROPERTY_FINISHED_BEFORE = "finishedBefore";
-  private JsonNullable<OffsetDateTime> finishedBefore = JsonNullable.<OffsetDateTime>undefined();
+  public static final String SERIALIZED_NAME_FINISHED_BEFORE = "finishedBefore";
+  @SerializedName(SERIALIZED_NAME_FINISHED_BEFORE)
+  private OffsetDateTime finishedBefore;
 
-  public static final String JSON_PROPERTY_FINISHED_AFTER = "finishedAfter";
-  private JsonNullable<OffsetDateTime> finishedAfter = JsonNullable.<OffsetDateTime>undefined();
+  public static final String SERIALIZED_NAME_FINISHED_AFTER = "finishedAfter";
+  @SerializedName(SERIALIZED_NAME_FINISHED_AFTER)
+  private OffsetDateTime finishedAfter;
 
-  public static final String JSON_PROPERTY_EXECUTED_ACTIVITY_AFTER = "executedActivityAfter";
-  private JsonNullable<OffsetDateTime> executedActivityAfter = JsonNullable.<OffsetDateTime>undefined();
+  public static final String SERIALIZED_NAME_EXECUTED_ACTIVITY_AFTER = "executedActivityAfter";
+  @SerializedName(SERIALIZED_NAME_EXECUTED_ACTIVITY_AFTER)
+  private OffsetDateTime executedActivityAfter;
 
-  public static final String JSON_PROPERTY_EXECUTED_ACTIVITY_BEFORE = "executedActivityBefore";
-  private JsonNullable<OffsetDateTime> executedActivityBefore = JsonNullable.<OffsetDateTime>undefined();
+  public static final String SERIALIZED_NAME_EXECUTED_ACTIVITY_BEFORE = "executedActivityBefore";
+  @SerializedName(SERIALIZED_NAME_EXECUTED_ACTIVITY_BEFORE)
+  private OffsetDateTime executedActivityBefore;
 
-  public static final String JSON_PROPERTY_EXECUTED_JOB_AFTER = "executedJobAfter";
-  private JsonNullable<OffsetDateTime> executedJobAfter = JsonNullable.<OffsetDateTime>undefined();
+  public static final String SERIALIZED_NAME_EXECUTED_JOB_AFTER = "executedJobAfter";
+  @SerializedName(SERIALIZED_NAME_EXECUTED_JOB_AFTER)
+  private OffsetDateTime executedJobAfter;
 
-  public static final String JSON_PROPERTY_EXECUTED_JOB_BEFORE = "executedJobBefore";
-  private JsonNullable<OffsetDateTime> executedJobBefore = JsonNullable.<OffsetDateTime>undefined();
+  public static final String SERIALIZED_NAME_EXECUTED_JOB_BEFORE = "executedJobBefore";
+  @SerializedName(SERIALIZED_NAME_EXECUTED_JOB_BEFORE)
+  private OffsetDateTime executedJobBefore;
 
-  public static final String JSON_PROPERTY_STARTED_BY = "startedBy";
+  public static final String SERIALIZED_NAME_STARTED_BY = "startedBy";
+  @SerializedName(SERIALIZED_NAME_STARTED_BY)
   private String startedBy;
 
-  public static final String JSON_PROPERTY_SUPER_PROCESS_INSTANCE_ID = "superProcessInstanceId";
+  public static final String SERIALIZED_NAME_SUPER_PROCESS_INSTANCE_ID = "superProcessInstanceId";
+  @SerializedName(SERIALIZED_NAME_SUPER_PROCESS_INSTANCE_ID)
   private String superProcessInstanceId;
 
-  public static final String JSON_PROPERTY_SUB_PROCESS_INSTANCE_ID = "subProcessInstanceId";
+  public static final String SERIALIZED_NAME_SUB_PROCESS_INSTANCE_ID = "subProcessInstanceId";
+  @SerializedName(SERIALIZED_NAME_SUB_PROCESS_INSTANCE_ID)
   private String subProcessInstanceId;
 
-  public static final String JSON_PROPERTY_SUPER_CASE_INSTANCE_ID = "superCaseInstanceId";
+  public static final String SERIALIZED_NAME_SUPER_CASE_INSTANCE_ID = "superCaseInstanceId";
+  @SerializedName(SERIALIZED_NAME_SUPER_CASE_INSTANCE_ID)
   private String superCaseInstanceId;
 
-  public static final String JSON_PROPERTY_SUB_CASE_INSTANCE_ID = "subCaseInstanceId";
+  public static final String SERIALIZED_NAME_SUB_CASE_INSTANCE_ID = "subCaseInstanceId";
+  @SerializedName(SERIALIZED_NAME_SUB_CASE_INSTANCE_ID)
   private String subCaseInstanceId;
 
-  public static final String JSON_PROPERTY_CASE_INSTANCE_ID = "caseInstanceId";
+  public static final String SERIALIZED_NAME_CASE_INSTANCE_ID = "caseInstanceId";
+  @SerializedName(SERIALIZED_NAME_CASE_INSTANCE_ID)
   private String caseInstanceId;
 
-  public static final String JSON_PROPERTY_TENANT_ID_IN = "tenantIdIn";
+  public static final String SERIALIZED_NAME_TENANT_ID_IN = "tenantIdIn";
+  @SerializedName(SERIALIZED_NAME_TENANT_ID_IN)
   private List<String> tenantIdIn = null;
 
-  public static final String JSON_PROPERTY_WITHOUT_TENANT_ID = "withoutTenantId";
-  private JsonNullable<Boolean> withoutTenantId = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_WITHOUT_TENANT_ID = "withoutTenantId";
+  @SerializedName(SERIALIZED_NAME_WITHOUT_TENANT_ID)
+  private Boolean withoutTenantId;
 
-  public static final String JSON_PROPERTY_EXECUTED_ACTIVITY_ID_IN = "executedActivityIdIn";
+  public static final String SERIALIZED_NAME_EXECUTED_ACTIVITY_ID_IN = "executedActivityIdIn";
+  @SerializedName(SERIALIZED_NAME_EXECUTED_ACTIVITY_ID_IN)
   private List<String> executedActivityIdIn = null;
 
-  public static final String JSON_PROPERTY_ACTIVE_ACTIVITY_ID_IN = "activeActivityIdIn";
+  public static final String SERIALIZED_NAME_ACTIVE_ACTIVITY_ID_IN = "activeActivityIdIn";
+  @SerializedName(SERIALIZED_NAME_ACTIVE_ACTIVITY_ID_IN)
   private List<String> activeActivityIdIn = null;
 
-  public static final String JSON_PROPERTY_ACTIVE = "active";
-  private JsonNullable<Boolean> active = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_ACTIVE = "active";
+  @SerializedName(SERIALIZED_NAME_ACTIVE)
+  private Boolean active;
 
-  public static final String JSON_PROPERTY_SUSPENDED = "suspended";
-  private JsonNullable<Boolean> suspended = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_SUSPENDED = "suspended";
+  @SerializedName(SERIALIZED_NAME_SUSPENDED)
+  private Boolean suspended;
 
-  public static final String JSON_PROPERTY_COMPLETED = "completed";
-  private JsonNullable<Boolean> completed = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_COMPLETED = "completed";
+  @SerializedName(SERIALIZED_NAME_COMPLETED)
+  private Boolean completed;
 
-  public static final String JSON_PROPERTY_EXTERNALLY_TERMINATED = "externallyTerminated";
-  private JsonNullable<Boolean> externallyTerminated = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_EXTERNALLY_TERMINATED = "externallyTerminated";
+  @SerializedName(SERIALIZED_NAME_EXTERNALLY_TERMINATED)
+  private Boolean externallyTerminated;
 
-  public static final String JSON_PROPERTY_INTERNALLY_TERMINATED = "internallyTerminated";
-  private JsonNullable<Boolean> internallyTerminated = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_INTERNALLY_TERMINATED = "internallyTerminated";
+  @SerializedName(SERIALIZED_NAME_INTERNALLY_TERMINATED)
+  private Boolean internallyTerminated;
 
-  public static final String JSON_PROPERTY_VARIABLES = "variables";
+  public static final String SERIALIZED_NAME_VARIABLES = "variables";
+  @SerializedName(SERIALIZED_NAME_VARIABLES)
   private List<VariableQueryParameterDto> variables = null;
 
-  public static final String JSON_PROPERTY_VARIABLE_NAMES_IGNORE_CASE = "variableNamesIgnoreCase";
-  private JsonNullable<Boolean> variableNamesIgnoreCase = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_VARIABLE_NAMES_IGNORE_CASE = "variableNamesIgnoreCase";
+  @SerializedName(SERIALIZED_NAME_VARIABLE_NAMES_IGNORE_CASE)
+  private Boolean variableNamesIgnoreCase;
 
-  public static final String JSON_PROPERTY_VARIABLE_VALUES_IGNORE_CASE = "variableValuesIgnoreCase";
-  private JsonNullable<Boolean> variableValuesIgnoreCase = JsonNullable.<Boolean>undefined();
+  public static final String SERIALIZED_NAME_VARIABLE_VALUES_IGNORE_CASE = "variableValuesIgnoreCase";
+  @SerializedName(SERIALIZED_NAME_VARIABLE_VALUES_IGNORE_CASE)
+  private Boolean variableValuesIgnoreCase;
 
-  public static final String JSON_PROPERTY_OR_QUERIES = "orQueries";
+  public static final String SERIALIZED_NAME_OR_QUERIES = "orQueries";
+  @SerializedName(SERIALIZED_NAME_OR_QUERIES)
   private List<HistoricProcessInstanceQueryDto> orQueries = null;
 
-  public static final String JSON_PROPERTY_SORTING = "sorting";
+  public static final String SERIALIZED_NAME_SORTING = "sorting";
+  @SerializedName(SERIALIZED_NAME_SORTING)
   private List<HistoricProcessInstanceQueryDtoSorting> sorting = null;
 
 
   public HistoricProcessInstanceQueryDto processInstanceId(String processInstanceId) {
+    
     this.processInstanceId = processInstanceId;
     return this;
   }
@@ -279,8 +283,6 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by process instance id.")
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getProcessInstanceId() {
     return processInstanceId;
@@ -293,6 +295,7 @@ public class HistoricProcessInstanceQueryDto {
 
 
   public HistoricProcessInstanceQueryDto processInstanceIds(List<String> processInstanceIds) {
+    
     this.processInstanceIds = processInstanceIds;
     return this;
   }
@@ -311,8 +314,6 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by process instance ids. Must be a JSON array of `Strings`.")
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_IDS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<String> getProcessInstanceIds() {
     return processInstanceIds;
@@ -325,6 +326,7 @@ public class HistoricProcessInstanceQueryDto {
 
 
   public HistoricProcessInstanceQueryDto processDefinitionId(String processDefinitionId) {
+    
     this.processDefinitionId = processDefinitionId;
     return this;
   }
@@ -335,8 +337,6 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the process definition the instances run on.")
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getProcessDefinitionId() {
     return processDefinitionId;
@@ -349,6 +349,7 @@ public class HistoricProcessInstanceQueryDto {
 
 
   public HistoricProcessInstanceQueryDto processDefinitionKey(String processDefinitionKey) {
+    
     this.processDefinitionKey = processDefinitionKey;
     return this;
   }
@@ -359,8 +360,6 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the key of the process definition the instances run on.")
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getProcessDefinitionKey() {
     return processDefinitionKey;
@@ -373,6 +372,7 @@ public class HistoricProcessInstanceQueryDto {
 
 
   public HistoricProcessInstanceQueryDto processDefinitionKeyIn(List<String> processDefinitionKeyIn) {
+    
     this.processDefinitionKeyIn = processDefinitionKeyIn;
     return this;
   }
@@ -391,8 +391,6 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by a list of process definition keys. A process instance must have one of the given process definition keys. Must be a JSON array of `Strings`.")
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY_IN)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<String> getProcessDefinitionKeyIn() {
     return processDefinitionKeyIn;
@@ -405,6 +403,7 @@ public class HistoricProcessInstanceQueryDto {
 
 
   public HistoricProcessInstanceQueryDto processDefinitionName(String processDefinitionName) {
+    
     this.processDefinitionName = processDefinitionName;
     return this;
   }
@@ -415,8 +414,6 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the name of the process definition the instances run on.")
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_NAME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getProcessDefinitionName() {
     return processDefinitionName;
@@ -429,6 +426,7 @@ public class HistoricProcessInstanceQueryDto {
 
 
   public HistoricProcessInstanceQueryDto processDefinitionNameLike(String processDefinitionNameLike) {
+    
     this.processDefinitionNameLike = processDefinitionNameLike;
     return this;
   }
@@ -439,8 +437,6 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by process definition names that the parameter is a substring of.")
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_NAME_LIKE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getProcessDefinitionNameLike() {
     return processDefinitionNameLike;
@@ -453,6 +449,7 @@ public class HistoricProcessInstanceQueryDto {
 
 
   public HistoricProcessInstanceQueryDto processDefinitionKeyNotIn(List<String> processDefinitionKeyNotIn) {
+    
     this.processDefinitionKeyNotIn = processDefinitionKeyNotIn;
     return this;
   }
@@ -471,8 +468,6 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Exclude instances that belong to a set of process definitions. Must be a JSON array of `Strings`.")
-  @JsonProperty(JSON_PROPERTY_PROCESS_DEFINITION_KEY_NOT_IN)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<String> getProcessDefinitionKeyNotIn() {
     return processDefinitionKeyNotIn;
@@ -485,6 +480,7 @@ public class HistoricProcessInstanceQueryDto {
 
 
   public HistoricProcessInstanceQueryDto processInstanceBusinessKey(String processInstanceBusinessKey) {
+    
     this.processInstanceBusinessKey = processInstanceBusinessKey;
     return this;
   }
@@ -495,8 +491,6 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by process instance business key.")
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_BUSINESS_KEY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getProcessInstanceBusinessKey() {
     return processInstanceBusinessKey;
@@ -509,6 +503,7 @@ public class HistoricProcessInstanceQueryDto {
 
 
   public HistoricProcessInstanceQueryDto processInstanceBusinessKeyLike(String processInstanceBusinessKeyLike) {
+    
     this.processInstanceBusinessKeyLike = processInstanceBusinessKeyLike;
     return this;
   }
@@ -519,8 +514,6 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by process instance business key that the parameter is a substring of.")
-  @JsonProperty(JSON_PROPERTY_PROCESS_INSTANCE_BUSINESS_KEY_LIKE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getProcessInstanceBusinessKeyLike() {
     return processInstanceBusinessKeyLike;
@@ -533,7 +526,8 @@ public class HistoricProcessInstanceQueryDto {
 
 
   public HistoricProcessInstanceQueryDto rootProcessInstances(Boolean rootProcessInstances) {
-    this.rootProcessInstances = JsonNullable.<Boolean>of(rootProcessInstances);
+    
+    this.rootProcessInstances = rootProcessInstances;
     return this;
   }
 
@@ -543,31 +537,20 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict the query to all process instances that are top level process instances.")
-  @JsonIgnore
 
   public Boolean getRootProcessInstances() {
-        return rootProcessInstances.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_ROOT_PROCESS_INSTANCES)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getRootProcessInstances_JsonNullable() {
     return rootProcessInstances;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ROOT_PROCESS_INSTANCES)
-  public void setRootProcessInstances_JsonNullable(JsonNullable<Boolean> rootProcessInstances) {
-    this.rootProcessInstances = rootProcessInstances;
-  }
+
 
   public void setRootProcessInstances(Boolean rootProcessInstances) {
-    this.rootProcessInstances = JsonNullable.<Boolean>of(rootProcessInstances);
+    this.rootProcessInstances = rootProcessInstances;
   }
 
 
   public HistoricProcessInstanceQueryDto finished(Boolean finished) {
-    this.finished = JsonNullable.<Boolean>of(finished);
+    
+    this.finished = finished;
     return this;
   }
 
@@ -577,31 +560,20 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include finished process instances. Value may only be `true`, as `false` is the default behavior.")
-  @JsonIgnore
 
   public Boolean getFinished() {
-        return finished.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_FINISHED)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getFinished_JsonNullable() {
     return finished;
   }
-  
-  @JsonProperty(JSON_PROPERTY_FINISHED)
-  public void setFinished_JsonNullable(JsonNullable<Boolean> finished) {
-    this.finished = finished;
-  }
+
 
   public void setFinished(Boolean finished) {
-    this.finished = JsonNullable.<Boolean>of(finished);
+    this.finished = finished;
   }
 
 
   public HistoricProcessInstanceQueryDto unfinished(Boolean unfinished) {
-    this.unfinished = JsonNullable.<Boolean>of(unfinished);
+    
+    this.unfinished = unfinished;
     return this;
   }
 
@@ -611,31 +583,20 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include unfinished process instances. Value may only be `true`, as `false` is the default behavior.")
-  @JsonIgnore
 
   public Boolean getUnfinished() {
-        return unfinished.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_UNFINISHED)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getUnfinished_JsonNullable() {
     return unfinished;
   }
-  
-  @JsonProperty(JSON_PROPERTY_UNFINISHED)
-  public void setUnfinished_JsonNullable(JsonNullable<Boolean> unfinished) {
-    this.unfinished = unfinished;
-  }
+
 
   public void setUnfinished(Boolean unfinished) {
-    this.unfinished = JsonNullable.<Boolean>of(unfinished);
+    this.unfinished = unfinished;
   }
 
 
   public HistoricProcessInstanceQueryDto withIncidents(Boolean withIncidents) {
-    this.withIncidents = JsonNullable.<Boolean>of(withIncidents);
+    
+    this.withIncidents = withIncidents;
     return this;
   }
 
@@ -645,31 +606,20 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include process instances which have an incident. Value may only be `true`, as `false` is the default behavior.")
-  @JsonIgnore
 
   public Boolean getWithIncidents() {
-        return withIncidents.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_WITH_INCIDENTS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getWithIncidents_JsonNullable() {
     return withIncidents;
   }
-  
-  @JsonProperty(JSON_PROPERTY_WITH_INCIDENTS)
-  public void setWithIncidents_JsonNullable(JsonNullable<Boolean> withIncidents) {
-    this.withIncidents = withIncidents;
-  }
+
 
   public void setWithIncidents(Boolean withIncidents) {
-    this.withIncidents = JsonNullable.<Boolean>of(withIncidents);
+    this.withIncidents = withIncidents;
   }
 
 
   public HistoricProcessInstanceQueryDto withRootIncidents(Boolean withRootIncidents) {
-    this.withRootIncidents = JsonNullable.<Boolean>of(withRootIncidents);
+    
+    this.withRootIncidents = withRootIncidents;
     return this;
   }
 
@@ -679,30 +629,19 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include process instances which have a root incident. Value may only be `true`, as `false` is the default behavior.")
-  @JsonIgnore
 
   public Boolean getWithRootIncidents() {
-        return withRootIncidents.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_WITH_ROOT_INCIDENTS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getWithRootIncidents_JsonNullable() {
     return withRootIncidents;
   }
-  
-  @JsonProperty(JSON_PROPERTY_WITH_ROOT_INCIDENTS)
-  public void setWithRootIncidents_JsonNullable(JsonNullable<Boolean> withRootIncidents) {
-    this.withRootIncidents = withRootIncidents;
-  }
+
 
   public void setWithRootIncidents(Boolean withRootIncidents) {
-    this.withRootIncidents = JsonNullable.<Boolean>of(withRootIncidents);
+    this.withRootIncidents = withRootIncidents;
   }
 
 
   public HistoricProcessInstanceQueryDto incidentType(String incidentType) {
+    
     this.incidentType = incidentType;
     return this;
   }
@@ -713,8 +652,6 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the incident type. See the [User Guide](https://docs.camunda.org/manual/7.14/user-guide/process-engine/incidents/#incident-types) for a list of incident types.")
-  @JsonProperty(JSON_PROPERTY_INCIDENT_TYPE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getIncidentType() {
     return incidentType;
@@ -727,6 +664,7 @@ public class HistoricProcessInstanceQueryDto {
 
 
   public HistoricProcessInstanceQueryDto incidentStatus(IncidentStatusEnum incidentStatus) {
+    
     this.incidentStatus = incidentStatus;
     return this;
   }
@@ -737,8 +675,6 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include process instances which have an incident in status either open or resolved. To get all process instances, use the query parameter withIncidents.")
-  @JsonProperty(JSON_PROPERTY_INCIDENT_STATUS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public IncidentStatusEnum getIncidentStatus() {
     return incidentStatus;
@@ -751,6 +687,7 @@ public class HistoricProcessInstanceQueryDto {
 
 
   public HistoricProcessInstanceQueryDto incidentMessage(String incidentMessage) {
+    
     this.incidentMessage = incidentMessage;
     return this;
   }
@@ -761,8 +698,6 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the incident message. Exact match.")
-  @JsonProperty(JSON_PROPERTY_INCIDENT_MESSAGE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getIncidentMessage() {
     return incidentMessage;
@@ -775,6 +710,7 @@ public class HistoricProcessInstanceQueryDto {
 
 
   public HistoricProcessInstanceQueryDto incidentMessageLike(String incidentMessageLike) {
+    
     this.incidentMessageLike = incidentMessageLike;
     return this;
   }
@@ -785,8 +721,6 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by the incident message that the parameter is a substring of.")
-  @JsonProperty(JSON_PROPERTY_INCIDENT_MESSAGE_LIKE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getIncidentMessageLike() {
     return incidentMessageLike;
@@ -799,7 +733,8 @@ public class HistoricProcessInstanceQueryDto {
 
 
   public HistoricProcessInstanceQueryDto startedBefore(OffsetDateTime startedBefore) {
-    this.startedBefore = JsonNullable.<OffsetDateTime>of(startedBefore);
+    
+    this.startedBefore = startedBefore;
     return this;
   }
 
@@ -809,31 +744,20 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to instances that were started before the given date. By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.")
-  @JsonIgnore
 
   public OffsetDateTime getStartedBefore() {
-        return startedBefore.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_STARTED_BEFORE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<OffsetDateTime> getStartedBefore_JsonNullable() {
     return startedBefore;
   }
-  
-  @JsonProperty(JSON_PROPERTY_STARTED_BEFORE)
-  public void setStartedBefore_JsonNullable(JsonNullable<OffsetDateTime> startedBefore) {
-    this.startedBefore = startedBefore;
-  }
+
 
   public void setStartedBefore(OffsetDateTime startedBefore) {
-    this.startedBefore = JsonNullable.<OffsetDateTime>of(startedBefore);
+    this.startedBefore = startedBefore;
   }
 
 
   public HistoricProcessInstanceQueryDto startedAfter(OffsetDateTime startedAfter) {
-    this.startedAfter = JsonNullable.<OffsetDateTime>of(startedAfter);
+    
+    this.startedAfter = startedAfter;
     return this;
   }
 
@@ -843,31 +767,20 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to instances that were started after the given date. By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.")
-  @JsonIgnore
 
   public OffsetDateTime getStartedAfter() {
-        return startedAfter.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_STARTED_AFTER)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<OffsetDateTime> getStartedAfter_JsonNullable() {
     return startedAfter;
   }
-  
-  @JsonProperty(JSON_PROPERTY_STARTED_AFTER)
-  public void setStartedAfter_JsonNullable(JsonNullable<OffsetDateTime> startedAfter) {
-    this.startedAfter = startedAfter;
-  }
+
 
   public void setStartedAfter(OffsetDateTime startedAfter) {
-    this.startedAfter = JsonNullable.<OffsetDateTime>of(startedAfter);
+    this.startedAfter = startedAfter;
   }
 
 
   public HistoricProcessInstanceQueryDto finishedBefore(OffsetDateTime finishedBefore) {
-    this.finishedBefore = JsonNullable.<OffsetDateTime>of(finishedBefore);
+    
+    this.finishedBefore = finishedBefore;
     return this;
   }
 
@@ -877,31 +790,20 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to instances that were finished before the given date. By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.")
-  @JsonIgnore
 
   public OffsetDateTime getFinishedBefore() {
-        return finishedBefore.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_FINISHED_BEFORE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<OffsetDateTime> getFinishedBefore_JsonNullable() {
     return finishedBefore;
   }
-  
-  @JsonProperty(JSON_PROPERTY_FINISHED_BEFORE)
-  public void setFinishedBefore_JsonNullable(JsonNullable<OffsetDateTime> finishedBefore) {
-    this.finishedBefore = finishedBefore;
-  }
+
 
   public void setFinishedBefore(OffsetDateTime finishedBefore) {
-    this.finishedBefore = JsonNullable.<OffsetDateTime>of(finishedBefore);
+    this.finishedBefore = finishedBefore;
   }
 
 
   public HistoricProcessInstanceQueryDto finishedAfter(OffsetDateTime finishedAfter) {
-    this.finishedAfter = JsonNullable.<OffsetDateTime>of(finishedAfter);
+    
+    this.finishedAfter = finishedAfter;
     return this;
   }
 
@@ -911,31 +813,20 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to instances that were finished after the given date. By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.")
-  @JsonIgnore
 
   public OffsetDateTime getFinishedAfter() {
-        return finishedAfter.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_FINISHED_AFTER)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<OffsetDateTime> getFinishedAfter_JsonNullable() {
     return finishedAfter;
   }
-  
-  @JsonProperty(JSON_PROPERTY_FINISHED_AFTER)
-  public void setFinishedAfter_JsonNullable(JsonNullable<OffsetDateTime> finishedAfter) {
-    this.finishedAfter = finishedAfter;
-  }
+
 
   public void setFinishedAfter(OffsetDateTime finishedAfter) {
-    this.finishedAfter = JsonNullable.<OffsetDateTime>of(finishedAfter);
+    this.finishedAfter = finishedAfter;
   }
 
 
   public HistoricProcessInstanceQueryDto executedActivityAfter(OffsetDateTime executedActivityAfter) {
-    this.executedActivityAfter = JsonNullable.<OffsetDateTime>of(executedActivityAfter);
+    
+    this.executedActivityAfter = executedActivityAfter;
     return this;
   }
 
@@ -945,31 +836,20 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to instances that executed an activity after the given date (inclusive). By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.")
-  @JsonIgnore
 
   public OffsetDateTime getExecutedActivityAfter() {
-        return executedActivityAfter.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_EXECUTED_ACTIVITY_AFTER)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<OffsetDateTime> getExecutedActivityAfter_JsonNullable() {
     return executedActivityAfter;
   }
-  
-  @JsonProperty(JSON_PROPERTY_EXECUTED_ACTIVITY_AFTER)
-  public void setExecutedActivityAfter_JsonNullable(JsonNullable<OffsetDateTime> executedActivityAfter) {
-    this.executedActivityAfter = executedActivityAfter;
-  }
+
 
   public void setExecutedActivityAfter(OffsetDateTime executedActivityAfter) {
-    this.executedActivityAfter = JsonNullable.<OffsetDateTime>of(executedActivityAfter);
+    this.executedActivityAfter = executedActivityAfter;
   }
 
 
   public HistoricProcessInstanceQueryDto executedActivityBefore(OffsetDateTime executedActivityBefore) {
-    this.executedActivityBefore = JsonNullable.<OffsetDateTime>of(executedActivityBefore);
+    
+    this.executedActivityBefore = executedActivityBefore;
     return this;
   }
 
@@ -979,31 +859,20 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to instances that executed an activity before the given date (inclusive). By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.")
-  @JsonIgnore
 
   public OffsetDateTime getExecutedActivityBefore() {
-        return executedActivityBefore.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_EXECUTED_ACTIVITY_BEFORE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<OffsetDateTime> getExecutedActivityBefore_JsonNullable() {
     return executedActivityBefore;
   }
-  
-  @JsonProperty(JSON_PROPERTY_EXECUTED_ACTIVITY_BEFORE)
-  public void setExecutedActivityBefore_JsonNullable(JsonNullable<OffsetDateTime> executedActivityBefore) {
-    this.executedActivityBefore = executedActivityBefore;
-  }
+
 
   public void setExecutedActivityBefore(OffsetDateTime executedActivityBefore) {
-    this.executedActivityBefore = JsonNullable.<OffsetDateTime>of(executedActivityBefore);
+    this.executedActivityBefore = executedActivityBefore;
   }
 
 
   public HistoricProcessInstanceQueryDto executedJobAfter(OffsetDateTime executedJobAfter) {
-    this.executedJobAfter = JsonNullable.<OffsetDateTime>of(executedJobAfter);
+    
+    this.executedJobAfter = executedJobAfter;
     return this;
   }
 
@@ -1013,31 +882,20 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to instances that executed an job after the given date (inclusive). By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.")
-  @JsonIgnore
 
   public OffsetDateTime getExecutedJobAfter() {
-        return executedJobAfter.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_EXECUTED_JOB_AFTER)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<OffsetDateTime> getExecutedJobAfter_JsonNullable() {
     return executedJobAfter;
   }
-  
-  @JsonProperty(JSON_PROPERTY_EXECUTED_JOB_AFTER)
-  public void setExecutedJobAfter_JsonNullable(JsonNullable<OffsetDateTime> executedJobAfter) {
-    this.executedJobAfter = executedJobAfter;
-  }
+
 
   public void setExecutedJobAfter(OffsetDateTime executedJobAfter) {
-    this.executedJobAfter = JsonNullable.<OffsetDateTime>of(executedJobAfter);
+    this.executedJobAfter = executedJobAfter;
   }
 
 
   public HistoricProcessInstanceQueryDto executedJobBefore(OffsetDateTime executedJobBefore) {
-    this.executedJobBefore = JsonNullable.<OffsetDateTime>of(executedJobBefore);
+    
+    this.executedJobBefore = executedJobBefore;
     return this;
   }
 
@@ -1047,30 +905,19 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to instances that executed an job before the given date (inclusive). By [default](https://docs.camunda.org/manual/7.14/reference/rest/overview/date-format/), the date must have the format `yyyy-MM-dd'T'HH:mm:ss.SSSZ`, e.g., `2013-01-23T14:42:45.000+0200`.")
-  @JsonIgnore
 
   public OffsetDateTime getExecutedJobBefore() {
-        return executedJobBefore.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_EXECUTED_JOB_BEFORE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<OffsetDateTime> getExecutedJobBefore_JsonNullable() {
     return executedJobBefore;
   }
-  
-  @JsonProperty(JSON_PROPERTY_EXECUTED_JOB_BEFORE)
-  public void setExecutedJobBefore_JsonNullable(JsonNullable<OffsetDateTime> executedJobBefore) {
-    this.executedJobBefore = executedJobBefore;
-  }
+
 
   public void setExecutedJobBefore(OffsetDateTime executedJobBefore) {
-    this.executedJobBefore = JsonNullable.<OffsetDateTime>of(executedJobBefore);
+    this.executedJobBefore = executedJobBefore;
   }
 
 
   public HistoricProcessInstanceQueryDto startedBy(String startedBy) {
+    
     this.startedBy = startedBy;
     return this;
   }
@@ -1081,8 +928,6 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include process instances that were started by the given user.")
-  @JsonProperty(JSON_PROPERTY_STARTED_BY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getStartedBy() {
     return startedBy;
@@ -1095,6 +940,7 @@ public class HistoricProcessInstanceQueryDto {
 
 
   public HistoricProcessInstanceQueryDto superProcessInstanceId(String superProcessInstanceId) {
+    
     this.superProcessInstanceId = superProcessInstanceId;
     return this;
   }
@@ -1105,8 +951,6 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict query to all process instances that are sub process instances of the given process instance. Takes a process instance id.")
-  @JsonProperty(JSON_PROPERTY_SUPER_PROCESS_INSTANCE_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getSuperProcessInstanceId() {
     return superProcessInstanceId;
@@ -1119,6 +963,7 @@ public class HistoricProcessInstanceQueryDto {
 
 
   public HistoricProcessInstanceQueryDto subProcessInstanceId(String subProcessInstanceId) {
+    
     this.subProcessInstanceId = subProcessInstanceId;
     return this;
   }
@@ -1129,8 +974,6 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict query to one process instance that has a sub process instance with the given id.")
-  @JsonProperty(JSON_PROPERTY_SUB_PROCESS_INSTANCE_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getSubProcessInstanceId() {
     return subProcessInstanceId;
@@ -1143,6 +986,7 @@ public class HistoricProcessInstanceQueryDto {
 
 
   public HistoricProcessInstanceQueryDto superCaseInstanceId(String superCaseInstanceId) {
+    
     this.superCaseInstanceId = superCaseInstanceId;
     return this;
   }
@@ -1153,8 +997,6 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict query to all process instances that are sub process instances of the given case instance. Takes a case instance id.")
-  @JsonProperty(JSON_PROPERTY_SUPER_CASE_INSTANCE_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getSuperCaseInstanceId() {
     return superCaseInstanceId;
@@ -1167,6 +1009,7 @@ public class HistoricProcessInstanceQueryDto {
 
 
   public HistoricProcessInstanceQueryDto subCaseInstanceId(String subCaseInstanceId) {
+    
     this.subCaseInstanceId = subCaseInstanceId;
     return this;
   }
@@ -1177,8 +1020,6 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict query to one process instance that has a sub case instance with the given id.")
-  @JsonProperty(JSON_PROPERTY_SUB_CASE_INSTANCE_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getSubCaseInstanceId() {
     return subCaseInstanceId;
@@ -1191,6 +1032,7 @@ public class HistoricProcessInstanceQueryDto {
 
 
   public HistoricProcessInstanceQueryDto caseInstanceId(String caseInstanceId) {
+    
     this.caseInstanceId = caseInstanceId;
     return this;
   }
@@ -1201,8 +1043,6 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict query to all process instances that are sub process instances of the given case instance. Takes a case instance id.")
-  @JsonProperty(JSON_PROPERTY_CASE_INSTANCE_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getCaseInstanceId() {
     return caseInstanceId;
@@ -1215,6 +1055,7 @@ public class HistoricProcessInstanceQueryDto {
 
 
   public HistoricProcessInstanceQueryDto tenantIdIn(List<String> tenantIdIn) {
+    
     this.tenantIdIn = tenantIdIn;
     return this;
   }
@@ -1233,8 +1074,6 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Filter by a list of tenant ids. A process instance must have one of the given tenant ids. Must be a JSON array of `Strings`")
-  @JsonProperty(JSON_PROPERTY_TENANT_ID_IN)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<String> getTenantIdIn() {
     return tenantIdIn;
@@ -1247,7 +1086,8 @@ public class HistoricProcessInstanceQueryDto {
 
 
   public HistoricProcessInstanceQueryDto withoutTenantId(Boolean withoutTenantId) {
-    this.withoutTenantId = JsonNullable.<Boolean>of(withoutTenantId);
+    
+    this.withoutTenantId = withoutTenantId;
     return this;
   }
 
@@ -1257,30 +1097,19 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Only include historic process instances which belong to no tenant. Value may only be `true`, as `false` is the default behavior.")
-  @JsonIgnore
 
   public Boolean getWithoutTenantId() {
-        return withoutTenantId.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_WITHOUT_TENANT_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getWithoutTenantId_JsonNullable() {
     return withoutTenantId;
   }
-  
-  @JsonProperty(JSON_PROPERTY_WITHOUT_TENANT_ID)
-  public void setWithoutTenantId_JsonNullable(JsonNullable<Boolean> withoutTenantId) {
-    this.withoutTenantId = withoutTenantId;
-  }
+
 
   public void setWithoutTenantId(Boolean withoutTenantId) {
-    this.withoutTenantId = JsonNullable.<Boolean>of(withoutTenantId);
+    this.withoutTenantId = withoutTenantId;
   }
 
 
   public HistoricProcessInstanceQueryDto executedActivityIdIn(List<String> executedActivityIdIn) {
+    
     this.executedActivityIdIn = executedActivityIdIn;
     return this;
   }
@@ -1299,8 +1128,6 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to instances that executed an activity with one of given ids. Must be a JSON array of `Strings`")
-  @JsonProperty(JSON_PROPERTY_EXECUTED_ACTIVITY_ID_IN)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<String> getExecutedActivityIdIn() {
     return executedActivityIdIn;
@@ -1313,6 +1140,7 @@ public class HistoricProcessInstanceQueryDto {
 
 
   public HistoricProcessInstanceQueryDto activeActivityIdIn(List<String> activeActivityIdIn) {
+    
     this.activeActivityIdIn = activeActivityIdIn;
     return this;
   }
@@ -1331,8 +1159,6 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to instances that have an active activity with one of given ids. Must be a JSON array of `Strings`")
-  @JsonProperty(JSON_PROPERTY_ACTIVE_ACTIVITY_ID_IN)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<String> getActiveActivityIdIn() {
     return activeActivityIdIn;
@@ -1345,7 +1171,8 @@ public class HistoricProcessInstanceQueryDto {
 
 
   public HistoricProcessInstanceQueryDto active(Boolean active) {
-    this.active = JsonNullable.<Boolean>of(active);
+    
+    this.active = active;
     return this;
   }
 
@@ -1355,31 +1182,20 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to instances that are active.")
-  @JsonIgnore
 
   public Boolean getActive() {
-        return active.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_ACTIVE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getActive_JsonNullable() {
     return active;
   }
-  
-  @JsonProperty(JSON_PROPERTY_ACTIVE)
-  public void setActive_JsonNullable(JsonNullable<Boolean> active) {
-    this.active = active;
-  }
+
 
   public void setActive(Boolean active) {
-    this.active = JsonNullable.<Boolean>of(active);
+    this.active = active;
   }
 
 
   public HistoricProcessInstanceQueryDto suspended(Boolean suspended) {
-    this.suspended = JsonNullable.<Boolean>of(suspended);
+    
+    this.suspended = suspended;
     return this;
   }
 
@@ -1389,31 +1205,20 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to instances that are suspended.")
-  @JsonIgnore
 
   public Boolean getSuspended() {
-        return suspended.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_SUSPENDED)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getSuspended_JsonNullable() {
     return suspended;
   }
-  
-  @JsonProperty(JSON_PROPERTY_SUSPENDED)
-  public void setSuspended_JsonNullable(JsonNullable<Boolean> suspended) {
-    this.suspended = suspended;
-  }
+
 
   public void setSuspended(Boolean suspended) {
-    this.suspended = JsonNullable.<Boolean>of(suspended);
+    this.suspended = suspended;
   }
 
 
   public HistoricProcessInstanceQueryDto completed(Boolean completed) {
-    this.completed = JsonNullable.<Boolean>of(completed);
+    
+    this.completed = completed;
     return this;
   }
 
@@ -1423,31 +1228,20 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to instances that are completed.")
-  @JsonIgnore
 
   public Boolean getCompleted() {
-        return completed.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_COMPLETED)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getCompleted_JsonNullable() {
     return completed;
   }
-  
-  @JsonProperty(JSON_PROPERTY_COMPLETED)
-  public void setCompleted_JsonNullable(JsonNullable<Boolean> completed) {
-    this.completed = completed;
-  }
+
 
   public void setCompleted(Boolean completed) {
-    this.completed = JsonNullable.<Boolean>of(completed);
+    this.completed = completed;
   }
 
 
   public HistoricProcessInstanceQueryDto externallyTerminated(Boolean externallyTerminated) {
-    this.externallyTerminated = JsonNullable.<Boolean>of(externallyTerminated);
+    
+    this.externallyTerminated = externallyTerminated;
     return this;
   }
 
@@ -1457,31 +1251,20 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to instances that are externallyTerminated.")
-  @JsonIgnore
 
   public Boolean getExternallyTerminated() {
-        return externallyTerminated.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_EXTERNALLY_TERMINATED)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getExternallyTerminated_JsonNullable() {
     return externallyTerminated;
   }
-  
-  @JsonProperty(JSON_PROPERTY_EXTERNALLY_TERMINATED)
-  public void setExternallyTerminated_JsonNullable(JsonNullable<Boolean> externallyTerminated) {
-    this.externallyTerminated = externallyTerminated;
-  }
+
 
   public void setExternallyTerminated(Boolean externallyTerminated) {
-    this.externallyTerminated = JsonNullable.<Boolean>of(externallyTerminated);
+    this.externallyTerminated = externallyTerminated;
   }
 
 
   public HistoricProcessInstanceQueryDto internallyTerminated(Boolean internallyTerminated) {
-    this.internallyTerminated = JsonNullable.<Boolean>of(internallyTerminated);
+    
+    this.internallyTerminated = internallyTerminated;
     return this;
   }
 
@@ -1491,30 +1274,19 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Restrict to instances that are internallyTerminated.")
-  @JsonIgnore
 
   public Boolean getInternallyTerminated() {
-        return internallyTerminated.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_INTERNALLY_TERMINATED)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getInternallyTerminated_JsonNullable() {
     return internallyTerminated;
   }
-  
-  @JsonProperty(JSON_PROPERTY_INTERNALLY_TERMINATED)
-  public void setInternallyTerminated_JsonNullable(JsonNullable<Boolean> internallyTerminated) {
-    this.internallyTerminated = internallyTerminated;
-  }
+
 
   public void setInternallyTerminated(Boolean internallyTerminated) {
-    this.internallyTerminated = JsonNullable.<Boolean>of(internallyTerminated);
+    this.internallyTerminated = internallyTerminated;
   }
 
 
   public HistoricProcessInstanceQueryDto variables(List<VariableQueryParameterDto> variables) {
+    
     this.variables = variables;
     return this;
   }
@@ -1533,8 +1305,6 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON array to only include process instances that have/had variables with certain values. The array consists of objects with the three properties `name`, `operator` and `value`. `name` (`String`) is the variable name, `operator` (`String`) is the comparison operator to be used and `value` the variable value.  Value may be `String`, `Number` or `Boolean`.  Valid operator values are: `eq` - equal to; `neq` - not equal to; `gt` - greater than; `gteq` - greater than or equal to; `lt` - lower than; `lteq` - lower than or equal to; `like`. ")
-  @JsonProperty(JSON_PROPERTY_VARIABLES)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<VariableQueryParameterDto> getVariables() {
     return variables;
@@ -1547,7 +1317,8 @@ public class HistoricProcessInstanceQueryDto {
 
 
   public HistoricProcessInstanceQueryDto variableNamesIgnoreCase(Boolean variableNamesIgnoreCase) {
-    this.variableNamesIgnoreCase = JsonNullable.<Boolean>of(variableNamesIgnoreCase);
+    
+    this.variableNamesIgnoreCase = variableNamesIgnoreCase;
     return this;
   }
 
@@ -1557,31 +1328,20 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Match all variable names provided in variables case-insensitively. If set to `true` variableName and variablename are treated as equal.")
-  @JsonIgnore
 
   public Boolean getVariableNamesIgnoreCase() {
-        return variableNamesIgnoreCase.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_VARIABLE_NAMES_IGNORE_CASE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getVariableNamesIgnoreCase_JsonNullable() {
     return variableNamesIgnoreCase;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VARIABLE_NAMES_IGNORE_CASE)
-  public void setVariableNamesIgnoreCase_JsonNullable(JsonNullable<Boolean> variableNamesIgnoreCase) {
-    this.variableNamesIgnoreCase = variableNamesIgnoreCase;
-  }
+
 
   public void setVariableNamesIgnoreCase(Boolean variableNamesIgnoreCase) {
-    this.variableNamesIgnoreCase = JsonNullable.<Boolean>of(variableNamesIgnoreCase);
+    this.variableNamesIgnoreCase = variableNamesIgnoreCase;
   }
 
 
   public HistoricProcessInstanceQueryDto variableValuesIgnoreCase(Boolean variableValuesIgnoreCase) {
-    this.variableValuesIgnoreCase = JsonNullable.<Boolean>of(variableValuesIgnoreCase);
+    
+    this.variableValuesIgnoreCase = variableValuesIgnoreCase;
     return this;
   }
 
@@ -1591,30 +1351,19 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Match all variable values provided in variables case-insensitively. If set to `true` variableValue and variablevalue are treated as equal.")
-  @JsonIgnore
 
   public Boolean getVariableValuesIgnoreCase() {
-        return variableValuesIgnoreCase.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_VARIABLE_VALUES_IGNORE_CASE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Boolean> getVariableValuesIgnoreCase_JsonNullable() {
     return variableValuesIgnoreCase;
   }
-  
-  @JsonProperty(JSON_PROPERTY_VARIABLE_VALUES_IGNORE_CASE)
-  public void setVariableValuesIgnoreCase_JsonNullable(JsonNullable<Boolean> variableValuesIgnoreCase) {
-    this.variableValuesIgnoreCase = variableValuesIgnoreCase;
-  }
+
 
   public void setVariableValuesIgnoreCase(Boolean variableValuesIgnoreCase) {
-    this.variableValuesIgnoreCase = JsonNullable.<Boolean>of(variableValuesIgnoreCase);
+    this.variableValuesIgnoreCase = variableValuesIgnoreCase;
   }
 
 
   public HistoricProcessInstanceQueryDto orQueries(List<HistoricProcessInstanceQueryDto> orQueries) {
+    
     this.orQueries = orQueries;
     return this;
   }
@@ -1633,8 +1382,6 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A JSON array of nested historic process instance queries with OR semantics.  A process instance matches a nested query if it fulfills at least one of the query's predicates.  With multiple nested queries, a process instance must fulfill at least one predicate of each query ([Conjunctive Normal Form](https://en.wikipedia.org/wiki/Conjunctive_normal_form)).  All process instance query properties can be used except for: `sorting`  See the [User Guide](https://docs.camunda.org/manual/7.14/user-guide/process-engine/process-engine-api/#or-queries) for more information about OR queries.")
-  @JsonProperty(JSON_PROPERTY_OR_QUERIES)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<HistoricProcessInstanceQueryDto> getOrQueries() {
     return orQueries;
@@ -1647,6 +1394,7 @@ public class HistoricProcessInstanceQueryDto {
 
 
   public HistoricProcessInstanceQueryDto sorting(List<HistoricProcessInstanceQueryDtoSorting> sorting) {
+    
     this.sorting = sorting;
     return this;
   }
@@ -1665,8 +1413,6 @@ public class HistoricProcessInstanceQueryDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Apply sorting of the result")
-  @JsonProperty(JSON_PROPERTY_SORTING)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<HistoricProcessInstanceQueryDtoSorting> getSorting() {
     return sorting;
@@ -1678,9 +1424,6 @@ public class HistoricProcessInstanceQueryDto {
   }
 
 
-  /**
-   * Return true if this HistoricProcessInstanceQueryDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

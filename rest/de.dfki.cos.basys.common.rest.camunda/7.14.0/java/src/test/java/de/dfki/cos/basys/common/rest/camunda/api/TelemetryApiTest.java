@@ -13,14 +13,11 @@
 
 package de.dfki.cos.basys.common.rest.camunda.api;
 
-import de.dfki.cos.basys.common.rest.camunda.*;
-import de.dfki.cos.basys.common.rest.camunda.auth.*;
+import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.dto.ExceptionDto;
 import de.dfki.cos.basys.common.rest.camunda.dto.TelemetryConfigurationDto;
-import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
-
+import org.junit.Ignore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,10 +27,12 @@ import java.util.Map;
 /**
  * API tests for TelemetryApi
  */
+@Ignore
 public class TelemetryApiTest {
 
     private final TelemetryApi api = new TelemetryApi();
 
+    
     /**
      * Configure Telemetry
      *
@@ -44,11 +43,12 @@ public class TelemetryApiTest {
      */
     @Test
     public void configureTelemetryTest() throws ApiException {
-        //TelemetryConfigurationDto telemetryConfigurationDto = null;
-        //api.configureTelemetry(telemetryConfigurationDto);
+        TelemetryConfigurationDto telemetryConfigurationDto = null;
+        api.configureTelemetry(telemetryConfigurationDto);
+
         // TODO: test validations
     }
-
+    
     /**
      * Fetch Telemetry Configuration
      *
@@ -59,8 +59,9 @@ public class TelemetryApiTest {
      */
     @Test
     public void getTelemetryConfigurationTest() throws ApiException {
-        //TelemetryConfigurationDto response = api.getTelemetryConfiguration();
+        TelemetryConfigurationDto response = api.getTelemetryConfiguration();
+
         // TODO: test validations
     }
-
+    
 }

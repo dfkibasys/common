@@ -9,9 +9,8 @@ Method | HTTP request | Description
 [**getComments**](TaskCommentApi.md#getComments) | **GET** /task/{id}/comment | 
 
 
-
-## createComment
-
+<a name="createComment"></a>
+# **createComment**
 > CommentDto createComment(id, commentDto)
 
 
@@ -19,39 +18,37 @@ Method | HTTP request | Description
 Creates a comment for a task by id.
 
 ### Example
-
 ```java
 // Import classes:
 import de.dfki.cos.basys.common.rest.camunda.ApiClient;
 import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.Configuration;
-import de.dfki.cos.basys.common.rest.camunda.model.*;
+import de.dfki.cos.basys.common.rest.camunda.models.*;
 import de.dfki.cos.basys.common.rest.camunda.api.TaskCommentApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("http://localhost:8080/engine-rest");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost:8080/engine-rest");
 
-        TaskCommentApi apiInstance = new TaskCommentApi(defaultClient);
-        String id = "id_example"; // String | The id of the task to add the comment to.
-        CommentDto commentDto = {"message":"a task comment"}; // CommentDto | **Note:** Only the `message` property will be used. Every other property passed to this endpoint will be ignored.
-        try {
-            CommentDto result = apiInstance.createComment(id, commentDto);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling TaskCommentApi#createComment");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    TaskCommentApi apiInstance = new TaskCommentApi(defaultClient);
+    String id = "id_example"; // String | The id of the task to add the comment to.
+    CommentDto commentDto = {"message":"a task comment"}; // CommentDto | **Note:** Only the `message` property will be used. Every other property passed to this endpoint will be ignored.
+    try {
+      CommentDto result = apiInstance.createComment(id, commentDto);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TaskCommentApi#createComment");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -68,19 +65,18 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Request successful. |  -  |
-| **400** | The task does not exist or no comment message was submitted. See the [Introduction](https://docs.camunda.org/manual/7.14/reference/rest/overview/#error-handling) for the error response format. |  -  |
-| **403** | The history of the engine is disabled. See the [Introduction](https://docs.camunda.org/manual/7.14/reference/rest/overview/#error-handling) for the error response format. |  -  |
+**200** | Request successful. |  -  |
+**400** | The task does not exist or no comment message was submitted. See the [Introduction](https://docs.camunda.org/manual/7.14/reference/rest/overview/#error-handling) for the error response format. |  -  |
+**403** | The history of the engine is disabled. See the [Introduction](https://docs.camunda.org/manual/7.14/reference/rest/overview/#error-handling) for the error response format. |  -  |
 
-
-## getComment
-
+<a name="getComment"></a>
+# **getComment**
 > CommentDto getComment(id, commentId)
 
 
@@ -88,39 +84,37 @@ No authorization required
 Retrieves a task comment by task id and comment id.
 
 ### Example
-
 ```java
 // Import classes:
 import de.dfki.cos.basys.common.rest.camunda.ApiClient;
 import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.Configuration;
-import de.dfki.cos.basys.common.rest.camunda.model.*;
+import de.dfki.cos.basys.common.rest.camunda.models.*;
 import de.dfki.cos.basys.common.rest.camunda.api.TaskCommentApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("http://localhost:8080/engine-rest");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost:8080/engine-rest");
 
-        TaskCommentApi apiInstance = new TaskCommentApi(defaultClient);
-        String id = "id_example"; // String | The id of the task.
-        String commentId = "commentId_example"; // String | The id of the comment to be retrieved.
-        try {
-            CommentDto result = apiInstance.getComment(id, commentId);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling TaskCommentApi#getComment");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    TaskCommentApi apiInstance = new TaskCommentApi(defaultClient);
+    String id = "id_example"; // String | The id of the task.
+    String commentId = "commentId_example"; // String | The id of the comment to be retrieved.
+    try {
+      CommentDto result = apiInstance.getComment(id, commentId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TaskCommentApi#getComment");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -137,18 +131,17 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Request successful. |  -  |
-| **404** | The task or comment with given task and comment id does not exist, or the history of the engine is disabled. See the [Introduction](https://docs.camunda.org/manual/7.14/reference/rest/overview/#error-handling) for the error response format. |  -  |
+**200** | Request successful. |  -  |
+**404** | The task or comment with given task and comment id does not exist, or the history of the engine is disabled. See the [Introduction](https://docs.camunda.org/manual/7.14/reference/rest/overview/#error-handling) for the error response format. |  -  |
 
-
-## getComments
-
+<a name="getComments"></a>
+# **getComments**
 > List&lt;CommentDto&gt; getComments(id)
 
 
@@ -156,38 +149,36 @@ No authorization required
 Gets the comments for a task by id.
 
 ### Example
-
 ```java
 // Import classes:
 import de.dfki.cos.basys.common.rest.camunda.ApiClient;
 import de.dfki.cos.basys.common.rest.camunda.ApiException;
 import de.dfki.cos.basys.common.rest.camunda.Configuration;
-import de.dfki.cos.basys.common.rest.camunda.model.*;
+import de.dfki.cos.basys.common.rest.camunda.models.*;
 import de.dfki.cos.basys.common.rest.camunda.api.TaskCommentApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("http://localhost:8080/engine-rest");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost:8080/engine-rest");
 
-        TaskCommentApi apiInstance = new TaskCommentApi(defaultClient);
-        String id = "id_example"; // String | The id of the task to retrieve the comments for.
-        try {
-            List<CommentDto> result = apiInstance.getComments(id);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling TaskCommentApi#getComments");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    TaskCommentApi apiInstance = new TaskCommentApi(defaultClient);
+    String id = "id_example"; // String | The id of the task to retrieve the comments for.
+    try {
+      List<CommentDto> result = apiInstance.getComments(id);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TaskCommentApi#getComments");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -203,12 +194,12 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Request successful. |  -  |
-| **404** | No task exists for the given task id. See the [Introduction](https://docs.camunda.org/manual/7.14/reference/rest/overview/#error-handling) for the error response format. |  -  |
+**200** | Request successful. |  -  |
+**404** | No task exists for the given task id. See the [Introduction](https://docs.camunda.org/manual/7.14/reference/rest/overview/#error-handling) for the error response format. |  -  |
 

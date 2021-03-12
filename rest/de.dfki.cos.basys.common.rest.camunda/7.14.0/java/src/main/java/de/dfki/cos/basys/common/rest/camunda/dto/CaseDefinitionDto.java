@@ -15,67 +15,59 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
+import java.io.IOException;
 
 /**
  * CaseDefinitionDto
  */
-@JsonPropertyOrder({
-  CaseDefinitionDto.JSON_PROPERTY_ID,
-  CaseDefinitionDto.JSON_PROPERTY_KEY,
-  CaseDefinitionDto.JSON_PROPERTY_CATEGORY,
-  CaseDefinitionDto.JSON_PROPERTY_NAME,
-  CaseDefinitionDto.JSON_PROPERTY_VERSION,
-  CaseDefinitionDto.JSON_PROPERTY_RESOURCE,
-  CaseDefinitionDto.JSON_PROPERTY_DEPLOYMENT_ID,
-  CaseDefinitionDto.JSON_PROPERTY_TENANT_ID,
-  CaseDefinitionDto.JSON_PROPERTY_HISTORY_TIME_TO_LIVE
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class CaseDefinitionDto {
-  public static final String JSON_PROPERTY_ID = "id";
+  public static final String SERIALIZED_NAME_ID = "id";
+  @SerializedName(SERIALIZED_NAME_ID)
   private String id;
 
-  public static final String JSON_PROPERTY_KEY = "key";
+  public static final String SERIALIZED_NAME_KEY = "key";
+  @SerializedName(SERIALIZED_NAME_KEY)
   private String key;
 
-  public static final String JSON_PROPERTY_CATEGORY = "category";
+  public static final String SERIALIZED_NAME_CATEGORY = "category";
+  @SerializedName(SERIALIZED_NAME_CATEGORY)
   private String category;
 
-  public static final String JSON_PROPERTY_NAME = "name";
+  public static final String SERIALIZED_NAME_NAME = "name";
+  @SerializedName(SERIALIZED_NAME_NAME)
   private String name;
 
-  public static final String JSON_PROPERTY_VERSION = "version";
+  public static final String SERIALIZED_NAME_VERSION = "version";
+  @SerializedName(SERIALIZED_NAME_VERSION)
   private Integer version;
 
-  public static final String JSON_PROPERTY_RESOURCE = "resource";
+  public static final String SERIALIZED_NAME_RESOURCE = "resource";
+  @SerializedName(SERIALIZED_NAME_RESOURCE)
   private String resource;
 
-  public static final String JSON_PROPERTY_DEPLOYMENT_ID = "deploymentId";
+  public static final String SERIALIZED_NAME_DEPLOYMENT_ID = "deploymentId";
+  @SerializedName(SERIALIZED_NAME_DEPLOYMENT_ID)
   private String deploymentId;
 
-  public static final String JSON_PROPERTY_TENANT_ID = "tenantId";
+  public static final String SERIALIZED_NAME_TENANT_ID = "tenantId";
+  @SerializedName(SERIALIZED_NAME_TENANT_ID)
   private String tenantId;
 
-  public static final String JSON_PROPERTY_HISTORY_TIME_TO_LIVE = "historyTimeToLive";
-  private JsonNullable<Integer> historyTimeToLive = JsonNullable.<Integer>undefined();
+  public static final String SERIALIZED_NAME_HISTORY_TIME_TO_LIVE = "historyTimeToLive";
+  @SerializedName(SERIALIZED_NAME_HISTORY_TIME_TO_LIVE)
+  private Integer historyTimeToLive;
 
 
   public CaseDefinitionDto id(String id) {
+    
     this.id = id;
     return this;
   }
@@ -86,8 +78,6 @@ public class CaseDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the case definition")
-  @JsonProperty(JSON_PROPERTY_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getId() {
     return id;
@@ -100,6 +90,7 @@ public class CaseDefinitionDto {
 
 
   public CaseDefinitionDto key(String key) {
+    
     this.key = key;
     return this;
   }
@@ -110,8 +101,6 @@ public class CaseDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The key of the case definition, i.e., the id of the CMMN 2.0 XML case definition.")
-  @JsonProperty(JSON_PROPERTY_KEY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getKey() {
     return key;
@@ -124,6 +113,7 @@ public class CaseDefinitionDto {
 
 
   public CaseDefinitionDto category(String category) {
+    
     this.category = category;
     return this;
   }
@@ -134,8 +124,6 @@ public class CaseDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The category of the case definition.")
-  @JsonProperty(JSON_PROPERTY_CATEGORY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getCategory() {
     return category;
@@ -148,6 +136,7 @@ public class CaseDefinitionDto {
 
 
   public CaseDefinitionDto name(String name) {
+    
     this.name = name;
     return this;
   }
@@ -158,8 +147,6 @@ public class CaseDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The name of the case definition.")
-  @JsonProperty(JSON_PROPERTY_NAME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getName() {
     return name;
@@ -172,6 +159,7 @@ public class CaseDefinitionDto {
 
 
   public CaseDefinitionDto version(Integer version) {
+    
     this.version = version;
     return this;
   }
@@ -182,8 +170,6 @@ public class CaseDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The version of the case definition that the engine assigned to it.")
-  @JsonProperty(JSON_PROPERTY_VERSION)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getVersion() {
     return version;
@@ -196,6 +182,7 @@ public class CaseDefinitionDto {
 
 
   public CaseDefinitionDto resource(String resource) {
+    
     this.resource = resource;
     return this;
   }
@@ -206,8 +193,6 @@ public class CaseDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The file name of the case definition.")
-  @JsonProperty(JSON_PROPERTY_RESOURCE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getResource() {
     return resource;
@@ -220,6 +205,7 @@ public class CaseDefinitionDto {
 
 
   public CaseDefinitionDto deploymentId(String deploymentId) {
+    
     this.deploymentId = deploymentId;
     return this;
   }
@@ -230,8 +216,6 @@ public class CaseDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The deployment id of the case definition.")
-  @JsonProperty(JSON_PROPERTY_DEPLOYMENT_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getDeploymentId() {
     return deploymentId;
@@ -244,6 +228,7 @@ public class CaseDefinitionDto {
 
 
   public CaseDefinitionDto tenantId(String tenantId) {
+    
     this.tenantId = tenantId;
     return this;
   }
@@ -254,8 +239,6 @@ public class CaseDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The tenant id of the case definition.")
-  @JsonProperty(JSON_PROPERTY_TENANT_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getTenantId() {
     return tenantId;
@@ -268,7 +251,8 @@ public class CaseDefinitionDto {
 
 
   public CaseDefinitionDto historyTimeToLive(Integer historyTimeToLive) {
-    this.historyTimeToLive = JsonNullable.<Integer>of(historyTimeToLive);
+    
+    this.historyTimeToLive = historyTimeToLive;
     return this;
   }
 
@@ -279,32 +263,17 @@ public class CaseDefinitionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "History time to live value of the case definition. Is used within [History cleanup](https://docs.camunda.org/manual/7.14/user-guide/process-engine/history/#history-cleanup).")
-  @JsonIgnore
 
   public Integer getHistoryTimeToLive() {
-        return historyTimeToLive.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_HISTORY_TIME_TO_LIVE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<Integer> getHistoryTimeToLive_JsonNullable() {
     return historyTimeToLive;
   }
-  
-  @JsonProperty(JSON_PROPERTY_HISTORY_TIME_TO_LIVE)
-  public void setHistoryTimeToLive_JsonNullable(JsonNullable<Integer> historyTimeToLive) {
+
+
+  public void setHistoryTimeToLive(Integer historyTimeToLive) {
     this.historyTimeToLive = historyTimeToLive;
   }
 
-  public void setHistoryTimeToLive(Integer historyTimeToLive) {
-    this.historyTimeToLive = JsonNullable.<Integer>of(historyTimeToLive);
-  }
 
-
-  /**
-   * Return true if this CaseDefinitionDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

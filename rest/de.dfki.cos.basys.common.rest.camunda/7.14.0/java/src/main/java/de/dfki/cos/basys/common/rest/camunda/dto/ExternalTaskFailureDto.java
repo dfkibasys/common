@@ -15,48 +15,43 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
+import java.io.IOException;
 
 /**
  * ExternalTaskFailureDto
  */
-@JsonPropertyOrder({
-  ExternalTaskFailureDto.JSON_PROPERTY_WORKER_ID,
-  ExternalTaskFailureDto.JSON_PROPERTY_ERROR_MESSAGE,
-  ExternalTaskFailureDto.JSON_PROPERTY_ERROR_DETAILS,
-  ExternalTaskFailureDto.JSON_PROPERTY_RETRIES,
-  ExternalTaskFailureDto.JSON_PROPERTY_RETRY_TIMEOUT
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class ExternalTaskFailureDto {
-  public static final String JSON_PROPERTY_WORKER_ID = "workerId";
+  public static final String SERIALIZED_NAME_WORKER_ID = "workerId";
+  @SerializedName(SERIALIZED_NAME_WORKER_ID)
   private String workerId;
 
-  public static final String JSON_PROPERTY_ERROR_MESSAGE = "errorMessage";
+  public static final String SERIALIZED_NAME_ERROR_MESSAGE = "errorMessage";
+  @SerializedName(SERIALIZED_NAME_ERROR_MESSAGE)
   private String errorMessage;
 
-  public static final String JSON_PROPERTY_ERROR_DETAILS = "errorDetails";
+  public static final String SERIALIZED_NAME_ERROR_DETAILS = "errorDetails";
+  @SerializedName(SERIALIZED_NAME_ERROR_DETAILS)
   private String errorDetails;
 
-  public static final String JSON_PROPERTY_RETRIES = "retries";
+  public static final String SERIALIZED_NAME_RETRIES = "retries";
+  @SerializedName(SERIALIZED_NAME_RETRIES)
   private Integer retries;
 
-  public static final String JSON_PROPERTY_RETRY_TIMEOUT = "retryTimeout";
+  public static final String SERIALIZED_NAME_RETRY_TIMEOUT = "retryTimeout";
+  @SerializedName(SERIALIZED_NAME_RETRY_TIMEOUT)
   private Long retryTimeout;
 
 
   public ExternalTaskFailureDto workerId(String workerId) {
+    
     this.workerId = workerId;
     return this;
   }
@@ -67,8 +62,6 @@ public class ExternalTaskFailureDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the worker that reports the failure. Must match the id of the worker who has most recently locked the task.")
-  @JsonProperty(JSON_PROPERTY_WORKER_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getWorkerId() {
     return workerId;
@@ -81,6 +74,7 @@ public class ExternalTaskFailureDto {
 
 
   public ExternalTaskFailureDto errorMessage(String errorMessage) {
+    
     this.errorMessage = errorMessage;
     return this;
   }
@@ -91,8 +85,6 @@ public class ExternalTaskFailureDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "An message indicating the reason of the failure.")
-  @JsonProperty(JSON_PROPERTY_ERROR_MESSAGE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getErrorMessage() {
     return errorMessage;
@@ -105,6 +97,7 @@ public class ExternalTaskFailureDto {
 
 
   public ExternalTaskFailureDto errorDetails(String errorDetails) {
+    
     this.errorDetails = errorDetails;
     return this;
   }
@@ -115,8 +108,6 @@ public class ExternalTaskFailureDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A detailed error description.")
-  @JsonProperty(JSON_PROPERTY_ERROR_DETAILS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getErrorDetails() {
     return errorDetails;
@@ -129,6 +120,7 @@ public class ExternalTaskFailureDto {
 
 
   public ExternalTaskFailureDto retries(Integer retries) {
+    
     this.retries = retries;
     return this;
   }
@@ -139,8 +131,6 @@ public class ExternalTaskFailureDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A number of how often the task should be retried. Must be >= 0. If this is 0, an incident is created and the task cannot be fetched anymore unless the retries are increased again. The incident's message is set to the `errorMessage` parameter.")
-  @JsonProperty(JSON_PROPERTY_RETRIES)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getRetries() {
     return retries;
@@ -153,6 +143,7 @@ public class ExternalTaskFailureDto {
 
 
   public ExternalTaskFailureDto retryTimeout(Long retryTimeout) {
+    
     this.retryTimeout = retryTimeout;
     return this;
   }
@@ -163,8 +154,6 @@ public class ExternalTaskFailureDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "A timeout in milliseconds before the external task becomes available again for fetching. Must be >= 0.")
-  @JsonProperty(JSON_PROPERTY_RETRY_TIMEOUT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Long getRetryTimeout() {
     return retryTimeout;
@@ -176,9 +165,6 @@ public class ExternalTaskFailureDto {
   }
 
 
-  /**
-   * Return true if this ExternalTaskFailureDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

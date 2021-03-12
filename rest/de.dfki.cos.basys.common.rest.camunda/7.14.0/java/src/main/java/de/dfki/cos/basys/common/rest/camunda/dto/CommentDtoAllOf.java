@@ -15,60 +15,52 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import org.threeten.bp.OffsetDateTime;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
 
 /**
  * CommentDtoAllOf
  */
-@JsonPropertyOrder({
-  CommentDtoAllOf.JSON_PROPERTY_ID,
-  CommentDtoAllOf.JSON_PROPERTY_USER_ID,
-  CommentDtoAllOf.JSON_PROPERTY_TASK_ID,
-  CommentDtoAllOf.JSON_PROPERTY_TIME,
-  CommentDtoAllOf.JSON_PROPERTY_MESSAGE,
-  CommentDtoAllOf.JSON_PROPERTY_REMOVAL_TIME,
-  CommentDtoAllOf.JSON_PROPERTY_ROOT_PROCESS_INSTANCE_ID
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class CommentDtoAllOf {
-  public static final String JSON_PROPERTY_ID = "id";
+  public static final String SERIALIZED_NAME_ID = "id";
+  @SerializedName(SERIALIZED_NAME_ID)
   private String id;
 
-  public static final String JSON_PROPERTY_USER_ID = "userId";
+  public static final String SERIALIZED_NAME_USER_ID = "userId";
+  @SerializedName(SERIALIZED_NAME_USER_ID)
   private String userId;
 
-  public static final String JSON_PROPERTY_TASK_ID = "taskId";
+  public static final String SERIALIZED_NAME_TASK_ID = "taskId";
+  @SerializedName(SERIALIZED_NAME_TASK_ID)
   private String taskId;
 
-  public static final String JSON_PROPERTY_TIME = "time";
+  public static final String SERIALIZED_NAME_TIME = "time";
+  @SerializedName(SERIALIZED_NAME_TIME)
   private OffsetDateTime time;
 
-  public static final String JSON_PROPERTY_MESSAGE = "message";
+  public static final String SERIALIZED_NAME_MESSAGE = "message";
+  @SerializedName(SERIALIZED_NAME_MESSAGE)
   private String message;
 
-  public static final String JSON_PROPERTY_REMOVAL_TIME = "removalTime";
-  private JsonNullable<OffsetDateTime> removalTime = JsonNullable.<OffsetDateTime>undefined();
+  public static final String SERIALIZED_NAME_REMOVAL_TIME = "removalTime";
+  @SerializedName(SERIALIZED_NAME_REMOVAL_TIME)
+  private OffsetDateTime removalTime;
 
-  public static final String JSON_PROPERTY_ROOT_PROCESS_INSTANCE_ID = "rootProcessInstanceId";
+  public static final String SERIALIZED_NAME_ROOT_PROCESS_INSTANCE_ID = "rootProcessInstanceId";
+  @SerializedName(SERIALIZED_NAME_ROOT_PROCESS_INSTANCE_ID)
   private String rootProcessInstanceId;
 
 
   public CommentDtoAllOf id(String id) {
+    
     this.id = id;
     return this;
   }
@@ -79,8 +71,6 @@ public class CommentDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the task comment.")
-  @JsonProperty(JSON_PROPERTY_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getId() {
     return id;
@@ -93,6 +83,7 @@ public class CommentDtoAllOf {
 
 
   public CommentDtoAllOf userId(String userId) {
+    
     this.userId = userId;
     return this;
   }
@@ -103,8 +94,6 @@ public class CommentDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the user who created the comment.")
-  @JsonProperty(JSON_PROPERTY_USER_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getUserId() {
     return userId;
@@ -117,6 +106,7 @@ public class CommentDtoAllOf {
 
 
   public CommentDtoAllOf taskId(String taskId) {
+    
     this.taskId = taskId;
     return this;
   }
@@ -127,8 +117,6 @@ public class CommentDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The id of the task to which the comment belongs.")
-  @JsonProperty(JSON_PROPERTY_TASK_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getTaskId() {
     return taskId;
@@ -141,6 +129,7 @@ public class CommentDtoAllOf {
 
 
   public CommentDtoAllOf time(OffsetDateTime time) {
+    
     this.time = time;
     return this;
   }
@@ -151,8 +140,6 @@ public class CommentDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The time when the comment was created. [Default format]($(docsUrl)/reference/rest/overview/date-format/) `yyyy-MM-dd'T'HH:mm:ss.SSSZ`.")
-  @JsonProperty(JSON_PROPERTY_TIME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public OffsetDateTime getTime() {
     return time;
@@ -165,6 +152,7 @@ public class CommentDtoAllOf {
 
 
   public CommentDtoAllOf message(String message) {
+    
     this.message = message;
     return this;
   }
@@ -175,8 +163,6 @@ public class CommentDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The content of the comment.")
-  @JsonProperty(JSON_PROPERTY_MESSAGE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getMessage() {
     return message;
@@ -189,7 +175,8 @@ public class CommentDtoAllOf {
 
 
   public CommentDtoAllOf removalTime(OffsetDateTime removalTime) {
-    this.removalTime = JsonNullable.<OffsetDateTime>of(removalTime);
+    
+    this.removalTime = removalTime;
     return this;
   }
 
@@ -199,30 +186,19 @@ public class CommentDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The time after which the comment should be removed by the History Cleanup job. [Default format]($(docsUrl)/reference/rest/overview/date-format/) `yyyy-MM-dd'T'HH:mm:ss.SSSZ`.")
-  @JsonIgnore
 
   public OffsetDateTime getRemovalTime() {
-        return removalTime.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_REMOVAL_TIME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<OffsetDateTime> getRemovalTime_JsonNullable() {
     return removalTime;
   }
-  
-  @JsonProperty(JSON_PROPERTY_REMOVAL_TIME)
-  public void setRemovalTime_JsonNullable(JsonNullable<OffsetDateTime> removalTime) {
-    this.removalTime = removalTime;
-  }
+
 
   public void setRemovalTime(OffsetDateTime removalTime) {
-    this.removalTime = JsonNullable.<OffsetDateTime>of(removalTime);
+    this.removalTime = removalTime;
   }
 
 
   public CommentDtoAllOf rootProcessInstanceId(String rootProcessInstanceId) {
+    
     this.rootProcessInstanceId = rootProcessInstanceId;
     return this;
   }
@@ -233,8 +209,6 @@ public class CommentDtoAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The process instance id of the root process instance that initiated the process containing the task.")
-  @JsonProperty(JSON_PROPERTY_ROOT_PROCESS_INSTANCE_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getRootProcessInstanceId() {
     return rootProcessInstanceId;
@@ -246,9 +220,6 @@ public class CommentDtoAllOf {
   }
 
 
-  /**
-   * Return true if this CommentDto_allOf object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

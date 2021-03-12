@@ -15,32 +15,24 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
+import java.io.IOException;
 
 /**
  * RestartProcessInstanceModificationInstructionDto
  */
-@JsonPropertyOrder({
-  RestartProcessInstanceModificationInstructionDto.JSON_PROPERTY_TYPE,
-  RestartProcessInstanceModificationInstructionDto.JSON_PROPERTY_ACTIVITY_ID,
-  RestartProcessInstanceModificationInstructionDto.JSON_PROPERTY_TRANSITION_ID
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class RestartProcessInstanceModificationInstructionDto {
   /**
    * **Mandatory**. One of the following values: &#x60;startBeforeActivity&#x60;, &#x60;startAfterActivity&#x60;, &#x60;startTransition&#x60;.  * A &#x60;startBeforeActivity&#x60; instruction requests to enter a given activity. * A &#x60;startAfterActivity&#x60; instruction requests to execute the single outgoing sequence flow of a given activity. * A &#x60;startTransition&#x60; instruction requests to execute a specific sequence flow.
    */
+  @JsonAdapter(TypeEnum.Adapter.class)
   public enum TypeEnum {
     STARTBEFOREACTIVITY("startBeforeActivity"),
     
@@ -54,7 +46,6 @@ public class RestartProcessInstanceModificationInstructionDto {
       this.value = value;
     }
 
-    @JsonValue
     public String getValue() {
       return value;
     }
@@ -64,7 +55,6 @@ public class RestartProcessInstanceModificationInstructionDto {
       return String.valueOf(value);
     }
 
-    @JsonCreator
     public static TypeEnum fromValue(String value) {
       for (TypeEnum b : TypeEnum.values()) {
         if (b.value.equals(value)) {
@@ -73,19 +63,36 @@ public class RestartProcessInstanceModificationInstructionDto {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
+
+    public static class Adapter extends TypeAdapter<TypeEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final TypeEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public TypeEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return TypeEnum.fromValue(value);
+      }
+    }
   }
 
-  public static final String JSON_PROPERTY_TYPE = "type";
+  public static final String SERIALIZED_NAME_TYPE = "type";
+  @SerializedName(SERIALIZED_NAME_TYPE)
   private TypeEnum type;
 
-  public static final String JSON_PROPERTY_ACTIVITY_ID = "activityId";
+  public static final String SERIALIZED_NAME_ACTIVITY_ID = "activityId";
+  @SerializedName(SERIALIZED_NAME_ACTIVITY_ID)
   private String activityId;
 
-  public static final String JSON_PROPERTY_TRANSITION_ID = "transitionId";
+  public static final String SERIALIZED_NAME_TRANSITION_ID = "transitionId";
+  @SerializedName(SERIALIZED_NAME_TRANSITION_ID)
   private String transitionId;
 
 
   public RestartProcessInstanceModificationInstructionDto type(TypeEnum type) {
+    
     this.type = type;
     return this;
   }
@@ -95,8 +102,6 @@ public class RestartProcessInstanceModificationInstructionDto {
    * @return type
   **/
   @ApiModelProperty(required = true, value = "**Mandatory**. One of the following values: `startBeforeActivity`, `startAfterActivity`, `startTransition`.  * A `startBeforeActivity` instruction requests to enter a given activity. * A `startAfterActivity` instruction requests to execute the single outgoing sequence flow of a given activity. * A `startTransition` instruction requests to execute a specific sequence flow.")
-  @JsonProperty(JSON_PROPERTY_TYPE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public TypeEnum getType() {
     return type;
@@ -109,6 +114,7 @@ public class RestartProcessInstanceModificationInstructionDto {
 
 
   public RestartProcessInstanceModificationInstructionDto activityId(String activityId) {
+    
     this.activityId = activityId;
     return this;
   }
@@ -119,8 +125,6 @@ public class RestartProcessInstanceModificationInstructionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "**Can be used with instructions of types** `startBeforeActivity` and `startAfterActivity`. Specifies the sequence flow to start.")
-  @JsonProperty(JSON_PROPERTY_ACTIVITY_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getActivityId() {
     return activityId;
@@ -133,6 +137,7 @@ public class RestartProcessInstanceModificationInstructionDto {
 
 
   public RestartProcessInstanceModificationInstructionDto transitionId(String transitionId) {
+    
     this.transitionId = transitionId;
     return this;
   }
@@ -143,8 +148,6 @@ public class RestartProcessInstanceModificationInstructionDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "**Can be used with instructions of types** `startTransition`. Specifies the sequence flow to start.")
-  @JsonProperty(JSON_PROPERTY_TRANSITION_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getTransitionId() {
     return transitionId;
@@ -156,9 +159,6 @@ public class RestartProcessInstanceModificationInstructionDto {
   }
 
 
-  /**
-   * Return true if this RestartProcessInstanceModificationInstructionDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {

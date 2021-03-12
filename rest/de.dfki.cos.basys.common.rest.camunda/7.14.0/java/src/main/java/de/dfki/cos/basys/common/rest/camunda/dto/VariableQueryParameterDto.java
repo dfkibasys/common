@@ -15,35 +15,28 @@ package de.dfki.cos.basys.common.rest.camunda.dto;
 
 import java.util.Objects;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import de.dfki.cos.basys.common.rest.camunda.JSON;
-
+import java.io.IOException;
 
 /**
  * VariableQueryParameterDto
  */
-@JsonPropertyOrder({
-  VariableQueryParameterDto.JSON_PROPERTY_NAME,
-  VariableQueryParameterDto.JSON_PROPERTY_OPERATOR,
-  VariableQueryParameterDto.JSON_PROPERTY_VALUE
-})
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-11T21:54:35.456Z[GMT]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2021-03-12T00:15:55.778Z[GMT]")
 public class VariableQueryParameterDto {
-  public static final String JSON_PROPERTY_NAME = "name";
+  public static final String SERIALIZED_NAME_NAME = "name";
+  @SerializedName(SERIALIZED_NAME_NAME)
   private String name;
 
   /**
    * Comparison operator to be used
    */
+  @JsonAdapter(OperatorEnum.Adapter.class)
   public enum OperatorEnum {
     EQ("eq"),
     
@@ -65,7 +58,6 @@ public class VariableQueryParameterDto {
       this.value = value;
     }
 
-    @JsonValue
     public String getValue() {
       return value;
     }
@@ -75,7 +67,6 @@ public class VariableQueryParameterDto {
       return String.valueOf(value);
     }
 
-    @JsonCreator
     public static OperatorEnum fromValue(String value) {
       for (OperatorEnum b : OperatorEnum.values()) {
         if (b.value.equals(value)) {
@@ -84,16 +75,32 @@ public class VariableQueryParameterDto {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
+
+    public static class Adapter extends TypeAdapter<OperatorEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final OperatorEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public OperatorEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return OperatorEnum.fromValue(value);
+      }
+    }
   }
 
-  public static final String JSON_PROPERTY_OPERATOR = "operator";
+  public static final String SERIALIZED_NAME_OPERATOR = "operator";
+  @SerializedName(SERIALIZED_NAME_OPERATOR)
   private OperatorEnum operator;
 
-  public static final String JSON_PROPERTY_VALUE = "value";
+  public static final String SERIALIZED_NAME_VALUE = "value";
+  @SerializedName(SERIALIZED_NAME_VALUE)
   private Object value;
 
 
   public VariableQueryParameterDto name(String name) {
+    
     this.name = name;
     return this;
   }
@@ -104,8 +111,6 @@ public class VariableQueryParameterDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Variable name")
-  @JsonProperty(JSON_PROPERTY_NAME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getName() {
     return name;
@@ -118,6 +123,7 @@ public class VariableQueryParameterDto {
 
 
   public VariableQueryParameterDto operator(OperatorEnum operator) {
+    
     this.operator = operator;
     return this;
   }
@@ -128,8 +134,6 @@ public class VariableQueryParameterDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Comparison operator to be used")
-  @JsonProperty(JSON_PROPERTY_OPERATOR)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public OperatorEnum getOperator() {
     return operator;
@@ -142,6 +146,7 @@ public class VariableQueryParameterDto {
 
 
   public VariableQueryParameterDto value(Object value) {
+    
     this.value = value;
     return this;
   }
@@ -152,8 +157,6 @@ public class VariableQueryParameterDto {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The variable value, could be of type boolean, string or number")
-  @JsonProperty(JSON_PROPERTY_VALUE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Object getValue() {
     return value;
@@ -165,9 +168,6 @@ public class VariableQueryParameterDto {
   }
 
 
-  /**
-   * Return true if this VariableQueryParameterDto object is equal to o.
-   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
