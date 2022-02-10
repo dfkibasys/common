@@ -1,28 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
+    <modelVersion>4.0.0</modelVersion>
+	
 	<parent>
-		<relativePath>../../poms/compiled/</relativePath>
-		<groupId>de.dfki.cos.basys.common</groupId>
-		<artifactId>compiled-bundle-settings</artifactId>
-		<version>0.2.7-SNAPSHOT</version>
+		<groupId>de.dfki.cos.basys.pom</groupId>
+		<artifactId>starter-parent</artifactId>
+		<version>0.3.0-SNAPSHOT</version>
+		<relativePath/>
 	</parent>
 
 	<properties>
 		<bundle.symbolicName>de.dfki.cos.basys.common.jrosbridge</bundle.symbolicName>
 		<bundle.namespace>edu.wpi.rail.jrosbridge</bundle.namespace>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
 
-	<modelVersion>4.0.0</modelVersion>
-	<artifactId>de.dfki.cos.basys.common.jrosbridge</artifactId>
-
-	<name>${bundle.symbolicName}</name>
-
-	<packaging>bundle</packaging>
+    <groupId>de.dfki.cos.basys.common</groupId>
+	<artifactId>jrosbridge</artifactId>
+	<packaging>bundle</packaging>	
+    <name>${bundle.symbolicName}</name>
 
 	<licenses>
 		<license>
@@ -86,17 +81,8 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>${junit-version}</version>
+			<version>${junit.version}</version>
 			<scope>test</scope>
-		</dependency>
-		<!-- comment to remove all imported (non-local) bundles from your compilation 
-			classpath -->
-		<dependency>
-			<type>pom</type>
-			<groupId>${project.parent.groupId}</groupId>
-			<artifactId>provision</artifactId>			
-			<version>${project.version}</version>
-			<optional>true</optional>
 		</dependency>
 
 	</dependencies>

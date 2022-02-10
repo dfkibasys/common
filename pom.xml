@@ -1,43 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
-	<parent>
-		<groupId>de.dfki.cos.basys</groupId>
-		<artifactId>pom</artifactId>
-		<version>0.2.7-SNAPSHOT</version>
-		<relativePath />
-	</parent>
-
 	<modelVersion>4.0.0</modelVersion>
+	
 	<groupId>de.dfki.cos.basys</groupId>
-	<artifactId>common</artifactId>
-
-	<name>BaSys 4.0 Common</name>
-
-	<description>Common libraries for use in BaSys 4.0</description>
-
+	<artifactId>common</artifactId>	
+	<version>0.3.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
+	
+	<name>BaSys 4.2 Common</name>
+	<description>Common libraries for use in BaSys 4.2</description>
 
 	<modules>
-		<module>poms</module>
-		<module>provision</module>
-		<!--
-		<module>modules/de.dfki.cos.basys.common.aas</module>
-		-->
-		<module>modules/de.dfki.cos.basys.common.component</module>
-		<module>modules/de.dfki.cos.basys.common.emf</module>
-		<module>modules/de.dfki.cos.basys.common.emf.json</module>
-		<module>modules/de.dfki.cos.basys.common.emf.jaxrs</module>
+		<module>modules/de.dfki.cos.basys.common.component</module>				
 		<module>modules/de.dfki.cos.basys.common.jrosbridge</module>
-		<module>modules/de.dfki.cos.basys.common.logging</module>	
-		<!--
-		<module>modules/de.dfki.cos.basys.common.mirrestclient</module>
-		<module>modules/de.dfki.cos.basys.common.wmrestclient</module>	
-		-->
 		<module>modules/de.dfki.cos.basys.common.scxml</module>
-		<module>rest</module>		
+		<module>modules/de.dfki.cos.basys.common.rest.mir</module>
 		<!--
-		<module>karaf</module>	
+		<module>modules/de.dfki.cos.basys.common.rest.camunda</module>
 		-->
 	</modules>
 
