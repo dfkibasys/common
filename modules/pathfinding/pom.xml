@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>de.dfki.cos.basys.pom</groupId>
+		<artifactId>starter-parent</artifactId>
+		<version>0.3.0-SNAPSHOT</version>
+		<relativePath/>
+	</parent>
+
+    <properties>
+        <bundle.symbolicName>de.dfki.cos.basys.common.pathfinding</bundle.symbolicName>
+        <bundle.namespace>de.dfki.cos.basys.common.pathfinding</bundle.namespace>
+    </properties>
+
+    <groupId>de.dfki.cos.basys.common</groupId>
+    <artifactId>pathfinding</artifactId>
+	<packaging>bundle</packaging>	
+    <name>${bundle.symbolicName}</name>
+
+    <dependencies>
+
+        <!-- https://mvnrepository.com/artifact/org.jmonkeyengine/jme3-core -->
+        <dependency>
+            <groupId>org.jmonkeyengine</groupId>
+            <artifactId>jme3-core</artifactId>
+            <version>3.5.2-stable</version>
+        </dependency>
+		
+    </dependencies>
+
+</project>
