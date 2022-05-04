@@ -66,7 +66,7 @@ public class AStarLogic {
      * @param startNode     starting node
      * @param targetNode    target node
      * @param busyNodes busy "unwalkable" nodes
-     * @return          path as list of nodes from start to target or empty list if no path found
+     * @return          path as list of nodes from start to target or null if no path found
      */
     public final List<AStarNode> getPath(AStarNode startNode, AStarNode targetNode, boolean simplify, AStarNode... busyNodes) {
 
@@ -116,7 +116,8 @@ public class AStarLogic {
         }
         else {
             //System.out.println("NOT_FOUND");
-            return Collections.emptyList();
+            //return Collections.emptyList();
+            return null;
             //return closedSet;
         }
     }

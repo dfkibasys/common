@@ -1,4 +1,4 @@
-package de.dfki.cos.basys.common.pathfinding.util;
+package de.dfki.cos.basys.common.pathfinding;
 
 import de.dfki.cos.basys.common.pathfinding.AStarGrid;
 import de.dfki.cos.basys.common.pathfinding.AStarNode;
