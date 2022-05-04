@@ -20,6 +20,8 @@ public class AStarLogic {
 
     public final List<Vector3f> getWaypoints(Vector3f start, Vector3f target) {
         List<AStarNode> nodes = getPath(grid.getNodeFromWorldPoint(start), grid.getNodeFromWorldPoint(target), true);
+        if (nodes == null) return null;
+
         List<Vector3f> waypoints = new ArrayList<>(nodes.size());
         for (AStarNode node : nodes) {
             Vector3f waypoint = grid.getWorldPointFromNode(node);
