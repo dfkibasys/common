@@ -10,6 +10,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MapUtils {
@@ -59,22 +61,7 @@ public class MapUtils {
         return grid;
     }
 
-
-    public static void toImageFile(String outputFilename, List<AStarNode> path, String backgroundImage) {
-
-        try {
-            BufferedImage img = ImageIO.read(new File(backgroundImage));
-            for (AStarNode node : path) {
-                img.setRGB(node.getX(), node.getY(), RED);
-            }
-            ImageIO.write(img, "png", new File(outputFilename));
-        } catch (IOException e) {
-            e.printStackTrace();
-
-        }
-    }
-
-    public static void toImageFile(AStarGrid grid, AStarNode start, AStarNode target, List<AStarNode> path, String outputFilename) {
+    public static void toImageFile(AStarGrid grid, AStarNode startNode, AStarNode targetNode, List<AStarNode> path, String outputFilename) {
 
         try {
             BufferedImage img = new BufferedImage(grid.getWidth(), grid.getHeight(), BufferedImage.TYPE_INT_ARGB);
@@ -83,11 +70,17 @@ public class MapUtils {
             }
 
             for (AStarNode n : path) {
-                img.setRGB(n.getX(), n.getY(), RED);
+                paintNode(img, n, BLUE);
             }
 
-            img.setRGB(start.getX(), start.getY(), GREEN);
-            img.setRGB(target.getX(), target.getY(), BLUE);
+            paintNode(img, startNode, GREEN);
+            paintNode(img, targetNode, RED);
+
+            for (int i = 0; i < 5; i++) {
+                for (int j = 0; j < 5; j++) {
+                    img.setRGB(i,j,RED);
+                }
+            }
 
             ImageIO.write(img, "png", new File(outputFilename));
         } catch (IOException e) {
@@ -97,27 +90,32 @@ public class MapUtils {
     }
 
     public static void toImageFile(AStarGrid grid, Vector3f start, Vector3f target, List<Vector3f> waypoints, String outputFilename) {
-
-        try {
-            BufferedImage img = new BufferedImage(grid.getWidth(), grid.getHeight(), BufferedImage.TYPE_INT_ARGB);
-            for (AStarNode n : grid.getNodes()) {
-                img.setRGB(n.getX(), n.getY(), !n.isWalkable() ? BLACK : WHITE);
-            }
-
+        AStarNode startNode = grid.getNodeFromWorldPoint(start);
+        AStarNode targetNode = grid.getNodeFromWorldPoint(target);
+        List<AStarNode> nodes = Collections.emptyList();
+        if (waypoints != null) {
+            nodes = new ArrayList<>(waypoints.size());
             for (Vector3f waypoint : waypoints) {
                 AStarNode n = grid.getNodeFromWorldPoint(waypoint);
-                img.setRGB(n.getX(), n.getY(), RED);
+                if (n != null) {
+                    nodes.add(n);
+                }
             }
-
-            AStarNode startNode = grid.getNodeFromWorldPoint(start);
-            AStarNode targetNode = grid.getNodeFromWorldPoint(target);
-            img.setRGB(startNode.getX(), startNode.getY(), GREEN);
-            img.setRGB(targetNode.getX(), targetNode.getY(), BLUE);
-
-            ImageIO.write(img, "png", new File(outputFilename));
-        } catch (IOException e) {
-            e.printStackTrace();
-
         }
+        toImageFile(grid, startNode, targetNode, nodes, outputFilename);
+    }
+
+    private static void paintNode(BufferedImage img, AStarNode node, int color) {
+        if (node == null) return;
+
+        img.setRGB(node.getX()-1, node.getY()-1, color);
+        img.setRGB(node.getX()-1, node.getY()+0, color);
+        img.setRGB(node.getX()-1, node.getY()+1, color);
+        img.setRGB(node.getX()+0, node.getY()-1, color);
+        //img.setRGB(node.getX()+0, node.getY()+0, color);
+        img.setRGB(node.getX()+0, node.getY()+1, color);
+        img.setRGB(node.getX()+1, node.getY()-1, color);
+        img.setRGB(node.getX()+1, node.getY()+0, color);
+        img.setRGB(node.getX()+1, node.getY()+1, color);
     }
 }

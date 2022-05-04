@@ -106,7 +106,9 @@ public class AStarGrid {
      * @return A* node at x, y
      */
     public final AStarNode getNode(int x, int y) {
-        return grid[x][y];
+        if (x >= 0 && x < width && y >= 0 && y < height)
+            return grid[x][y];
+        return null;
     }
 
     public final AStarNode getNodeFromWorldPoint(Vector3f worldPosition) {
@@ -114,13 +116,13 @@ public class AStarGrid {
         Vector3f gridPosition = worldPosition.subtract(offset).divide(scaleFactor);
 
         int x = Math.round(gridPosition.x);
-        int y = Math.round(gridPosition.z); // important: z!
+        int y = Math.round(this.height - gridPosition.z); // important: z!
 
         return getNode(x,y);
     }
 
     public Vector3f getWorldPointFromNode(AStarNode node) {
-        Vector3f worldPosition = new Vector3f(node.getX(), 0, node.getY()).mult(scaleFactor).add(offset);
+        Vector3f worldPosition = new Vector3f(node.getX(), 0, this.height - node.getY()).mult(scaleFactor).add(offset);
         return worldPosition;
     }
 
