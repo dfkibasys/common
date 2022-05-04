@@ -108,7 +108,8 @@ public class AStarGridTest {
             grid.getNode(4, i).setState(AStarNode.NodeState.NOT_WALKABLE);
 
         path = logic.getPath(3, 0, 5, 0);
-        assertTrue(path.isEmpty());
+        //assertTrue(path.isEmpty());
+        assertNull(path);
     }
 
     private void assertPathEquals(List<AStarNode> path, int... points) {
