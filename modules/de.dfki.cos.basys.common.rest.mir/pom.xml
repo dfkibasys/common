@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
+    <modelVersion>4.0.0</modelVersion>
+	
 	<parent>
-		<relativePath>../../poms/compiled/</relativePath>
-		<groupId>de.dfki.cos.basys.common</groupId>
-		<artifactId>compiled-bundle-settings</artifactId>
-		<version>0.2.7-SNAPSHOT</version>
+		<groupId>de.dfki.cos.basys.pom</groupId>
+		<artifactId>starter-parent</artifactId>
+		<version>0.3.0-SNAPSHOT</version>
+		<relativePath/>
 	</parent>
 
 	<properties>
@@ -13,13 +14,10 @@
 		<bundle.namespace>de.dfki.cos.basys.common.rest.mir</bundle.namespace>
 	</properties>
 
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>de.dfki.cos.basys.common.rest</groupId>
-	<artifactId>de.dfki.cos.basys.common.rest.mir</artifactId>
-
-	<name>${bundle.symbolicName}</name>
-
+	<groupId>de.dfki.cos.basys.common</groupId>
+	<artifactId>mir-restclient</artifactId>
 	<packaging>bundle</packaging>
+	<name>${bundle.symbolicName}</name>
 
 	<dependencies>
 	
@@ -27,38 +25,29 @@
 		<dependency>
 		    <groupId>javax.ws.rs</groupId>
 		    <artifactId>javax.ws.rs-api</artifactId>
-		    <version>${jaxrs-version}</version>	
+		    <version>${jaxrs.version}</version>	
 		</dependency>
-	
-		<!-- comment to remove all imported (non-local) bundles from your compilation 
-			classpath -->
-		<dependency>
-			<type>pom</type>
-			<groupId>${project.parent.groupId}</groupId>
-			<artifactId>provision</artifactId>			
-			<version>${project.version}</version>
-			<optional>true</optional>
-		</dependency>
+
 		        
      	<!-- https://mvnrepository.com/artifact/junit/junit/4.12 -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>${junit-version}</version>
+			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
 				   
 		<dependency>
 			<groupId>org.glassfish.jersey.core</groupId>
 			<artifactId>jersey-client</artifactId>
-			<version>${jersey-version}</version>
+			<version>${jersey.version}</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 		    <groupId>org.glassfish.jersey.inject</groupId>
 		    <artifactId>jersey-hk2</artifactId>
-		    <version>${jersey-version}</version>
+		    <version>${jersey.version}</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -66,12 +55,10 @@
 		<dependency>
 			<groupId>org.glassfish.jersey.media</groupId>
 			<artifactId>jersey-media-json-jackson</artifactId>
-			<version>${jersey-version}</version>
+			<version>${jersey.version}</version>
 			<scope>test</scope>
 		</dependency>
 
 	</dependencies>
-
-
-
+	
 </project>
