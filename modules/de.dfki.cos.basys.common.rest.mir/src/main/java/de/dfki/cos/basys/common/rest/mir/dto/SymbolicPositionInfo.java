@@ -1,10 +1,8 @@
 package de.dfki.cos.basys.common.rest.mir.dto;
 
 public class SymbolicPositionInfo {
-	public String[] allowed_methods;
 	public String created_by;
 	public String created_by_id;
-	public String created_by_name;	
 	public String docking_offsets;	
 	public String guid;
 	public String map;

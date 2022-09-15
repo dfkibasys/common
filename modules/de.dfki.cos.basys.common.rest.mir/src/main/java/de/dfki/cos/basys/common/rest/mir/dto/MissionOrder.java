@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class MissionOrder {
+	public String fleet_schedule_guid;
 	public String mission_id;
 	public String message;
 	public List<Parameter> parameters = new LinkedList<Parameter>();
