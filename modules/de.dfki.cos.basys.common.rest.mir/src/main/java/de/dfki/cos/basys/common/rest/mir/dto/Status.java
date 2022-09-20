@@ -3,6 +3,7 @@ package de.dfki.cos.basys.common.rest.mir.dto;
 import java.util.List;
 
 public class Status {
+	public String allowed_methods;
 	public float battery_percentage;	
 	public int battery_time_remaining;	
 	public float distance_to_next_target;	
