@@ -14,6 +14,7 @@ public class MissionOrder {
 		super();
 		this.mission_id = mission_id;
 		this.message = message;
+		this.fleet_schedule_guid = "";
 	}
 	
 }
