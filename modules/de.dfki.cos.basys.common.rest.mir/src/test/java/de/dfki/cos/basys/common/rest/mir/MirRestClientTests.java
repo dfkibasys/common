@@ -24,7 +24,7 @@ public class MirRestClientTests {
 
 	MirService client;
 	String url = "http://robot-mir-01.mrk40.dfki.lan";
-	String auth = "YWRtaW46OGM2OTc2ZTViNTQxMDQxNWJkZTkwOGJkNGRlZTE1ZGZiMTY3YTljODczZmM0YmI4YTgxZjZmMmFiNDQ4YTkxOA==";
+	String auth = "bXJrOjZjNGIwNmRjYTU4NmM1NzkxYmI2Nzc4MjFjZjU3YWQ0ZjcyOGVmMTZmMWNjN2ZiMDg1MmEwNmY3Yzc5NmI1M2Y=";
 	
 	@Before
 	public void setUp() throws Exception {
@@ -97,7 +97,7 @@ public class MirRestClientTests {
 	@Test
 	@Ignore
 	public void testGetMapPositions() {
-		String mapId = "605911f3-dc39-11e8-8b31-f44d3061d5d6";
+		String mapId = "e4422d8c-8984-11ec-99dd-f44d3061d5d6";
 		List<SymbolicPosition> positions = client.getMapPositions(mapId);
 		assertNotNull(positions);
 	}
@@ -105,10 +105,10 @@ public class MirRestClientTests {
 	@Test
 	@Ignore
 	public void testGetPositionInfo() {
-		String positionId = "4300e514-e113-11e8-b57c-f44d3061d5d6";
+		String positionId = "776da25e-8991-11ec-99dd-f44d3061d5d6";
 		SymbolicPositionInfo info = client.getPositionInfo(positionId);
 		assertNotNull(info);
-		assertEquals("ColaStation", info.name);
+		assertEquals("Waypoint09", info.name);
 	}
 	
 /*
@@ -136,42 +136,23 @@ public class MirRestClientTests {
     "type_id": 0
 }
 */
-	
 	@Test
 	@Ignore
-	public void testGotoColaStationSymbolic() {
-		//String positionName = "EntryPosition";
-		String positionName = "ColaStation";
+	public void testGotoWaypoint09Symbolic() {
+		String positionName = "Waypoint09";
 		MissionInstanceInfo instance = client.gotoSymbolicPosition(positionName);
 		assertNotNull(instance);
-		
+
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		client.dequeueMissionInstance(instance.id);
 	}
-	
-	@Test
-	@Ignore
-	public void testGotoEntryPositionSymbolic() {
-		String positionName = "EntryPosition";
-		MissionInstanceInfo instance = client.gotoSymbolicPosition(positionName);
-		assertNotNull(instance);
-		
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		client.dequeueMissionInstance(instance.id);
-	}
-	
+
 	@Test
 	@Ignore
 	public void testGotoColaStationAbsolute() {
