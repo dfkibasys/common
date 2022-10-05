@@ -5,8 +5,8 @@
 	<parent>
 		<groupId>de.dfki.cos.basys</groupId>
 		<artifactId>pom</artifactId>
-		<version>0.3.0-SNAPSHOT</version>
-		<relativePath/>
+		<version>0.4.2</version>
+		<relativePath />
 	</parent>
 
 	<artifactId>common</artifactId>
@@ -30,5 +30,6 @@
 		<url>https://github.com/dfkibasys</url>
 		<connection>${gitUrl}/common.git</connection>
 		<developerConnection>${gitUrl}/common.git</developerConnection>
-	</scm>
+	  <tag>v0.4.2</tag>
+  </scm>
 </project>
