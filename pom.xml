@@ -8,9 +8,8 @@
 		<version>0.3.0-SNAPSHOT</version>
 		<relativePath/>
 	</parent>
-	
-	<groupId>de.dfki.cos.basys</groupId>
-	<artifactId>common</artifactId>	
+
+	<artifactId>common</artifactId>
 	<packaging>pom</packaging>
 	
 	<name>BaSys 4.2 Common</name>
@@ -28,9 +27,8 @@
 	</modules>
 
 	<scm>
-		<url>https://github.com/BaSys-PC1</url>
+		<url>https://github.com/dfkibasys</url>
 		<connection>${gitUrl}/common.git</connection>
 		<developerConnection>${gitUrl}/common.git</developerConnection>
-		<tag>v0.2.5</tag>
 	</scm>
 </project>
