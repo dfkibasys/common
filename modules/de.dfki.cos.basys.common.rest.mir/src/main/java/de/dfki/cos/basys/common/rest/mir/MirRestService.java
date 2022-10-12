@@ -14,18 +14,9 @@ import javax.ws.rs.core.MediaType;
 
 import javax.ws.rs.core.Response;
 
+import de.dfki.cos.basys.common.rest.mir.dto.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import de.dfki.cos.basys.common.rest.mir.dto.MissionDefinition;
-import de.dfki.cos.basys.common.rest.mir.dto.MissionInstance;
-import de.dfki.cos.basys.common.rest.mir.dto.MissionInstanceInfo;
-import de.dfki.cos.basys.common.rest.mir.dto.MissionOrder;
-import de.dfki.cos.basys.common.rest.mir.dto.Parameter;
-import de.dfki.cos.basys.common.rest.mir.dto.Status;
-import de.dfki.cos.basys.common.rest.mir.dto.StatusChangeRequest;
-import de.dfki.cos.basys.common.rest.mir.dto.SymbolicPosition;
-import de.dfki.cos.basys.common.rest.mir.dto.SymbolicPositionInfo;
 
 public class MirRestService implements MirService {
 
@@ -34,34 +25,37 @@ public class MirRestService implements MirService {
 	private final String pathSegment = "/api/v2.0.0";
 	private final String gotoAbsolutePositionId = "mirconst-guid-0000-0003-actionlist00"; // id for MIR's default taxi mission;
 	private final String gotoSymbolicPositionId = "mirconst-guid-0000-0001-actionlist00";// id for MIR's default move mission;
-	
+
+	private final String playSoundId = "5bd4a3f0-4a28-11ed-8b5f-f44d3061d5d6"; // id for MIR's play sound mission;
+
 	protected Client client = ClientBuilder.newClient();
 	protected WebTarget endpoint = null;
 	protected String auth = null;
-	
+
 	List<MissionDefinition> missionDefinitions;
 	Map<String,List<MissionDefinition>> areaMissionDefinitions = new HashMap<String, List<MissionDefinition>>();
 	List<MissionInstance> allMissionInstances;
-	List<MissionInstance> currentMissionInstances;	
-	
+	List<MissionInstance> currentMissionInstances;
+	List<Sound> sounds;
+
 	public MirRestService(String host, String auth) {
-		this.endpoint = client.target(host).path(pathSegment);	
+		this.endpoint = client.target(host).path(pathSegment);
 		this.auth = auth;
 		init();
 	}
-	
+
 	public MirRestService(WebTarget endpoint, String auth) {
-		this.endpoint = endpoint.path(pathSegment);	
+		this.endpoint = endpoint.path(pathSegment);
 		this.auth = auth;
 		init();
 	}
-	
+
 	private void init() {
 		missionDefinitions = getMissionDefinitions();
 		allMissionInstances = getAllMissionInstancesInQueue();
 		currentMissionInstances = new LinkedList<MissionInstance>();
 	}
-	
+
 	@Override
 	public Status getRobotStatus() {
 		Status status = endpoint.path("/status").request(MediaType.APPLICATION_JSON_TYPE).header("Authorization", "Basic " + auth).get(Status.class);
@@ -70,10 +64,10 @@ public class MirRestService implements MirService {
 
 	@Override
 	public Status setRobotStatus(MiRState state) {
-		
+
 		StatusChangeRequest request = new StatusChangeRequest();
 		request.state_id = state.id();
-		
+
 		Status status = endpoint.path("/status").request(MediaType.APPLICATION_JSON_TYPE).header("Authorization", "Basic " + auth).put(Entity.entity(request, MediaType.APPLICATION_JSON),Status.class);
 		return status;
 	}
@@ -116,49 +110,49 @@ public class MirRestService implements MirService {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		
+
 		MissionInstanceInfo instance = endpoint.path("/mission_queue").request(MediaType.APPLICATION_JSON_TYPE).header("Authorization", "Basic " + auth)
 				.post(Entity.entity(order, MediaType.APPLICATION_JSON),MissionInstanceInfo.class);
-		
+
 		if (instance != null) {
 			MissionInstance inst = instance.toMissionInstance();
 			allMissionInstances.add(inst);
-			currentMissionInstances.add(inst);				
+			currentMissionInstances.add(inst);
 		}
 		return instance;
 	}
-	
+
 	@Override
 	public boolean dequeueMissionInstance(int missionInstanceId) {
 
 		Response response = endpoint.path("/mission_queue/{id}").resolveTemplate("id", missionInstanceId).request(MediaType.APPLICATION_JSON_TYPE).header("Authorization", "Basic " + auth).delete();
 
-		if (response.getStatus() == 200) {		
+		if (response.getStatus() == 200) {
 			//identify MissionInstance object in list
 			MissionInstance instance = null;
 			for (MissionInstance missionInstance : currentMissionInstances) {
 				if (missionInstance.id == missionInstanceId) {
 					instance = missionInstance;
-	        		break; 
-	        	}     
-			}		
-	        
+	        		break;
+	        	}
+			}
+
 	        if (instance != null) {
 	        	allMissionInstances.remove(instance);
 	        	currentMissionInstances.remove(instance);
 	        }
-	        
+
 	        return true;
 		}
-        
+
         return false;
-    
+
 	}
 
 	@Override
 	public List<SymbolicPosition> getPositions() {
 		List<SymbolicPosition> positions = endpoint.path("/positions").request(MediaType.APPLICATION_JSON_TYPE).header("Authorization", "Basic " + auth).get(new GenericType<List<SymbolicPosition>>() {});
-		return positions;	
+		return positions;
 	}
 
 	@Override
@@ -166,15 +160,15 @@ public class MirRestService implements MirService {
 		List<SymbolicPosition> positions = endpoint.path("/maps/{map_id}/positions").resolveTemplate("map_id", mapId).request(MediaType.APPLICATION_JSON_TYPE).header("Authorization", "Basic " + auth).get(new GenericType<List<SymbolicPosition>>() {});
 		return positions;
 	}
-	
+
 	@Override
 	public SymbolicPositionInfo getPositionInfo(String positionId) {
 		SymbolicPositionInfo info = endpoint.path("/positions/{id}").resolveTemplate("id", positionId).request(MediaType.APPLICATION_JSON_TYPE).header("Authorization", "Basic " + auth).get(SymbolicPositionInfo.class);
-		return info;	
+		return info;
 	}
 
 	@Override
-	public List<MissionInstance> getMissionInstancesInQueue() {		
+	public List<MissionInstance> getMissionInstancesInQueue() {
 		List<MissionInstance> toRemove = new LinkedList<MissionInstance>();
 		for (MissionInstance missionInstance : currentMissionInstances) {
 			MissionInstanceInfo info = getMissionInstanceInfo(missionInstance.id);
@@ -182,17 +176,25 @@ public class MirRestService implements MirService {
 				toRemove.add(missionInstance);
 			}
 		}
-		currentMissionInstances.removeAll(toRemove);			
+		currentMissionInstances.removeAll(toRemove);
 		return currentMissionInstances;
 	}
-	
+
+	@Override
+	public List<Sound> getSounds() {
+		if (sounds == null) {
+			sounds = endpoint.path("/sounds").request(MediaType.APPLICATION_JSON_TYPE).header("Authorization", "Basic " + auth).get(new GenericType<List<Sound>>() {});
+		}
+		return sounds;
+	}
+
 	@Override
 	public MissionInstanceInfo enqueueMissionInstance(String missionDefinitionId) {
 		MissionOrder order = new MissionOrder(missionDefinitionId, "");
 		order.mission_id = missionDefinitionId;
 		return enqueueMissionInstance(order);
 	}
-	
+
 	@Override
 	public MissionInstanceInfo enqueueMissionInstanceByName(String missionDefinitionName) {
 		MissionDefinition missionDefinition = null;
@@ -200,13 +202,37 @@ public class MirRestService implements MirService {
 			if (m.name.equals(missionDefinitionName)) {
 				missionDefinition = m;
 				break;
-			}			
+			}
 		}
-		if (missionDefinition != null) {		
+		if (missionDefinition != null) {
 			return enqueueMissionInstance(missionDefinition.guid);
 		} else {
 			return null;
 		}
+	}
+
+	@Override
+	public MissionInstanceInfo playSound(String soundName) {
+		Sound sound = null;
+		List<Sound> sounds = getSounds();
+		for (Sound s : sounds){
+			if (s.name.equals(soundName)) {
+				sound = s;
+				break;
+			}
+		}
+
+		if (sound != null) {
+			MissionOrder order = new MissionOrder(playSoundId, "");
+			Parameter s = new Parameter();
+			s.id = "Sound";
+			s.label = sound.name;
+			s.value = sound.guid;
+
+			order.parameters.add(s);
+			return enqueueMissionInstance(order);
+		}
+		return null;
 	}
 
 	@Override

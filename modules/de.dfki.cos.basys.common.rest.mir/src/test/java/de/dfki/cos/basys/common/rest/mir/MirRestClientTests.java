@@ -203,4 +203,21 @@ public class MirRestClientTests {
 		
 		client.dequeueMissionInstance(instance.id);
 	}
+
+	@Test
+	@Ignore
+	public void testPlaySound() {
+		String soundName = "Horn";
+		MissionInstanceInfo instance = client.playSound(soundName);
+		assertNotNull(instance);
+
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		client.dequeueMissionInstance(instance.id);
+	}
 }
