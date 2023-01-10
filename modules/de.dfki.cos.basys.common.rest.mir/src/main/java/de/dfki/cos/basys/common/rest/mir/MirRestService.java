@@ -15,7 +15,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import de.dfki.cos.basys.common.rest.mir.dto.*;
-import jdk.jshell.spi.ExecutionControl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -190,13 +189,13 @@ public class MirRestService implements MirService {
 	}
 
 	@Override
-	public MissionInstanceInfo pick(String stationType, String loadType) {
+	public MissionInstanceInfo pick(String stationType, String loadType, String stationName, String loadId) {
 		LOGGER.error("NOT SUPPORTED");
 		return null;
 	}
 
 	@Override
-	public MissionInstanceInfo drop(String stationType, String loadType) {
+	public MissionInstanceInfo drop(String stationType, String loadType, String stationName, String loadId) {
 		LOGGER.error("NOT SUPPORTED");
 		return null;
 	}
