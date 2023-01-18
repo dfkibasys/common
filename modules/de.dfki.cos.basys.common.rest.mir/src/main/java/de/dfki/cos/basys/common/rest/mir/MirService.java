@@ -45,9 +45,9 @@ public interface MirService {
 
 	MissionInstanceInfo playSound(String soundName);
 	List<Sound> getSounds();
-	MissionInstanceInfo pick(String stationType, String loadType, String stationName, String loadId);
+	MissionInstanceInfo pick(String stationType, String loadType, String stationName, String loadId, int quantity);
 
-	MissionInstanceInfo drop(String stationType, String loadType, String stationName, String loadId);
+	MissionInstanceInfo drop(String stationType, String loadType, String stationName, String loadId, int quantity);
 
 
 }

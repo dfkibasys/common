@@ -189,13 +189,13 @@ public class MirRestService implements MirService {
 	}
 
 	@Override
-	public MissionInstanceInfo pick(String stationType, String loadType, String stationName, String loadId) {
+	public MissionInstanceInfo pick(String stationType, String loadType, String stationName, String loadId, int quantity) {
 		LOGGER.error("NOT SUPPORTED");
 		return null;
 	}
 
 	@Override
-	public MissionInstanceInfo drop(String stationType, String loadType, String stationName, String loadId) {
+	public MissionInstanceInfo drop(String stationType, String loadType, String stationName, String loadId, int quantity) {
 		LOGGER.error("NOT SUPPORTED");
 		return null;
 	}
