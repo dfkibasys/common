@@ -35,26 +35,18 @@ public class MirRestService implements MirService {
 
 	List<MissionDefinition> missionDefinitions;
 	Map<String,List<MissionDefinition>> areaMissionDefinitions = new HashMap<String, List<MissionDefinition>>();
-	List<MissionInstance> allMissionInstances;
-	List<MissionInstance> currentMissionInstances;
+	//List<MissionInstance> allMissionInstances;
+	List<MissionInstance> currentMissionInstances = new LinkedList<>();
 	List<Sound> sounds;
 
 	public MirRestService(String host, String auth) {
 		this.endpoint = client.target(host).path(pathSegment);
 		this.auth = auth;
-		init();
 	}
 
 	public MirRestService(WebTarget endpoint, String auth) {
 		this.endpoint = endpoint.path(pathSegment);
 		this.auth = auth;
-		init();
-	}
-
-	private void init() {
-		missionDefinitions = getMissionDefinitions();
-		allMissionInstances = getAllMissionInstancesInQueue();
-		currentMissionInstances = new LinkedList<MissionInstance>();
 	}
 
 	@Override
@@ -89,9 +81,9 @@ public class MirRestService implements MirService {
 
 	@Override
 	public List<MissionInstance> getAllMissionInstancesInQueue() {
-		if (allMissionInstances == null) {
-			allMissionInstances = endpoint.path("/mission_queue").request(MediaType.APPLICATION_JSON_TYPE).header("Authorization", "Basic " + auth).get(new GenericType<List<MissionInstance>>() {});
-		}
+		//if (allMissionInstances == null) {
+		List<MissionInstance> allMissionInstances = endpoint.path("/mission_queue").request(MediaType.APPLICATION_JSON_TYPE).header("Authorization", "Basic " + auth).get(new GenericType<List<MissionInstance>>() {});
+		//}
 		return allMissionInstances;
 	}
 
@@ -117,7 +109,7 @@ public class MirRestService implements MirService {
 
 		if (instance != null) {
 			MissionInstance inst = instance.toMissionInstance();
-			allMissionInstances.add(inst);
+			//allMissionInstances.add(inst);
 			currentMissionInstances.add(inst);
 		}
 		return instance;
@@ -139,7 +131,7 @@ public class MirRestService implements MirService {
 			}
 
 	        if (instance != null) {
-	        	allMissionInstances.remove(instance);
+	        	//allMissionInstances.remove(instance);
 	        	currentMissionInstances.remove(instance);
 	        }
 
@@ -211,7 +203,7 @@ public class MirRestService implements MirService {
 	@Override
 	public MissionInstanceInfo enqueueMissionInstanceByName(String missionDefinitionName) {
 		MissionDefinition missionDefinition = null;
-		for (MissionDefinition m : missionDefinitions) {
+		for (MissionDefinition m : getMissionDefinitions()) {
 			if (m.name.equals(missionDefinitionName)) {
 				missionDefinition = m;
 				break;
