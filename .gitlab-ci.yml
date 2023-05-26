@@ -3,8 +3,10 @@ include:
       file: mvn.gitlab-ci.yml
       ref: main
 
-mvn-test:
-  extends: .mvn-test
+mvn-package:
+  extends: .mvn-package
 
 mvn-deploy:
-  extends: .mvn-deploy
+  extends: .mvn-deploy  
+  dependencies:
+    - mvn-package
