@@ -1,12 +1,4 @@
 include:
     - project: i40/administration
-      file: mvn.gitlab-ci.yml
+      file: gitlab-ci-maven.yml
       ref: main
-
-mvn-package:
-  extends: .mvn-package
-
-mvn-deploy:
-  extends: .mvn-deploy  
-  dependencies:
-    - mvn-package
