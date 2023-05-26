@@ -5,3 +5,4 @@ include:
 
 variables:
   MAVEN_DEPLOY_ENABLED: "true"
+  MVN_FORBID_SNAPSHOT_DEPENDENCIES_DISABLED : "true"
