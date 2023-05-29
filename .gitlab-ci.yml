@@ -4,5 +4,6 @@ include:
       ref: main
 
 variables:
-  MAVEN_DEPLOY_ENABLED: "true"
   MVN_FORBID_SNAPSHOT_DEPENDENCIES_DISABLED : "true"
+  MAVEN_DEPLOY_FROM_UNPROTECTED_DISABLED: "true"
+  MAVEN_DEPLOY_ENABLED: "true"
