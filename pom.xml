@@ -20,6 +20,7 @@
 		<module>modules/de.dfki.cos.basys.common.jrosbridge</module>
 		<module>modules/de.dfki.cos.basys.common.scxml</module>
 		<module>modules/de.dfki.cos.basys.common.rest.mir</module>
+		<module>modules/jsonpatch-maven-plugin</module>
 		<module>modules/pathfinding</module>
 		<!--
 		<module>modules/de.dfki.cos.basys.common.rest.camunda</module>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>de.dfki.cos.basys.pom</groupId>
+		<artifactId>starter-parent</artifactId>
+		<version>0.5.0-SNAPSHOT</version>
+		<relativePath />
+	</parent>
+
+	<groupId>de.dfki.cos.basys.common</groupId>
+	<artifactId>jsonpatch-maven-plugin</artifactId>
+	<packaging>maven-plugin</packaging>
+
+	<properties>
+		<maven-plugin.version>3.9.0</maven-plugin.version>
+		<maven-project.version>3.0-alpha-2</maven-project.version>
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
+		<json.patch.version>1.13</json.patch.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-plugin-api</artifactId>
+			<version>${maven-plugin.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.plugin-tools</groupId>
+			<artifactId>maven-plugin-annotations</artifactId>
+			<version>${maven-plugin.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-project</artifactId>
+			<version>${maven-project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.java-json-tools</groupId>
+			<artifactId>json-patch</artifactId>
+			<version>${json.patch.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-yaml</artifactId>
+		</dependency>
+	</dependencies>	
+	
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-plugin-plugin</artifactId>
+					<version>${maven-plugin.version}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>
