@@ -12,8 +12,8 @@
 	<artifactId>common</artifactId>
 	<packaging>pom</packaging>
 	
-	<name>BaSys 4.2 Common</name>
-	<description>Common libraries for use in BaSys 4.2</description>
+	<name>BaSys Common</name>
+	<description>Common libraries for use in BaSys</description>
 
 	<modules>
 		<module>modules/de.dfki.cos.basys.common.component</module>				
@@ -28,9 +28,9 @@
 	</modules>
 
 	<scm>
-		<url>https://github.com/dfkibasys</url>
-		<connection>${gitUrl}/common.git</connection>
-		<developerConnection>${gitUrl}/common.git</developerConnection>
-    <tag>HEAD</tag>
-  </scm>
+		<url>https://github.com/dfkibasys/common</url>
+		<connection>https://github.com/dfkibasys/common.git</connection>
+		<developerConnection>https://github.com/dfkibasys/common.git</developerConnection>
+    	<tag>HEAD</tag>
+	</scm>
 </project>
