@@ -29,8 +29,8 @@
 
 	<scm>
 		<url>https://github.com/dfkibasys/common</url>
-		<connection>https://github.com/dfkibasys/common.git</connection>
-		<developerConnection>https://github.com/dfkibasys/common.git</developerConnection>
+		<connection>${gitUrl}/common.git</connection>
+		<developerConnection>${gitUrl}/common.git</developerConnection>
     	<tag>HEAD</tag>
 	</scm>
 </project>
