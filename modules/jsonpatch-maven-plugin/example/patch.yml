@@ -1,0 +1,10 @@
+- op: copy
+  from: /a/b/c
+  path: /a/b/f
+- op: add
+  path: /a/b/d
+  value: 
+   - hello
+   - world
+- op: remove
+  path: /a/b/c

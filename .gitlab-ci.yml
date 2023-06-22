@@ -1,42 +1,9 @@
-image: maven:3-eclipse-temurin-11-alpine
+include:
+    - project: i40/administration
+      file: gitlab-ci-maven.yml
+      ref: main
 
 variables:
-  MAVEN_CLI_OPTS: "-s .m2/settings.xml --batch-mode"
-  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
-
-cache:
-  paths:
-    - .m2/repository/
-    - target/
-
-stages:
-  - build
-  - test
-  - deploy
-
-build:
-  stage: build
-  tags:
-    - basys
-    - maven
-  script:
-    - mvn -V $MAVEN_CLI_OPTS compile
-
-test:
-  stage: test
-  tags:
-    - basys
-    - maven
-  script:
-    - mvn $MAVEN_CLI_OPTS test
-
-deploy:
-  stage: deploy
-  tags:
-    - basys
-    - maven
-  script:
-    - mvn $MAVEN_CLI_OPTS deploy
-  only:
-    - master
-    - develop
+  MVN_FORBID_SNAPSHOT_DEPENDENCIES_DISABLED : "true"
+  MAVEN_DEPLOY_FROM_UNPROTECTED_DISABLED: "true"
+  MAVEN_DEPLOY_ENABLED: "true"

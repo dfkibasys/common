@@ -5,21 +5,22 @@
 	<parent>
 		<groupId>de.dfki.cos.basys</groupId>
 		<artifactId>pom</artifactId>
-		<version>0.4.3-SNAPSHOT</version>
+		<version>0.5.0-SNAPSHOT</version>
 		<relativePath />
 	</parent>
 
 	<artifactId>common</artifactId>
 	<packaging>pom</packaging>
 	
-	<name>BaSys 4.2 Common</name>
-	<description>Common libraries for use in BaSys 4.2</description>
+	<name>BaSys Common</name>
+	<description>Common libraries for use in BaSys</description>
 
 	<modules>
 		<module>modules/de.dfki.cos.basys.common.component</module>				
 		<module>modules/de.dfki.cos.basys.common.jrosbridge</module>
 		<module>modules/de.dfki.cos.basys.common.scxml</module>
 		<module>modules/de.dfki.cos.basys.common.rest.mir</module>
+		<module>modules/jsonpatch-maven-plugin</module>
 		<module>modules/pathfinding</module>
 		<!--
 		<module>modules/de.dfki.cos.basys.common.rest.camunda</module>
@@ -27,9 +28,9 @@
 	</modules>
 
 	<scm>
-		<url>https://github.com/dfkibasys</url>
+		<url>https://github.com/dfkibasys/common</url>
 		<connection>${gitUrl}/common.git</connection>
 		<developerConnection>${gitUrl}/common.git</developerConnection>
-    <tag>HEAD</tag>
-  </scm>
+    	<tag>HEAD</tag>
+	</scm>
 </project>
