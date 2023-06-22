@@ -27,6 +27,8 @@ import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import javax.script.SimpleScriptContext;
 
+//import com.oracle.truffle.js.scriptengine.GraalJSEngineFactory;
+//import com.oracle.truffle.js.scriptengine.GraalJSScriptEngine;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.scxml2.Context;
 import org.apache.commons.scxml2.Evaluator;
@@ -35,6 +37,7 @@ import org.apache.commons.scxml2.SCXMLExpressionException;
 import org.apache.commons.scxml2.env.AbstractBaseEvaluator;
 import org.apache.commons.scxml2.env.EffectiveContextMap;
 import org.apache.commons.scxml2.model.SCXML;
+//import org.graalvm.polyglot.HostAccess;
 
 /**
  * Embedded JavaScript expression evaluator for SCXML expressions using the JDK 8+ Nashorn Script Engine.
@@ -100,7 +103,33 @@ public class JSEvaluator extends AbstractBaseEvaluator {
      */
     protected synchronized void initEngine() {
         if (engine == null) {
+
+            //var engines = new ScriptEngineManager().getEngineFactories();
+
             engine = new ScriptEngineManager().getEngineByName("JavaScript");
+//            GraalJSEngineFactory fac = new GraalJSEngineFactory();
+//
+//
+//            ScriptEngine e = GraalJSScriptEngine.create(null,
+//                    org.graalvm.polyglot.Context.newBuilder("js")
+//                            .allowExperimentalOptions(true)
+//                            .allowHostAccess(HostAccess.ALL)
+//                            .allowHostClassLookup(s -> true)
+//                            .option("js.nashorn-compat","true")
+//                            .option("js.ecmascript-version", "2022"));
+//
+////            e.put("polyglot.js.allowHostAccess", true);
+////            e.put("polyglot.js.allowHostClassLookup", true);
+////            e.put("polyglot.js.nashorn-compat", true);
+//
+//            engine = e;
+//            Bindings b = e.createBindings();
+//            b.put("polyglot.js.allowHostAccess", true);
+//            b.put("polyglot.js.allowHostClassLookup", true);
+//            b.put("polyglot.js.nashorn-compat", true);
+
+
+
             if (initGlobalsScript == null) {
                 try {
                     initGlobalsScript = IOUtils.toString(JSEvaluator.class.getResourceAsStream("init_global.js"), "UTF-8");

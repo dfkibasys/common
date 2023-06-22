@@ -3,23 +3,28 @@ List of third-party dependencies grouped by their license type.
 
     Apache-2.0:
 
-        * Jackson-core (com.fasterxml.jackson.core:jackson-core:2.13.1 - https://github.com/FasterXML/jackson-core)
-        * jackson-databind (com.fasterxml.jackson.core:jackson-databind:2.13.1 - http://github.com/FasterXML/jackson)
+        * Jackson-core (com.fasterxml.jackson.core:jackson-core:2.13.5 - https://github.com/FasterXML/jackson-core)
+        * jackson-databind (com.fasterxml.jackson.core:jackson-databind:2.13.5 - http://github.com/FasterXML/jackson)
+        * Jackson-dataformat-YAML (com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.5 - https://github.com/FasterXML/jackson-dataformats-text)
+        * json-patch (com.github.java-json-tools:json-patch:1.13 - https://github.com/java-json-tools/json-patch)
         * Gson (com.google.code.gson:gson:2.9.1 - https://github.com/google/gson/gson)
         * Guava: Google Core Libraries for Java (com.google.guava:guava:30.1-jre - https://github.com/google/guava/guava)
         * Apache Commons Codec (commons-codec:commons-codec:1.9 - http://commons.apache.org/proper/commons-codec/)
         * Apache Commons IO (commons-io:commons-io:2.8.0 - https://commons.apache.org/proper/commons-io/)
         * Apache Commons JEXL (org.apache.commons:commons-jexl3:3.1 - http://commons.apache.org/jexl/)
+        * Maven Plugin API (org.apache.maven:maven-plugin-api:3.9.0 - https://maven.apache.org/ref/3.9.0/maven-plugin-api/)
+        * Maven Project (org.apache.maven:maven-project:3.0-alpha-2 - http://maven.apache.org/maven-project/)
+        * Maven Plugin Tools Java Annotations (org.apache.maven.plugin-tools:maven-plugin-annotations:3.9.0 - https://maven.apache.org/plugin-tools/maven-plugin-annotations)
         * Apache Groovy (org.codehaus.groovy:groovy:2.4.13 - http://groovy-lang.org)
-        * jersey-core-client (org.glassfish.jersey.core:jersey-client:2.30 - https://projects.eclipse.org/projects/ee4j.jersey/jersey-client)
-        * jersey-inject-hk2 (org.glassfish.jersey.inject:jersey-hk2:2.30 - https://projects.eclipse.org/projects/ee4j.jersey/project/jersey-hk2)
-        * jersey-media-json-jackson (org.glassfish.jersey.media:jersey-media-json-jackson:2.30 - https://projects.eclipse.org/projects/ee4j.jersey/project/jersey-media-json-jackson)
-        * spring-boot-starter-logging (org.springframework.boot:spring-boot-starter-logging:2.7.3 - https://spring.io/projects/spring-boot)
+        * jersey-core-client (org.glassfish.jersey.core:jersey-client:2.35 - https://projects.eclipse.org/projects/ee4j.jersey/jersey-client)
+        * jersey-inject-hk2 (org.glassfish.jersey.inject:jersey-hk2:2.35 - https://projects.eclipse.org/projects/ee4j.jersey/project/jersey-hk2)
+        * jersey-media-json-jackson (org.glassfish.jersey.media:jersey-media-json-jackson:2.35 - https://projects.eclipse.org/projects/ee4j.jersey/project/jersey-media-json-jackson)
+        * spring-boot-starter-logging (org.springframework.boot:spring-boot-starter-logging:2.7.12 - https://spring.io/projects/spring-boot)
 
-    BSD 2-Clause:
+    BSD-2-Clause:
 
-        * jersey-core-client (org.glassfish.jersey.core:jersey-client:2.30 - https://projects.eclipse.org/projects/ee4j.jersey/jersey-client)
-        * jersey-inject-hk2 (org.glassfish.jersey.inject:jersey-hk2:2.30 - https://projects.eclipse.org/projects/ee4j.jersey/project/jersey-hk2)
+        * jersey-core-client (org.glassfish.jersey.core:jersey-client:2.35 - https://projects.eclipse.org/projects/ee4j.jersey/jersey-client)
+        * jersey-inject-hk2 (org.glassfish.jersey.inject:jersey-hk2:2.35 - https://projects.eclipse.org/projects/ee4j.jersey/project/jersey-hk2)
 
     BSD-3-Clause:
 
@@ -36,8 +41,8 @@ List of third-party dependencies grouped by their license type.
 
     EDL 1.0:
 
-        * jersey-core-client (org.glassfish.jersey.core:jersey-client:2.30 - https://projects.eclipse.org/projects/ee4j.jersey/jersey-client)
-        * jersey-inject-hk2 (org.glassfish.jersey.inject:jersey-hk2:2.30 - https://projects.eclipse.org/projects/ee4j.jersey/project/jersey-hk2)
+        * jersey-core-client (org.glassfish.jersey.core:jersey-client:2.35 - https://projects.eclipse.org/projects/ee4j.jersey/jersey-client)
+        * jersey-inject-hk2 (org.glassfish.jersey.inject:jersey-hk2:2.35 - https://projects.eclipse.org/projects/ee4j.jersey/project/jersey-hk2)
 
     EPL-1.0:
 
@@ -46,41 +51,46 @@ List of third-party dependencies grouped by their license type.
     EPL-2.0:
 
         * javax.ws.rs-api (javax.ws.rs:javax.ws.rs-api:2.1.1 - https://github.com/eclipse-ee4j/jaxrs-api)
-        * jersey-core-client (org.glassfish.jersey.core:jersey-client:2.30 - https://projects.eclipse.org/projects/ee4j.jersey/jersey-client)
-        * jersey-inject-hk2 (org.glassfish.jersey.inject:jersey-hk2:2.30 - https://projects.eclipse.org/projects/ee4j.jersey/project/jersey-hk2)
-        * jersey-media-json-jackson (org.glassfish.jersey.media:jersey-media-json-jackson:2.30 - https://projects.eclipse.org/projects/ee4j.jersey/project/jersey-media-json-jackson)
+        * jersey-core-client (org.glassfish.jersey.core:jersey-client:2.35 - https://projects.eclipse.org/projects/ee4j.jersey/jersey-client)
+        * jersey-inject-hk2 (org.glassfish.jersey.inject:jersey-hk2:2.35 - https://projects.eclipse.org/projects/ee4j.jersey/project/jersey-hk2)
+        * jersey-media-json-jackson (org.glassfish.jersey.media:jersey-media-json-jackson:2.35 - https://projects.eclipse.org/projects/ee4j.jersey/project/jersey-media-json-jackson)
+
+    GPL v2 with the Classpath exception:
+
+        * OpenJDK Nashorn (org.openjdk.nashorn:nashorn-core:15.4 - https://github.com/openjdk/nashorn)
 
     GPL2 w/ CPE:
 
         * javax.ws.rs-api (javax.ws.rs:javax.ws.rs-api:2.1.1 - https://github.com/eclipse-ee4j/jaxrs-api)
-        * jersey-core-client (org.glassfish.jersey.core:jersey-client:2.30 - https://projects.eclipse.org/projects/ee4j.jersey/jersey-client)
-        * jersey-inject-hk2 (org.glassfish.jersey.inject:jersey-hk2:2.30 - https://projects.eclipse.org/projects/ee4j.jersey/project/jersey-hk2)
+        * jersey-core-client (org.glassfish.jersey.core:jersey-client:2.35 - https://projects.eclipse.org/projects/ee4j.jersey/jersey-client)
+        * jersey-inject-hk2 (org.glassfish.jersey.inject:jersey-hk2:2.35 - https://projects.eclipse.org/projects/ee4j.jersey/project/jersey-hk2)
+        * jersey-media-json-jackson (org.glassfish.jersey.media:jersey-media-json-jackson:2.35 - https://projects.eclipse.org/projects/ee4j.jersey/project/jersey-media-json-jackson)
+
+    Lesser General Public License, version 3 or greater:
+
+        * json-patch (com.github.java-json-tools:json-patch:1.13 - https://github.com/java-json-tools/json-patch)
 
     MIT license:
 
-        * jersey-core-client (org.glassfish.jersey.core:jersey-client:2.30 - https://projects.eclipse.org/projects/ee4j.jersey/jersey-client)
-        * jersey-inject-hk2 (org.glassfish.jersey.inject:jersey-hk2:2.30 - https://projects.eclipse.org/projects/ee4j.jersey/project/jersey-hk2)
+        * jersey-core-client (org.glassfish.jersey.core:jersey-client:2.35 - https://projects.eclipse.org/projects/ee4j.jersey/jersey-client)
+        * jersey-inject-hk2 (org.glassfish.jersey.inject:jersey-hk2:2.35 - https://projects.eclipse.org/projects/ee4j.jersey/project/jersey-hk2)
 
     Modified BSD:
 
-        * jersey-core-client (org.glassfish.jersey.core:jersey-client:2.30 - https://projects.eclipse.org/projects/ee4j.jersey/jersey-client)
-        * jersey-inject-hk2 (org.glassfish.jersey.inject:jersey-hk2:2.30 - https://projects.eclipse.org/projects/ee4j.jersey/project/jersey-hk2)
+        * jersey-core-client (org.glassfish.jersey.core:jersey-client:2.35 - https://projects.eclipse.org/projects/ee4j.jersey/jersey-client)
+        * jersey-inject-hk2 (org.glassfish.jersey.inject:jersey-hk2:2.35 - https://projects.eclipse.org/projects/ee4j.jersey/project/jersey-hk2)
 
     Public Domain:
 
-        * jersey-core-client (org.glassfish.jersey.core:jersey-client:2.30 - https://projects.eclipse.org/projects/ee4j.jersey/jersey-client)
-        * jersey-inject-hk2 (org.glassfish.jersey.inject:jersey-hk2:2.30 - https://projects.eclipse.org/projects/ee4j.jersey/project/jersey-hk2)
-
-    The GNU General Public License (GPL), Version 2, With Classpath Exception:
-
-        * jersey-media-json-jackson (org.glassfish.jersey.media:jersey-media-json-jackson:2.30 - https://projects.eclipse.org/projects/ee4j.jersey/project/jersey-media-json-jackson)
+        * jersey-core-client (org.glassfish.jersey.core:jersey-client:2.35 - https://projects.eclipse.org/projects/ee4j.jersey/jersey-client)
+        * jersey-inject-hk2 (org.glassfish.jersey.inject:jersey-hk2:2.35 - https://projects.eclipse.org/projects/ee4j.jersey/project/jersey-hk2)
 
     W3C license:
 
-        * jersey-core-client (org.glassfish.jersey.core:jersey-client:2.30 - https://projects.eclipse.org/projects/ee4j.jersey/jersey-client)
-        * jersey-inject-hk2 (org.glassfish.jersey.inject:jersey-hk2:2.30 - https://projects.eclipse.org/projects/ee4j.jersey/project/jersey-hk2)
+        * jersey-core-client (org.glassfish.jersey.core:jersey-client:2.35 - https://projects.eclipse.org/projects/ee4j.jersey/jersey-client)
+        * jersey-inject-hk2 (org.glassfish.jersey.inject:jersey-hk2:2.35 - https://projects.eclipse.org/projects/ee4j.jersey/project/jersey-hk2)
 
     jQuery license:
 
-        * jersey-core-client (org.glassfish.jersey.core:jersey-client:2.30 - https://projects.eclipse.org/projects/ee4j.jersey/jersey-client)
-        * jersey-inject-hk2 (org.glassfish.jersey.inject:jersey-hk2:2.30 - https://projects.eclipse.org/projects/ee4j.jersey/project/jersey-hk2)
+        * jersey-core-client (org.glassfish.jersey.core:jersey-client:2.35 - https://projects.eclipse.org/projects/ee4j.jersey/jersey-client)
+        * jersey-inject-hk2 (org.glassfish.jersey.inject:jersey-hk2:2.35 - https://projects.eclipse.org/projects/ee4j.jersey/project/jersey-hk2)
