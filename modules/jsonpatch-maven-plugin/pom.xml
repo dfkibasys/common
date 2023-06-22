@@ -11,6 +11,7 @@
 
 	<groupId>de.dfki.cos.basys.common</groupId>
 	<artifactId>jsonpatch-maven-plugin</artifactId>
+  <version>0.5.1-SNAPSHOT</version>
 	<packaging>maven-plugin</packaging>
 
 	<properties>
@@ -58,8 +59,4 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-
-  <scm>
-    <tag>v0.5.0</tag>
-  </scm>
 </project>

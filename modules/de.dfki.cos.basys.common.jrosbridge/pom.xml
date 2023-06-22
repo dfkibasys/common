@@ -16,6 +16,7 @@
 
     <groupId>de.dfki.cos.basys.common</groupId>
 	<artifactId>jrosbridge</artifactId>
+  <version>0.5.1-SNAPSHOT</version>
 	<packaging>bundle</packaging>	
     <name>${bundle.symbolicName}</name>
 
@@ -86,8 +87,4 @@
 		</dependency>
 
 	</dependencies>
-
-  <scm>
-    <tag>v0.5.0</tag>
-  </scm>
 </project>
