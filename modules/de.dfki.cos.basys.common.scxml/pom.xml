@@ -29,7 +29,7 @@
 
 	<groupId>de.dfki.cos.basys.common</groupId>
 	<artifactId>scxml</artifactId>
-  	<version>0.5.1</version>
+  	<version>0.5.2-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 	<name>${bundle.symbolicName}</name>
 
