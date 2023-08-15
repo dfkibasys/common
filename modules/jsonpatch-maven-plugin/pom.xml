@@ -5,13 +5,13 @@
 	<parent>
 		<groupId>de.dfki.cos.basys.pom</groupId>
 		<artifactId>starter-parent</artifactId>
-		<version>0.5.0</version>
+		<version>0.5.1</version>
 		<relativePath />
 	</parent>
 
 	<groupId>de.dfki.cos.basys.common</groupId>
 	<artifactId>jsonpatch-maven-plugin</artifactId>
-  <version>0.5.1-SNAPSHOT</version>
+  	<version>0.5.1-SNAPSHOT</version>
 	<packaging>maven-plugin</packaging>
 
 	<properties>
